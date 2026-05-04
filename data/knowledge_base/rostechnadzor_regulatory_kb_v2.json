@@ -1,0 +1,1051 @@
+{
+  "metadata": {
+    "title": "Rostechnadzor Coal Mining Safety - Regulatory Knowledge Base",
+    "version": "1.0",
+    "source": "Annual reports of the Federal Service for Environmental, Technological and Nuclear Supervision (Rostechnadzor), 2020-2024",
+    "compiled_for": "Multi-agent accident investigation system - domain knowledge and precedent store",
+    "coverage_years": [2020, 2021, 2022, 2023, 2024],
+    "scope": "Coal mining accidents, incidents and regulatory violations (Russia) — underground, open-pit, and surface processing facilities",
+    "design_notes": [
+      "This knowledge base is fully case-agnostic. No content references any active investigation case.",
+      "Relevance mapping to specific cases is computed at runtime by the regulatory compliance agent.",
+      "The similarity_profile on each precedent enables CBR matching against any new case without manual annotation.",
+      "Two 2022 accidents lack specific descriptions in the source reports — partial entries are included with a completeness flag.",
+      "The Raspadskaya-Koksovaya 2021 seismic event was classified as a group accident (grupovoy neschastny sluchay), not an avaria. It is included as a precedent due to its investigative detail and seismic relevance.",
+      "Total precedent entries: 11 (10 avarii + 1 group accident)"
+    ]
+  },
+
+  "domain_knowledge": {
+
+    "accident_type_definitions": {
+      "description": "Rostechnadzor-recognized accident types in the coal industry, with identification criteria and distinguishing evidence patterns.",
+      "types": [
+        {
+          "id": "ATD-01",
+          "label": "methane_explosion",
+          "russian_term": "vzryv metanovozhdushnoy smesi",
+          "description": "Detonation or deflagration of methane-air mixture in underground workings. Methane concentration must be between 5-15% (explosive range) for ignition to propagate. Below 5% too lean; above 15% too rich.",
+          "distinguishing_evidence": [
+            "Pressure wave (shock wave) recorded by ventilation fan instruments — airflow surge and depression drop",
+            "Seismic events detectable by mine seismology instruments",
+            "Signal loss from sensors in affected zones",
+            "Physical blast damage — displaced supports, destroyed isolation structures",
+            "High CO concentration in post-explosion atmosphere",
+            "Survivor injuries consistent with blast and thermal exposure"
+          ],
+          "key_indicators": ["pressure_wave", "seismic_event", "sensor_signal_loss", "blast_damage", "high_co_post_explosion"],
+          "common_precursors": ["methane_accumulation_in_goaf", "ventilation_inadequacy", "ignition_source_present"],
+          "typical_settings": ["longwall_extraction", "development_roadways", "goaf_areas"]
+        },
+        {
+          "id": "ATD-02",
+          "label": "underground_gas_fire",
+          "russian_term": "pozhar / vosplamenenie metana",
+          "description": "Ignition of methane-air mixture or combustible materials in underground workings without full deflagration or explosion. Fire may escalate to explosion if not extinguished.",
+          "distinguishing_evidence": [
+            "CO rise on outgoing stream sensors before any pressure wave",
+            "Visible flame reported by workers",
+            "CO increase consistent with solid material combustion (wood, synthetic materials, oil) rather than pure methane combustion (CH4 + 2O2 = CO2 + 2H2O produces no CO)",
+            "Firefighting attempts recorded in phone logs",
+            "No blast damage in initial phase"
+          ],
+          "key_indicators": ["co_spike_outgoing_stream", "visible_flame", "worker_phone_reports", "no_initial_pressure_wave"],
+          "common_precursors": ["methane_accumulation", "combustible_materials_present", "ignition_source"],
+          "typical_settings": ["longwall_face", "conveyor_drifts", "goaf_interface"]
+        },
+        {
+          "id": "ATD-03",
+          "label": "coal_dust_explosion",
+          "russian_term": "vzryv pyli / vzryv pylevoy smesi",
+          "description": "Explosion propagated by coal dust along roadways, typically initiated by a methane ignition or explosion event. Lower explosive limit for settled coal dust is approximately 100 g/m2 (0.1mm layer) or 60 g/m3 dispersed. Combined methane-dust mixtures lower this threshold by approximately 25% at 0.75% CH4.",
+          "distinguishing_evidence": [
+            "Explosion propagates along conveyor transport routes",
+            "Explosion reaches fresh-air side of ventilation circuit where methane concentration is below explosive limit",
+            "Propagation distance exceeds 500m — consistent with fuel-fed rather than point-source explosion",
+            "Slate/water barrier activation",
+            "Post-accident coal dust accumulations on conveyor lines",
+            "Degree of destruction and body fragmentation consistent with high-pressure dust explosion",
+            "Explosion travels against ventilation direction"
+          ],
+          "key_indicators": ["propagation_along_conveyor_routes", "fresh_air_side_propagation", "slate_barrier_activation", "post_accident_dust_deposits", "long_propagation_distance"],
+          "common_precursors": ["insufficient_stone_dusting", "coal_dust_accumulation_on_conveyors", "initiating_methane_explosion"],
+          "typical_settings": ["conveyor_roadways", "mine_wide_propagation"]
+        },
+        {
+          "id": "ATD-04",
+          "label": "gas_outburst",
+          "russian_term": "vnezapnyy vybros uglya i gaza",
+          "description": "Sudden dynamic outburst of coal and gas from the face, typically in development workings. Driven by high gas pressure and stress in the coal seam.",
+          "distinguishing_evidence": [
+            "Cave-in debris at face — characteristic funnel or cavity shape",
+            "Absence of ignition-related evidence (no CO spike, no fire)",
+            "Outburst-prone seam classification in geological documentation",
+            "Rapid methane surge in working atmosphere",
+            "Workers buried under coal debris"
+          ],
+          "key_indicators": ["funnel_cavity_at_face", "coal_gas_debris", "no_ignition_evidence", "outburst_prone_seam"],
+          "common_precursors": ["inadequate_outburst_forecast", "barrier_degasification_absent", "geological_disturbance_nearby"],
+          "typical_settings": ["development_roadways", "blind_headings", "faces_near_geological_faults"]
+        },
+        {
+          "id": "ATD-05",
+          "label": "rock_burst",
+          "russian_term": "gornyy udar",
+          "description": "Sudden violent failure of coal or rock under high stress conditions, releasing stored elastic energy. Can be triggered by seismic events or abutment pressure from mining operations.",
+          "distinguishing_evidence": [
+            "Loud noise at moment of event",
+            "Shock wave in working",
+            "Coal rib or face spalling",
+            "Seismic event correlation",
+            "Rock pressure redistribution patterns in working"
+          ],
+          "key_indicators": ["audible_event", "face_spalling", "seismic_correlation", "high_stress_zone"],
+          "common_precursors": ["elevated_rock_pressure", "companion_seam_extraction", "inadequate_geotechnical_forecast"],
+          "typical_settings": ["deep_mines", "abutment_pressure_zones", "areas_near_geological_disturbances"]
+        },
+        {
+          "id": "ATD-06",
+          "label": "endogenous_fire",
+          "russian_term": "endogennyy pozhar / samovozgoranie uglya",
+          "description": "Spontaneous combustion of coal in the goaf or remnant pillars due to oxidation. Develops slowly over days to weeks. Detectable via indicator gas monitoring before open fire breaks out.",
+          "distinguishing_evidence": [
+            "Progressive CO increase in goaf monitoring samples over time",
+            "R1 = CO2_increase / O2_decrease > 2.5 (critical threshold)",
+            "R2 = CO_increase / O2_decrease > 0 (CO detected)",
+            "R3 = CO_increase / CO2_increase > 0",
+            "H2 detected in goaf samples",
+            "Smoke or smell of burning at ventilation shaft"
+          ],
+          "key_indicators": ["progressive_co_increase", "r1_threshold_exceeded", "h2_detected", "smoke_at_shaft"],
+          "common_precursors": ["spontaneous_combustion_prone_seam", "pillar_destruction", "oxygen_ingress_to_goaf", "inadequate_monitoring"],
+          "typical_settings": ["goaf_areas", "remnant_pillars", "isolation_structures_areas"]
+        },
+        {
+          "id": "ATD-07",
+          "label": "surface_fire",
+          "russian_term": "pozhar na poverkhnosti / na obogatitelnoy fabrike",
+          "description": "Fire at surface facilities including coal processing plants, flotation facilities, or surface mine infrastructure. Typically involves flammable process chemicals, conveyors, or electrical equipment.",
+          "distinguishing_evidence": [
+            "Visible fire and smoke at surface facility",
+            "Involvement of flammable process chemicals (flotation reagents, oils)",
+            "Absence of underground indicators (no sensor changes in mine atmosphere)"
+          ],
+          "key_indicators": ["surface_fire_visible", "process_chemicals_involved", "no_underground_impact"],
+          "common_precursors": ["hot_work_near_flammables", "work_permit_violation", "inadequate_fire_prevention"],
+          "typical_settings": ["flotation_plants", "coal_preparation_facilities", "surface_conveyor_systems"]
+        },
+        {
+          "id": "ATD-08",
+          "label": "slope_failure",
+          "russian_term": "deformatsiya otkoса bortа razreza",
+          "description": "Collapse or deformation of open-pit mine wall or slope, typically due to geological or hydrogeological conditions. No gas or fire component.",
+          "distinguishing_evidence": [
+            "Mass movement of material visible on slope",
+            "Equipment or personnel buried under slope debris",
+            "Geological or hydrogeological weakness in slope materials",
+            "No underground or atmospheric component"
+          ],
+          "key_indicators": ["slope_movement", "equipment_buried", "geological_weakness"],
+          "common_precursors": ["inadequate_geological_assessment", "water_infiltration", "tectonic_disturbance"],
+          "typical_settings": ["open_pit_mines", "strip_mines", "overburden_slopes"]
+        }
+      ]
+    },
+
+    "cause_taxonomy": {
+      "description": "Rostechnadzor uses a consistent two-tier cause classification across all years and accident types: Technical Causes (tekhnicheskie prichiny) and Organizational Causes (organizatsionnye prichiny). Every accident investigation must categorize causes under one or both tiers.",
+      "technical_cause_categories": [
+        {
+          "id": "TC-01",
+          "label": "methane_accumulation",
+          "description": "Elevated methane concentration in the working or goaf exceeding permissible limits, creating explosive atmosphere",
+          "typical_sources": ["companion seam release under abutment pressure", "main seam outgassing", "goaf accumulation", "ventilation inadequacy", "stagnant zones under conveyor"]
+        },
+        {
+          "id": "TC-02",
+          "label": "ignition_source_mechanical",
+          "description": "Mechanical sparking from equipment operation creating ignition energy sufficient to ignite methane-air mixture",
+          "typical_equipment": ["armored face conveyor (AFC) chain", "shearer cutting drums", "angle grinder", "falling metallic objects", "conveyor chain on shearer components"]
+        },
+        {
+          "id": "TC-03",
+          "label": "ignition_source_electrical",
+          "description": "Electrical arcing or sparking from non-explosion-proof equipment, cable damage, or insulation failure"
+        },
+        {
+          "id": "TC-04",
+          "label": "ignition_source_chemical",
+          "description": "Chemical exothermic reaction providing ignition energy — includes resin chemical reactions, flammable aerosols, synthetic oils, or hot work near flammable materials"
+        },
+        {
+          "id": "TC-05",
+          "label": "spontaneous_combustion",
+          "description": "Endogenous fire from coal self-ignition in the goaf or remnant pillars due to oxidation",
+          "detection_method": "R1 = CO2_increase/O2_decrease. Threshold: R1 > 2.5 indicates active oxidation process. R2 = CO_increase/O2_decrease > 0 indicates CO present. R3 = CO_increase/CO2_increase"
+        },
+        {
+          "id": "TC-06",
+          "label": "ventilation_failure",
+          "description": "Failure or inadequacy of ventilation system resulting in methane accumulation or insufficient fresh air",
+          "forms": ["ventilation duct disconnection", "fan failure", "incorrect ventilation scheme design", "leakage coefficient exceedance", "stagnant sub-conveyor zones in combined schemes"]
+        },
+        {
+          "id": "TC-07",
+          "label": "degasification_failure",
+          "description": "Inadequate or absent degasification of coal seams or goaf resulting in uncontrolled methane release",
+          "forms": ["no pre-drainage boreholes for companion seam", "inadequate borehole parameters", "ineffective isolated methane removal system"]
+        },
+        {
+          "id": "TC-08",
+          "label": "geological_dynamic_hazard",
+          "description": "Rock burst, sudden coal and gas outburst, or seismic event causing sudden release of stored energy",
+          "forms": ["gornyy_udar (rock burst)", "vnezapnyy_vybros (sudden outburst)", "seysmosobytie (seismic event)", "abutment_pressure_decompression"]
+        },
+        {
+          "id": "TC-09",
+          "label": "roof_failure",
+          "description": "Roof fall, pillar collapse or strata movement that displaces gas, creates ignition conditions, or directly injures workers"
+        },
+        {
+          "id": "TC-10",
+          "label": "coal_dust_hazard",
+          "description": "Accumulation of explosive coal dust on roadway surfaces and equipment, providing fuel for secondary explosion propagation",
+          "threshold": "Lower explosive limit: ~100 g/m2 settled (0.1mm layer) or ~60 g/m3 dispersed. Threshold reduced ~25% in combined methane-dust mixtures at 0.75% CH4"
+        },
+        {
+          "id": "TC-11",
+          "label": "monitoring_system_failure",
+          "description": "Sensor failure, absence of required sensors, or sensor data that does not reflect actual atmospheric conditions"
+        },
+        {
+          "id": "TC-12",
+          "label": "equipment_technical_failure",
+          "description": "Mechanical or structural failure of mine equipment not related to ignition — includes conveyor derailment, support failure, pump failure"
+        },
+        {
+          "id": "TC-13",
+          "label": "geological_structural_weakness",
+          "description": "Geological conditions creating instability — includes swelling clays, tectonic disturbances, weak overburden, hydrogeological hazards"
+        }
+      ],
+      "organizational_cause_categories": [
+        {
+          "id": "OC-01",
+          "label": "insufficient_production_control",
+          "description": "Absence or inadequate level of production control (proizvodstvennyy kontrol) — the mandatory internal safety supervision system. Most frequently cited organizational cause across all 5 years.",
+          "manifestations": ["supervisors absent during hazardous operations", "night shift and weekend safety not enforced", "violations not detected or corrected"]
+        },
+        {
+          "id": "OC-02",
+          "label": "naryad_system_violation",
+          "description": "Violation of the work assignment system (naryad-dopusk, naryad-putyovka) — includes performing work without written authorization, or modifying work orders verbally without written record and safety briefing"
+        },
+        {
+          "id": "OC-03",
+          "label": "qualification_training_failure",
+          "description": "Workers or supervisors admitted to work without required qualification, certification, or training. Includes insufficient knowledge of emergency procedures."
+        },
+        {
+          "id": "OC-04",
+          "label": "data_falsification",
+          "description": "Falsification or deliberate modification of atmospheric monitoring data, safety records, borehole drilling logs, or other safety-relevant documentation"
+        },
+        {
+          "id": "OC-05",
+          "label": "technical_documentation_violation",
+          "description": "Work conducted in violation of technical documentation — passports, project documents, instructions. Includes deviations from approved ventilation schemes, borehole parameters, or support designs."
+        },
+        {
+          "id": "OC-06",
+          "label": "labor_discipline_failure",
+          "description": "Low level of labor and production discipline. Includes unauthorized presence in hazardous zones, prohibited tools or substances brought underground."
+        },
+        {
+          "id": "OC-07",
+          "label": "emergency_response_failure",
+          "description": "Inadequate preparation for or response to emergency situation — includes delayed evacuation, incorrect use of self-rescuers, poor coordination with rescue teams"
+        },
+        {
+          "id": "OC-08",
+          "label": "project_documentation_deficiency",
+          "description": "Project or design documentation non-compliant with industrial safety requirements, or failing to account for known hazards (e.g. previous fires not recorded in mine documentation)"
+        },
+        {
+          "id": "OC-09",
+          "label": "geotechnical_forecast_failure",
+          "description": "Failure to conduct required geotechnical or outburst hazard forecast, or inadequate forecast methodology that missed hazardous conditions"
+        },
+        {
+          "id": "OC-10",
+          "label": "hazard_identification_failure",
+          "description": "Failure to identify and assess hazards associated with substances, processes, or conditions present in the working"
+        }
+      ]
+    },
+
+    "regulatory_requirements": [
+      {
+        "id": "REG-01",
+        "topic": "Methane monitoring limits and automatic cutoff",
+        "requirement": "Continuous monitoring of CH4 concentration in the longwall face, outgoing air stream, and goaf is mandatory via stationary sensors connected to automated SCADA. Maximum permissible CH4 in outgoing air stream: 1.0%. Automatic power cutoff to all electrical equipment required when 1.0% CH4 is reached. CH4 in the face cross-section must not exceed 2.0%.",
+        "applicable_standard": "Pravila bezopasnosti v ugolnykh shakhtakh (PB v UK) — Federal norms and rules for industrial safety in coal mines",
+        "applies_to_accident_types": ["methane_explosion", "underground_gas_fire"],
+        "relevant_cause_categories": ["TC-01", "TC-11"]
+      },
+      {
+        "id": "REG-02",
+        "topic": "Ventilation scheme design and airflow requirements",
+        "requirement": "Ventilation scheme must be designed to prevent methane accumulation in sub-conveyor zones and at face-roadway junctions. Combined ventilation schemes (kombinirovannoye proyetrivaniye) require specific design measures to prevent stagnant methane zones. Compressed air injection into scraper chain conveyor is required by manufacturers when methane is present. Actual airflow must match calculated requirements.",
+        "applicable_standard": "Metodicheskiye rekomendatsii po proyektirovaniyu ventilyatsii ugolnykh shakht; PB v UK",
+        "applies_to_accident_types": ["methane_explosion", "underground_gas_fire"],
+        "relevant_cause_categories": ["TC-06"]
+      },
+      {
+        "id": "REG-03",
+        "topic": "Degasification of companion seams",
+        "requirement": "When a companion seam lies within 10m of the working seam and has gas content above 9 m3/t, pre-drainage boreholes must be drilled before longwall advance. Isolated methane drainage systems must be evaluated for effectiveness and results documented. Gas balance calculations must account for companion seam contributions.",
+        "applicable_standard": "Instruktsiya po degasifikatsii ugolnykh shakht",
+        "applies_to_accident_types": ["methane_explosion", "underground_gas_fire"],
+        "relevant_cause_categories": ["TC-07"]
+      },
+      {
+        "id": "REG-04",
+        "topic": "Spontaneous combustion monitoring",
+        "requirement": "Mines where coal seam is classified as prone to spontaneous combustion must conduct systematic indicator gas monitoring (CO, CO2, O2, H2) at all isolation structures with results logged. R1 = CO2_increase/O2_decrease > 2.5 is the threshold for declaring endogenous fire hazard. CO monitoring sensors with telemetry output must be installed at isolation structures. Previous fires must be recorded in mine survey documentation.",
+        "applicable_standard": "Instruktsiya po preduprezhdeniyu i tusheniyu endogennykh pozharov",
+        "applies_to_accident_types": ["endogenous_fire", "methane_explosion"],
+        "relevant_cause_categories": ["TC-05", "TC-11", "OC-08"]
+      },
+      {
+        "id": "REG-05",
+        "topic": "Explosion-proof equipment requirements",
+        "requirement": "All electrical equipment in underground coal workings must be explosion-proof (vzryvozashchishchennoye ispolnenie) and have valid inspection passports. Non-explosion-proof portable tools (angle grinders, welding equipment) are prohibited in gas-hazardous working areas. Aerosol products marked flammable are prohibited underground. Synthetic oils must be stored in designated locations only.",
+        "applicable_standard": "Pravila bezopasnosti v ugolnykh shakhtakh; Pravila ustroystva elektroustanovok (PUE)",
+        "applies_to_accident_types": ["methane_explosion", "underground_gas_fire"],
+        "relevant_cause_categories": ["TC-02", "TC-03", "TC-04", "OC-06"]
+      },
+      {
+        "id": "REG-06",
+        "topic": "Coal dust explosion prevention",
+        "requirement": "Mandatory dust control measures: stone dusting (inertnaya pyl) on all roadway surfaces; water infusion into the seam; water barriers or slate barriers at intervals not exceeding 300m; regular dust sampling to verify non-combustible content exceeds 70%. Stone dusting program must be documented and executed on schedule. Conveyors are primary dust accumulation risk points.",
+        "applicable_standard": "Instruktsiya po bor'be s pylyu i pylevzryvozashchite na ugolnykh shakhtakh",
+        "applies_to_accident_types": ["coal_dust_explosion", "methane_explosion"],
+        "relevant_cause_categories": ["TC-10"]
+      },
+      {
+        "id": "REG-07",
+        "topic": "Dynamic hazard forecasting and outburst prevention",
+        "requirement": "Before advancing a development face in outburst-hazardous seams, outburst forecast must be conducted. Maximum advance between forecasts: 4m. Forecast holes must be minimum 5.5m long; relief boreholes minimum 10m. Anti-outburst measures must follow approved complex per the annual plan. Sections near geological disturbances must be reclassified as 'dangerous' and alternative rock breakage methods applied.",
+        "applicable_standard": "Instruktsiya po prognozu dinamicheskikh yavleniy i monitoringu massiva; Complex of anti-outburst measures",
+        "applies_to_accident_types": ["gas_outburst"],
+        "relevant_cause_categories": ["TC-08", "OC-09"]
+      },
+      {
+        "id": "REG-08",
+        "topic": "Work assignment (naryad) system",
+        "requirement": "All underground work must be authorized by a written work order (naryad-dopusk or naryad-putyovka). Verbal modification of work orders is prohibited — any change must be recorded in writing with a new safety briefing. Work orders must specify all hazards and safety measures. Supervisors must verify conditions match those in the work order before work begins.",
+        "applicable_standard": "Polozheniye o naryadnoy sisteme na ugolnykh shakhtakh; PB v UK",
+        "applies_to_accident_types": ["all"],
+        "relevant_cause_categories": ["OC-02"]
+      },
+      {
+        "id": "REG-09",
+        "topic": "Production control system",
+        "requirement": "Every coal mine must maintain a functioning internal production control (proizvodstvennyy kontrol) system with designated responsible personnel. Control must cover all shifts including nights and weekends. Results of internal inspections must be documented. Identified violations must be corrected with timelines recorded. Production control reports must be submitted annually to Rostechnadzor by April 1.",
+        "applicable_standard": "Federal Law No. 116-FZ on Industrial Safety; Postanovleniye Pravitelstva No. 263",
+        "applies_to_accident_types": ["all"],
+        "relevant_cause_categories": ["OC-01"]
+      },
+      {
+        "id": "REG-10",
+        "topic": "Atmospheric data integrity and anti-falsification",
+        "requirement": "Atmospheric monitoring data from stationary sensor systems must not be modified, delayed, or falsified. Discrepancies between automated SCADA readings and individual gas analyzer readings must be investigated and resolved. Personnel responsible for data falsification face criminal liability following 2021 legislative reforms.",
+        "applicable_standard": "Federal Law No. 116-FZ amendments (post-Listviazhnaya reforms, Dec 2021 Presidential instructions)",
+        "applies_to_accident_types": ["methane_explosion", "underground_gas_fire", "gas_outburst"],
+        "relevant_cause_categories": ["TC-11", "OC-04"]
+      },
+      {
+        "id": "REG-11",
+        "topic": "Owner liability and independent safety audit (post-Listviazhnaya)",
+        "requirement": "Owners and controlling persons of Class I hazard objects (coal mines) bear personal liability for industrial safety. Mandatory independent audit of safety management systems at Class I OPOs. Turnover-based fines for mine owners when accidents result in 2 or more fatalities. These requirements entered force following Presidential instructions of December 2, 2021 after the Listviazhnaya disaster.",
+        "applicable_standard": "Federal Law No. 116-FZ amendments; Presidential instructions from meeting on Kuzbass coal industry safety, 02.12.2021",
+        "applies_to_accident_types": ["all"],
+        "relevant_cause_categories": ["OC-01", "OC-04"]
+      },
+      {
+        "id": "REG-12",
+        "topic": "Protective pillar dimensioning",
+        "requirement": "Protective coal pillars between extraction faces and permanent infrastructure (shafts, roadways, surface structures) must be designed and maintained at approved dimensions. Face advance must not reduce pillar width below approved minimum. Pillar dimensions must be recalculated when face advance deviates from plan.",
+        "applicable_standard": "Pravila okhrany sooruzheniy i prirodnykh obektov ot vrednogo vliyaniya podzemnykh gornykh razrabotok",
+        "applies_to_accident_types": ["endogenous_fire", "rock_burst"],
+        "relevant_cause_categories": ["TC-09", "OC-05"]
+      },
+      {
+        "id": "REG-13",
+        "topic": "Geotechnical slope stability in open-pit mines",
+        "requirement": "Open-pit mine slopes must be designed with stable angles based on full geotechnical assessment including physical-mechanical properties of all lithological units. Geotechnical monitoring must be continuous and include seasonal assessments. Slope parameters must be updated when geological conditions change. Mining must not proceed until slope design is approved.",
+        "applicable_standard": "Pravila obespecheniya ustoychivosti bortov, uступov i otvalov na uголных razrezakh",
+        "applies_to_accident_types": ["slope_failure"],
+        "relevant_cause_categories": ["TC-13", "OC-09"]
+      },
+      {
+        "id": "REG-14",
+        "topic": "Hot work permits at surface facilities",
+        "requirement": "Welding, cutting, grinding and other hot work at surface coal facilities requires a formal work permit (naryad-dopusk). All flammable materials must be removed or protected before hot work begins. Fire watch must be posted. Reagents and flammable chemicals at processing plants must be stored per approved specifications and their locations included in fire safety plans.",
+        "applicable_standard": "Pravila protivopozharnogo rezhima v Rossiyskoy Federatsii; PPB v ugolnoy promyshlennosti",
+        "applies_to_accident_types": ["surface_fire"],
+        "relevant_cause_categories": ["TC-04", "OC-02", "OC-05"]
+      }
+    ]
+  },
+
+  "industry_statistics": [
+    {
+      "year": 2020,
+      "mines_under_supervision": {"shakhty": 90, "razrezy": 302, "obogashcheniye": 86},
+      "coal_output_mln_t": 401.4,
+      "accidents_total": 3,
+      "accidents_with_fatalities": 2,
+      "fatalities_from_accidents": 5,
+      "total_fatalities": 15,
+      "udelniy_travmatizm_per_mln_t": 0.037,
+      "note": "Output fell 8.14% vs 2019. Three accidents including two underground and one open-pit."
+    },
+    {
+      "year": 2021,
+      "mines_under_supervision": {"shakhty": 92, "razrezy": 305},
+      "coal_output_mln_t": 439.0,
+      "accidents_total": 4,
+      "accidents_with_fatalities": 2,
+      "fatalities_from_accidents": 51,
+      "total_fatalities": 67,
+      "note": "Dominated by Listviazhnaya explosion (51 killed). Worst year since 2010. Triggered major legislative reforms (Presidential instructions Dec 2021)."
+    },
+    {
+      "year": 2022,
+      "mines_under_supervision": {"shakhty": 90, "razrezy": 313, "obogashcheniye": 87},
+      "coal_output_mln_t": 443.0,
+      "accidents_total": 2,
+      "accidents_with_fatalities": 0,
+      "fatalities_from_accidents": 0,
+      "total_fatalities": 7,
+      "udelniy_travmatizm_per_mln_t": 0.016,
+      "note": "90% reduction in fatalities vs 2021. Best safety record on record. Attributed partly to post-Listviazhnaya reforms. Two accidents occurred but specific case descriptions were not published in the annual report."
+    },
+    {
+      "year": 2023,
+      "mines_under_supervision": {"shakhty": 89, "razrezy": 321, "obogashcheniye": 93},
+      "coal_output_mln_t": 438.4,
+      "accidents_total": 0,
+      "accidents_with_fatalities": 0,
+      "fatalities_from_accidents": 0,
+      "total_fatalities": 11,
+      "note": "First year with zero recorded accidents on Russian coal OPOs. 11 fatalities from non-accident causes."
+    },
+    {
+      "year": 2024,
+      "mines_under_supervision": {"shakhty": 85, "razrezy": 318, "obogashcheniye": 93},
+      "coal_output_mln_t": 438.7,
+      "accidents_total": 1,
+      "accidents_with_fatalities": 0,
+      "fatalities_from_accidents": 0,
+      "total_fatalities": 13,
+      "note": "One accident at Alardinskaya — methane ignition from roof fall, no fatalities, all 120 workers evacuated."
+    }
+  ],
+
+  "accident_precedents": [
+    {
+      "id": "PREC-2020-01",
+      "year": 2020,
+      "date": "2020-03-06",
+      "record_type": "avaria",
+      "mine": "Shaktha Zapolyarnaya-2 (blok Vorkutinskiy)",
+      "operator": "AO Vorkutaugol",
+      "region": "Respublika Komi, Vorkuta",
+      "accident_type": "rock_burst",
+      "work_type": "underground_development",
+      "description": "In the dead-end section of the conveyor drift, a rock dynamic event — rock burst — occurred on the right side of the working. The shearer operator and a drifter received fatal injuries. Two other drifters were injured. After the dynamic event, ventilation duct disconnection caused methane outgassing of the face.",
+      "fatalities": 2,
+      "injured": 2,
+      "technical_causes": [
+        "Dynamic fracture of roof of seam Chetvertyy causing rock burst from floor of seam Troynoy with coal rib spalling",
+        "Significant methane accumulation in goaf at post-mining boundary of seam Chetvertyy and in air-conducting fractures between seams Chetvertyy and Troynoy",
+        "Elevated gas content of seam Troynoy in zone of elevated rock pressure",
+        "Methane outgassing of conveyor drift face after dynamic event due to ventilation duct disconnection — absence of flexible connectors between duct sections"
+      ],
+      "organizational_causes": [
+        "Absence of adequate supervision by mine engineering staff over industrial safety in development face",
+        "Failure to determine sufficiency of physical-mechanical properties of enclosing rocks for geotechnical forecast",
+        "Low level of technological, production and executive discipline"
+      ],
+      "violated_regulations": ["REG-02", "REG-09"],
+      "cause_categories": ["TC-08", "TC-01", "TC-06", "OC-01", "OC-09"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "rock_burst",
+        "work_type": "underground_development",
+        "underground": true,
+        "longwall_face_involved": false,
+        "methane_involved": true,
+        "companion_seam_involved": true,
+        "goaf_accumulation": true,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "none",
+        "ventilation_failure": true,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": true,
+        "seismic_event": false,
+        "roof_failure": true,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": false,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 2,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2020-02",
+      "year": 2020,
+      "date": "2020-09-14",
+      "record_type": "avaria",
+      "mine": "Shaktha Chertinskaya-Koksovaya",
+      "operator": "OOO MMK-Ugol",
+      "region": "Kemerovskaya oblast, Belovo",
+      "accident_type": "gas_outburst",
+      "work_type": "underground_development",
+      "description": "During cleanup of the face of the axial drift, a sudden outburst of coal and gas occurred. Four workers were present; two escaped independently, two were found dead.",
+      "fatalities": 2,
+      "injured": 0,
+      "technical_causes": [
+        "No hazard identification for harmful substances — no risk reduction measures in place",
+        "No anti-outburst measures per Complex of measures 2020 — non-reducible outburst forecast not conducted",
+        "Absence of barrier degasification when driving axial drift 553",
+        "Face advance of 7.6m after last forecast — permitted maximum 4m"
+      ],
+      "organizational_causes": [
+        "Shift foremen issued work orders beyond 17m mark without outburst forecast",
+        "Degasification niche work deviated from design parameters, preventing barrier degasification drilling",
+        "Work conducted without signed acceptance certificate for degasification borehole No.2",
+        "Concealment of actual status of degasification borehole drilling",
+        "Production managers did not ensure safety compliance during night shifts and weekends",
+        "Systematic weakening of dynamic hazard forecasting service — use of defective instruments"
+      ],
+      "violated_regulations": ["REG-07", "REG-08", "REG-09"],
+      "cause_categories": ["TC-07", "TC-08", "OC-02", "OC-04", "OC-01", "OC-09"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "gas_outburst",
+        "work_type": "underground_development",
+        "underground": true,
+        "longwall_face_involved": false,
+        "methane_involved": true,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "none",
+        "ventilation_failure": false,
+        "degasification_failure": true,
+        "outburst_hazard": true,
+        "geological_hazard": false,
+        "seismic_event": false,
+        "roof_failure": false,
+        "monitoring_failure": false,
+        "data_falsification": true,
+        "naryad_violation": true,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 2,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2020-03",
+      "year": 2020,
+      "date": "2020-12-22",
+      "record_type": "avaria",
+      "mine": "Razrez Vinogradovskiy",
+      "operator": "AO Russkiy Ugol, PAO Kuzbasskaya Toplivnaya Kompaniya",
+      "region": "Kemerovskaya oblast, Belovo",
+      "accident_type": "slope_failure",
+      "work_type": "open_pit",
+      "description": "Deformation of open-pit working wall slope buried a Komatsu PC-750 excavator. Operator found dead. Two other equipment operators on adjacent machines were uninjured. Approximately 60,000 m3 of slope material deformed.",
+      "fatalities": 1,
+      "injured": 0,
+      "technical_causes": [
+        "Collapse of working wall section due to swelling of clay rocks from combination of: large-volume loam layer in bowl-shaped structure above bedrock; soft-plastic loam layer; thin clay layer confirmed by supplementary drilling; tectonic disturbances on the section; high-moisture loams prone to swelling; frost screen formation on slope faces from low temperatures; stress accumulation in loam layer"
+      ],
+      "organizational_causes": [
+        "Inadequate geological service control over mining — incomplete study of physical-mechanical properties of overburden including weak rocks",
+        "Untimely geotechnical forecasting when opening, preparing and extracting coal seam on open-pit section",
+        "Untimely identification of local geological disturbances, water saturation, and changes in rock strength characteristics",
+        "Unsafe working conditions not fully provided for razrez workers",
+        "No additional safety measures developed for shift handover procedures, as required by technical director"
+      ],
+      "violated_regulations": ["REG-13", "REG-09"],
+      "cause_categories": ["TC-13", "OC-09", "OC-01", "OC-05"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "slope_failure",
+        "work_type": "open_pit",
+        "underground": false,
+        "longwall_face_involved": false,
+        "methane_involved": false,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "none",
+        "ventilation_failure": false,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": true,
+        "seismic_event": false,
+        "roof_failure": false,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": false,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 1,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2021-01",
+      "year": 2021,
+      "date": "2021-01-21",
+      "record_type": "avaria",
+      "mine": "Shaktha im. S.D. Tikhova",
+      "operator": "PMKh-Ugol",
+      "region": "Kemerovskaya oblast, Leninsk-Kuznetskiy",
+      "accident_type": "gas_outburst",
+      "work_type": "underground_development",
+      "description": "During driving of the conveyor drift, a sudden coal and gas outburst occurred. Three workers — mine foreman and two shearer operators — were trapped under the fall and found dead during recovery.",
+      "fatalities": 3,
+      "injured": 0,
+      "technical_causes": [
+        "Violation of dynamic hazard forecasting instruction — section near geological disturbance not classified as dangerous",
+        "Deviation from Complex of measures 2021 — no switch to shock blasting or supporting support type near geological disturbance",
+        "Forecast holes shorter than required 5.5m; relief boreholes shorter than required 10m"
+      ],
+      "organizational_causes": [
+        "Inadequate supervision of outburst forecast and seam relief measures by technical services",
+        "Inadequate control over barrier degasification borehole drilling",
+        "Project documentation non-compliant with industrial safety requirements",
+        "Low qualification of mine engineering staff"
+      ],
+      "violated_regulations": ["REG-07", "REG-09"],
+      "cause_categories": ["TC-08", "TC-07", "OC-09", "OC-01", "OC-08", "OC-03"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "gas_outburst",
+        "work_type": "underground_development",
+        "underground": true,
+        "longwall_face_involved": false,
+        "methane_involved": true,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "none",
+        "ventilation_failure": false,
+        "degasification_failure": true,
+        "outburst_hazard": true,
+        "geological_hazard": true,
+        "seismic_event": false,
+        "roof_failure": false,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": false,
+        "insufficient_supervision": true,
+        "qualification_failure": true,
+        "fatalities": 3,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2021-02",
+      "year": 2021,
+      "date": "2021-06-15",
+      "record_type": "avaria",
+      "mine": "PAO Tsentralnaya obogatitelnaya fabrika Berezovskaya",
+      "operator": "PAO TsOF Berezovskaya",
+      "region": "Kemerovskaya oblast, Berezovskiy",
+      "accident_type": "surface_fire",
+      "work_type": "surface_processing",
+      "description": "During scheduled maintenance at the flotation plant (plant not operating at the time), fire broke out in the beneficiation shop. Crane operator killed. One worker fractured arm. Five workers sought medical treatment for acute smoke inhalation. Fire caused by welding near polyethylene containers of flotation reagent.",
+      "fatalities": 1,
+      "injured": 6,
+      "technical_causes": [
+        "Welding work near flotation machine in immediate proximity to polyethylene containers of flammable flotation reagent",
+        "Flammable reagent containers located adjacent to welding work area"
+      ],
+      "organizational_causes": [
+        "No hot work permit (naryad-dopusk) issued for welding work",
+        "No work technology cards for welding operations in process regulations",
+        "Workers not informed of flammability properties of reagent in nearby containers",
+        "Insufficient production control over hot work in beneficiation shop"
+      ],
+      "violated_regulations": ["REG-14", "REG-08", "REG-09"],
+      "cause_categories": ["TC-04", "OC-02", "OC-05", "OC-01", "OC-10"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "surface_fire",
+        "work_type": "surface_processing",
+        "underground": false,
+        "longwall_face_involved": false,
+        "methane_involved": false,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": true,
+        "ignition_type": "chemical",
+        "ventilation_failure": false,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": false,
+        "seismic_event": false,
+        "roof_failure": false,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": true,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 1,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2021-03",
+      "year": 2021,
+      "date": "2021-11-03",
+      "record_type": "avaria",
+      "mine": "Shaktha Baykamiaskaya",
+      "operator": "AO UK Kuzbasstrazreugol",
+      "region": "Kemerovskaya oblast, Belovo",
+      "accident_type": "endogenous_fire",
+      "work_type": "underground_extraction",
+      "description": "Pump operator detected smell of burning and smoke at flanking ventilation shaft opening. Emergency fire response activated. No casualties. Fire originated from spontaneous combustion of coal in protective pillar remnant near flanking shaft. Fire extinguished by nitrogen and foam injection through boreholes drilled from surface, then isolation by explosion-proof stoppings.",
+      "fatalities": 0,
+      "injured": 0,
+      "technical_causes": [
+        "Destruction of edge section of protective coal pillar between retreat chamber and flanking ventilation shaft — pillar reduced from 100m to 40m due to face overrun by 60m",
+        "Oxygen ingress to destroyed edge portions of coal pillar near retreat chamber",
+        "Shallow working depth (50-100m), high rock fracturing in seam erosion zone, low face advance rate (2004-2007) created aerodynamic connection with surface",
+        "No CO sensor monitoring at isolation structures near flanking ventilation shaft"
+      ],
+      "organizational_causes": [
+        "Project documentation contained no reference to the 2008 fire on same horizon",
+        "No mine survey records of previous fire",
+        "Absence of CO sensor monitoring with telemetry at isolation structures on flanking ventilation shaft",
+        "No monitoring of early signs of coal spontaneous combustion",
+        "Absence of control over condition of isolation structures on flanking ventilation shaft"
+      ],
+      "violated_regulations": ["REG-04", "REG-12", "REG-09"],
+      "cause_categories": ["TC-05", "TC-11", "OC-08", "OC-01"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "endogenous_fire",
+        "work_type": "underground_extraction",
+        "underground": true,
+        "longwall_face_involved": true,
+        "methane_involved": false,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": true,
+        "ignition_source_identified": true,
+        "ignition_type": "chemical",
+        "ventilation_failure": false,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": false,
+        "seismic_event": false,
+        "roof_failure": false,
+        "monitoring_failure": true,
+        "data_falsification": false,
+        "naryad_violation": false,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 0,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2021-04",
+      "year": 2021,
+      "date": "2021-11-25",
+      "record_type": "avaria",
+      "mine": "Shaktha Listvyazhnaya",
+      "operator": "OOO Shaktha Ugolnaya Listvyazhnaya, AO KhK SDS-Ugol",
+      "region": "Kemerovskaya oblast, Belovo",
+      "accident_type": "methane_explosion",
+      "work_type": "underground_extraction",
+      "description": "Explosion of methane-air mixture. Deadliest Russian mining accident in many years: 51 killed (46 miners, 5 rescuers). Investigation was extended. Preliminary finding: causes were gross violations of mandatory industrial safety requirements. This accident triggered Presidential instructions of December 2, 2021 and sweeping legislative reforms to coal mine safety.",
+      "fatalities": 51,
+      "injured": null,
+      "technical_causes": [
+        "Gross violations of mandatory industrial safety requirements (full technical investigation was ongoing at time of report publication — detailed causes not yet published)"
+      ],
+      "organizational_causes": [
+        "Gross violations of mandatory industrial safety requirements"
+      ],
+      "violated_regulations": ["REG-01", "REG-02", "REG-09", "REG-10"],
+      "cause_categories": ["TC-01", "OC-01", "OC-04"],
+      "data_completeness": "partial",
+      "completeness_note": "Investigation was still ongoing at time of annual report publication. Full technical causes were not yet released. Entry will be updated when final investigation report is published.",
+      "similarity_profile": {
+        "accident_type": "methane_explosion",
+        "work_type": "underground_extraction",
+        "underground": true,
+        "longwall_face_involved": true,
+        "methane_involved": true,
+        "companion_seam_involved": null,
+        "goaf_accumulation": null,
+        "coal_dust_involved": null,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "unknown",
+        "ventilation_failure": null,
+        "degasification_failure": null,
+        "outburst_hazard": false,
+        "geological_hazard": false,
+        "seismic_event": false,
+        "roof_failure": null,
+        "monitoring_failure": true,
+        "data_falsification": true,
+        "naryad_violation": null,
+        "insufficient_supervision": true,
+        "qualification_failure": null,
+        "fatalities": 51,
+        "mass_casualty": true
+      }
+    },
+    {
+      "id": "PREC-2021-GRP-01",
+      "year": 2021,
+      "date": "2021-07-05",
+      "record_type": "grupovoy_neschastny_sluchay",
+      "mine": "Shaktha Raspadskaya-Koksovaya",
+      "operator": "AO Raspadskaya-Koksovaya",
+      "region": "Kemerovskaya oblast, Mezhdurechensk",
+      "accident_type": "rock_burst",
+      "work_type": "underground_extraction",
+      "description": "Deformation of a cross-section of a mine working caused by a seismic event near Mezhdurechensk. Four workers affected, one fatally. Note: this was classified as a group accident (grupovoy neschastny sluchay), not an avaria. Included due to investigative detail and seismic mechanism relevance.",
+      "fatalities": 1,
+      "injured": 3,
+      "technical_causes": [
+        "Unpredictable dynamic impact of seismic wave from local earthquake magnitude 4.3",
+        "Intensive deformation of working contour from redistribution of stresses in rock mass",
+        "Difficult geotechnical conditions for maintaining ventilation drift"
+      ],
+      "organizational_causes": [],
+      "violated_regulations": [],
+      "cause_categories": ["TC-08", "TC-13"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "rock_burst",
+        "work_type": "underground_extraction",
+        "underground": true,
+        "longwall_face_involved": false,
+        "methane_involved": false,
+        "companion_seam_involved": false,
+        "goaf_accumulation": false,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "none",
+        "ventilation_failure": false,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": true,
+        "seismic_event": true,
+        "roof_failure": false,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": false,
+        "insufficient_supervision": false,
+        "qualification_failure": false,
+        "fatalities": 1,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2022-01",
+      "year": 2022,
+      "date": "2022",
+      "record_type": "avaria",
+      "mine": "not_published",
+      "operator": "not_published",
+      "region": "not_published",
+      "accident_type": "unknown",
+      "work_type": "unknown",
+      "description": "One of two accidents registered in 2022. Specific case details were not published in the Rostechnadzor annual report. Zero fatalities from accidents in 2022.",
+      "fatalities": 0,
+      "injured": null,
+      "technical_causes": [],
+      "organizational_causes": [],
+      "generalized_causes_2022": [
+        "Inconsistency of actions between workers",
+        "Unsatisfactory organization of production work",
+        "Violation of technical documentation requirements",
+        "Absence or insufficient level of production control",
+        "Personal carelessness",
+        "Insufficient qualifications, absence of training and certification",
+        "Violation of the work assignment (naryad) system",
+        "Low level of labor and production discipline"
+      ],
+      "violated_regulations": [],
+      "cause_categories": ["OC-01", "OC-02", "OC-03", "OC-05", "OC-06"],
+      "data_completeness": "minimal",
+      "completeness_note": "Specific accident descriptions for 2022 accidents were not published in the annual report. Only generalized cause patterns are available. Similarity profile populated with confirmed negatives only.",
+      "similarity_profile": {
+        "accident_type": "unknown",
+        "work_type": "unknown",
+        "underground": null,
+        "longwall_face_involved": null,
+        "methane_involved": null,
+        "companion_seam_involved": null,
+        "goaf_accumulation": null,
+        "coal_dust_involved": null,
+        "spontaneous_combustion_involved": null,
+        "ignition_source_identified": null,
+        "ignition_type": "unknown",
+        "ventilation_failure": null,
+        "degasification_failure": null,
+        "outburst_hazard": null,
+        "geological_hazard": null,
+        "seismic_event": null,
+        "roof_failure": null,
+        "monitoring_failure": null,
+        "data_falsification": null,
+        "naryad_violation": true,
+        "insufficient_supervision": true,
+        "qualification_failure": true,
+        "fatalities": 0,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2022-02",
+      "year": 2022,
+      "date": "2022",
+      "record_type": "avaria",
+      "mine": "not_published",
+      "operator": "not_published",
+      "region": "not_published",
+      "accident_type": "unknown",
+      "work_type": "unknown",
+      "description": "Second of two accidents registered in 2022. Specific case details were not published in the Rostechnadzor annual report. Zero fatalities from accidents in 2022.",
+      "fatalities": 0,
+      "injured": null,
+      "technical_causes": [],
+      "organizational_causes": [],
+      "generalized_causes_2022": [
+        "Inconsistency of actions between workers",
+        "Unsatisfactory organization of production work",
+        "Violation of technical documentation requirements",
+        "Absence or insufficient level of production control",
+        "Personal carelessness",
+        "Insufficient qualifications, absence of training and certification",
+        "Violation of the work assignment (naryad) system",
+        "Low level of labor and production discipline"
+      ],
+      "violated_regulations": [],
+      "cause_categories": ["OC-01", "OC-02", "OC-03", "OC-05", "OC-06"],
+      "data_completeness": "minimal",
+      "completeness_note": "Specific accident descriptions for 2022 accidents were not published in the annual report. Only generalized cause patterns are available.",
+      "similarity_profile": {
+        "accident_type": "unknown",
+        "work_type": "unknown",
+        "underground": null,
+        "longwall_face_involved": null,
+        "methane_involved": null,
+        "companion_seam_involved": null,
+        "goaf_accumulation": null,
+        "coal_dust_involved": null,
+        "spontaneous_combustion_involved": null,
+        "ignition_source_identified": null,
+        "ignition_type": "unknown",
+        "ventilation_failure": null,
+        "degasification_failure": null,
+        "outburst_hazard": null,
+        "geological_hazard": null,
+        "seismic_event": null,
+        "roof_failure": null,
+        "monitoring_failure": null,
+        "data_falsification": null,
+        "naryad_violation": true,
+        "insufficient_supervision": true,
+        "qualification_failure": true,
+        "fatalities": 0,
+        "mass_casualty": false
+      }
+    },
+    {
+      "id": "PREC-2024-01",
+      "year": 2024,
+      "date": "2024-12-09",
+      "record_type": "avaria",
+      "mine": "Shaktha Alardinskaya",
+      "operator": "OOO Raspadskaya Ugolnaya Kompaniya",
+      "region": "Kemerovskaya oblast",
+      "accident_type": "underground_gas_fire",
+      "work_type": "underground_extraction",
+      "description": "In the goaf of the longwall, a roof fall occurred with displacement of ignited methane-air mixture into mine workings of the extraction section. Ignition detected in the corner section of the longwall. 120 workers were underground — all evacuated to surface. Fire extinguished. No casualties.",
+      "fatalities": 0,
+      "injured": 0,
+      "technical_causes": [
+        "Roof fall in goaf with displacement of ignited methane-air mixture into workings",
+        "Unsatisfactory technical condition of structures for production processes including those for accident localization and elimination",
+        "Non-implementation of safety measures: no exploratory boreholes drilled, support spacing and cut depth not reduced, no water drainage provision"
+      ],
+      "organizational_causes": [
+        "Unsatisfactory organization of production work — management failed to control work execution and labor discipline",
+        "Work performed in violation of industrial safety requirements and occupational safety instructions",
+        "Violation of naryad system — work order changed by telephone without written record in work-pass and without safety briefing"
+      ],
+      "violated_regulations": ["REG-01", "REG-02", "REG-08", "REG-09"],
+      "cause_categories": ["TC-01", "TC-09", "OC-01", "OC-02", "OC-05"],
+      "data_completeness": "full",
+      "similarity_profile": {
+        "accident_type": "underground_gas_fire",
+        "work_type": "underground_extraction",
+        "underground": true,
+        "longwall_face_involved": true,
+        "methane_involved": true,
+        "companion_seam_involved": null,
+        "goaf_accumulation": true,
+        "coal_dust_involved": false,
+        "spontaneous_combustion_involved": false,
+        "ignition_source_identified": false,
+        "ignition_type": "unknown",
+        "ventilation_failure": false,
+        "degasification_failure": false,
+        "outburst_hazard": false,
+        "geological_hazard": false,
+        "seismic_event": false,
+        "roof_failure": true,
+        "monitoring_failure": false,
+        "data_falsification": false,
+        "naryad_violation": true,
+        "insufficient_supervision": true,
+        "qualification_failure": false,
+        "fatalities": 0,
+        "mass_casualty": false
+      }
+    }
+  ]
+}

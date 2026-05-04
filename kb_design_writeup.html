@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building the Knowledge Base — Mining Investigation System</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --paper: #f5f0e8;
+    --paper-dark: #ede7d5;
+    --accent: #c0392b;
+    --accent-muted: #e8d5d3;
+    --gold: #b8860b;
+    --code-bg: #1e1e1e;
+    --code-text: #d4d4d4;
+    --rule: #c8bfa8;
+    --muted: #6b6358;
+    --highlight: #fff3cd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 0 2.5rem;
+    text-align: center;
+    border-bottom: 4px solid var(--accent);
+  }
+
+  .masthead .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .masthead h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 700px;
+    margin: 0 auto 1.2rem;
+    padding: 0 2rem;
+  }
+
+  .masthead .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: #b0a898;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .masthead .byline {
+    margin-top: 1.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: #7a7068;
+    letter-spacing: 0.05em;
+  }
+
+  .masthead .byline span {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* LEAD */
+  .lead {
+    padding: 3rem 0 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 2.5rem;
+  }
+
+  .lead p {
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: #2a2520;
+    margin-bottom: 1.5rem;
+  }
+
+  /* SECTIONS */
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  h2 .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 1.8rem 0 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    color: #2a2520;
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--accent-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #3a2520;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* CALLOUT BOX */
+  .callout {
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--gold);
+    padding: 1.3rem 1.5rem;
+    margin: 2rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+  }
+
+  .callout .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+  }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1.3rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    border-radius: 2px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .code-block .key { color: #9cdcfe; }
+  .code-block .str { color: #ce9178; }
+  .code-block .num { color: #b5cea8; }
+  .code-block .cmt { color: #6a9955; font-style: italic; }
+  .code-block .punct { color: #808080; }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 2rem 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 110px;
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    padding: 1rem 0.8rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .flow-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--accent);
+    z-index: 1;
+    background: var(--paper);
+    padding: 0 2px;
+  }
+
+  .flow-step .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .flow-step .step-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* TWO-FILE TABLE */
+  .file-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+  }
+
+  .file-table thead tr {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .file-table th {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .file-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .file-table tr:nth-child(even) td {
+    background: var(--paper-dark);
+  }
+
+  .file-table .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+  }
+
+  /* KB EXPANSION TABLE */
+  .tier-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+  }
+
+  .tier-table th {
+    background: var(--paper-dark);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .tier-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .tier-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .tier-1 { background: var(--ink); color: var(--paper); }
+  .tier-2 { background: var(--accent); color: white; }
+  .tier-3 { background: var(--gold); color: var(--ink); }
+
+  /* SCHEMA FIELDS */
+  .schema-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 1.2rem 0;
+  }
+
+  .schema-field {
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    padding: 0.6rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .schema-field .field-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .schema-field .field-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* RULE */
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: #7a7068;
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--accent);
+  }
+
+  footer span { color: var(--paper); }
+
+  @media (max-width: 600px) {
+    .schema-grid { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -14px; transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">MSc Thesis — NUST MISIS · Data Science · 2025</div>
+  <h1>Building the Knowledge Base for a Multi-Agent Mining Investigation System</h1>
+  <p class="subtitle">From raw expert reports and regulatory documents to structured, agent-ready knowledge — design decisions, architecture, and expansion strategy.</p>
+  <p class="byline">By <span>Ridwan A. Adebayo</span> &nbsp;·&nbsp; Supervisors: <span>Anna Markarian</span> &amp; <span>Igor Temkin</span></p>
+</div>
+
+<div class="container">
+
+  <div class="lead">
+    <p>When you set out to build an AI system that investigates mining accidents, one of the first things you discover is that the intelligence of the system is only as good as the knowledge it can draw on. Before any agent reasons, before any argumentation graph is computed, there is a more fundamental question: what do we actually need to store, in what form, and why?</p>
+    <p>This write-up documents the knowledge base design for a multi-agent investigation system built as part of an MSc thesis at NUST MISIS. It traces the thinking behind every structural decision — from the choice to decompose expert reports into atomic arguments, to the two-file architecture, to the planned expansion strategy across three source tiers.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section>
+    <h2><span class="section-num">§ 01</span> The Problem with Raw Documents</h2>
+
+    <p>The starting point was three expert investigation reports on the Kostenko mine explosion (Kazakhstan, October 2023, 46 fatalities). These were DOCX files in Russian — each written by a different expert team with a different analytical lens, each reaching different conclusions on the same incident.</p>
+
+    <p>The instinct is to feed these documents directly into the system. Vector-embed them, store them in a retrieval database, let agents query them. This works for general question-answering. But it does not work for what this system needs to do.</p>
+
+    <div class="pull-quote">
+      The system does not need to find text about the ignition source. It needs to know that Expert A claims the ignition was the angle grinder, Expert B claims it was AFC chain friction, and Expert C says the ignition source cannot be determined — and that these three positions are in direct conflict with each other.
+      <cite>Design decision log, March 2025</cite>
+    </div>
+
+    <p>That kind of structured, relational knowledge — who claims what, supported by what evidence, with what confidence, and in conflict with whom — cannot be reliably extracted at query time from raw text. It needs to be explicit in the data structure itself.</p>
+
+    <p>This is the core reason the KB does not store documents. It stores <em>arguments</em>.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section>
+    <h2><span class="section-num">§ 02</span> The Argument as the Fundamental Unit</h2>
+
+    <p>Every piece of investigative knowledge in the system is represented as a structured argument — a formalization borrowed from Toulmin's model of argumentation. Each argument captures not just a conclusion, but the evidence it rests on and the reasoning that connects evidence to conclusion.</p>
+
+    <p>The schema has eight fields:</p>
+
+    <div class="schema-grid">
+      <div class="schema-field">
+        <span class="field-name">id</span>
+        <span class="field-desc">Unique identifier, e.g. U-A3, K-A4, D-A9</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">source</span>
+        <span class="field-desc">Which expert or agent produced this argument</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">topic</span>
+        <span class="field-desc">The investigation question it addresses, e.g. "Ignition source"</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">claim</span>
+        <span class="field-desc">The conclusion being asserted</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">evidence</span>
+        <span class="field-desc">The data or observations supporting the claim</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">warrant</span>
+        <span class="field-desc">The reasoning connecting evidence to claim</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">confidence</span>
+        <span class="field-desc">Numeric confidence score (0.0–1.0)</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">cause_categories</span>
+        <span class="field-desc">Taxonomy labels for classification and matching</span>
+      </div>
+    </div>
+
+    <p>A real example, extracted from the Kolikov-Meshcheryakov expert report:</p>
+
+    <div class="code-block">
+<span class="punct">{</span>
+  <span class="key">"id"</span><span class="punct">:</span> <span class="str">"K-A4"</span><span class="punct">,</span>
+  <span class="key">"source"</span><span class="punct">:</span> <span class="str">"K"</span><span class="punct">,</span>
+  <span class="key">"topic"</span><span class="punct">:</span> <span class="str">"Ignition source"</span><span class="punct">,</span>
+  <span class="key">"claim"</span><span class="punct">:</span> <span class="str">"Most probable ignition source was sparking from the
+           armored face conveyor (AFC) chain operating in the
+           methane-rich zone."</span><span class="punct">,</span>
+  <span class="key">"evidence"</span><span class="punct">:</span> <span class="str">"Witness testimony from 4 protocols confirming sparking
+             during conveyor operation; physical tests confirming
+             conveyor sparking is possible; sparking zone coincides
+             with floor-level methane measurements of 1.2–17.9%."</span><span class="punct">,</span>
+  <span class="key">"warrant"</span><span class="punct">:</span> <span class="str">"Documented as major ignition cause in 16% of Russian coal
+            mine explosions 2004–2019 (N=50 events, 645 casualties).
+            Conveyor sparking zone overlaps methane accumulation zone."</span><span class="punct">,</span>
+  <span class="key">"confidence"</span><span class="punct">:</span> <span class="num">0.72</span><span class="punct">,</span>
+  <span class="key">"cause_categories"</span><span class="punct">:</span> <span class="punct">[</span><span class="str">"ignition_source_mechanical"</span><span class="punct">,</span>
+                         <span class="str">"methane_accumulation"</span><span class="punct">]</span>
+<span class="punct">}</span>
+    </div>
+
+    <p>This argument is directly comparable with U-A3 (Usembekov's angle grinder hypothesis) and D-A5 (DMT's "ignition source unknown" conclusion). The system can detect that conflict automatically because all three share the same <code>topic</code> field — and the explicit claims can be fed to the argumentation layer for formal resolution.</p>
+
+    <p>This would not be possible if the knowledge were stored as raw text.</p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section>
+    <h2><span class="section-num">§ 03</span> The Pipeline: From Documents to Arguments</h2>
+
+    <p>The journey from raw expert reports to agent-ready structured arguments happens in the first subsystem of the architecture — v1 (Decomposition). Understanding this pipeline is essential to understanding why the KB looks the way it does.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-label">Input</div>
+        <div class="step-title">Raw documents (DOCX, PDF, sensor logs)</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-label">v1 — Mode 2</div>
+        <div class="step-title">LLM-assisted argument extraction</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-label">v1 — Mode 1</div>
+        <div class="step-title">Structured JSON input (pre-extracted)</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-label">Output</div>
+        <div class="step-title">Uniform 8-field argument schema</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-label">Downstream</div>
+        <div class="step-title">v2–v6 agents, all mode-agnostic</div>
+      </div>
+    </div>
+
+    <p>v1 operates in two modes. In Mode 1 — the primary mode used for both test cases — the arguments have already been manually extracted and structured into JSON. The system loads and validates them directly. In Mode 2, a raw text passage from an investigation report is fed to an LLM, which extracts structured arguments and maps them to the 8-field schema.</p>
+
+    <div class="callout">
+      <div class="callout-label">Key design property</div>
+      Both modes produce identical output schema. Everything downstream — classification, precedent matching, agent reasoning, argumentation — is completely mode-agnostic. The KB does not know or care whether its arguments came from manual extraction or LLM processing.
+    </div>
+
+    <p>The "heterogeneous data sources" language in the thesis proposal refers to this pipeline capability — that v1 can, in principle, accept sensor logs, maintenance records, or witness transcripts and convert them into the same uniform argument format. For the prototype, this is demonstrated through Mode 2 evaluated against Mode 1 as ground truth.</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section>
+    <h2><span class="section-num">§ 04</span> Two Files, Two Roles</h2>
+
+    <p>The knowledge base consists of two JSON files. They serve fundamentally different purposes in the system, and conflating them is a common source of confusion.</p>
+
+    <table class="file-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Role</th>
+          <th>Used by</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mono">kostenko_knowledge_base.json</span></td>
+          <td>Case-specific evidence — the input to the investigation</td>
+          <td>v4 specialist agents (reasoning over)</td>
+          <td>17 arguments from 3 expert reports; 4 attack relations; 5 support relations</td>
+        </tr>
+        <tr>
+          <td><span class="mono">rostechnadzor_regulatory_kb.json</span></td>
+          <td>Background knowledge — the context for reasoning</td>
+          <td>v3 (precedent matching), v4 Agent 4 (regulations), v1/v2 (taxonomy)</td>
+          <td>7 precedent cases; regulatory requirements; cause taxonomy; violation patterns</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The Kostenko file is not a precedent. It is the case under investigation. The 17 arguments it contains are what the four specialist agents in v4 will reason over, attack, and support. The argumentation graph is built from these arguments.</p>
+
+    <p>The regulatory KB, by contrast, is what agents consult when they need context — what similar accidents looked like, what regulations were in force, what the standard causes are. It is the system's background knowledge about the domain, not about the specific incident.</p>
+
+    <div class="pull-quote">
+      The test case is the question. The regulatory KB is the domain knowledge needed to answer it.
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section>
+    <h2><span class="section-num">§ 05</span> What Is Currently in the Regulatory KB — and What Is Missing</h2>
+
+    <p>The regulatory KB currently contains seven precedent cases, all sourced from Russian Rostechnadzor annual reports (2020–2024). It also contains regulatory requirement summaries, a two-tier cause taxonomy (10 technical + 7 organizational categories), and recurring violation patterns.</p>
+
+    <p>Seven cases is workable for a proof of concept but thin for a thesis that claims to demonstrate meaningful precedent matching. The quality of v3's output scales directly with the breadth and relevance of cases in the precedent store.</p>
+
+    <p>There is also a structural gap: Rostechnadzor covers only Russian Federation mines. The Kostenko mine is in Kazakhstan. While it operates under an equivalent regulatory framework and has identical methane hazard classification, several directly comparable incidents — including Kostenko itself — fall outside Rostechnadzor's jurisdiction entirely. A system that cannot surface Listviazhnaya 2021 as a precedent when investigating Kostenko 2023 is missing its most important comparator.</p>
+
+    <div class="callout">
+      <div class="callout-label">Confirmed: Alardinskaya 2024 is the closest precedent currently in the KB</div>
+      Roof fall in the goaf displacing ignited methane-air mixture into longwall workings — almost identical mechanism to Kostenko. But Listviazhnaya 2021 (51 killed, methane explosion, same regulatory baseline in force during Kostenko) is not currently structured as a searchable precedent.
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section>
+    <h2><span class="section-num">§ 06</span> Knowledge Base Expansion — Three-Tier Strategy</h2>
+
+    <p>The expansion goal is a minimum of 20 total precedent cases, prioritizing underground coal mines with methane and explosion incidents, but covering the full accident type spectrum the system is designed to handle.</p>
+
+    <table class="tier-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Source</th>
+          <th>Cases available</th>
+          <th>Language</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-badge tier-1">Tier 1</span></td>
+          <td>MSHA Major Disaster Investigations (USA)</td>
+          <td>~5 high-quality cases (UBB 2010, Sago 2006, Jim Walter 2001, Crandall Canyon 2007, Quecreek 2002)</td>
+          <td>English</td>
+          <td>To be extracted</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-2">Tier 2</span></td>
+          <td>Rostechnadzor annual reports (already loaded)</td>
+          <td>7 cases structured</td>
+          <td>Russian</td>
+          <td>Partial — expand within reports</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-3">Tier 3</span></td>
+          <td>International incidents via academic literature (Turkey, Poland, China, Ukraine, New Zealand)</td>
+          <td>~10+ cases documented in English papers</td>
+          <td>Mixed (English academic)</td>
+          <td>To be identified and extracted</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tier 1 — MSHA</h3>
+    <p>MSHA's Major Disaster Investigations are the highest-quality English-language source available. For each listed disaster, MSHA publishes a full investigation report, an internal review, and in several cases an independent NIOSH assessment. The Upper Big Branch explosion (2010, 29 fatalities) is already planned as the system's secondary test case — but several other MSHA disasters are strong candidates for the precedent KB: Sago Mine (2006, methane ignition triggering explosion), Jim Walter Resources (2001, two methane explosions within one hour), and Crandall Canyon (2007, coal outburst with seismic contribution).</p>
+
+    <h3>Tier 3 — International incidents</h3>
+    <p>For accidents outside MSHA and Rostechnadzor jurisdiction, the strategy is to source structured information from academic papers rather than official investigation databases. The Soma mine disaster (Turkey, 2014, 301 fatalities — spontaneous combustion and carbon monoxide) and Pike River (New Zealand, 2010, 29 fatalities — methane explosion) are both extensively documented in English-language mining safety literature. While the source-level detail is lower than MSHA reports, these cases provide geographic diversity and cover accident types and failure modes underrepresented in the Russian and American data.</p>
+
+    <div class="callout">
+      <div class="callout-label">Schema note</div>
+      All new precedents will follow the existing schema: <code>technical_causes</code>, <code>organizational_causes</code>, <code>violated_regulations</code>, <code>cause_categories</code>, <code>relevance_to_kostenko</code>. The regulatory reference field will note the source framework (30 CFR for US cases, national equivalents for others) rather than forcing all cases into Russian regulatory terminology. This preserves source fidelity while maintaining structural uniformity.
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section>
+    <h2><span class="section-num">§ 07</span> What the KB Deliberately Does Not Contain</h2>
+
+    <p>One category is conspicuously absent from both KB files: a dedicated domain knowledge store — mining engineering textbooks, equipment manuals, gas physics references. This is a deliberate design decision, not an oversight.</p>
+
+    <p>The system's specialist agents access domain knowledge through the LLM's training data. An LLM like GPT-4 or Claude has substantial embedded knowledge about methane explosion dynamics, ventilation engineering, and coal seam geology. Adding a full mining engineering knowledge base to the KB would be an enormous extraction effort with marginal benefit for a prototype that already has a capable LLM doing the reasoning.</p>
+
+    <p>This is acknowledged as a limitation in the thesis. A production system — one deployed by a mining regulatory body or operator — would benefit significantly from a verified, up-to-date domain knowledge store. For the research prototype, the LLM's embedded knowledge is sufficient to demonstrate the architecture's value, and the limitation is stated explicitly rather than papered over.</p>
+  </section>
+
+  <hr>
+
+  <!-- SECTION 8 -->
+  <section>
+    <h2><span class="section-num">§ 08</span> Where This Sits in the Larger Architecture</h2>
+
+    <p>The KB is not a subsystem of the investigation pipeline — it is the backbone that all six subsystems draw from. v1 uses the cause taxonomy for labeling. v2 uses accident type definitions for classification. v3 queries the precedent store. v4 agents receive relevant regulations and precedents via RAG. v5 builds the argumentation framework from the case-specific arguments. v6 generates the report from v5's output.</p>
+
+    <p>In Markarian's original architecture, the knowledge base is modeled as a central node connected to all six subsystems via bidirectional edges in a directed graph G = {V, E}. The two-file design here is a direct implementation of that pattern — one file per knowledge type, each serving the subsystems that need it.</p>
+
+    <p>The expansion of the precedent KB from 7 to 20+ cases is, in this sense, not just a data collection exercise. It is the difference between a system that can demonstrate meaningful precedent retrieval and one that retrieves the same few cases regardless of the accident under investigation. The argumentation layer is only as interesting as the diversity of the cases it can draw on for context.</p>
+  </section>
+
+</div>
+
+<footer>
+  <p>MSc Thesis — Multi-Agent Mining Accident Investigation System &nbsp;·&nbsp; NUST MISIS &nbsp;·&nbsp; 2025<br>
+  <span>Ridwan A. Adebayo</span> &nbsp;·&nbsp; Supervisors: <span>Anna Markarian</span> &amp; <span>Igor Temkin</span></p>
+</footer>
+
+</body>
+</html>

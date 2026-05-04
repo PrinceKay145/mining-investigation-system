@@ -1,0 +1,9 @@
+venv/
+.env
+__pycache__/
+*.pyc
+.faiss/
+outputs/
+*.db
+.DS_Store
+CLAUDE.md

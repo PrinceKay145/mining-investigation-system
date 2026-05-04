@@ -1,0 +1,430 @@
+{
+  "metadata": {
+    "case": "Kostenko Mine Explosion",
+    "date": "2023-10-28",
+    "location": "Kostenko Mine, ArcelorMittal Temirtau, Kazakhstan",
+    "longwall": "48K3-Z",
+    "sources": [
+      {
+        "id": "U",
+        "full_name": "Usembekov Meiramбек Sabdenovich",
+        "affiliation": "KarTU im. Abylkas Saginov",
+        "role": "Independent specialist, PhD (Technical Sciences)",
+        "report_date": "2023-11"
+      },
+      {
+        "id": "K",
+        "full_name": "Kolikov-Meshcheryakov Joint Expert Conclusion",
+        "affiliation": "NUST MISIS / independent",
+        "role": "Expert commission",
+        "report_date": "2023-11-20"
+      },
+      {
+        "id": "D",
+        "full_name": "DMT GmbH & Co. KG",
+        "affiliation": "DMT, Essen, Germany",
+        "role": "Independent technical review (contracted by ArcelorMittal)",
+        "report_date": "2023-11-17"
+      }
+    ],
+    "investigation_questions": [
+      "Determine the cause of the fire and explosion",
+      "Determine the sources of elevated methane release",
+      "Determine the possible ignition source",
+      "Determine the location of the fire and explosion",
+      "Determine the sequence of events leading to casualties and damage",
+      "Assess the role of seismic activity",
+      "Propose measures to prevent similar accidents"
+    ]
+  },
+  "arguments": [
+    {
+      "id": "U-A1",
+      "source": "U",
+      "topic": "Ignition location",
+      "claim": "Initial ignition occurred in the upper part of longwall 48K3-Z, in the area of sections 142-145.",
+      "evidence": "Physical inspection findings: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' found on shearer SL-300; plastic bottle with synthetic oil in section 144 pocket; chemical ampoules behind sections 143-144.",
+      "warrant": "Physical items capable of producing ignition are concentrated at that location, and CO trend data shows sharp rise from 02:24 consistent with combustion of solid materials (CH4 combustion does not produce CO: CH4 + 2O2 = CO2 + 2H2O).",
+      "confidence": 0.75,
+      "cause_categories": [
+        "TC-02",
+        "TC-04"
+      ]
+    },
+    {
+      "id": "U-A2",
+      "source": "U",
+      "topic": "Spontaneous combustion",
+      "claim": "Spontaneous combustion of coal in the goaf is excluded as a cause.",
+      "evidence": "Indicator gas analysis from PASS 'Komir' (4 sampling dates Jul-Oct 2023): R1 max=0.94 across all isolation walls (critical threshold is R1>2.5); R2=R3=0 in all samples (no CO or H2 detected). CO concentration trends on sensors stable at 0.0004-0.0009% until the accident.",
+      "warrant": "All three fire indicator ratios (R1, R2, R3) are in the green zone well below spontaneous combustion thresholds. R1=CO2_increase/O2_decrease; R2=CO_increase/O2_decrease; R3=CO_increase/CO2_increase. This is the standard VGCH method for detecting oxidation processes.",
+      "confidence": 0.95,
+      "cause_categories": [
+        "TC-05"
+      ]
+    },
+    {
+      "id": "U-A3",
+      "source": "U",
+      "topic": "Ignition source",
+      "claim": "Ignition was caused by an external source, most likely the angle grinder, aerosol can, synthetic oil, or AFC chain friction.",
+      "evidence": "Angle grinder with 6 used disks found in conveyor drift 47K3-Z. Aerosol can marked 'flammable' on shearer. Synthetic oil bottle in section 144. Equipment operation data shows shearer and conveyor were running at 02:29 when power was cut.",
+      "warrant": "Multiple identifiable ignition-capable items were present at the ignition location. CO sensor data confirms combustion of solid materials rather than pure methane ignition.",
+      "confidence": 0.65,
+      "cause_categories": [
+        "TC-02",
+        "TC-04"
+      ]
+    },
+    {
+      "id": "U-A4",
+      "source": "U",
+      "topic": "Ventilation",
+      "claim": "Technical ventilation failure is excluded as a cause of elevated methane concentration.",
+      "evidence": "Air velocity sensor data from 12:00 27.10 to accident time was stable and matched ventilation journal entries dated 20.10.23 No.29. Incoming airflow: 1943 m3/min; outgoing: 1507 m3/min.",
+      "warrant": "Consistent pre-accident readings across multiple sensors exclude sudden ventilation failure as a contributing factor.",
+      "confidence": 0.92,
+      "cause_categories": [
+        "TC-06"
+      ]
+    },
+    {
+      "id": "K-A1",
+      "source": "K",
+      "topic": "Gas-dynamic event",
+      "claim": "Atmospheric pressure change did not contribute to elevated methane release.",
+      "evidence": "Atmospheric pressure data for 27-28.10.2023: total change in 24h before accident was 0.39% (external data) or +1.1% (mine data). Literature threshold for significant effect is typically rapid drops of >1% within hours.",
+      "warrant": "Per Le Chatelier principle, pressure drop accelerates gas release. The observed pressure change is below documented thresholds for significant effect on methane outburst (Skochinsky, Komarov; Lidin, Ayruny et al.).",
+      "confidence": 0.88,
+      "cause_categories": [
+        "TC-08"
+      ]
+    },
+    {
+      "id": "K-A2",
+      "source": "K",
+      "topic": "Methane source",
+      "claim": "The primary source of elevated methane in the upper longwall was the K2 companion seam, released due to abutment pressure decompression zones.",
+      "evidence": "Post-accident methane survey at floor level across all sections: sections 128-142 showed concentrations 1.2-17.9%, maximum 17.9% at section 140 (near lower auger). Average cross-section concentration in central longwall was only 0.16-0.39%. Air velocity at floor: 0.25 m/s (stagnant sub-conveyor zone).",
+      "warrant": "K2 seam is 3.35m below K3. Abutment pressure creates decompression zone at the face, causing K2 fracturing and methane release into sub-conveyor space where ventilation is insufficient to dilute it. Abutment pressure maximum is shifted toward the ventilation drift.",
+      "confidence": 0.85,
+      "cause_categories": [
+        "TC-01",
+        "TC-07"
+      ]
+    },
+    {
+      "id": "K-A3",
+      "source": "K",
+      "topic": "Spontaneous combustion",
+      "claim": "Spontaneous combustion is excluded: K3 seam is classified as non-prone, and no CO/H2 indicators were detected.",
+      "evidence": "Expert conclusion No.3 from 'NIC UGOL' laboratory: coal from section 139, lava 48K3-West rated as stable to self-ignition (Group III by KNIUI classification). No CO or H2 in any VGCH samples July-October 2023 (Notices No.43, 8, 33, 26).",
+      "warrant": "Independent laboratory classification plus longitudinal monitoring data provide two independent lines of evidence excluding spontaneous combustion.",
+      "confidence": 0.95,
+      "cause_categories": [
+        "TC-05"
+      ]
+    },
+    {
+      "id": "K-A4",
+      "source": "K",
+      "topic": "Ignition source",
+      "claim": "The most probable ignition source was sparking from the armored face conveyor (AFC) chain operating in the methane-rich zone.",
+      "evidence": "Witness testimony (Protocols No.35, 37, 42, 43): sparking and ignition events observed during conveyor operation in upper longwall. Physical tests confirmed conveyor sparking is possible. Sparking zone coincides with elevated methane zone (floor-level measurements, sections 128-142). Manufacturer instruction section 9.2.1 requires compressed air ventilation of scraper chain when methane is present.",
+      "warrant": "Conveyor sparking zone overlaps with sub-conveyor methane accumulation zone. Documented as major ignition cause: 16% of Russian coal mine explosions 2004-2019 (N=50 events, 645 casualties). Conveyor sparking was the leading mechanical ignition category.",
+      "confidence": 0.72,
+      "cause_categories": [
+        "TC-02"
+      ]
+    },
+    {
+      "id": "K-A5",
+      "source": "K",
+      "topic": "Electrical equipment",
+      "claim": "Electrical equipment malfunction is excluded as an ignition source.",
+      "evidence": "Post-accident inspection of all electrical equipment in lava 48K3-Z and development headings: equipment operated normally without violations.",
+      "warrant": "Standard post-accident electrical inspection found no evidence of abnormal operation or insulation failures.",
+      "confidence": 0.82,
+      "cause_categories": [
+        "TC-03"
+      ]
+    },
+    {
+      "id": "K-A6",
+      "source": "K",
+      "topic": "Explosion location",
+      "claim": "The explosion epicenter was in the upper part of longwall 48K3-Z; two seismic events recorded at 02:43:32 and 02:43:34.",
+      "evidence": "Institute of Mine Seismology (Australia) seismic analysis: two events at 02:43:32 and 02:43:34, presumed epicenter includes lava 48K3-Z. Main ventilation fan VC-5 data: at 02:43:49 airflow surged from 191 to 333 m3/s and depression halved (480 to 260 mmH2O). Phone records confirm fire at sections 142-145.",
+      "warrant": "Multiple independent data streams converge on same location and time: seismic events, ventilation fan readings, and eyewitness phone records.",
+      "confidence": 0.88,
+      "cause_categories": [
+        "TC-01"
+      ]
+    },
+    {
+      "id": "K-A7",
+      "source": "K",
+      "topic": "Explosion sequence",
+      "claim": "The first explosion occurred in the goaf of longwall 48K3-Z approximately 120m from the face, followed by 99.99% methane displacement into workings, then a second large explosion.",
+      "evidence": "Individual gas detector of miner Bobryashov S.V. in conveyor drift: at 02:47 methane reached 99.99% and held for ~4 minutes; temperature rose from 21 to 45 degrees C; pressure 103->109 units. Degasification pipeline (10% CH4) was not damaged — explosion did not reach it, implying it occurred within 120m of face.",
+      "warrant": "The 120m limit is inferred from the intact degasification pipeline. The 99.99% methane reading means gas was displaced from the goaf into the workings after initial explosion. Worker survival time post-shock-wave eliminates coal dust as primary agent (CO poisoning would have been near-immediate with coal dust).",
+      "confidence": 0.78,
+      "cause_categories": [
+        "TC-01"
+      ]
+    },
+    {
+      "id": "K-A8",
+      "source": "K",
+      "topic": "Explosion type",
+      "claim": "The large-scale explosion was driven primarily by high-concentration methane, not coal dust.",
+      "evidence": "Video from miner's lamp captured after shock wave arrived at gallery K1-K2: workers remained active and breathing without respirators for extended period post-shock-wave. With coal dust explosion CO poisoning would have incapacitated them rapidly.",
+      "warrant": "Coal dust explosions produce high CO concentrations in post-explosion atmosphere; workers would not survive unprotected. The video evidence is direct observational testimony contradicting a coal dust primary explosion.",
+      "confidence": 0.68,
+      "cause_categories": [
+        "TC-01"
+      ]
+    },
+    {
+      "id": "D-A1",
+      "source": "D",
+      "topic": "Methane source",
+      "claim": "K2 seam was continuously releasing CH4 into goaf near the longwall face; this was the methane present at the ignition location.",
+      "evidence": "K2 seam: ~5m thickness, ~15 m3/t CH4 content in vicinity of 48K3-Z. Geological conditions (3.35m separation, weak rock layer) make continuous CH4 release probable. Gas drainage system captured 34.1% CH4 at perimeter wall 1640. No borehole pre-drainage of K2 seam.",
+      "warrant": "K2 proximity and characteristics, combined with absence of pre-drainage boreholes, means CH4 accumulates in goaf. Mine Scada shows small CH4 increase (~1.8 m3/min) at 02:04-02:12, consistent with roof movement releasing gas — possibly triggered by support movement.",
+      "confidence": 0.82,
+      "cause_categories": [
+        "TC-01",
+        "TC-07"
+      ]
+    },
+    {
+      "id": "D-A2",
+      "source": "D",
+      "topic": "Gas-dynamic event",
+      "claim": "No sudden gas outburst or gas-dynamic phenomenon occurred before ignition.",
+      "evidence": "Mine Scada data 25-28 October: CH4 levels in outgoing air fluctuated normally, reaching max 1.2%. No sudden spike before 02:24. Small increase of 0.05% at 02:04-02:12 is within operational range. Airflow (air speed sensor) remained unchanged throughout.",
+      "warrant": "A gas outburst would appear as a rapid, large-amplitude CH4 spike in Mine Scada data. No such pattern observed. Sudden outburst from K3 or K2 is assessed as unlikely given geological conditions.",
+      "confidence": 0.9,
+      "cause_categories": [
+        "TC-08"
+      ]
+    },
+    {
+      "id": "D-A3",
+      "source": "D",
+      "topic": "Ventilation",
+      "claim": "Ventilation was operating within design parameters but the combined scheme created structural vulnerability to methane accumulation in sub-conveyor zones.",
+      "evidence": "Airflow of 2572 m3/min per ventilation journal (design: 2705 m3/min). CH4 in outgoing stream consistently below lower explosive limit. Isolation methane removal system: 34.5 m3/min. However, no borehole drainage of K2. Leakage coefficient 1.3.",
+      "warrant": "Ventilation quantity was adequate for design load. However the 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone in lower longwall where methane can accumulate to explosive concentrations while average cross-section readings remain below threshold.",
+      "confidence": 0.8,
+      "cause_categories": [
+        "TC-06"
+      ]
+    },
+    {
+      "id": "D-A4",
+      "source": "D",
+      "topic": "Spontaneous combustion",
+      "claim": "Spontaneous combustion and resin chemical reactions are excluded as ignition sources.",
+      "evidence": "No CO increase in goaf monitoring (perimeter walls, crosscuts) in August, September, and last sampling 16 October 2023. No evidence of resin use at time of ignition found during physical inspection.",
+      "warrant": "Spontaneous combustion produces progressive CO accumulation in goaf samples prior to ignition event. No such trend was observed across multiple monitoring points over 3 months.",
+      "confidence": 0.9,
+      "cause_categories": [
+        "TC-04",
+        "TC-05"
+      ]
+    },
+    {
+      "id": "D-A5",
+      "source": "D",
+      "topic": "Ignition source",
+      "claim": "Ignition source is unknown and may never be identified. Most probable category: mechanical sparks (shearer, falling material, or metal cutting).",
+      "evidence": "Physical inspection: damaged shearer (external teeth missing, mount sheared — timing unclear); no evidence of angle grinder use at ignition location; no resin use evidence; explosion-proof electrical equipment. Electrical equipment inspection still ongoing at report date. Fire appears to have started in goaf or at goaf-longwall interface.",
+      "warrant": "Analysis per EN 1127-1 (13 ignition source categories): electrical excluded (explosion-proof, ongoing inspection), self-ignition excluded, sources 7-13 highly unlikely. Remaining probable category is mechanical sparks. Post-explosion wave damage may have permanently destroyed ignition evidence.",
+      "confidence": 0.45,
+      "cause_categories": [
+        "TC-02"
+      ]
+    },
+    {
+      "id": "D-A6",
+      "source": "D",
+      "topic": "Ignition location",
+      "claim": "Initial fire started at upper part of longwall near sections 142-145, confirmed by CO sensor data at 02:24:20.",
+      "evidence": "Mine Scada: CO increased at sensor OY32(2) in conveyor drift at 02:24:20; followed ~80 seconds later at mixing chamber OY42(2). CH4 simultaneously decreased slightly, consistent with combustion consuming methane. Phone call at 02:29:19 confirmed fire at sections 142-145 growing from goaf toward AFC.",
+      "warrant": "CO spike at 02:24 precedes first phone report by 5 minutes, indicating sensor-level detection. 80-second lag between OY32 and OY42 matches expected airflow travel time between sensors, confirming fire location by triangulation.",
+      "confidence": 0.9,
+      "cause_categories": [
+        "TC-02"
+      ]
+    },
+    {
+      "id": "D-A7",
+      "source": "D",
+      "topic": "Explosion sequence",
+      "claim": "Full accident sequence: gas fire (02:24) -> methane deflagration -> initial dust explosion -> full-scale coal dust explosion propagating across the mine.",
+      "evidence": "Physical inspection: fire marks from section 143 downward; small pressure wave evidence at sections 20-8 from goaf direction. Coal dust accumulations on conveyor lines. Slate barrier activated. Explosion reached eastern mine (42K2E), 4+ km from origin. Explosion traveled along conveyor transport routes.",
+      "warrant": "Five-stage sequence modeled on established coal mine explosion physics. Scale and propagation pattern (traveling on fresh-air side, following conveyor lines) is characteristic of dust explosion, not methane.",
+      "confidence": 0.7,
+      "cause_categories": [
+        "TC-01",
+        "TC-10"
+      ]
+    },
+    {
+      "id": "D-A8",
+      "source": "D",
+      "topic": "Explosion location",
+      "claim": "Initial methane explosion most likely occurred near section 20 of the longwall (lower area), distinct from the initial fire location.",
+      "evidence": "Physical inspection: synthetic coatings on support legs sections 20-8 strongly scorched and displaced toward coal face, indicating small pressure wave from goaf direction. Some covers completely absent. Open space found between section 1, drift supports, and goaf debris — potential CH4 accumulation zone.",
+      "warrant": "Direction of force on support coatings (from goaf side) is a physical indicator of explosion origin on the goaf side at sections 20-8. This location is geometrically distinct from the initial fire at sections 142-145 — the explosion is a downstream event from the fire.",
+      "confidence": 0.62,
+      "cause_categories": [
+        "TC-01"
+      ]
+    },
+    {
+      "id": "D-A9",
+      "source": "D",
+      "topic": "Explosion type",
+      "claim": "Coal dust was the primary fuel for the full-scale explosion — this is one of the most important conclusions.",
+      "evidence": "Explosion propagated along conveyor transport routes across mine including fresh-air side where methane was below explosive limit. Explosion covered 4+ km. Degree of destruction and body fragmentation consistent with powerful dust explosion. Coal dust accumulations observed post-accident on conveyor lines. Slate barrier activated.",
+      "warrant": "Methane explosion cannot propagate on fresh-air side or follow conveyor routes over long distances. Only coal dust distributed along conveyor lines explains the propagation pattern. Lower explosive limit for settled coal dust: ~100 g/m2 (0.1mm layer). Combined methane-dust mixtures lower this threshold by ~25% at 0.75% CH4.",
+      "confidence": 0.75,
+      "cause_categories": [
+        "TC-10"
+      ]
+    }
+  ],
+  "argumentation_framework": {
+    "attack_relations": [
+      {
+        "id": "ATK-1",
+        "attacker": "U-A3",
+        "target": "D-A5",
+        "type": "rebutting",
+        "description": "Usembekov identifies specific physical items (angle grinder, aerosol can) as the likely ignition source. DMT explicitly states the ignition source is unknown and may never be identified, and found no evidence of grinder use at the ignition location. These positions are mutually incompatible on specificity of conclusion."
+      },
+      {
+        "id": "ATK-2",
+        "attacker": "K-A4",
+        "target": "U-A3",
+        "type": "rebutting",
+        "description": "Kolikov-Meshcheryakov identifies AFC conveyor chain sparking as the most probable ignition cause, supported by witness testimony and physical tests. Usembekov does not single out the conveyor, preferring grinder/aerosol. Their conclusions attack each other's specificity regarding the dominant ignition mechanism."
+      },
+      {
+        "id": "ATK-3",
+        "attacker": "D-A9",
+        "target": "K-A8",
+        "type": "rebutting",
+        "description": "DMT argues coal dust was the primary fuel for the full-scale explosion — explicitly called 'one of the most important conclusions'. Kolikov-Meshcheryakov argues the large-scale explosion was driven by high-concentration methane, citing survivor video evidence. These are directly contradictory conclusions about the dominant explosive agent."
+      },
+      {
+        "id": "ATK-4",
+        "attacker": "K-A7",
+        "target": "D-A8",
+        "type": "undercutting",
+        "description": "Kolikov-Meshcheryakov places the first explosion in the goaf approximately 120m from the face. DMT identifies section ~20 (lower area) as the likely initial methane explosion location. These represent divergent causal sequences with different propagation models, partially undermining each other's reconstruction."
+      }
+    ],
+    "support_relations": [
+      {
+        "id": "SUP-1",
+        "supporters": [
+          "U-A2",
+          "K-A3",
+          "D-A4"
+        ],
+        "topic": "Spontaneous combustion excluded",
+        "description": "All three experts independently exclude spontaneous coal combustion. Usembekov: indicator gas ratios below thresholds (R1<2.5, R2=R3=0). Kolikov-Meshcheryakov: KNIUI Group III classification (non-prone). DMT: no CO increase in goaf monitoring data over 3 months. Unanimous convergence — strong candidate for grounded extension.",
+        "strength": "unanimous"
+      },
+      {
+        "id": "SUP-2",
+        "supporters": [
+          "U-A1",
+          "K-A6",
+          "D-A6"
+        ],
+        "topic": "Ignition location: upper longwall, sections 142-145",
+        "description": "All three independently confirm initial fire at upper longwall near sections 142-145. Usembekov: physical evidence. Kolikov-Meshcheryakov: worker testimony + seismic data. DMT: Mine Scada CO sensor sequence (OY32 at 02:24:20, OY42 at 02:26:00). Strong multi-source corroboration.",
+        "strength": "unanimous"
+      },
+      {
+        "id": "SUP-3",
+        "supporters": [
+          "U-A4",
+          "D-A3"
+        ],
+        "topic": "Ventilation technically functional before accident",
+        "description": "Usembekov and DMT both conclude ventilation systems were operating within normal parameters immediately before the accident. Air velocity sensors stable; airflow matched journal records. Technical ventilation failure as root cause is excluded by both.",
+        "strength": "bilateral"
+      },
+      {
+        "id": "SUP-4",
+        "supporters": [
+          "K-A2",
+          "D-A1"
+        ],
+        "topic": "K2 seam was the primary methane source",
+        "description": "Both identify the underlying K2 seam as a significant methane source releasing gas into the goaf near the longwall face. Kolikov-Meshcheryakov: floor-level measurements showing 17.9% CH4 at sections 140-142 from K2 decompression. DMT: gas balance calculations and absence of K2 pre-drainage boreholes.",
+        "strength": "bilateral"
+      },
+      {
+        "id": "SUP-5",
+        "supporters": [
+          "K-A1",
+          "D-A2"
+        ],
+        "topic": "No sudden gas outburst occurred",
+        "description": "Both experts conclude there was no sudden gas outburst or gas-dynamic event. Kolikov-Meshcheryakov: atmospheric pressure change was negligible. DMT: Mine Scada shows no sudden CH4 spike — only small gradual increase consistent with normal geological operation.",
+        "strength": "bilateral"
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-1",
+        "question": "Was the shearer operating at the time of ignition?",
+        "relevance": "Would affect probability of mechanical sparking from shearer vs AFC as ignition source.",
+        "raised_by": [
+          "D"
+        ]
+      },
+      {
+        "id": "OQ-2",
+        "question": "Was the angle grinder used at or near the ignition location (sections 142-145)?",
+        "relevance": "DMT found no evidence of this; Usembekov assumed it. Resolving this would strengthen or defeat U-A3.",
+        "raised_by": [
+          "D"
+        ]
+      },
+      {
+        "id": "OQ-3",
+        "question": "What was the actual CH4 concentration distribution in the goaf and crosscut 13 immediately before the explosion?",
+        "relevance": "Critical for resolving whether initial explosion was at section 20 (D-A8) or 120m into goaf (K-A7).",
+        "raised_by": [
+          "D",
+          "K"
+        ]
+      },
+      {
+        "id": "OQ-4",
+        "question": "Were post-accident coal dust samples from conveyor lines explosive (non-incombustible content below threshold)?",
+        "relevance": "Would confirm or refute D-A9 (coal dust primary fuel). DMT noted visual assessment insufficient; sampling required.",
+        "raised_by": [
+          "D"
+        ]
+      },
+      {
+        "id": "OQ-5",
+        "question": "What was the exact sequence of explosion propagation through the mine?",
+        "relevance": "Required to determine whether full-scale explosion was methane (K-A8) or dust-driven (D-A9).",
+        "raised_by": [
+          "D",
+          "K"
+        ]
+      }
+    ]
+  }
+}

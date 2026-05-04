@@ -1,0 +1,12 @@
+langchain
+langchain-openai
+langchain-anthropic
+langgraph
+faiss-cpu
+sentence-transformers
+networkx
+openai
+anthropic
+python-dotenv
+pytest
+pydantic
