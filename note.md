@@ -165,10 +165,11 @@ Both were raised during early design and are effectively settled by what is alre
 | LLM scaffolding | `src/llm/`: `client.py` (Anthropic), `openai_client.py` (OpenAI), `__init__.py` (`LLMClient` Protocol + `make_llm_client()` factory), `logging.py` (`RunContext`) | 39 |
 | Prompt loader | `src/prompts/loader.py` — Jinja2 markdown templates with `{{ var }}` placeholders, `trim_blocks` for clean rendering | 14 |
 | v4 agents | `src/v4_agents/__init__.py` (orchestrator), `src/v4_agents/context.py` (formatting helpers), `prompts/agent_*.md` (4 prompts + `DESIGN_DECISIONS.md`) | 23 |
-| **v5 argumentation** | `src/v5_argumentation/`: `__init__.py` (orchestrator), `conflict_detection.py` (topic filter + LLM confirmation), `af.py` (NetworkX), `semantics.py` (grounded + preferred via component decomposition + brute force); `prompts/v5_conflict_check.md`; `src/schema/v5_result.py` | 40 |
+| v5 argumentation | `src/v5_argumentation/`: `__init__.py` (orchestrator), `conflict_detection.py` (topic filter + LLM confirmation + content-hashed pair cache), `af.py` (NetworkX), `semantics.py` (grounded + preferred via component decomposition + brute force); `prompts/v5_conflict_check.md`; `src/schema/v5_result.py` | 51 |
+| **v6 report** | `src/v6_report/`: `__init__.py` (orchestrator), `context.py` (formatters), `visualizer.py` (NetworkX → PNG via matplotlib), `renderer.py` (markdown + minimal-HTML); `prompts/v6_report.md`; `src/schema/v6_report.py` | 27 |
 | Test infrastructure | `pyproject.toml` (pytest config, `pythonpath = ["src"]`), `tests/conftest.py` (KB path fixtures + `kostenko_with_bad_cause_id` synthetic-bad-data fixture) | — |
-| Demo | `scripts/demo_kostenko.py`, `scripts/run_v4_kostenko.py`, `scripts/run_v5_kostenko.py`, `notebooks/demo_kostenko.ipynb` | — |
-| **Total** | | **206 passing** |
+| Demo | `scripts/demo_kostenko.py`, `scripts/run_v4_kostenko.py`, `scripts/run_v5_kostenko.py`, `scripts/run_v6_kostenko.py`, `scripts/evaluate_kostenko.py`, `notebooks/demo_kostenko.ipynb` | — |
+| **Total** | | **244 passing** |
 
 The v1 facade is intentionally thin — it wraps `kb.loader.load_case_file` rather than reimplementing it, so there is one canonical loader (the KB layer) and v1's job is just to expose it as the official pipeline entry point with the two-mode contract documented.
 
@@ -439,10 +440,20 @@ This is the central empirical contribution of the thesis. Reproducible from the 
 
 Re-running `python scripts/evaluate_kostenko.py` on the 2026-05-11 run reproduces: **3/4 attacks** (2 exact), **6/9 expected support pairs**, **5/5 open questions captured**, **26 accepted / 12 ambiguous / 5 rejected**. Two of the three missed-or-partial detections trace to the documented exact-string topic filter — K-A6 (`"Explosion location"`) vs U-A1/D-A6 (`"Ignition location"`) for SUP-2, and K-A7 (`"Explosion sequence"`) vs D-A8 (`"Explosion location"`) for ATK-4. Both are direct empirical motivation for the SBERT semantic-similarity upgrade path.
 
+### v6 design decisions
+
+- **Single LLM call returning typed sections.** Rather than one call per section, v6 issues a single `complete_json(schema=V6ReportContent)` invocation. The Pydantic schema enforces that the response contains all six narrative sections (1–5 + 7; Section 6 is the graph, no LLM needed). Single-call advantages: coherent narrative voice, simpler orchestration, easier prompt iteration. Schema validation localizes parse failures to specific sections.
+- **LLM for narrative; deterministic for data.** The graph (Section 6) is rendered by `src/v6_report/visualizer.py` directly from the NetworkX `af_graph` — no LLM involvement. Counts, run ID, and citations are stamped deterministically. The LLM's job is the connective prose, not the data.
+- **Citation discipline preserved.** The prompt instructs the LLM to cite argument IDs inline (`[U-A3]`, `[agent_3_001]`, `[ATK-V5-002]`, `[SUP-V5-001]`). The renderer leaves these tokens untouched so every claim in the final report traces to a specific argument or v5 relation. This is the central traceability property the architecture promises.
+- **Graph visualization choices.** Nodes colored by acceptance (`green` accepted / `orange` ambiguous / `red` rejected). Edges styled by attack type (`solid red` rebutting / `dashed black` undercutting). Spring layout (NetworkX) for sparse AFs; a documented limitation for cases that produce dense components. Headless matplotlib (`Agg` backend) so the renderer runs in any environment.
+- **Three output formats.** `v6_report.json` (the structured `V6Report` — for programmatic re-use, e.g. comparison across runs or input to a future v7). `report.md` (markdown — github rendering, thesis appendix). `report.html` (single-file HTML with inline CSS — for sharing). All live in `runs/<run_id>/`.
+- **Run-relative graph path.** The markdown references the graph as `argumentation_graph.png` (relative, no run-id prefix), so the report directory is portable — copying the entire run folder to another location keeps the image link working.
+- **Minimal in-house markdown → HTML converter.** ~40 LOC handles the subset our reports use (headers, paragraphs, bold/italic, code, lists, tables, images). Avoids a markdown-library dependency. Documented limitation: not a general-purpose converter.
+
 ### What's not built
 
-- v6 (LLM report generation over v5 output) — the final pipeline stage.
 - v1 Mode 2 (LLM extraction from raw text) — stub in place; implementation in `notebooks/v1_extract_arguments.ipynb`.
+- Second-case evaluation (Upper Big Branch 2010) — extraction and ground-truth annotation pending.
 
 ## Implementation roadmap
 

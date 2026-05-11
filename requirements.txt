@@ -13,3 +13,4 @@ pydantic
 jupyter
 ipykernel
 jinja2
+matplotlib
