@@ -41,7 +41,7 @@ class OpenAIClient:
         api_key: str | None = None,
         model: str | None = None,
         max_tokens: int = 4096,
-        max_retries: int = 2,
+        max_retries: int = 5,
         run_context: RunContext | None = None,
     ):
         key = api_key or OPENAI_API_KEY

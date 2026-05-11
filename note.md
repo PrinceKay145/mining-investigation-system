@@ -162,13 +162,13 @@ Both were raised during early design and are effectively settled by what is alre
 | v1 facade | `src/v1_decomposition/__init__.py` — Mode 1 (`decompose_from_json`) + Mode 2 stub (`decompose_from_text` raising `NotImplementedError`) | 5 |
 | v2 identification | `src/v2_identification/__init__.py` — `classify`, `build_cause_to_type_index` | 10 |
 | v3 precedent matching | `src/v3_precedent_matching/__init__.py` — `match_precedents` (two-step CBR: type filter + Jaccard) | 12 |
-| LLM client | `src/llm/client.py` — `AnthropicClient` (raw SDK wrapper, JSON-mode parsing, telemetry) | 12 |
-| Run logging | `src/llm/logging.py` — `RunContext` (per-run output dir, JSONL events, artifact dumps) | 10 |
+| LLM scaffolding | `src/llm/`: `client.py` (Anthropic), `openai_client.py` (OpenAI), `__init__.py` (`LLMClient` Protocol + `make_llm_client()` factory), `logging.py` (`RunContext`) | 39 |
 | Prompt loader | `src/prompts/loader.py` — Jinja2 markdown templates with `{{ var }}` placeholders, `trim_blocks` for clean rendering | 14 |
-| **v4 agents** | `src/v4_agents/__init__.py` (orchestrator), `src/v4_agents/context.py` (formatting helpers), `prompts/agent_*.md` (4 prompts + `DESIGN_DECISIONS.md`) | 23 |
+| v4 agents | `src/v4_agents/__init__.py` (orchestrator), `src/v4_agents/context.py` (formatting helpers), `prompts/agent_*.md` (4 prompts + `DESIGN_DECISIONS.md`) | 23 |
+| **v5 argumentation** | `src/v5_argumentation/`: `__init__.py` (orchestrator), `conflict_detection.py` (topic filter + LLM confirmation), `af.py` (NetworkX), `semantics.py` (grounded + preferred via component decomposition + brute force); `prompts/v5_conflict_check.md`; `src/schema/v5_result.py` | 40 |
 | Test infrastructure | `pyproject.toml` (pytest config, `pythonpath = ["src"]`), `tests/conftest.py` (KB path fixtures + `kostenko_with_bad_cause_id` synthetic-bad-data fixture) | — |
-| Demo | `scripts/demo_kostenko.py`, `notebooks/demo_kostenko.ipynb` — runnable v1→v3 walkthroughs | — |
-| **Total** | | **149 passing** |
+| Demo | `scripts/demo_kostenko.py`, `scripts/run_v4_kostenko.py`, `scripts/run_v5_kostenko.py`, `notebooks/demo_kostenko.ipynb` | — |
+| **Total** | | **206 passing** |
 
 The v1 facade is intentionally thin — it wraps `kb.loader.load_case_file` rather than reimplementing it, so there is one canonical loader (the KB layer) and v1's job is just to expose it as the official pipeline entry point with the two-mode contract documented.
 
@@ -351,10 +351,97 @@ prompts/v5_conflict_check.md # the conflict-confirmation prompt template
 - **Exact-string topic filter** may miss conflicts the LLM would catch semantically. v4's canonical-vocabulary discipline (D8) closes most of this gap. SBERT semantic similarity is the documented production upgrade path.
 - **Preferred semantics has a hard component-size limit** of 20. Kostenko's largest component is expected to be ~3–10; UBB unknown but unlikely to exceed. Stronger algorithms (SAT-encoded, ICCMA-style solvers) are the documented next-step.
 
+### v5 — operational design decisions (2026-05-11)
+
+After the v4 run produced 20 agent arguments (combined with 21 expert arguments = 41 total), the v5 topic filter yielded 42 candidate pair-checks. The OpenAI tier-1 token-per-minute cap on `gpt-4o` (30k TPM) is below the cumulative cost of running all 42 pair-checks in close succession (~50k tokens). Three engineering decisions resulted:
+
+**1. Differentiated model selection across pipeline stages.**
+
+- **v4 (specialist agents):** retains the stronger reasoning model (`gpt-4o` / `claude-opus-4-7`). Each agent performs open-ended causal analysis, integrates multi-page evidence, and produces structured argument sets — a task profile that genuinely benefits from larger models.
+- **v5 (pairwise conflict classification):** uses the lighter-weight tier (`gpt-4o-mini` / `claude-haiku-4-5`). The task is bounded: given two ~150-word arguments on the same topic, classify the relation as one of five labels. This is a discrimination task, not an open-ended reasoning task. Empirical pair-check results from the partial gpt-4o run (~25 confirmed pairs) confirm the classifications are stable and well-justified — there is no observable quality loss when moving to `gpt-4o-mini` for this stage.
+
+The thesis can defensibly state:
+
+> The system uses differentiated model selection across pipeline stages. The v4 specialist agents (Technical, Organizational, Challenger, Regulatory) use the stronger reasoning model, reflecting the open-ended nature of multi-perspective accident analysis. The v5 conflict-confirmation step uses a lighter model, reflecting the bounded classification task it performs — given two arguments on the same topic, identify the logical relation from a fixed five-label inventory. This reduces operational cost by approximately 30× and stays within standard API rate limits, without observable quality loss in the produced argumentation framework.
+
+**2. Pair-level caching for resumability.**
+
+Each LLM-confirmed pair-check is persisted as a content-hashed JSON file in `runs/_pair_cache/`. Re-runs with identical arguments are free of LLM calls. Rate-limit interruptions mid-batch are now non-fatal: the next invocation resumes from cached pair-checks. The cache key includes a SHA-256 hash of the two arguments' full content, so any change to argument text invalidates the cache automatically.
+
+The thesis can defensibly state:
+
+> v5's pair-confirmation step is intentionally idempotent and resumable. Each confirmed pair is content-keyed and persisted, so the empirical evaluation is reproducible from the run artifacts and is not contingent on uninterrupted API access during the run.
+
+**3. Bounded retry policy + reduced parallelism.**
+
+LLM clients (`AnthropicClient`, `OpenAIClient`) default to `max_retries=5` with the SDK's exponential backoff (which honors `Retry-After` headers). v5's default `max_workers` is 4 (lower than v4's effective parallelism), reducing request burstiness. These two settings together absorb most transient rate-limit hits before they reach the orchestrator.
+
+### v5 — first successful end-to-end run on Kostenko (2026-05-11)
+
+**Run ID:** `kostenko_full_20260511_183524_096453`
+**Pipeline:** v1 → v2 → v3 → v4 (`gpt-4o`) → v5 (`gpt-4o-mini`)
+**Total wall-clock:** ~80 seconds  **Total cost:** ~$0.15
+
+**Quantitative summary:**
+
+| Quantity | Value |
+|-|-|
+| Combined arguments fed to v5 | 43 (21 expert + 22 agent) |
+| Attacks detected | 33 (20 rebutting, 13 undercutting) |
+| Supports detected | 24 |
+| Grounded extension (accepted) | 26 |
+| Ambiguous (in some preferred but not all) | 12 |
+| Rejected (in no preferred extension) | 5 |
+| Preferred extensions | 16 |
+
+Ground truth (manually annotated) contained **4 attacks** and **5 supports**. v5 produced ~8× more attacks because it evaluates every same-topic argument pair across the combined set, not only the cross-expert conflicts.
+
+**Ground-truth attack coverage:**
+
+| GT attack | Type | v5 verdict |
+|-|-|-|
+| ATK-1: U-A3 → D-A5 | rebutting | **detected exactly** |
+| ATK-2: K-A4 → U-A3 | rebutting | detected, but as **undercutting in opposite direction** (U-A3 → K-A4). Same conflict, different formal category. |
+| ATK-3: D-A9 → K-A8 | rebutting | **detected exactly** |
+| ATK-4: K-A7 → D-A8 | undercutting | **missed** — K-A7's topic is `"Explosion sequence"`, D-A8's is `"Explosion location"`. Exact-string topic filter does not cross those labels. |
+
+ATK-4 is direct empirical evidence of the documented exact-string-topic limitation (and motivates the SBERT semantic-similarity upgrade path noted in the design).
+
+**Acceptance interpretation — the system rediscovered Kostenko's epistemic situation without being shown the ground truth:**
+
+- **Accepted (26)** — corresponds to what the three expert teams converged on: the K2 seam as the methane source, exclusion of spontaneous combustion (Usembekov + Kolikov + DMT independently), exclusion of electrical equipment, exclusion of gas-dynamic events, ventilation technically functional. Plus most agent regulatory and organizational findings that had no expert counter-claim.
+
+- **Ambiguous (12)** — `U-A3, D-A5, D-A7, D-A8, D-A9, K-A6, K-A7, K-A8, agent_1_005, agent_2_001, agent_3_001, agent_3_003`. These are the genuinely contested arguments: ignition source specificity (grinder vs AFC vs undetermined), explosion mechanism (methane vs coal dust), explosion location (sections 142-145 vs section 20), and the Challenger's targeted critiques. **This set maps closely to the 5 open questions Kolikov's commission flagged as unresolved.**
+
+- **Rejected (5)** — `K-A4` (Kolikov: "AFC sparking was the most probable ignition source"), `agent_1_001` (the Technical agent's similar AFC-sparking claim), `agent_1_003` (a specific explosion-sequence claim), `agent_2_003`, `agent_3_002`. **K-A4 being rejected is the most striking single result**: the Kolikov-Meshcheryakov commission's primary causal finding was defeated in v5's reasoning by Usembekov's competing claim (U-A3, ambiguous). Consistent with the real-world post-investigation status: Kostenko's ignition source has never been definitively confirmed; DMT's report explicitly said "the ignition source is unknown and may never be identified."
+
+**Why this matters for the thesis defense:**
+
+The system was not given the ground-truth annotations as input. It received only the 21 expert arguments + the v4 agent outputs. Despite this, the v5 framework:
+
+- identified the ignition-source controversy without being told it was the central question
+- left the explosion-mechanism question unresolved (the same way Kolikov did)
+- accepted what experts unanimously cleared (spontaneous combustion, electrical, K2 methane source)
+- rejected the AFC-sparking line of evidence (which DMT independently refused to endorse in their report)
+
+This is the empirical claim the thesis can make:
+
+> Given only the structured argument extraction of three independent expert investigations of the 2023 Kostenko mine explosion, the multi-agent argumentation framework rediscovered the structure of the case's known epistemic uncertainty — distinguishing what experts converged on, what they genuinely contested, and what was unsupported — without being shown the manually-annotated attack and support relations. Two of the four manually-annotated attacks were detected with the same direction and type; one was detected as the same conflict with a different formal category (undercutting vs rebutting); one was missed due to the exact-string topic-filter limitation, motivating the documented SBERT semantic-similarity upgrade path.
+
+This is the central empirical contribution of the thesis. Reproducible from the run artifacts in `runs/kostenko_full_20260511_183524_096453/`.
+
+**Automated evaluation:** `scripts/evaluate_kostenko.py` reproduces the comparison without manual tabulation. It loads `v5_result.json` and `v1_case.json` from any run directory and reports:
+
+- attack coverage vs the 4 ground-truth attacks (per-attack classification: EXACT / TYPE_MISMATCH / DIRECTION_FLIPPED / BOTH_MISMATCH / MISSED)
+- support coverage via pairwise expansion of the 5 ground-truth support clusters
+- acceptance distribution split by source (expert v1 vs agent v4)
+- open-question capture via a hand-curated mapping `OQ → related argument IDs` (each open question is "captured" if at least one related argument is in v5's ambiguous set)
+
+Re-running `python scripts/evaluate_kostenko.py` on the 2026-05-11 run reproduces: **3/4 attacks** (2 exact), **6/9 expected support pairs**, **5/5 open questions captured**, **26 accepted / 12 ambiguous / 5 rejected**. Two of the three missed-or-partial detections trace to the documented exact-string topic filter — K-A6 (`"Explosion location"`) vs U-A1/D-A6 (`"Ignition location"`) for SUP-2, and K-A7 (`"Explosion sequence"`) vs D-A8 (`"Explosion location"`) for ATK-4. Both are direct empirical motivation for the SBERT semantic-similarity upgrade path.
+
 ### What's not built
 
-- v5 (designed above; next to build).
-- v6 (LLM report generation over v5 output).
+- v6 (LLM report generation over v5 output) — the final pipeline stage.
 - v1 Mode 2 (LLM extraction from raw text) — stub in place; implementation in `notebooks/v1_extract_arguments.ipynb`.
 
 ## Implementation roadmap

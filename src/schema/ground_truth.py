@@ -58,8 +58,12 @@ class AttackRelation(BaseModel):
     """
     id: str = Field(
         ...,
-        pattern=r"^ATK-\d+$",
-        description="Attack relation ID: ATK-N",
+        pattern=r"^ATK(?:-[A-Z0-9]+)+$",
+        description=(
+            "Attack relation ID. Patterns: 'ATK-<n>' for ground-truth annotations "
+            "(e.g. ATK-1, ATK-2); 'ATK-V5-<nnn>' for v5-generated attacks "
+            "(e.g. ATK-V5-001). Both forms are accepted."
+        ),
     )
     attacker: str = Field(
         ...,
@@ -106,7 +110,7 @@ class SupportRelation(BaseModel):
     """
     id: str = Field(
         ...,
-        pattern=r"^SUP-\d+$",
+        pattern=r"^SUP(?:-[A-Z0-9]+)+$",
         description="Support relation ID: SUP-N",
     )
     supporters: list[str] = Field(
