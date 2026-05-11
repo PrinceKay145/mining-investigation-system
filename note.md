@@ -161,9 +161,14 @@ Both were raised during early design and are effectively settled by what is alre
 | Project config | `src/config.py` | 6 |
 | v1 facade | `src/v1_decomposition/__init__.py` — Mode 1 (`decompose_from_json`) + Mode 2 stub (`decompose_from_text` raising `NotImplementedError`) | 5 |
 | v2 identification | `src/v2_identification/__init__.py` — `classify`, `build_cause_to_type_index` | 10 |
-| **v3 precedent matching** | `src/v3_precedent_matching/__init__.py` — `match_precedents` (two-step CBR: type filter + Jaccard) | 12 |
+| v3 precedent matching | `src/v3_precedent_matching/__init__.py` — `match_precedents` (two-step CBR: type filter + Jaccard) | 12 |
+| LLM client | `src/llm/client.py` — `AnthropicClient` (raw SDK wrapper, JSON-mode parsing, telemetry) | 12 |
+| Run logging | `src/llm/logging.py` — `RunContext` (per-run output dir, JSONL events, artifact dumps) | 10 |
+| Prompt loader | `src/prompts/loader.py` — Jinja2 markdown templates with `{{ var }}` placeholders, `trim_blocks` for clean rendering | 14 |
+| **v4 agents** | `src/v4_agents/__init__.py` (orchestrator), `src/v4_agents/context.py` (formatting helpers), `prompts/agent_*.md` (4 prompts + `DESIGN_DECISIONS.md`) | 23 |
 | Test infrastructure | `pyproject.toml` (pytest config, `pythonpath = ["src"]`), `tests/conftest.py` (KB path fixtures + `kostenko_with_bad_cause_id` synthetic-bad-data fixture) | — |
-| **Total** | | **90 passing** |
+| Demo | `scripts/demo_kostenko.py`, `notebooks/demo_kostenko.ipynb` — runnable v1→v3 walkthroughs | — |
+| **Total** | | **149 passing** |
 
 The v1 facade is intentionally thin — it wraps `kb.loader.load_case_file` rather than reimplementing it, so there is one canonical loader (the KB layer) and v1's job is just to expose it as the official pipeline entry point with the two-mode contract documented.
 
@@ -228,11 +233,129 @@ This is documented as a known artifact of current data, not an algorithm flaw. T
 
 For thesis defense framing: the **ranking is correct on day one**; absolute scores will improve as the KB grows and as evidence extraction deepens. This is the system's designed scalability behavior.
 
+### LLM scaffolding design decisions
+
+- **Raw `anthropic` SDK over LangChain** for the agents and v5 conflict-pair confirmation. LangChain stays available in `requirements.txt` for future orchestration patterns (e.g., LangGraph state machines), but agent calls use the SDK directly. Reason: easier to debug, transparent prompt/response logs, no abstraction layer between us and the model.
+- **`.env` via `python-dotenv`**, loaded once at `config.py` import time with `override=False` so existing shell vars win. `.env.example` documents the contract: `ANTHROPIC_API_KEY`, `LLM_MODEL` (default `claude-opus-4-7`), `LOG_LEVEL` (default `INFO`).
+- **Default model: `claude-opus-4-7`.** Configurable via `LLM_MODEL` env var or constructor override. Cheaper alternatives (`claude-sonnet-4-6`, `claude-haiku-4-5-20251001`) are documented in `.env.example` for iteration / debugging.
+- **`AnthropicClient.complete_json(schema=...)`.** Pydantic-typed structured output. The wrapper appends a system instruction with the JSON schema, parses the response, strips ```json fences if the model includes them, and raises `ValueError` with the raw text on parse failure. Default temperature 0.0 for JSON outputs (determinism preferred over diversity). v4 agents will use this for their 8-field argument outputs.
+- **Markdown prompt files in `prompts/`.** Each agent will get one file (`prompts/agent_technical.md`, etc.). Loader uses Python `str.format()` — no Jinja2 dependency. Loader functions: `load_prompt(name, **vars)`, `list_prompts()`, `required_variables(name)`. The `name` parameter is positional-only (`/`) so `**variables` can include any key (including `name`) without collision.
+- **`RunContext` for per-run telemetry.** Each pipeline invocation creates `runs/<run_id>/` with:
+  - `events.jsonl` — every LLM call + pipeline-stage event, one JSON object per line
+  - `<stage>.json` — `save_artifact()` dumps for stage-by-stage I/O
+  - The final v6 report (later)
+  Logger writes JSONL to disk and human-readable lines to stdout. `default=` callback handles Pydantic, `Path`, `set`, and `datetime` serialization.
+
+### v4 design decisions
+
+- **Execution model: Phase 1 parallel, Phase 2 sequential.** Agents 1 (Technical), 2 (Organizational), 4 (Regulatory) run in parallel via `concurrent.futures.ThreadPoolExecutor` — they analyze raw evidence independently. Agent 3 (Challenger) runs sequentially after Phase 1 with the parsed outputs of the other three injected into its prompt. Per `prompts/DESIGN_DECISIONS.md` D3, this design ensures challenges are *targeted* (cite specific argument IDs) rather than coincidentally overlapping parallel skepticism.
+- **Loose coupling on inputs.** `run_v4()` takes `case`, `classification`, `match_result`, `kb`, `client`, `run` — uses each KB layer only as needed. No globals.
+- **Output: `V4Result` in `src/schema/v4_result.py`.** Pydantic model holding each agent's parsed `list[Argument]` separately, plus a `combined_arguments` property (Agents 1 → 2 → 3 → 4 concatenated) that v5 consumes. Per-agent storage is preserved for traceability and for v6 to attribute findings.
+- **Context formatting in `src/v4_agents/context.py`.** Pure functions (no I/O) that turn v1/v2/v3 outputs + KB into the formatted strings each prompt template renders. One function per template variable. Tested independently of the orchestrator.
+- **Canonical topic vocabulary derived at runtime.** `extract_canonical_topics(case.arguments)` returns the sorted unique topic labels from the active case. The orchestrator passes these to Agents 1, 2, 4 via the `canonical_topics` Jinja2 variable. **No prompt edits are required when switching cases** — the vocabulary is data-driven (D8 in `DESIGN_DECISIONS.md`).
+- **Failure semantics.** `AgentRunFailure` is raised if any agent returns invalid JSON or output that fails Argument schema validation. The raw response is persisted to `runs/<run_id>/<agent>_raw_response.txt` *before* the exception fires, so postmortems have the exact model output to inspect.
+- **JSON parsing robustness.** Strips ```json fences if the model adds them despite the "no fences" instruction. Uses `temperature=0.0` on all four agent calls — determinism preferred over diversity for structured output.
+- **Telemetry.** Every call emits structured events (`agent_X_start`, `agent_X_done`, `v4_phase1_start`, etc.) to `runs/<run_id>/events.jsonl` with token counts, argument counts, and prompt sizes. Combined `v4_result.json` artifact is the v5 input.
+
+### v4 — first successful end-to-end run on Kostenko (2026-05-11)
+
+**Run ID:** `kostenko_v4_20260511_172049_881647`
+**Provider:** OpenAI (`gpt-4o-2024-08-06`)
+**Cost:** ~$0.12  **Wall-clock:** ~31s  **Tokens:** ~32k input + 3.3k output across 4 calls
+**Anthropic comparison:** deferred (account funding pending)
+
+Output: **20 agent arguments** (5 per agent) added to **21 expert arguments** = **41 total** for v5.
+
+**Five conflict candidates identified (same-topic across ≥2 agents):**
+
+| Topic | Conflict | Maps to ground truth |
+|-|-|-|
+| `Ignition source` | A1 (AFC chain mechanical) ↔ A3 (undetermined) | ATK-1, ATK-2 |
+| `Explosion sequence` | A1 (methane → coal dust cascade) ↔ A3 (multiple methane deflagrations) | partial ATK-3 |
+| `Methane source` | A1 (K2 seam confident) ↔ A3 (plausible but not conclusive) | not in ground truth |
+| `Supervision failure` | A2 (prohibited items) ↔ A3 (cultural/procedural) | not in ground truth |
+| `Ventilation` | A1 (technically functional) ↔ A2 (design vulnerability) ↔ A3 (geological factors) — **3-way** | not in ground truth |
+
+This is the empirical validation that D3 (sequential challenger) works as intended — Agent 3 produced *targeted* challenges to specific A1/A2 claims rather than parallel skepticism.
+
+**Observations to keep for thesis writeup:**
+
+- Agent 1's claims paraphrase the strongest expert arguments closely (A1_001 ≈ K-A4; A1_004 ≈ D-A3). Defensible interpretation: each agent independently aligned with one expert team's conclusions.
+- Agent 4 introduced its own regulatory-specific topics (`Methane monitoring compliance`, `Ventilation design compliance`, etc.) — consistent with prompt's "common regulatory-specific topics" guidance.
+- Canonical topic vocabulary reused for 5 of 10 labels — exactly the topics with corresponding evidence. New labels only introduced where canonical didn't fit (organizational, regulatory). Working as designed (D8).
+- All cause_categories pass referential integrity (no orphan `TC-99`-style references emitted).
+
+**Minor refinements deferred (prompt-level, not code):**
+
+- A4_001 conflates sub-conveyor methane accumulation with permissible-limit breach. Could tighten REG-01 wording.
+
+### v5 — design plan (next to build)
+
+**Inputs:** combined 41-argument set (21 expert + 20 agent from v4) plus the active `LLMClient` (for conflict-pair confirmation).
+
+**Pipeline:**
+
+1. **Conflict detection (hybrid)** — `src/v5_argumentation/conflict_detection.py`
+   - **Step 1 — topic filter:** find all argument pairs sharing the same `topic` (exact string equality). These are *candidate* conflict pairs.
+   - **Step 2 — LLM confirmation:** for each candidate pair, call the LLM with a structured prompt asking whether the two claims (a) rebut each other (mutually incompatible — bidirectional attack), (b) undercut each other (one undermines the evidence/warrant of the other — directed attack), (c) support each other (compatible reinforcing claims), or (d) are independent (same topic, different sub-questions). Output is the typed enum `Literal["rebutting", "undercutting", "support", "independent"]` plus a rationale.
+   - One LLM call per pair (parallelizable, easy to retry, clean per-pair logs).
+2. **AF construction** — `src/v5_argumentation/af.py`
+   - NetworkX `DiGraph`. Nodes = argument IDs, with `data` attribute holding the full `Argument`. Edges = directed attacks. Rebutting attacks add both `A→B` and `B→A`. Undercutting adds only the directed edge. Supports stored separately (not Dung-formal).
+3. **Semantics computation** — `src/v5_argumentation/semantics.py`
+   - **Grounded** via iterative fixpoint of the characteristic function F(S): unique, skeptical, always exists. ~20 LOC.
+   - **Preferred** via **connected-component decomposition + brute-force per component**. With ~41 sparse nodes the largest component is expected to be <10 — brute force on `2^10 = 1024` candidate sets is instant. Hard limit at component size 20 raises a warning + falls back to a labelling-based approach (not implemented in v1 — out-of-scope unless Kostenko hits the limit).
+4. **Extension comparison** — derived in the orchestrator
+   - `accepted` = grounded extension members. Confident conclusions.
+   - `rejected` = arguments not in any preferred extension. Defeated.
+   - `ambiguous` = in some preferred but not all. Genuinely contested.
+   - The *comparison itself is a finding*: `grounded == preferred` (across all preferred sets) means consensus; `grounded ⊂ preferred` means genuine ambiguity.
+
+**Output schema** — `src/schema/v5_result.py`
+
+```python
+class V5Result(BaseModel):
+    attack_relations: list[AttackRelation]       # reuse schema/ground_truth.py
+    support_relations: list[SupportRelation]
+    grounded_extension: list[str]                # argument IDs
+    preferred_extensions: list[list[str]]
+    accepted: list[str]                          # = grounded_extension
+    rejected: list[str]
+    ambiguous: list[str]
+    af_graph: dict                               # NetworkX node-link JSON
+```
+
+Saved to `runs/<run_id>/v5_result.json`. v6 consumes this directly.
+
+**Module layout:**
+
+```text
+src/v5_argumentation/
+├── __init__.py             # run_v5() orchestrator
+├── conflict_detection.py   # topic filter + LLM confirmation
+├── af.py                   # NetworkX construction + node-link persistence
+└── semantics.py            # grounded + preferred algorithms
+
+src/schema/v5_result.py     # V5Result + helpers
+prompts/v5_conflict_check.md # the conflict-confirmation prompt template
+```
+
+**Design decisions worth defending in the thesis:**
+
+- **Hybrid filter + LLM** vs pure-LLM pairwise check: with ~41 args, all-pairs is 820 LLM calls. Topic filter cuts that to ~5–10 candidate pairs. Two orders of magnitude cheaper with no precision loss when canonical-vocabulary discipline is enforced (D8 in v4).
+- **Connected-component decomposition** for preferred semantics: Dung's NP-hardness is a worst-case statement. The empirical AFs produced by mining accident investigations are sparse — most arguments don't conflict with anything. Decomposition makes the algorithm tractable in practice while keeping the implementation simple enough to defend at viva.
+- **Implementing semantics ourselves** rather than depending on an argumentation library: shows understanding, keeps the dependency surface minimal, and the algorithms are simple enough that the implementation cost is low.
+
+**Documented limitations:**
+
+- **LLM conflict confirmation is stochastic** even at `temperature=0.0`. Same-pair runs may diverge in ~5% of cases. Mitigation: each run's confirmations are persisted, so any reported result is reproducible from the run artifacts.
+- **Exact-string topic filter** may miss conflicts the LLM would catch semantically. v4's canonical-vocabulary discipline (D8) closes most of this gap. SBERT semantic similarity is the documented production upgrade path.
+- **Preferred semantics has a hard component-size limit** of 20. Kostenko's largest component is expected to be ~3–10; UBB unknown but unlikely to exceed. Stronger algorithms (SAT-encoded, ICCMA-style solvers) are the documented next-step.
+
 ### What's not built
 
-- v4 (4 specialist agents), v5 (Dung's AF), v6 (LLM report) — the thesis contribution
-- LLM scaffolding: `.env`, anthropic client wrapper, prompt management, structured logging
-- v1 Mode 2 (LLM extraction) — stub in place; implementation in `notebooks/v1_extract_arguments.ipynb`
+- v5 (designed above; next to build).
+- v6 (LLM report generation over v5 output).
+- v1 Mode 2 (LLM extraction from raw text) — stub in place; implementation in `notebooks/v1_extract_arguments.ipynb`.
 
 ## Implementation roadmap
 

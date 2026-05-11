@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 .faiss/
 outputs/
+runs/
+.pytest_cache/
 *.db
 .DS_Store
 CLAUDE.md

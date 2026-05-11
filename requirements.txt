@@ -10,3 +10,6 @@ anthropic
 python-dotenv
 pytest
 pydantic
+jupyter
+ipykernel
+jinja2
