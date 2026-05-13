@@ -1,0 +1,54 @@
+```json
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for mechanical sparking from the AFC chain is circumstantial and lacks direct confirmation.",
+    "evidence": "K-A4 provides witness testimony and physical tests suggesting conveyor sparking is possible, but D-A5 indicates the ignition source is unknown and may never be identified, with mechanical sparks being only one of several possibilities.",
+    "warrant": "While conveyor sparking is a plausible ignition source, the evidence does not definitively confirm it as the cause. The presence of other potential ignition sources and the lack of direct evidence linking the AFC chain to the ignition event suggest that the source remains undetermined.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion sequence",
+    "claim": "The sequence of events leading to the explosion may have involved multiple methane deflagrations rather than a single initial event, complicating the role of coal dust.",
+    "evidence": "D-A7 and D-A9 describe a sequence involving gas fire, methane deflagration, and coal dust explosion, but K-A8 suggests the large-scale explosion was driven primarily by high-concentration methane, not coal dust.",
+    "warrant": "The evidence for a coal dust explosion is based on propagation patterns, but the role of methane in multiple deflagrations could explain the observed damage without requiring a significant coal dust component. This alternative sequence should be considered given the high methane concentrations reported.",
+    "confidence": 0.68,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's structural vulnerability to methane accumulation may have been exacerbated by unrecognized geological factors affecting airflow.",
+    "evidence": "D-A3 notes stagnant zones in the ventilation system, but K-A2 and D-A1 highlight geological conditions that could influence methane release and distribution.",
+    "warrant": "While the ventilation design is cited as a structural vulnerability, the interaction with geological factors such as abutment pressure and seam proximity may have further compromised airflow, suggesting a more complex interplay than design alone.",
+    "confidence": 0.7,
+    "cause_categories": ["TC-06"]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The role of the K2 seam as the primary methane source is plausible but not conclusively established, as other geological factors may have contributed.",
+    "evidence": "K-A2 and D-A1 attribute methane release to the K2 seam, but D-A2 indicates no sudden gas outburst, suggesting a more gradual release potentially influenced by other geological conditions.",
+    "warrant": "The evidence supports the K2 seam as a significant methane source, but the absence of a sudden outburst and the potential for other geological influences suggest that the full methane release dynamics are not fully understood.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Supervision failure",
+    "claim": "The presence of prohibited items underground may indicate systemic issues beyond supervision, such as cultural or procedural deficiencies.",
+    "evidence": "Agent_2_001 cites U-A1 and U-A3 for supervision failure, but the repeated presence of such items suggests deeper issues in safety culture or procedural enforcement.",
+    "warrant": "While supervision failure is a valid concern, the systemic nature of the issue implies that cultural or procedural deficiencies may also play a significant role, requiring broader organizational changes beyond supervision alone.",
+    "confidence": 0.7,
+    "cause_categories": ["OC-01", "OC-06"]
+  }
+]
+```

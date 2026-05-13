@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "The angle grinder was found in the conveyor drift, but no direct evidence links it to the ignition event (U-A1, U-A3). Witness testimonies are not definitive, and the physical tests do not confirm its operation at the time of ignition (agent_1_001).",
+    "warrant": "While the presence of the angle grinder suggests a potential ignition source, the lack of direct evidence connecting it to the ignition event means that it cannot be definitively identified as the cause. Other ignition sources, such as the aerosol can or friction from the AFC chain, remain plausible.",
+    "confidence": 0.75,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The K2 seam may not be the primary source of elevated methane; geological conditions could allow for methane release from other seams or areas.",
+    "evidence": "The evidence indicates that the K2 seam is 3.35m below the K3 seam, and while it is a potential source, the absence of pre-drainage boreholes raises questions about other possible methane sources (D-A1, D-A2).",
+    "warrant": "The geological conditions and the lack of borehole drainage suggest that methane could also be released from other seams or geological features, which have not been adequately investigated. This alternative explanation could account for the observed methane levels without solely attributing them to the K2 seam.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Explosion sequence",
+    "claim": "The explosion sequence may have included a significant gas-dynamic event that has not been adequately addressed, potentially contributing to the ignition conditions.",
+    "evidence": "While agent_1_003 claims a methane deflagration followed by a coal dust explosion, the absence of evidence for a gas-dynamic event prior to ignition is not definitively established (agent_1_006).",
+    "warrant": "The possibility of a gas-dynamic event, such as a sudden release of gas due to geological instability, could explain the rapid increase in methane levels and the subsequent ignition. This aspect has not been sufficiently explored in the analysis.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-08"]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design inadequacies may have been exacerbated by operational practices that were not addressed in the analysis.",
+    "evidence": "While agent_1_004 and agent_2_003 discuss ventilation design issues, they do not consider how operational practices may have contributed to the stagnant zones that allowed for methane accumulation (D-A3).",
+    "warrant": "Operational practices, such as inadequate monitoring or failure to adjust ventilation in response to changing conditions, could have compounded the design flaws, leading to hazardous methane levels. This operational aspect needs to be examined to fully understand the ventilation failures.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-06", "OC-10"]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The presence of flammable materials indicates a broader systemic failure in safety culture, not just isolated incidents of prohibited items.",
+    "evidence": "Agent_2_001 and agent_4_004 highlight the presence of prohibited items, but they do not connect this to a systemic issue in safety culture and oversight (U-A1, D-A5).",
+    "warrant": "The repeated presence of flammable materials and ignition sources suggests a deeper issue with safety culture and adherence to protocols, indicating that the problem is not merely about individual items but reflects a failure in organizational safety practices.",
+    "confidence": 0.68,
+    "cause_categories": ["OC-01", "OC-06"]
+  }
+]

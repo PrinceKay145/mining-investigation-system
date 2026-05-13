@@ -1,0 +1,54 @@
+```json
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "Non-compliance with REG-01 due to methane concentrations exceeding permissible limits without automatic power cutoff.",
+    "evidence": "Evidence from K-A2 and D-A1 indicates methane concentrations reached up to 17.9% in certain sections, far exceeding the 2.0% limit for the face cross-section and 1.0% for outgoing air. REG-01 mandates automatic power cutoff at 1.0% CH4, which did not occur.",
+    "warrant": "The failure to cut power when methane levels exceeded regulatory limits allowed the continued operation of equipment, increasing the risk of ignition and explosion. Compliance with REG-01 would have likely prevented the ignition of methane.",
+    "confidence": 0.90,
+    "cause_categories": ["TC-01", "OC-05"]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "Non-compliance with REG-02 due to inadequate ventilation design leading to methane accumulation in sub-conveyor zones.",
+    "evidence": "Evidence from D-A3 and K-A2 shows that the ventilation scheme allowed methane to accumulate in stagnant sub-conveyor zones, despite airflow being within design parameters. REG-02 requires ventilation schemes to prevent such accumulations.",
+    "warrant": "The ventilation design failed to address the specific risk of methane accumulation in sub-conveyor zones, a known hazard in combined ventilation schemes. Compliance with REG-02 would have mitigated the risk of methane accumulation and subsequent explosion.",
+    "confidence": 0.85,
+    "cause_categories": ["TC-06", "OC-05"]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "Non-compliance with REG-03 due to lack of pre-drainage boreholes for the K2 companion seam.",
+    "evidence": "Evidence from D-A1 and K-A2 indicates that the K2 seam, with a gas content of ~15 m3/t, was not pre-drained, violating REG-03 which requires pre-drainage for seams with gas content above 9 m3/t.",
+    "warrant": "The absence of pre-drainage boreholes allowed methane to accumulate in the goaf, contributing to the explosive atmosphere. Compliance with REG-03 would have reduced methane levels and the risk of explosion.",
+    "confidence": 0.88,
+    "cause_categories": ["TC-07", "OC-05"]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "Non-compliance with REG-05 due to presence of non-explosion-proof equipment and flammable materials.",
+    "evidence": "Evidence from U-A1 and U-A3 shows the presence of an angle grinder, aerosol can, and synthetic oil, which are prohibited in gas-hazardous areas under REG-05.",
+    "warrant": "The presence of non-certified tools and flammable materials increased the risk of ignition in a methane-rich environment. Compliance with REG-05 would have reduced the likelihood of ignition sources being present.",
+    "confidence": 0.87,
+    "cause_categories": ["TC-02", "OC-06"]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "Non-compliance with REG-06 due to inadequate dust control measures, contributing to explosion propagation.",
+    "evidence": "Evidence from D-A7 and D-A9 indicates significant coal dust accumulations along conveyor lines, which were not adequately controlled as required by REG-06.",
+    "warrant": "The lack of effective dust control measures allowed coal dust to fuel the explosion, increasing its scale and propagation. Compliance with REG-06 would have limited the explosion's reach and impact.",
+    "confidence": 0.80,
+    "cause_categories": ["TC-10", "OC-05"]
+  }
+]
+```

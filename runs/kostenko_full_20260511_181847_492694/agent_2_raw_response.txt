@@ -1,0 +1,54 @@
+```json
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "There was a failure in supervision and production control, allowing prohibited items capable of ignition to be present underground.",
+    "evidence": "Evidence from U-A1 and U-A3 indicates the presence of an angle grinder, aerosol can, and synthetic oil in the ignition area.",
+    "warrant": "The presence of prohibited items such as an angle grinder and flammable materials underground suggests a lack of effective supervision and enforcement of safety protocols, which should have prevented these items from being brought into hazardous areas.",
+    "confidence": 0.85,
+    "cause_categories": ["OC-01", "OC-06"]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Degasification planning",
+    "claim": "Inadequate degasification planning allowed methane to accumulate from the K2 companion seam.",
+    "evidence": "K-A2 and D-A1 highlight that the K2 seam was releasing methane due to abutment pressure decompression zones, and there was no borehole pre-drainage of the K2 seam.",
+    "warrant": "The lack of pre-drainage boreholes and the resulting methane accumulation indicate a failure in degasification planning, which should have accounted for the known risk of methane release from the K2 seam.",
+    "confidence": 0.75,
+    "cause_categories": ["OC-08", "TC-07"]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The ventilation system design created structural vulnerabilities that allowed methane to accumulate in sub-conveyor zones.",
+    "evidence": "D-A3 describes how the combined ventilation scheme created stagnant zones where methane could accumulate, despite overall ventilation operating within design parameters.",
+    "warrant": "While the ventilation system was technically operational, its design failed to prevent methane accumulation in specific areas, indicating a deficiency in the ventilation planning and design process.",
+    "confidence": 0.8,
+    "cause_categories": ["OC-08", "TC-06"]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Training and qualification",
+    "claim": "There may have been insufficient training and qualification of workers regarding the handling of ignition sources and emergency procedures.",
+    "evidence": "The presence of ignition-capable items and the sequence of events leading to the explosion suggest a lack of awareness or disregard for safety protocols.",
+    "warrant": "If workers were adequately trained and qualified, they would have been more likely to recognize the hazards associated with bringing ignition-capable items underground and would have followed emergency procedures more effectively.",
+    "confidence": 0.65,
+    "cause_categories": ["OC-03"]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "There was a failure to recognize and address the hazard of methane accumulation from the K2 seam.",
+    "evidence": "K-A2 and D-A1 provide evidence of methane release from the K2 seam due to geological conditions, which was not adequately addressed.",
+    "warrant": "The failure to implement effective degasification measures or adjust the ventilation scheme to account for methane release from the K2 seam indicates a lack of hazard recognition and proactive risk management.",
+    "confidence": 0.75,
+    "cause_categories": ["OC-10", "TC-01"]
+  }
+]
+```

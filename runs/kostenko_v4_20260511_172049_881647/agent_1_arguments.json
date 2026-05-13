@@ -1,0 +1,64 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The most probable ignition source was mechanical sparking from the armored face conveyor (AFC) chain operating in a methane-rich zone.",
+    "evidence": "K-A4 provides witness testimony and physical tests confirming conveyor sparking is possible. The sparking zone coincides with elevated methane levels (floor-level measurements, sections 128-142).",
+    "warrant": "The overlap of the conveyor sparking zone with the methane accumulation zone suggests that mechanical sparks from the AFC chain were sufficient to ignite the methane-air mixture.",
+    "confidence": 0.72,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "The primary source of elevated methane was the K2 companion seam, released due to abutment pressure decompression zones.",
+    "evidence": "K-A2 and D-A1 indicate methane concentrations of up to 17.9% at section 140, with geological conditions favoring continuous methane release from the K2 seam.",
+    "warrant": "The proximity of the K2 seam and its geological characteristics, combined with insufficient ventilation in the sub-conveyor zone, allowed methane to accumulate to explosive levels.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Explosion sequence",
+    "claim": "The accident sequence involved an initial methane deflagration followed by a coal dust explosion.",
+    "evidence": "D-A7 and D-A9 describe a sequence starting with a gas fire, leading to methane deflagration and a subsequent coal dust explosion, supported by physical inspection and propagation patterns.",
+    "warrant": "The initial methane explosion provided the energy to disperse coal dust, which then fueled a larger explosion, consistent with the observed damage and propagation along conveyor routes.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "Ventilation was operating within design parameters but was structurally vulnerable to methane accumulation in sub-conveyor zones.",
+    "evidence": "D-A3 notes adequate ventilation quantity but highlights a stagnant sub-conveyor zone where methane could accumulate.",
+    "warrant": "While overall ventilation was sufficient, the design allowed for localized methane build-up in areas with insufficient airflow, contributing to the explosive atmosphere.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Explosion location",
+    "claim": "The explosion epicenter was in the upper part of longwall 48K3-Z, near sections 142-145.",
+    "evidence": "K-A6 and D-A6 provide seismic data and CO sensor readings indicating the explosion's location and timing.",
+    "warrant": "The convergence of seismic events, ventilation data, and CO sensor spikes at this location supports it as the epicenter of the explosion.",
+    "confidence": 0.88,
+    "cause_categories": [
+      "TC-01"
+    ]
+  }
+]

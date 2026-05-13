@@ -1,0 +1,65 @@
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "The angle grinder was found in the conveyor drift, but no direct evidence of its operation at the time of ignition was established (U-A3, D-A5). Witness testimonies do not confirm its use during the critical time frame.",
+    "warrant": "While the presence of the angle grinder suggests a potential ignition source, the lack of direct evidence linking it to the ignition event means that it cannot be definitively identified as the cause. Other ignition sources, such as the AFC chain sparking, remain plausible.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The methane accumulation may have also been influenced by geological factors beyond abutment pressure, such as potential gas outbursts from the K3 seam.",
+    "evidence": "The geological conditions and the absence of pre-drainage boreholes for the K2 seam suggest that gas dynamics could be more complex than indicated (K-A2, D-A1).",
+    "warrant": "While the K2 seam is identified as a primary source, the potential for gas outbursts from the K3 seam, especially given the proximity and geological characteristics, should not be overlooked as a contributing factor to methane levels.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-01",
+      "TC-08"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Explosion sequence",
+    "claim": "The explosion sequence may have included a significant contribution from coal dust, which was not adequately accounted for in the initial analysis.",
+    "evidence": "Physical inspection revealed coal dust accumulations on conveyor lines and evidence of pressure waves consistent with coal dust explosions (D-A7, D-A9).",
+    "warrant": "The presence of coal dust along the conveyor routes and the observed damage patterns suggest that coal dust played a critical role in the explosion dynamics, potentially leading to a more complex sequence than just methane deflagration followed by coal dust explosion.",
+    "confidence": 0.68,
+    "cause_categories": [
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design inadequacies were compounded by operational failures that allowed for methane accumulation.",
+    "evidence": "While the ventilation was operating within design parameters, the specific configuration created stagnant zones where methane could accumulate (D-A3, agent_2_003).",
+    "warrant": "The operational execution of the ventilation system did not align with the geological conditions, indicating a failure not just in design but also in the implementation and monitoring of ventilation practices.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06",
+      "OC-08"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The presence of flammable materials and non-explosion-proof equipment significantly increased the ignition risk, which was not sufficiently addressed in the analysis.",
+    "evidence": "The angle grinder and aerosol can found at the ignition site violated safety regulations (U-A1, U-A3, agent_4_004).",
+    "warrant": "The regulatory non-compliance regarding the presence of flammable materials in a methane-rich environment indicates a systemic failure in safety protocols that contributed to the ignition risk, which should be emphasized in the analysis.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-06",
+      "TC-02"
+    ]
+  }
+]

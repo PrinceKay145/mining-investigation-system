@@ -1,0 +1,62 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Inadequate supervision allowed prohibited items to be present in the mine, contributing to ignition risk.",
+    "evidence": "Evidence of an angle grinder, aerosol can, and synthetic oil found at the ignition location (U-A1).",
+    "warrant": "The presence of these ignition-capable items indicates a failure in supervision and control measures that should have prevented unauthorized tools and flammable materials from being brought underground.",
+    "confidence": 0.85,
+    "cause_categories": ["OC-06"]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure to adequately manage methane release from the K2 seam contributed to the accident.",
+    "evidence": "Post-accident methane survey indicated significant methane concentrations from the K2 seam due to abutment pressure decompression (K-A2, D-A1).",
+    "warrant": "The lack of effective degasification planning and execution allowed methane to accumulate in hazardous concentrations, indicating a systemic failure in hazard management and risk assessment.",
+    "confidence": 0.80,
+    "cause_categories": ["OC-09", "TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "Inadequate ventilation planning allowed for methane accumulation in sub-conveyor zones.",
+    "evidence": "Ventilation was operating within design parameters, but the combined scheme created structural vulnerability to methane accumulation (D-A3).",
+    "warrant": "The design of the ventilation system did not account for the specific geological conditions and methane release patterns, indicating a failure in project documentation and hazard identification.",
+    "confidence": 0.75,
+    "cause_categories": ["OC-08", "OC-10"]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Naryad-dopusk compliance",
+    "claim": "Work procedures were likely violated, allowing unsafe conditions to persist.",
+    "evidence": "The presence of multiple ignition sources and prohibited items suggests that work was conducted without proper authorization and safety briefings (U-A1, D-A5).",
+    "warrant": "The absence of adherence to the naryad-dopusk system indicates a breakdown in safety culture and production control, allowing hazardous work conditions to develop.",
+    "confidence": 0.78,
+    "cause_categories": ["OC-02", "OC-01"]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Training and qualification",
+    "claim": "Insufficient training and awareness of hazards contributed to the accident.",
+    "evidence": "The presence of flammable materials and ignition sources indicates a lack of understanding of safety protocols among workers (U-A1, D-A5).",
+    "warrant": "If workers had been adequately trained to recognize and mitigate hazards, the presence of these items would have been prevented, indicating a failure in qualification and training systems.",
+    "confidence": 0.70,
+    "cause_categories": ["OC-03"]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Supervisory oversight was insufficient to enforce safety protocols and prevent hazardous conditions.",
+    "evidence": "Multiple ignition sources and the presence of prohibited items indicate a lack of effective supervision and monitoring (U-A1, D-A5).",
+    "warrant": "The failure to enforce safety protocols and monitor compliance with safety regulations reflects a systemic issue in supervisory practices and organizational culture.",
+    "confidence": 0.85,
+    "cause_categories": ["OC-01", "OC-06"]
+  }
+]

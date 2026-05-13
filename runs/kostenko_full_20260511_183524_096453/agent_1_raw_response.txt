@@ -1,0 +1,62 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The ignition was most likely caused by mechanical sparking from the armored face conveyor (AFC) chain operating in a methane-rich zone.",
+    "evidence": "Witness testimonies (K-A4) reported sparking during conveyor operation, and physical tests confirmed that sparking is possible. The AFC chain was operating in the methane-rich zone at the time of ignition.",
+    "warrant": "The presence of methane in the sub-conveyor zone, combined with the documented sparking from the AFC, indicates a high likelihood that this mechanical ignition source was responsible for the initial fire.",
+    "confidence": 0.75,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "Elevated methane concentrations in the upper longwall were primarily sourced from the K2 companion seam due to abutment pressure decompression.",
+    "evidence": "Post-accident methane surveys indicated concentrations of 1.2-17.9% in sections 128-142, with the maximum at section 140, which is near the lower auger (K-A2). The geological conditions support continuous methane release from the K2 seam.",
+    "warrant": "The proximity of the K2 seam and the geological characteristics that allow for methane accumulation in the goaf explain the elevated methane levels observed prior to the ignition event.",
+    "confidence": 0.85,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Explosion sequence",
+    "claim": "The explosion sequence began with a methane deflagration followed by a coal dust explosion that propagated through the mine.",
+    "evidence": "Evidence from D-A7 indicates a gas fire at 02:24, followed by methane displacement and a subsequent explosion. The propagation pattern observed aligns with characteristics of a coal dust explosion, as indicated by the extensive damage and coal dust accumulations.",
+    "warrant": "The initial fire likely ignited methane, leading to a deflagration that displaced gas, which then mixed with coal dust, resulting in a secondary explosion that traveled along conveyor routes.",
+    "confidence": 0.78,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "Ventilation was operating within design parameters but created stagnant zones that allowed for methane accumulation.",
+    "evidence": "Ventilation data showed stable airflow rates, but the combined ventilation scheme resulted in stagnant areas where methane could accumulate to explosive concentrations (D-A3).",
+    "warrant": "While the overall ventilation was adequate, the specific design led to insufficient dilution of methane in certain areas, contributing to the explosive atmosphere.",
+    "confidence": 0.80,
+    "cause_categories": ["TC-06"]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Explosion location",
+    "claim": "The explosion epicenter was located in the upper part of longwall 48K3-Z, confirmed by seismic data and eyewitness accounts.",
+    "evidence": "Seismic analysis recorded two events at 02:43:32 and 02:43:34, coinciding with a surge in airflow from the main ventilation fan (K-A6). Eyewitness reports confirmed fire at sections 142-145.",
+    "warrant": "The convergence of seismic data, ventilation readings, and eyewitness accounts provides strong evidence for the explosion's location in the upper longwall.",
+    "confidence": 0.88,
+    "cause_categories": ["TC-01"]
+  },
+  {
+    "id": "agent_1_006",
+    "source": "agent_1",
+    "topic": "Gas-dynamic event",
+    "claim": "No significant gas-dynamic event occurred prior to ignition that would have contributed to elevated methane levels.",
+    "evidence": "Mine Scada data showed normal fluctuations in methane levels without any sudden spikes leading up to the ignition (D-A2).",
+    "warrant": "The absence of rapid increases in methane concentration suggests that the conditions leading to ignition were not due to a gas-dynamic event but rather a combination of mechanical ignition and pre-existing methane accumulation.",
+    "confidence": 0.90,
+    "cause_categories": ["TC-08"]
+  }
+]

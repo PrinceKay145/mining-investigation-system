@@ -1,0 +1,28 @@
+{
+  "matches": [
+    {
+      "precedent_id": "PREC-2021-04",
+      "accident_type": "methane_explosion",
+      "overlap_score": 0.09090909090909091,
+      "shared_cause_categories": [
+        "TC-01"
+      ],
+      "matched_via": "primary"
+    },
+    {
+      "precedent_id": "PREC-2024-01",
+      "accident_type": "underground_gas_fire",
+      "overlap_score": 0.07692307692307693,
+      "shared_cause_categories": [
+        "TC-01"
+      ],
+      "matched_via": "secondary"
+    }
+  ],
+  "primary_type": "methane_explosion",
+  "secondary_types": [
+    "underground_gas_fire"
+  ],
+  "total_precedents": 11,
+  "filtered_count": 2
+}

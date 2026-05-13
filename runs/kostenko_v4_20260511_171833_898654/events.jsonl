@@ -1,0 +1,5 @@
+{"timestamp": "2026-05-11T17:18:33.944045", "run_id": "kostenko_v4_20260511_171833_898654", "event": "v4_start", "case_arguments": 21}
+{"timestamp": "2026-05-11T17:18:33.944534", "run_id": "kostenko_v4_20260511_171833_898654", "event": "v4_phase1_start", "agents": ["agent_1", "agent_2", "agent_4"]}
+{"timestamp": "2026-05-11T17:18:33.948117", "run_id": "kostenko_v4_20260511_171833_898654", "event": "agent_2_start", "label": "Organizational", "prompt_chars": 29700}
+{"timestamp": "2026-05-11T17:18:33.947149", "run_id": "kostenko_v4_20260511_171833_898654", "event": "agent_4_start", "label": "Regulatory", "prompt_chars": 38281}
+{"timestamp": "2026-05-11T17:18:33.948937", "run_id": "kostenko_v4_20260511_171833_898654", "event": "agent_1_start", "label": "Technical Causes", "prompt_chars": 27801}

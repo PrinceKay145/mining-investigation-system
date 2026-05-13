@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Inadequate supervision and control over hazardous operations allowed prohibited items to be present underground, contributing to ignition risk.",
+    "evidence": "Evidence of an angle grinder, aerosol can, and synthetic oil found at the ignition location (U-A1, U-A3).",
+    "warrant": "The presence of these ignition-capable items indicates a failure in supervision and adherence to safety protocols, as these items should not have been allowed underground without proper authorization.",
+    "confidence": 0.85,
+    "cause_categories": ["OC-06"]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure to adequately monitor and manage methane release from the K2 seam contributed to the accumulation of explosive methane concentrations.",
+    "evidence": "Post-accident methane survey indicated significant methane concentrations from the K2 seam, with no borehole pre-drainage conducted (K-A2, D-A1).",
+    "warrant": "The lack of pre-drainage and insufficient monitoring of methane levels from the K2 seam reflects a failure in hazard identification and risk management processes, allowing dangerous conditions to develop.",
+    "confidence": 0.80,
+    "cause_categories": ["OC-10", "TC-01"]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "Inadequate ventilation planning and execution allowed for methane accumulation in stagnant zones, creating an explosive atmosphere.",
+    "evidence": "Ventilation system was operating within design parameters, but the combined scheme created structural vulnerability to methane accumulation (D-A3).",
+    "warrant": "The design of the ventilation system did not account for the specific geological conditions and methane release patterns, indicating a failure in project documentation and hazard recognition.",
+    "confidence": 0.75,
+    "cause_categories": ["OC-08", "TC-06"]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Explosion sequence",
+    "claim": "Operational pressures may have overridden safety protocols, leading to inadequate responses to early warning signs of danger.",
+    "evidence": "Witness reports of sparking and ignition events during conveyor operation, with equipment running at the time of ignition (U-A3, K-A4).",
+    "warrant": "The decision to continue operations despite known ignition risks suggests a culture prioritizing production over safety, reflecting systemic issues in production control and decision-making processes.",
+    "confidence": 0.70,
+    "cause_categories": ["OC-01"]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Training and qualification",
+    "claim": "Insufficient training and awareness of emergency procedures among workers contributed to inadequate responses during the incident.",
+    "evidence": "No evidence of proper training or emergency response protocols being followed during the ignition and subsequent explosions (general inference from the sequence of events).",
+    "warrant": "The lack of effective emergency response indicates a failure in training and qualification processes, which should have prepared workers to recognize and react to hazardous situations.",
+    "confidence": 0.65,
+    "cause_categories": ["OC-03"]
+  }
+]

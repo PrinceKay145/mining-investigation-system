@@ -1,0 +1,66 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "Non-compliance with methane monitoring limits contributed to the accident.",
+    "evidence": "Evidence indicates that methane concentrations were elevated in the upper longwall, with readings reaching 17.9% in section 140 (K-A2). REG-01 mandates that CH4 in the outgoing air stream must not exceed 1.0%.",
+    "warrant": "The failure to monitor and control methane levels as required by REG-01 allowed for the accumulation of explosive methane concentrations, which directly contributed to the explosion.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "Ventilation design did not meet regulatory requirements, allowing methane accumulation.",
+    "evidence": "The ventilation scheme created stagnant zones where methane could accumulate, as indicated by the evidence of methane concentrations in the sub-conveyor zones (D-A3). REG-02 requires ventilation schemes to prevent such accumulations.",
+    "warrant": "The inadequate ventilation design led to the accumulation of methane in areas where it could reach explosive levels, which was a significant factor in the accident.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "Failure to conduct required degasification of the K2 seam contributed to methane release.",
+    "evidence": "The K2 seam was not pre-drained as required by REG-03, leading to uncontrolled methane release into the goaf (K-A2, D-A1).",
+    "warrant": "The absence of pre-drainage boreholes for the K2 seam allowed for significant methane accumulation, which contributed to the explosive atmosphere present at the time of the accident.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-07",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "Presence of non-explosion-proof equipment and flammable materials violated safety regulations.",
+    "evidence": "An angle grinder and flammable aerosol can were found in the ignition area (U-A1, U-A3), violating REG-05 which prohibits non-explosion-proof tools and flammable materials in gas-hazardous areas.",
+    "warrant": "The use of non-compliant equipment and materials created ignition sources in a methane-rich environment, directly contributing to the ignition and subsequent explosion.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Production control system",
+    "claim": "Insufficient production control and oversight contributed to the accident.",
+    "evidence": "The mine's internal production control system was not functioning effectively, as indicated by the presence of prohibited items and lack of proper monitoring (D-A4). REG-09 requires a functioning internal control system.",
+    "warrant": "The failure of the production control system allowed for unsafe practices and conditions to persist, which contributed to the accident's occurrence.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-01"
+    ]
+  }
+]
