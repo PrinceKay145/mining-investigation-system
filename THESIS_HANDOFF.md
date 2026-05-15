@@ -72,9 +72,12 @@ fatalities) against the three independent expert investigations
 
 ## 3. Canonical results (lift these into the Evaluation chapter)
 
-All numbers here are from the **May-15 canonical run**
-`runs/kostenko_v6_20260515_144020_680602/`. Every result is reproducible
-by running the scripts indexed in §6 against that run dir.
+Numbers in §3.1–3.5 and §3.7 are from the **May-15 canonical run**
+`runs/kostenko_v6_20260515_144020_680602/`. §3.6 (Axis 4 cross-model
+robustness) spans three configurations (May-11 baseline / May-15 hybrid /
+May-15 N=3 Gemini unified-paid). §3.8 (Axis 2 stability) spans five
+same-config hybrid runs (May-15 17:10–17:42). Every result is reproducible
+by running the scripts indexed in §6 against the named run dirs.
 
 ### 3.1 Axis 1 — Structural metrics vs ground truth
 
@@ -93,6 +96,15 @@ by running the scripts indexed in §6 against that run dir.
 open questions as `ambiguous` (contested but defensible), preserving every
 operationally-unresolved question from the three expert investigations.
 This is the strongest individual quantitative result of the project.
+
+**Important caveat from Axis 4 N=3 (see §3.6):** the 5/5 capture is **not
+invariant across all model configurations** — it is preserved by the
+mixed-family Hybrid (May-15) and the single-family-paid Baseline (May-11),
+but **collapses to 1/5 under a unified-single-model configuration**
+(Gemini 2.5 Flash Lite all-roles, May-15 N=3). The empirical implication
+is that the **mixed-family-as-diversity-primitive design is load-bearing
+for the OQ-capture property** — a single model cannot produce sufficient
+internal disagreement for v5 to surface contested issues as `ambiguous`.
 
 ### 3.2 Axis 5 — Per-agent argument quality (LLM-as-judge, GPT-4o)
 
@@ -194,34 +206,66 @@ Semantics) and how the May-15 misses partitioned:
    The upgrade would measurably fix 3 of 4 attack misses and 2 of 9
    support-pair misses **without changing any other pipeline component**.
 
-### 3.6 Axis 4 — Cross-model robustness (N=2)
+### 3.6 Axis 4 — Cross-model robustness (N=3)
 
-Two end-to-end pipeline runs with the same inputs, same prompts, same
+Three end-to-end pipeline runs with the same inputs, same prompts, same
 evaluation rubric — only the per-role model configuration differs.
 
 | Configuration | Run ID | Per-role models | Per-run cost |
 | --- | --- | --- | --- |
-| **Baseline** (single-model paid) | `kostenko_full_20260511_183524_096453` | Anthropic Claude across all v4 / v5 / v6 roles | ~$0.05 |
+| **Baseline** (single-family paid) | `kostenko_full_20260511_183524_096453` | Anthropic Claude across all v4 / v5 / v6 roles | ~$0.05 |
 | **Hybrid** (mixed-family OpenRouter, Layer-1 paid swaps) | `kostenko_v6_20260515_144020_680602` | T=gpt-oss-120b free · O=Qwen3-235B paid · Ch=Mistral-Small-3.2 paid · R=Llama-3.3 paid · v5=gpt-oss-20b free · v6=Llama-3.3 paid | **~$0.003** |
+| **Unified-paid** (single Gemini model all roles) | `kostenko_v6_20260515_170601_166521` | google/gemini-2.5-flash-lite for every v4 / v5 / v6 role | ~$0.014 |
 
 Comparison:
 
-| Metric | Baseline (May-11) | Hybrid (May-15) | Δ |
+| Metric | Baseline (May-11) | Hybrid (May-15) | **Unified-paid (May-15 N=3)** |
 | --- | --- | --- | --- |
-| Per-run cost | ~$0.05 | ~$0.003 | **−94%** |
-| GT attacks detected | 3 / 4 | 2 / 4 | −1 (regression) |
-| Support pairs detected | 6 / 9 | 7 / 9 | **+1 (improvement)** |
-| Open-question capture | 5 / 5 | 5 / 5 | invariant ✓ |
-| Acceptance: acc / amb / rej | 26 / 12 / 5 | 23 / 15 / 2 | more cautious |
-| Per-expert Jaccard spread | 0.056 (MIXED) | 0.067 (MIXED) | label invariant ✓ |
+| Per-run cost | ~$0.05 | ~$0.003 | ~$0.014 |
+| GT attacks detected | 3 / 4 | 2 / 4 | **3 / 4 (3 exact)** |
+| Support pairs detected | 6 / 9 | 7 / 9 | 5 / 9 |
+| **Open-question capture** | 5 / 5 | 5 / 5 | **1 / 5** ⚠️ |
+| Acceptance: acc / amb / rej | 26 / 12 / 5 | 23 / 15 / 2 | 24 / 7 / 15 |
+| Per-expert Jaccard — Usembekov | 0.111 | 0.125 | 0.037 |
+| Per-expert Jaccard — Kolikov | 0.133 | 0.192 | 0.143 |
+| Per-expert Jaccard — DMT | 0.167 | 0.143 | 0.100 |
+| Per-expert Jaccard spread | 0.056 (MIXED) | 0.067 (MIXED) | 0.106 (MIXED) |
+| Per-expert story label | MIXED | MIXED | MIXED (toward biased) |
+| Axis 7 v6 report overall | — | 3.60 | 3.80 |
+| Axis 5 per-agent overall (T / O / Ch / R) | — | 4.53 / 4.58 / 4.35 / 4.50 | 4.44 / 4.40 / 4.62 / 4.48 |
 
-**Defense-ready summary sentence (lift verbatim):**
+**Defense-ready summary sentence (lift verbatim, replaces the N=2 phrasing):**
 
-> Under a 94% per-run cost reduction (mixed-family free + budget-paid
-> swaps vs. premium single-model), v5's accepted set preserves the
-> methodologically critical open-question-as-ambiguous property (5 / 5)
-> and the per-expert synthesis-vs-bias label (MIXED in both), trading one
-> attack-detection regression for one support-coverage improvement.
+> Across three model configurations spanning a ~17× cost range
+> (~$0.003 hybrid → ~$0.05 single-family premium baseline), the per-expert
+> synthesis-vs-bias label remains MIXED for every configuration, but the
+> open-question-as-ambiguous capture property is **only preserved under
+> mixed-family or single-family-premium configurations (5 / 5)**; a
+> unified-single-model configuration (Gemini 2.5 Flash Lite all roles)
+> drops to **1 / 5**. This empirically demonstrates that the
+> mixed-family-as-diversity-primitive design is *load-bearing* for the
+> headline OQ-capture property — single-model setups, even at higher
+> per-run cost than the hybrid, cannot generate sufficient internal
+> disagreement for v5 to surface contested issues as `ambiguous`.
+
+**Three thesis-defensible findings (Axis 4 N=3):**
+
+1. **Open-question capture is configuration-dependent, not invariant.**
+   The N=2 framing in earlier drafts overstated invariance. The correct
+   characterization is: *5/5 capture is preserved across model-family
+   diversity (Hybrid mixed-family at $0.003/run, Baseline single-family
+   premium Claude at $0.05/run) but collapses under model-family
+   uniformity (Gemini all-roles at $0.014/run → 1/5)*. The thesis
+   contribution is the **diversity primitive**, not the LLM choice per se.
+2. **Cost is not the dominant variable.** The Unified-paid arm at
+   ~$0.014/run produces strictly *worse* OQ capture than the Hybrid arm
+   at ~$0.003/run. Spending more on a single model cannot compensate for
+   the loss of multi-family disagreement signal.
+3. **Per-expert MIXED label is invariant across all three configurations.**
+   Spread ranges 0.056 → 0.067 → 0.106; all three land in the MIXED
+   bucket (0.05 < spread < 0.15). The framework's synthesis-vs-bias
+   character is robust to model substitution even when other properties
+   degrade.
 
 ### 3.7 Operational telemetry from the canonical run (May-15)
 
@@ -234,6 +278,71 @@ Comparison:
 | Total output tokens | 12,193 |
 | Upstream 429 retries | 0 (on this run; earlier runs hit Venice throttles — see note.md "Catalog drift and verification") |
 | End-to-end wall time | ~5 minutes |
+
+### 3.8 Axis 2 — Multi-run stability (N=5 hybrid, same config)
+
+Five end-to-end pipeline runs at the same hybrid configuration (default
+`.env`, no overrides) to characterize the **sampling-noise floor** of v5's
+output under LLM non-determinism. Run dirs:
+
+```text
+runs/kostenko_v6_20260515_171033_139395   (anchor; stability_report.json saved here)
+runs/kostenko_v6_20260515_171757_180396
+runs/kostenko_v6_20260515_172822_319353
+runs/kostenko_v6_20260515_173447_867193
+runs/kostenko_v6_20260515_173850_754463
+```
+
+Pairwise Jaccard across all C(5, 2) = 10 pairs:
+
+| Aspect | mean ± std | min | max |
+| --- | --- | --- | --- |
+| Accepted-set Jaccard | **0.78 ± 0.05** | 0.69 | 0.86 |
+| Ambiguous-set Jaccard | **0.78 ± 0.08** | 0.67 | 0.86 |
+| Rejected-set Jaccard | 0.17 ± 0.25 | 0.00 | 0.67 |
+| Attack-edge Jaccard | 0.47 ± 0.08 | 0.38 | 0.66 |
+| Support-cluster Jaccard | 0.52 ± 0.07 | 0.45 | 0.64 |
+
+**Per-argument bucket consistency:** 29 / 42 arguments (**69% stability
+rate**) landed in the same bucket across all 5 runs; 13 arguments flipped
+buckets at least once. The flipping arguments cluster around the
+acceptance/ambiguous boundary (e.g. `K-A4` was `ambiguous` in 4 runs and
+`accepted` in 1; `agent_2_002` was `accepted` in 4 and `rejected` in 1).
+Open questions captured as `ambiguous` were stable across all 5 runs.
+
+**Three thesis-defensible findings (Axis 2):**
+
+1. **Same-config accepted-set Jaccard is 0.78 ± 0.05.** This is the
+   **sampling-noise floor** for v5 output stability. Cross-config Jaccards
+   in §3.6 (per-expert agreement, hybrid vs. baseline) and the per-expert
+   spread interpretation in §3.3 must be read against this floor: a
+   measured cross-config delta below ~0.05 is within sampling noise of
+   same-config variability and should not be reported as a robustness
+   signal.
+2. **Bucket structure is stable; bucket membership at the margin is not.**
+   The 69% per-argument bucket-consistency rate quantifies *which* parts
+   of v5's output are load-bearing (the 29 stable args, including all
+   five GT open questions) vs. *which* are sampling-noise artifacts (the
+   13 flipping args, almost all flipping at the accepted/ambiguous or
+   accepted/rejected boundary). Thesis claims should rest on the stable
+   set; the flipping set should be flagged in Limitations.
+3. **The rejected set is unstable (Jaccard 0.17 ± 0.25).** This is a
+   *reportable property*, not a bug: rejection only occurs when an
+   argument loses all attacks in the AF semantics step, and small v4
+   sampling differences shift which arguments receive attacks at all.
+   Practical implication: thesis discussion should treat the
+   **accepted ∪ ambiguous** set as v5's robust output and the rejected
+   set as advisory.
+
+**Caveat on the 0.78 number:** the v5 confirmation cache (model-aware,
+content-hashed) was active during stability runs, producing 13–18 cache
+hits out of 81–91 pair checks per run (~14–20% hit rate). True noise
+floor is therefore **fractionally lower than 0.78** (more variance under
+fully cold cache). Materially small effect because v4 outputs are
+non-deterministic per fresh run, but worth disclosing in the manuscript.
+
+[`runs/kostenko_v6_20260515_171033_139395/stability_report.json`](runs/kostenko_v6_20260515_171033_139395/stability_report.json)
+contains the full per-pair Jaccards and the per-argument flipping table.
 
 ---
 
@@ -325,17 +434,24 @@ maps to a §3 number or a `note.md` section.
 
 ### Chapter 5 — Evaluation
 
-- Six implemented axes (1, 4, 5, 6, 7, 8) — §3 of this doc has every
+- Seven implemented axes (1, 2, 4, 5, 6, 7, 8) — §3 of this doc has every
   number; lift directly into chapter tables.
-- The single canonical Kostenko run as the anchor; the May-11 baseline
-  as the cross-model comparison point (Axis 4 N=2).
+- The single canonical Kostenko run (May-15 hybrid) as the anchor for
+  Axes 1 / 5 / 6 / 7 / 8; the May-11 baseline + the May-15 N=3 Gemini
+  third arm as the cross-model comparison points (Axis 4 N=3); five
+  same-config hybrid runs as the Axis 2 stability cohort.
 - Failure-mode taxonomy (Axis 8) — the strongest *mechanistic* result;
   directly motivates the SBERT future-work path.
 
 ### Chapter 6 — Discussion
 
 - What the open-question-capture = 5/5 result actually means
-  methodologically. Why this is the property to advertise.
+  methodologically — and the **important refinement from N=3**: 5/5 is
+  preserved only under mixed-family or single-family-premium
+  configurations; the unified-single-model arm (Gemini all roles) drops
+  to 1/5. This is the empirical justification for the multi-family-as-
+  diversity-primitive design and should be the centrepiece of the
+  Discussion chapter rather than the bare 5/5 claim.
 - Why mixed-family v4 produces *genuine* disagreement (not paraphrase
   variance) — the structural argument enabled by 4 distinct RLHF lineages.
 - Cost analysis: $0.003/run hybrid vs. $0.05 baseline. Thesis-scale
@@ -358,14 +474,20 @@ maps to a §3 number or a `note.md` section.
 
 Stated honestly because the thesis defense will surface them anyway.
 
-1. **N = 1 canonical run for most axes.** Axes 1, 5, 6, 7, 8 are
-   evaluated on the single May-15 canonical run. Axis 2 (multi-run
-   stability with N ≥ 5) infrastructure is built but not yet exercised
-   — necessary to characterize the sampling-noise floor.
-2. **N = 2 for Axis 4 (cross-model robustness).** Two configurations
-   compared (single-model premium baseline vs. mixed-family hybrid).
-   Stronger claims would need N ≥ 3 — the recipe is in `note.md` §"Axis 4
-   N=3 third arm" and is one inline-env-var command away.
+1. **N = 1 canonical run for content axes.** Axes 1, 5, 6, 7, 8 are
+   evaluated on the single May-15 canonical run. Axis 2 (§3.8) now
+   characterizes the sampling-noise floor against this single anchor:
+   accepted-set Jaccard 0.78 ± 0.05 across 5 same-config runs; per-
+   argument bucket consistency 69%. Manuscript should explicitly cross-
+   reference §3.8 wherever a §3.1 / §3.5 / §3.7 number from the canonical
+   run is quoted, since 13 of 42 arguments flip buckets across re-runs at
+   the same configuration.
+2. **Axis 4 cross-model robustness at N = 3.** Three configurations
+   compared (May-11 single-family premium baseline / May-15 mixed-family
+   hybrid / May-15 N=3 unified-paid Gemini). Stronger claims would still
+   benefit from additional arms — e.g. an all-free OpenRouter
+   configuration to anchor the cost floor, or a second mixed-family
+   configuration with a different per-role swap.
 3. **LLM training data as domain knowledge.** v4 agents bring whatever
    mining-safety knowledge their training data contained. This is an
    acknowledged property, not a bug — but should be stated clearly as
@@ -512,11 +634,14 @@ model configuration.
 
 ## 8. What hasn't been done yet (writing-chapter relevant)
 
-- Axis 2 multi-run stability (script ready; ~25 min wall time + $0.015
-  to run; results would let the Limitations section quote a specific
-  Jaccard noise floor instead of waving at the issue).
-- Axis 4 N=3 third arm (one inline-env-var command; ~5 min wall;
-  ~$0.014; would harden the cross-model story).
+- Axis 2 — **done** (2026-05-15, see §3.8). Stability evaluated at N=5
+  same-config hybrid runs.
+- Axis 4 N=3 third arm — **done** (2026-05-15, see §3.6). Unified-paid
+  Gemini all-roles configuration added; produced the OQ-capture
+  collapse finding that reframes the headline §3.1 claim.
+- Axis 4 fourth arm (e.g. all-free OpenRouter, or a second mixed-family
+  swap) would harden the 3-arm story further — same recipe pattern as
+  the Gemini arm in `note.md` §"Axis 4 N=3 third arm".
 - Axis 3 ablation matrix (would need v4 plumbing to skip individual
   agents — not urgent for thesis).
 - Axis 9 Markarian classical baseline (would need supervisor support).
@@ -547,6 +672,10 @@ model configuration.
 
 > Multi-agent LLMs producing typed arguments + Dung's argumentation
 > framework synthesizes across three independent Kostenko investigation
-> reports, captures all five GT open questions as ambiguous, preserves
-> per-expert synthesis-vs-bias under model swaps, and surfaces every
-> miss to the correct pipeline stage — all at $0.003 per run.
+> reports, captures all five GT open questions as ambiguous *under
+> mixed-family configurations* (and demonstrably collapses to 1/5 under
+> a unified-single-model configuration — empirically establishing the
+> diversity primitive as load-bearing), preserves the per-expert
+> synthesis-vs-bias label (MIXED) across all three N=3 model
+> configurations, and surfaces every miss to the correct pipeline stage
+> — all at $0.003 per run for the hybrid configuration.

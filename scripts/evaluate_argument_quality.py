@@ -161,9 +161,41 @@ def _agent_id_from_arg(arg_id: str) -> str | None:
     return None
 
 
-def compute_per_agent_aggregates(result: ArgumentQualityResult) -> dict[str, dict]:
+def build_arg_to_agent_map(v4: dict) -> dict[str, str]:
+    """
+    Canonical arg_id → agent_id lookup built from v4_result.json structure.
+
+    Robust against models that emit non-canonical arg-id prefixes (e.g.
+    Gemini 2.5 emitted `analyst_1_001` instead of `agent_1_001` for the
+    Technical agent). The v4 result file is the source of truth: each
+    `agent_N_arguments` list is owned by `agent_N` regardless of what IDs
+    the model wrote into the `id` field.
+    """
+    mapping: dict[str, str] = {}
+    for agent_key in ("agent_1_arguments", "agent_2_arguments",
+                      "agent_3_arguments", "agent_4_arguments"):
+        agent_id = agent_key.replace("_arguments", "")
+        for arg in v4.get(agent_key, []):
+            arg_id = arg.get("id")
+            if arg_id:
+                mapping[arg_id] = agent_id
+    return mapping
+
+
+def compute_per_agent_aggregates(
+    result: ArgumentQualityResult,
+    arg_to_agent: dict[str, str] | None = None,
+) -> dict[str, dict]:
     """
     Per-agent mean scores across the 4 rubric dimensions + overall mean.
+
+    Args:
+        result: judge output.
+        arg_to_agent: optional canonical arg_id → agent_id lookup (built via
+            `build_arg_to_agent_map(v4_result)`). When provided, takes
+            precedence over arg-id prefix parsing — required when v4 emitted
+            non-canonical IDs. When None, falls back to prefix matching
+            (back-compat with callers that only have the judge result).
 
     Returns:
         Dict keyed by `agent_1`..`agent_4`. Each value has:
@@ -175,7 +207,7 @@ def compute_per_agent_aggregates(result: ArgumentQualityResult) -> dict[str, dic
     """
     by_agent: dict[str, list] = {}
     for s in result.scores:
-        agent = _agent_id_from_arg(s.arg_id)
+        agent = (arg_to_agent or {}).get(s.arg_id) or _agent_id_from_arg(s.arg_id)
         if agent is None:
             continue
         by_agent.setdefault(agent, []).append(s)
@@ -330,7 +362,9 @@ def main() -> None:
     )
 
     print_per_argument_scores(result)
-    aggregates = compute_per_agent_aggregates(result)
+    v4_for_map = json.loads((run_dir / "v4_result.json").read_text())
+    arg_to_agent = build_arg_to_agent_map(v4_for_map)
+    aggregates = compute_per_agent_aggregates(result, arg_to_agent=arg_to_agent)
     print_per_agent_aggregates(aggregates)
 
     section("Overall comments")
