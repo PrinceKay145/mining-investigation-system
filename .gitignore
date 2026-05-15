@@ -4,11 +4,18 @@ __pycache__/
 *.pyc
 .faiss/
 outputs/
-# runs/  # NOT ignored — run artifacts ARE committed so the thesis writer
-        #  (LLM or human) can read every per-run JSON / report / event log.
+
+# runs/ is NOT ignored — run artifacts ARE committed so the thesis writer
+#       (LLM or human) can read every per-run JSON / report / event log.
+# (line intentionally left commented in the original .gitignore for reference)
+
 .pytest_cache/
 *.db
 .DS_Store
 CLAUDE.md
-.claude/  # Claude Code local state (settings, scheduled tasks)
-.vscode/  # IDE-local preferences
+
+# Claude Code local state (settings, scheduled tasks)
+.claude/
+
+# IDE-local preferences
+.vscode/
