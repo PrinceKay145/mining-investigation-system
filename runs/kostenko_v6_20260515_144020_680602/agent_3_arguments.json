@@ -1,0 +1,65 @@
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The evidence for the angle grinder as an ignition source is circumstantial and insufficient to confirm its use at the ignition location, leaving the primary ignition source undetermined.",
+    "evidence": "U-A1 reports the angle grinder was found in conveyor drift 47K3-Z, not the ignition location (sections 142-145). D-A5 notes no evidence of angle grinder use at the ignition location. U-A3 and K-A4 focus on the AFC chain as a more probable source, with witness testimony and physical tests supporting sparking in the methane-rich zone.",
+    "warrant": "The angle grinder's location and lack of confirmed use at the ignition site weaken its role as the primary ignition source. The AFC chain, with documented sparking and overlap with the methane-rich zone, is a stronger candidate. The evidence does not conclusively support the angle grinder as the ignition source.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The evidence supports a primary methane explosion with a secondary coal dust explosion, but the relative contributions of each remain uncertain and may have been overstated in the analysts' conclusions.",
+    "evidence": "K-A8 and K-A7 provide evidence for a methane-driven primary explosion (99.99% CH4 reading, worker survivability post-shock). D-A9 argues for a coal dust-dominated explosion based on propagation patterns and dust accumulations. However, the initial seismic events (K-A6) and CO sensor data (U-A1, D-A6) align more closely with a methane deflagration.",
+    "warrant": "While both methane and coal dust played roles, the evidence does not conclusively determine the primary fuel source. The methane explosion is well-supported, but the extent of coal dust involvement is speculative. The analysts' confidence in the coal dust explosion's dominance may be overstated.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design flaw in creating stagnant sub-conveyor zones is well-supported, but the claim that it represents a 'functional ventilation failure' is misleading because the system operated within design parameters.",
+    "evidence": "D-A3 and agent_1_004 note the ventilation system met design flow rates (2572 m³/min vs. 2705 m³/min) but had stagnant zones. U-A4 confirms no system-wide airflow drop. The stagnant zones were a design limitation, not a failure in operation.",
+    "warrant": "The ventilation system's design was inadequate for the conditions, but it did not 'fail' in operation. The term 'functional ventilation failure' is misleading because the system performed as designed, even if the design was flawed. The distinction matters for regulatory and engineering responses.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The K2 seam is the primary methane source, but the evidence does not rule out contributions from other sources, such as roof falls or other geological disturbances.",
+    "evidence": "K-A2 and D-A1 focus on the K2 seam as the primary source, but K-A7 mentions a possible roof fall displacing methane into workings. D-A2 excludes a sudden gas outburst, but does not rule out smaller, localized releases from other sources.",
+    "warrant": "While the K2 seam is a significant contributor, the evidence does not exclude other potential sources. The analysts' focus on the K2 seam may overlook other possible methane release mechanisms, such as roof falls or other geological disturbances.",
+    "confidence": 0.6,
+    "cause_categories": [
+      "TC-01"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Explosion sequence",
+    "claim": "The explosion sequence proposed by agent_1_005 is plausible but relies on assumptions about the timing and interactions of events that are not fully supported by the evidence.",
+    "evidence": "Agent_1_005 proposes a sequence starting with methane accumulation, followed by ignition, deflagration, and a secondary dust explosion. However, the timing of events (e.g., CO sensor spikes at 02:24 vs. seismic events at 02:43) and the transition from fire to deflagration are not fully explained.",
+    "warrant": "The sequence is a reasonable hypothesis, but the evidence does not conclusively support the exact timing and interactions proposed. The analysts' confidence in the sequence may be overstated given the uncertainties in the data.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-01",
+      "TC-02",
+      "TC-10"
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "The explosive methane originated from the K2 companion seam, released into the sub‑conveyor zone of the upper longwall by abutment‑pressure‑induced fracturing, and accumulated to >5% in a stagnant pocket beneath the armored face conveyor.",
+    "evidence": "K-A2 reports methane concentrations up to 17.9 % at floor level in sections 128‑142, with low air velocity (0.25 m/s) creating a dead‑space; D-A1 describes continuous CH4 release from K2 (≈15 m³/t) and lack of pre‑drainage boreholes; U-A4 shows overall ventilation rates were stable, indicating the accumulation was local rather than system‑wide.",
+    "warrant": "High measured CH4 at floor combined with negligible airflow demonstrates that methane from K2 migrated into the sub‑conveyor zone where ventilation was insufficient to dilute it. The geological relationship (K2 3.35 m below K3) and abutment‑pressure‑driven fracturing are well‑known mechanisms for localized gas release, matching the observed concentration pattern.",
+    "confidence": 0.88,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The fire was ignited by mechanical sparking of the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor pocket.",
+    "evidence": "K-A4 documents multiple eyewitness reports of visible sparks from the AFC chain in the upper longwall; manufacturer instructions require compressed‑air chain ventilation when methane is present, which was not applied; U-A3 notes presence of other ignition‑capable items but assigns lower probability; electrical sources are excluded by K-A5 and D-A5.",
+    "warrant": "Mechanical chain sparking is a documented ignition source for methane (16 % of Russian explosions 2004‑2019). The coincidence of spark reports, the location of measured high CH4, and the absence of electrical or chemical ignition evidence make the AFC chain the most probable source.",
+    "confidence": 0.79,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Explosion type",
+    "claim": "The primary explosion was a methane deflagration; a secondary, limited coal‑dust explosion contributed to damage propagation but did not dominate the energy release.",
+    "evidence": "K-A8 and K-A6 locate the initial high‑energy event at the upper longwall (sections 142‑145) with seismic signatures at 02:43; CO sensor spikes (U-A1, D-A6) indicate combustion of a gas mixture rather than dust; video evidence (K-A8) shows workers remained conscious after the shock, inconsistent with a massive dust‑generated CO cloud; D-A9’s claim of a dust‑dominated explosion is contradicted by the rapid methane concentration rise to 99.99 % recorded by a miner’s detector (K-A7).",
+    "warrant": "Methane explosions produce a sharp pressure wave and a brief CO rise, while coal‑dust explosions generate sustained high CO and longer‑lasting flame fronts. The observed sensor data and survivor testimony align with a methane‑driven event, with only localized dust involvement evident on conveyor surfaces.",
+    "confidence": 0.81,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "The overall ventilation system met design flow rates, but the 1K‑N‑N‑vt combined scheme created a low‑velocity sub‑conveyor zone where methane accumulated, representing a functional ventilation failure in that micro‑environment.",
+    "evidence": "D-A3 notes adequate design flow (2572 m³/min vs 2705 m³/min) yet identifies a stagnant sub‑conveyor zone; U-A4 confirms no system‑wide airflow drop; K-A2’s floor‑level CH4 measurements show 0.25 m/s air speed, far below the required 1 m/s for effective dilution.",
+    "warrant": "Even with global compliance, localized dead‑spaces can permit explosive mixtures to form. The measured low velocity directly explains why methane from K2 was not removed, satisfying the definition of a ventilation failure in the affected zone.",
+    "confidence": 0.84,
+    "cause_categories": ["TC-06"]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Explosion sequence",
+    "claim": "Sequence: (1) methane accumulated in the sub‑conveyor pocket; (2) AFC chain spark ignited a localized methane fire at 02:24 h; (3) fire transitioned to a rapid methane deflagration at 02:43 h, producing the first seismic event; (4) the pressure wave displaced methane into the main haulage entries, reaching 99.99 % concentration (K-A7); (5) a secondary, limited coal‑dust explosion occurred along the conveyor route, extending damage to distant sections.",
+    "evidence": "Chronology from CO sensor spikes (U-A1, D-A6) at 02:24, seismic events at 02:43 (K-A6), miner detector reading of 99.99 % CH4 at 02:47 (K-A7), and video/eyewitness reports of post‑shock survivability (K-A8). D-A2 confirms no pre‑ignition outburst, supporting a fire‑to‑deflagration transition.",
+    "warrant": "The timing aligns the ignition, fire growth, and pressure wave generation, while the detector data documents methane displacement. The limited dust involvement is inferred from observed dust deposits and the secondary explosion characteristics described in D-A9, but its contribution is secondary to the methane event.",
+    "confidence": 0.78,
+    "cause_categories": ["TC-01", "TC-02", "TC-10"]
+  }
+]

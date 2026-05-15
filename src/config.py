@@ -49,11 +49,78 @@ DEFAULT_OPENAI_MODEL: str = (
 ANTHROPIC_API_KEY: str | None = os.environ.get("ANTHROPIC_API_KEY")
 OPENAI_API_KEY: str | None = os.environ.get("OPENAI_API_KEY")
 
+# ---------------------------------------------------------------------------
+# OpenRouter — unified gateway to many free + paid model families.
+# Used to assign different model families per v4 agent (methodological
+# diversity), and for v5 confirmation / v6 report. See note.md for rationale.
+# Model strings should be verified against `GET /api/v1/models` —
+# `scripts/ping_openrouter.py --list-free` prints currently-available IDs.
+# ---------------------------------------------------------------------------
+OPENROUTER_API_KEY: str | None = os.environ.get("OPENROUTER_API_KEY")
+OPENROUTER_BASE_URL: str = os.environ.get(
+    "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"
+)
+
+OPENROUTER_DEFAULT_MODEL: str = os.environ.get(
+    "OPENROUTER_DEFAULT_MODEL", "meta-llama/llama-3.3-70b-instruct:free"
+)
+OPENROUTER_MODEL_TECHNICAL: str = os.environ.get(
+    # Swapped 2026-05-15: free Nemotron-reasoning produced empty content in
+    # production (reasoning-token starvation — all 4096 max_tokens consumed by
+    # hidden chain-of-thought before any visible answer). Smoke-test of 200
+    # tokens missed this. gpt-oss-120b:free is a standard non-reasoning model
+    # (no starvation risk), bigger than the dead Nemotron pick, OpenAI RLHF.
+    # See runs/kostenko_v6_20260515_002634 for the failure case.
+    "OPENROUTER_MODEL_TECHNICAL",
+    "openai/gpt-oss-120b:free",
+)
+OPENROUTER_MODEL_ORGANIZATIONAL: str = os.environ.get(
+    # Paid (~$0.63/run) — free Qwen3-Next-80B was blocked by Venice upstream
+    # throttling. Same family signature, 3× bigger model, no rate-limit issue.
+    "OPENROUTER_MODEL_ORGANIZATIONAL", "qwen/qwen3-235b-a22b-2507"
+)
+OPENROUTER_MODEL_CHALLENGER: str = os.environ.get(
+    # Swapped twice on 2026-05-15:
+    #   1. nvidia/nemotron-3-super-120b-a12b:free → markdown prose, no JSON
+    #   2. nousresearch/hermes-3-llama-3.1-405b:free → Venice upstream 429
+    # Settled on paid Mistral-Small-3.2 (~$0.85/run) — distinct Mistral family
+    # signature, direct instruction-following, bypasses the unreliable free pool.
+    "OPENROUTER_MODEL_CHALLENGER", "mistralai/mistral-small-3.2-24b-instruct"
+)
+OPENROUTER_MODEL_REGULATORY: str = os.environ.get(
+    # Paid (~$1.24/run) — free Llama-3.3-70B was blocked by Venice upstream
+    # throttling. Identical model, bypasses the free-pool quota completely.
+    "OPENROUTER_MODEL_REGULATORY", "meta-llama/llama-3.3-70b-instruct"
+)
+OPENROUTER_MODEL_V5_CONFIRMATION: str = os.environ.get(
+    "OPENROUTER_MODEL_V5_CONFIRMATION", "openai/gpt-oss-20b:free"
+)
+OPENROUTER_MODEL_V6_REPORT: str = os.environ.get(
+    # Paid (~$1.24/run) — same Venice-bypass reason as Regulatory.
+    "OPENROUTER_MODEL_V6_REPORT", "meta-llama/llama-3.3-70b-instruct"
+)
+OPENROUTER_MODEL_V1_EXTRACTION: str = os.environ.get(
+    "OPENROUTER_MODEL_V1_EXTRACTION", "deepseek/deepseek-v4-flash:free"
+)
+
+# Optional OpenRouter attribution headers — used for analytics/leaderboards.
+# Not required; left blank by default.
+OPENROUTER_HTTP_REFERER: str | None = os.environ.get("OPENROUTER_HTTP_REFERER")
+OPENROUTER_X_TITLE: str | None = os.environ.get(
+    "OPENROUTER_X_TITLE", "mining-investigation-system"
+)
+
 # Back-compat alias — older imports use DEFAULT_LLM_MODEL. Resolves to the
 # active provider's default.
-DEFAULT_LLM_MODEL: str = (
-    DEFAULT_OPENAI_MODEL if LLM_PROVIDER == "openai" else DEFAULT_ANTHROPIC_MODEL
-)
+def _default_llm_model() -> str:
+    if LLM_PROVIDER == "openai":
+        return DEFAULT_OPENAI_MODEL
+    if LLM_PROVIDER == "openrouter":
+        return OPENROUTER_DEFAULT_MODEL
+    return DEFAULT_ANTHROPIC_MODEL
+
+
+DEFAULT_LLM_MODEL: str = _default_llm_model()
 
 # Logging level for the RunContext logger
 DEFAULT_LOG_LEVEL: str = os.environ.get("LOG_LEVEL", "INFO")

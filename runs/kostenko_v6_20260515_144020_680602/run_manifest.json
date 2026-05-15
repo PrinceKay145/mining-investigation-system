@@ -1,0 +1,126 @@
+{
+  "run_id": "kostenko_v6_20260515_144020_680602",
+  "run_dir": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_144020_680602",
+  "v4_agent_models_requested": {
+    "agent_1": "openai/gpt-oss-120b:free",
+    "agent_2": "qwen/qwen3-235b-a22b-2507",
+    "agent_3": "mistralai/mistral-small-3.2-24b-instruct",
+    "agent_4": "meta-llama/llama-3.3-70b-instruct"
+  },
+  "per_role": {
+    "agent_2": {
+      "requested_model": "qwen/qwen3-235b-a22b-2507",
+      "echoed_models": [
+        "qwen/qwen3-235b-a22b-07-25"
+      ],
+      "call_count": 1,
+      "input_tokens": 7206,
+      "output_tokens": 1506,
+      "latency_ms_mean": 17012,
+      "latency_ms_max": 17012,
+      "retry_count": 0
+    },
+    "agent_4": {
+      "requested_model": "meta-llama/llama-3.3-70b-instruct",
+      "echoed_models": [
+        "meta-llama/llama-3.3-70b-instruct"
+      ],
+      "call_count": 2,
+      "input_tokens": 22375,
+      "output_tokens": 1466,
+      "latency_ms_mean": 34599,
+      "latency_ms_max": 42341,
+      "retry_count": 0
+    },
+    "agent_1": {
+      "requested_model": "openai/gpt-oss-120b:free",
+      "echoed_models": [
+        "openai/gpt-oss-120b:free"
+      ],
+      "call_count": 1,
+      "input_tokens": 6621,
+      "output_tokens": 1447,
+      "latency_ms_mean": 81136,
+      "latency_ms_max": 81136,
+      "retry_count": 0
+    },
+    "agent_3": {
+      "requested_model": "mistralai/mistral-small-3.2-24b-instruct",
+      "echoed_models": [
+        "mistralai/mistral-small-3.2-24b-instruct-2506"
+      ],
+      "call_count": 1,
+      "input_tokens": 11327,
+      "output_tokens": 1193,
+      "latency_ms_mean": 10708,
+      "latency_ms_max": 10708,
+      "retry_count": 0
+    },
+    "other": {
+      "requested_model": "openai/gpt-oss-20b:free",
+      "echoed_models": [
+        "openai/gpt-oss-20b:free"
+      ],
+      "call_count": 57,
+      "input_tokens": 66619,
+      "output_tokens": 6581,
+      "latency_ms_mean": 7355,
+      "latency_ms_max": 30877,
+      "retry_count": 0
+    }
+  },
+  "stage_timing": {
+    "agent_2": {
+      "started_at": "2026-05-15T14:40:20.773240",
+      "finished_at": "2026-05-15T14:40:37.794502"
+    },
+    "agent_4": {
+      "started_at": "2026-05-15T14:40:20.774238",
+      "finished_at": "2026-05-15T14:41:03.127382"
+    },
+    "agent_1": {
+      "started_at": "2026-05-15T14:40:20.775089",
+      "finished_at": "2026-05-15T14:41:41.923331"
+    },
+    "agent_3": {
+      "started_at": "2026-05-15T14:41:41.935460",
+      "finished_at": "2026-05-15T14:41:52.651168"
+    },
+    "v4": {
+      "started_at": "2026-05-15T14:40:20.770590",
+      "finished_at": "2026-05-15T14:41:52.656890"
+    },
+    "v5_pair_check": {
+      "started_at": "2026-05-15T14:50:21.821729",
+      "finished_at": "2026-05-15T14:50:27.583404"
+    },
+    "v5": {
+      "started_at": "2026-05-15T14:50:21.811490",
+      "finished_at": "2026-05-15T14:50:27.591995"
+    },
+    "v6": {
+      "started_at": "2026-05-15T14:50:27.623903",
+      "finished_at": "2026-05-15T14:50:54.709790"
+    }
+  },
+  "v5_cache_hits": 56,
+  "v5_summary": {
+    "accepted": 23,
+    "rejected": 2,
+    "ambiguous": 15,
+    "consensus": false
+  },
+  "v6_summary": {
+    "run_id": "kostenko_v6_20260515_144020_680602",
+    "v6_report": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_144020_680602/v6_report.json",
+    "markdown": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_144020_680602/report.md",
+    "html": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_144020_680602/report.html",
+    "graph": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_144020_680602/argumentation_graph.png"
+  },
+  "totals": {
+    "llm_calls": 62,
+    "input_tokens": 114148,
+    "output_tokens": 12193,
+    "upstream_429_retries": 0
+  }
+}

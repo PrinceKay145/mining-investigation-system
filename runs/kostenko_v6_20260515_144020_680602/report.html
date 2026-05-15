@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Investigation Report — Kostenko Mine Explosion</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        max-width: 900px; margin: 2em auto; padding: 0 1em; line-height: 1.55;
+        color: #222; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 0.3em; }
+h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; margin-top: 2em; }
+h3 { color: #444; }
+code { background: #f4f4f4; padding: 1px 4px; border-radius: 3px;
+        font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+table { border-collapse: collapse; margin: 1em 0; }
+th { background: #f4f4f4; text-align: left; }
+hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+img { display: block; margin: 1em auto; }
+</style>
+</head>
+<body>
+<h1>Investigation Report — Kostenko Mine Explosion</h1>
+
+<p><strong>Date of incident:</strong> 2023-10-28</p>
+<p><strong>Run ID:</strong> <code>kostenko_v6_20260515_144020_680602</code></p>
+
+<hr>
+
+<h2>1. Incident summary</h2>
+
+<p>The Kostenko Mine Explosion occurred on October 28, 2023, at the ArcelorMittal Temirtau mine in Kazakhstan. The incident involved a fire and subsequent explosion, resulting in casualties and damage [U-A1, K-A1, D-A1]. The investigation was conducted by a team of experts, including Usembekov Meiramбек Sabdenovich (U), Kolikov-Meshcheryakov Joint Expert Conclusion (K), and DMT GmbH & Co. KG (D) [U, K, D]. The team examined the case metadata, expert sources, and v2 classification to determine the cause of the accident.</p>
+
+<h2>2. Classification and precedents</h2>
+
+<p>The primary accident type was classified as a methane explosion, with secondary types including underground gas fire [TC-01, TC-02]. The dominant cause categories driving this classification include methane accumulation and mechanical ignition source [TC-01, TC-02] [D-A1, K-A2, U-A3]. The top-ranked precedent match was PREC-2021-04, Shakhta Listvyazhnaya, with a Jaccard overlap score of 0.0909 and shared cause categories including methane accumulation [TC-01] [PREC-2021-04].</p>
+
+<h2>3. Accepted conclusions</h2>
+
+<p>The accepted conclusions include the ignition source, which was likely mechanical sparking from the armored face conveyor (AFC) chain [K-A4, agent_1_002, SUP-V5-011]. The methane source was the K2 companion seam, released into the sub-conveyor zone of the upper longwall by abutment-pressure-induced fracturing [K-A2, agent_1_001, SUP-V5-008]. Spontaneous combustion was excluded as a cause [U-A2, K-A3, D-A4, SUP-V5-001]. The ventilation system met design flow rates, but the combined scheme created a low-velocity sub-conveyor zone where methane accumulated [D-A3, agent_1_004, SUP-V5-018].</p>
+
+<h2>4. Rejected hypotheses</h2>
+
+<p>The rejected hypotheses include the angle grinder as the ignition source, which was defeated by K-A4 and agent_1_002 [ATK-V5-003, ATK-V5-004]. The hypothesis that the explosion was driven primarily by coal dust was also rejected, as the evidence supports a primary methane explosion with a secondary coal dust contribution [K-A8, agent_1_003, ATK-V5-011].</p>
+
+<h2>5. Unresolved questions</h2>
+
+<p>The genuinely contested arguments include the exact sequence of explosion propagation through the mine [D-A7, agent_1_005, ATK-V5-015]. The open questions from the original investigators include whether the shearer was operating at the time of ignition and what the actual CH4 concentration distribution was in the goaf and crosscut 13 immediately before the explosion [OQ-1, OQ-3].</p>
+
+<h2>6. Argumentation graph</h2>
+
+<p><img src="argumentation_graph.png" alt="Argumentation framework" style="max-width:100%;"></p>
+
+<p>Node colors: <strong>green</strong> = accepted (grounded extension), <strong>orange</strong> = ambiguous (in some preferred extension but not all), <strong>red</strong> = rejected (in no preferred extension). Edges: <strong>solid red</strong> = rebutting attack, <strong>dashed</strong> = undercutting attack.</p>
+
+<h2>7. Regulatory violations</h2>
+
+<p>The regulatory findings include violations of REG-01 (methane monitoring limits and automatic cutoff), REG-02 (ventilation scheme design and airflow requirements), and REG-03 (degasification of companion seams) [agent_4_001, agent_4_002, agent_4_003]. The mine failed to comply with these regulations, contributing to the accident. The violations were causally significant, as compliance would have prevented or mitigated the accident.</p>
+
+<hr>
+
+<h2>Summary counts</h2>
+
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>combined_arguments</td>
+<td>42</td>
+</tr>
+<tr>
+<td>expert_arguments</td>
+<td>21</td>
+</tr>
+<tr>
+<td>agent_arguments</td>
+<td>21</td>
+</tr>
+<tr>
+<td>attacks_detected</td>
+<td>28</td>
+</tr>
+<tr>
+<td>supports_detected</td>
+<td>25</td>
+</tr>
+<tr>
+<td>accepted</td>
+<td>23</td>
+</tr>
+<tr>
+<td>ambiguous</td>
+<td>15</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>2</td>
+</tr>
+<tr>
+<td>preferred_extensions</td>
+<td>24</td>
+</tr>
+</tbody></table>
+
+<p>_Reproducible from run artifacts in <code>runs/kostenko_v6_20260515_144020_680602/</code>._</p>
+</body>
+</html>

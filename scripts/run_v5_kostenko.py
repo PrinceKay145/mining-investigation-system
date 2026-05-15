@@ -29,11 +29,11 @@ if str(_SRC) not in sys.path:
 
 from config import DEFAULT_KOSTENKO_KB, DEFAULT_REGULATORY_KB, LLM_PROVIDER
 from kb.store import KnowledgeBase
-from llm import RunContext, make_llm_client
+from llm import RunContext, make_role_client
 from v1_decomposition import decompose_from_json
 from v2_identification import classify
 from v3_precedent_matching import match_precedents
-from v4_agents import run_v4
+from v4_agents import build_v4_agent_clients, run_v4
 from v5_argumentation import run_v5
 
 
@@ -76,8 +76,10 @@ def main() -> None:
 
     # --- v4 (LLM: 4 agents) ---
     section("v4 — 4 specialist agents")
-    client = make_llm_client(run_context=run)
-    print(f"  Model: {client.model}")
+    v4_clients = build_v4_agent_clients(run_context=run)
+    print("  Per-agent models:")
+    for agent_id in ("agent_1", "agent_2", "agent_3", "agent_4"):
+        print(f"    {agent_id}: {v4_clients[agent_id].model}")
     print(f"  Phase 1: agents 1, 2, 4 in parallel; Phase 2: agent 3 sequentially.")
 
     v4_result = run_v4(
@@ -85,7 +87,7 @@ def main() -> None:
         classification=classif,
         match_result=match,
         kb=kb,
-        client=client,
+        clients=v4_clients,
         run=run,
     )
     print(f"\n  Agent 1 (Technical):      {len(v4_result.agent_1_arguments):2d} arguments")
@@ -101,8 +103,10 @@ def main() -> None:
 
     # --- v5 (LLM: pairwise conflict confirmation) ---
     section("v5 — Argumentation framework")
+    v5_client = make_role_client("v5_confirmation", run_context=run)
+    print(f"  Confirmation model: {v5_client.model}")
     print("  Topic filter → LLM confirmation → AF construction → semantics.")
-    v5_result = run_v5(arguments=combined, client=client, run=run)
+    v5_result = run_v5(arguments=combined, client=v5_client, run=run)
 
     print(f"\n  Attacks detected:           {len(v5_result.attack_relations):3d}")
     print(f"  Supports detected:          {len(v5_result.support_relations):3d}")

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "The mine failed to comply with REG-01 by not ensuring continuous monitoring of CH4 concentration in the longwall face, outgoing air stream, and goaf, which contributed to the accident",
+    "evidence": "Evidence from U-A1, K-A2, and D-A1 suggests that methane accumulation was a critical factor in the accident. REG-01 requires continuous monitoring of CH4 concentration, but the evidence does not indicate that this was done effectively",
+    "warrant": "The regulation requires continuous monitoring to prevent methane accumulation, which is a critical factor in methane explosions. The fact that methane accumulation was a contributing factor to the accident suggests that the mine failed to comply with this regulation",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "The mine's ventilation design did not comply with REG-02, which requires that the ventilation scheme be designed to prevent methane accumulation in sub-conveyor zones and at face-roadway junctions",
+    "evidence": "Evidence from D-A3 suggests that the ventilation scheme created a stagnant sub-conveyor zone in the lower longwall where methane could accumulate, which is not in compliance with REG-02",
+    "warrant": "The regulation requires that the ventilation scheme be designed to prevent methane accumulation, which is critical to preventing methane explosions. The fact that methane accumulation occurred in the sub-conveyor zone suggests that the mine's ventilation design did not comply with this regulation",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "The mine failed to comply with REG-03 by not ensuring that pre-drainage boreholes were drilled before longwall advance, which contributed to the accident",
+    "evidence": "Evidence from K-A2 and D-A1 suggests that the K2 seam was continuously releasing CH4 into the goaf, which could have been mitigated by pre-drainage boreholes as required by REG-03",
+    "warrant": "The regulation requires pre-drainage boreholes to be drilled before longwall advance to prevent methane release from the companion seam. The fact that methane release from the companion seam was a contributing factor to the accident suggests that the mine failed to comply with this regulation",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-07",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "The mine failed to ensure that all electrical equipment was explosion-proof as required by REG-05, which contributed to the accident",
+    "evidence": "Evidence from K-A5 suggests that electrical equipment malfunction was excluded as an ignition source, but the presence of non-explosion-proof equipment could still have contributed to the accident",
+    "warrant": "The regulation requires that all electrical equipment be explosion-proof to prevent ignition of methane-air mixtures. The fact that the accident occurred in an area with potential ignition sources suggests that the mine failed to comply with this regulation",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-03",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "The mine failed to comply with REG-06 by not ensuring that stone dusting and barrier requirements were met, which contributed to the accident",
+    "evidence": "Evidence from D-A7 and D-A9 suggests that coal dust was a primary fuel for the full-scale explosion, which could have been mitigated by adequate stone dusting and barriers as required by REG-06",
+    "warrant": "The regulation requires that stone dusting and barriers be used to prevent coal dust explosions. The fact that coal dust was a primary fuel for the explosion suggests that the mine failed to comply with this regulation",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-10",
+      "OC-05"
+    ]
+  }
+]

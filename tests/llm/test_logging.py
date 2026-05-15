@@ -107,3 +107,54 @@ def test_event_handles_path_and_set_in_kwargs(tmp_path):
     record = json.loads((rc.dir / "events.jsonl").read_text().strip())
     assert record["artifact"] == str(tmp_path / "x.json")
     assert record["tags"] == ["TC-01", "TC-02"]
+
+
+# ---------------------------------------------------------------------------
+# RunContext.resume — checkpoint/resume support
+# ---------------------------------------------------------------------------
+
+def test_resume_reopens_existing_run_without_minting_new_id(tmp_path):
+    """resume() must point at the existing dir, not create a new dir with a fresh timestamp."""
+    original = RunContext(name="kostenko_v6", base_dir=tmp_path)
+    original.event("v4_start", agents=["agent_1", "agent_2"])
+    original_run_id = original.run_id
+
+    resumed = RunContext.resume(original_run_id, base_dir=tmp_path)
+    assert resumed.run_id == original_run_id
+    assert resumed.dir == original.dir
+
+
+def test_resume_appends_to_existing_events_jsonl(tmp_path):
+    """The original event log must survive — resume() must not overwrite it."""
+    original = RunContext(name="r", base_dir=tmp_path)
+    original.event("v4_done", agent="agent_1")
+
+    resumed = RunContext.resume(original.run_id, base_dir=tmp_path)
+    resumed.event("v5_done", accepted=5)
+
+    lines = (resumed.dir / "events.jsonl").read_text().splitlines()
+    events = [json.loads(line)["event"] for line in lines]
+    # Three: v4_done (original), run_resumed (auto-emitted by resume), v5_done (post-resume)
+    assert "v4_done" in events
+    assert "run_resumed" in events
+    assert "v5_done" in events
+    # Order: v4_done first, then the resume marker, then v5_done
+    assert events.index("v4_done") < events.index("run_resumed") < events.index("v5_done")
+
+
+def test_resume_raises_on_missing_run_dir(tmp_path):
+    import pytest
+    with pytest.raises(FileNotFoundError, match="run dir not found"):
+        RunContext.resume("nonexistent_run_id_123", base_dir=tmp_path)
+
+
+def test_resume_emits_run_resumed_marker_event(tmp_path):
+    """A `run_resumed` event is auto-emitted at resume time for timeline clarity."""
+    original = RunContext(name="r", base_dir=tmp_path)
+    resumed = RunContext.resume(original.run_id, base_dir=tmp_path)
+
+    last_event = json.loads(
+        (resumed.dir / "events.jsonl").read_text().strip().splitlines()[-1]
+    )
+    assert last_event["event"] == "run_resumed"
+    assert last_event["run_id"] == original.run_id

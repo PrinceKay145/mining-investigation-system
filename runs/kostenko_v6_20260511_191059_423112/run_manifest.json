@@ -1,0 +1,73 @@
+{
+  "run_id": "kostenko_v6_20260511_191059_423112",
+  "run_dir": "runs/kostenko_v6_20260511_191059_423112",
+  "v4_agent_models_requested": {},
+  "per_role": {
+    "other": {
+      "requested_model": null,
+      "echoed_models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "call_count": 52,
+      "input_tokens": 93069,
+      "output_tokens": 7582,
+      "latency_ms_mean": 3707,
+      "latency_ms_max": 32207,
+      "retry_count": 0
+    }
+  },
+  "stage_timing": {
+    "agent_1": {
+      "started_at": "2026-05-11T19:10:59.464910",
+      "finished_at": "2026-05-11T19:11:15.453631"
+    },
+    "agent_4": {
+      "started_at": "2026-05-11T19:10:59.466779",
+      "finished_at": "2026-05-11T19:11:17.704499"
+    },
+    "agent_2": {
+      "started_at": "2026-05-11T19:10:59.465888",
+      "finished_at": "2026-05-11T19:11:18.941181"
+    },
+    "agent_3": {
+      "started_at": "2026-05-11T19:11:18.944856",
+      "finished_at": "2026-05-11T19:11:43.783977"
+    },
+    "v4": {
+      "started_at": "2026-05-11T19:10:59.462481",
+      "finished_at": "2026-05-11T19:11:43.785595"
+    },
+    "v5_pair_check": {
+      "started_at": "2026-05-11T19:12:02.032260",
+      "finished_at": "2026-05-11T19:12:07.296456"
+    },
+    "v5": {
+      "started_at": "2026-05-11T19:11:43.786278",
+      "finished_at": "2026-05-11T19:12:07.310296"
+    },
+    "v6": {
+      "started_at": "2026-05-11T19:12:07.310706",
+      "finished_at": "2026-05-11T19:12:39.717277"
+    }
+  },
+  "v5_cache_hits": 13,
+  "v5_summary": {
+    "accepted": 23,
+    "rejected": 5,
+    "ambiguous": 14,
+    "consensus": false
+  },
+  "v6_summary": {
+    "run_id": "kostenko_v6_20260511_191059_423112",
+    "v6_report": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260511_191059_423112/v6_report.json",
+    "markdown": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260511_191059_423112/report.md",
+    "html": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260511_191059_423112/report.html",
+    "graph": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260511_191059_423112/argumentation_graph.png"
+  },
+  "totals": {
+    "llm_calls": 52,
+    "input_tokens": 93069,
+    "output_tokens": 7582,
+    "upstream_429_retries": 0
+  }
+}

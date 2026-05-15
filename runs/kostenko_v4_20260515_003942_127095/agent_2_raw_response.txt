@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. U-A3 confirms multiple ignition-capable items were present at ignition location.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active mining section with known methane emissions indicates a breakdown in supervision and enforcement of underground material controls. Such items are prohibited in gassy environments due to ignition risk. Their presence reflects a systemic failure in labor discipline and safety oversight.",
+    "confidence": 0.9,
+    "cause_categories": ["OC-06"]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the longwall goaf.",
+    "evidence": "K-A2: primary methane source is K2 seam released via abutment pressure decompression zones. D-A1: K2 seam has high gas content (~15 m3/t), 3.35m below K3, weak rock layer, no borehole pre-drainage. D-A3: no borehole drainage of K2 despite known structural vulnerability.",
+    "warrant": "The K2 seam’s proximity and high gas content were known geological conditions. The absence of pre-drainage boreholes indicates a failure to recognize and mitigate a predictable methane hazard. This reflects a deficiency in project documentation and hazard planning, as required by industrial safety standards for multi-seam operations.",
+    "confidence": 0.82,
+    "cause_categories": ["OC-08", "OC-10", "TC-07"]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme was implemented despite known structural vulnerability to methane accumulation in sub-conveyor zones, indicating a failure in production control and adherence to technical documentation.",
+    "evidence": "D-A3: ventilation operated within design parameters but the 1K-N-N-vt combined scheme creates stagnant sub-conveyor zones where methane accumulates. K-A2: air velocity at floor level was 0.25 m/s — stagnant. U-A4: airflow stable but insufficient to dilute floor-level methane.",
+    "warrant": "The ventilation system was functioning as designed, but the design itself created a known hazard — stagnant zones where methane can accumulate undetected. The decision to operate under this scheme without supplemental ventilation or monitoring in high-risk zones reflects a failure in production control and a lack of adaptive risk management.",
+    "confidence": 0.78,
+    "cause_categories": ["OC-01", "OC-05"]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Failure to enforce manufacturer safety instructions for armored face conveyor operation in gassy conditions created a mechanical ignition hazard.",
+    "evidence": "K-A4: sparking from AFC chain in methane-rich zone is most probable ignition source. Manufacturer instruction section 9.2.1 requires compressed air ventilation of scraper chain when methane is present. D-A5: mechanical sparks remain most probable category.",
+    "warrant": "The manufacturer’s explicit requirement for compressed air ventilation of the scraper chain in gassy conditions was not implemented. This constitutes a violation of technical documentation and reflects a failure in supervision and operational compliance. The risk was known and preventable, yet no procedural or engineering controls were applied.",
+    "confidence": 0.75,
+    "cause_categories": ["OC-05", "OC-01"]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "Recurring organizational failure to act on precedent: despite prior methane explosion accidents linked to companion seam degasification failures, no systemic improvements were implemented to prevent recurrence.",
+    "evidence": "PREC-2021-04 (Shaktha Listvyazhnaya): gross violations of safety requirements led to methane explosion. PREC-2024 triggered Presidential instructions and legislative reforms. Yet D-A1 and K-A2 show no borehole pre-drainage of K2 seam — a known high-risk condition.",
+    "warrant": "The failure to implement degasification measures for companion seams, despite national-level reforms after a prior catastrophic explosion, indicates a systemic failure in hazard recognition and learning from precedent. Organizational memory and regulatory compliance mechanisms failed to translate lessons into site-specific risk mitigation.",
+    "confidence": 0.7,
+    "cause_categories": ["OC-10", "OC-01"]
+  }
+]

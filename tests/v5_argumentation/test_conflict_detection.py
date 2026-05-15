@@ -37,10 +37,11 @@ class FakeClient:
     two argument IDs appear in the rendered prompt.
     """
 
-    def __init__(self, responses: dict[frozenset[str], str]):
+    def __init__(self, responses: dict[frozenset[str], str], model: str = "fake-v5-model"):
         # responses: {frozenset({id_a, id_b}): json_string}
         self.responses = responses
         self.calls: list[frozenset[str]] = []
+        self.model = model  # LLMClient Protocol + v5 model-aware cache key
 
     def complete_json(self, prompt: str, schema, system=None,
                       max_tokens=None, temperature: float = 0.0):

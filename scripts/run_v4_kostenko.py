@@ -28,11 +28,11 @@ if str(_SRC) not in sys.path:
 
 from config import DEFAULT_KOSTENKO_KB, DEFAULT_REGULATORY_KB, LLM_PROVIDER
 from kb.store import KnowledgeBase
-from llm import RunContext, make_llm_client
+from llm import RunContext
 from v1_decomposition import decompose_from_json
 from v2_identification import classify
 from v3_precedent_matching import match_precedents
-from v4_agents import run_v4
+from v4_agents import build_v4_agent_clients, run_v4
 
 
 def section(title: str) -> None:
@@ -75,8 +75,10 @@ def main() -> None:
 
     # --- v4 (the LLM stage) ---
     section("v4 — calling 4 specialist agents")
-    client = make_llm_client(run_context=run)
-    print(f"  Model: {client.model}")
+    clients = build_v4_agent_clients(run_context=run)
+    print("  Per-agent models:")
+    for agent_id in ("agent_1", "agent_2", "agent_3", "agent_4"):
+        print(f"    {agent_id}: {clients[agent_id].model}")
     print("  Phase 1: agents 1, 2, 4 in parallel ...")
 
     result = run_v4(
@@ -84,7 +86,7 @@ def main() -> None:
         classification=classif,
         match_result=match,
         kb=kb,
-        client=client,
+        clients=clients,
         run=run,
     )
 

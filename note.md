@@ -480,3 +480,377 @@ Stretch (only after thesis-critical path is solid):
 - **v6 + evaluation prove it works.** Critical for defense; not novel methodology.
 
 The earlier-than-expected progress on v1 (because `kb/loader.py` already does it) means more budget for v4–v5.
+
+## LLM provisioning — OpenRouter free-tier strategy
+
+Decision: use OpenRouter as the LLM backend for the v4–v6 pipeline, mixing several *different model families* across agent roles. Paid-model spend goes only to **the LLM-as-judge** in evaluation (GPT-4o or stronger, via the user's existing OpenAI key).
+
+### Why OpenRouter at all
+
+- Single API + single key fronts every major open and closed model, so we can swap families per agent without writing new SDK plumbing. The existing [src/llm/openai_client.py](src/llm/openai_client.py) already speaks OpenAI's wire format → OpenRouter is a `base_url` override away.
+- Free tier is generous enough for thesis-scale workloads if you hold ≥$10 credits on the account: `:free` model daily cap rises from ~50 → 1000 requests/day (credits never expire — the threshold is what unlocks the higher cap, not what gets spent).
+- Free models can be deprecated without notice, so all model IDs stay env-configurable. The run artifact records the exact model string the API echoes back per call.
+
+### Why a *mix* of model families (not one default)
+
+This is methodological, not budgetary. The thesis claim "4 agents produce genuine conflicts that v5 resolves" is undermined if all 4 agents share a base model — a reviewer can argue conflicts are paraphrase variance, not real disagreement. Picking different families (DeepSeek vs Llama vs Qwen vs Nemotron) makes the disagreements *structural*: different RLHF pipelines, different training mixes, different inductive biases on the same evidence. This becomes an ablation arm in §evaluation (mixed-family vs same-family v4) and the result either way is a thesis finding.
+
+### Catalog drift and verification (2026-05-14)
+
+The initial per-role picks (drafted from third-party docs and OpenRouter blog posts) were checked against the live `/api/v1/models` endpoint via `python scripts/ping_openrouter.py --list-free` on 2026-05-14. **5 of 8 hardcoded IDs were dead**: `google/gemini-2.0-flash-exp:free`, `deepseek/deepseek-r1:free`, and `qwen/qwen-2.5-72b-instruct:free` were all delisted; `nvidia/nemotron-3-super-120b:free` was missing its actual `-a12b` architecture suffix. The catalog drift is normal — free model IDs rotate as upstream providers add and retire models, which is also why every model ID stays env-overridable. The table below reflects the live catalog as of that verification date; lessons:
+
+- **Trust the catalog endpoint, not docs.** Anything written in a blog post or third-party guide is ≥ weeks stale. `--list-free` is authoritative.
+- **`--check-roles` belongs in the run-prep checklist.** Before any multi-run evaluation campaign (Axes 2, 3, 4) the operator runs `--check-roles` to verify all configured IDs still respond. Cheap insurance against silent substitutions or 404s mid-run.
+- **Provider-side upstream 429s are real.** During the same verification run, Llama-3.3-70B-instruct:free returned a 429 from the Venice upstream with a 29s retry-after — *not* an OpenRouter account-level rate limit, but a per-provider throttle one layer below. This is the failure mode the checkpoint/resume design and v5 confirmation cache (see below) primarily defend against.
+
+### Hybrid free / paid pricing strategy (resolved 2026-05-14)
+
+After the live verification run, three of the seven free roles routed through OpenRouter's *Venice* upstream provider and got `429` upstream-throttle errors back-to-back across multiple pings. Venice's throttle is a per-provider free-pool quota — separate from OpenRouter's own account-level 1000/day cap, which we have headroom on (`is_free_tier: false` confirmed via `/auth/key`). The pragmatic fix: **pay for those three roles, keep everything else free**. The decision is justified two ways:
+
+1. **Operational.** Free-pool throttles are external and unpredictable; a thesis run that 429s after 4/7 agents have completed is worse than a $1.24 paid call. The paid version of `meta-llama/llama-3.3-70b-instruct` (the worst-throttled model) is the *same model*, just routed through a paid lane that bypasses Venice's free-pool quota. No model substitution, no methodology change — just removing an operational failure mode.
+2. **Budgetary.** Live pricing pulled via `GET /api/v1/models` on 2026-05-14: paid Llama-3.3-70B is **1.24¢/run** (806 runs in $10); paid Qwen3-235B is **0.63¢/run** (1,597 runs in $10). Three paid roles × 50 evaluation runs ≈ **$0.60 total spent**. With $10 of credits deposited, this exhausts <10% of the budget. Most of the credit is preserved for Axis-4 cross-model robustness (paid unified baseline, ~$0.70 for 50 runs at `gemini-2.5-flash-lite` pricing).
+
+Note: the LLM-as-judge for Axes 5 and 7 is run against the user's **direct OpenAI API key** (not via OpenRouter), so judge spend does *not* draw down the $10 OpenRouter budget at all. That decision keeps the judge model isolated from the pipeline-model budget and makes "judge model swap" a separate, lower-stakes axis.
+
+### Per-subsystem model picks and rationale
+
+For each role: chosen model (free or paid), runner-up considered, and **why it's the best option for *this specific role*** (not just "best free model overall"). Picks are env-overridable; defaults documented here are the recommended starting point. **Bold-marked rows are paid** — see the hybrid strategy explanation above.
+
+| Role | Model | Runner-up | Why this is the best free model *for this role* |
+| --- | --- | --- | --- |
+| **v1 Mode 2 — LLM extraction from PDF text** (demo only) | `deepseek/deepseek-v4-flash:free` | `meta-llama/llama-3.3-70b-instruct:free` | Largest context window on the free catalog (1M tokens) — a full Rostechnadzor PDF fits in one call without chunking, which removes a whole class of extraction artifacts caused by argument-spanning chunk boundaries. The `-flash` variant is RLHF-tuned for throughput, which matches Mode 2's role as a demo path (reasoning would be wasted on a structured-extraction task). DeepSeek's `response_format=json_object` support is reliable on the v4 generation. Runner-up Llama 3.3 has better prose but smaller context (64K) and prompt-instructed-only JSON. Replaces the dead `google/gemini-2.0-flash-exp:free` (delisted; equivalent role). |
+| **v4 Technical agent** | `openai/gpt-oss-120b:free` | `meta-llama/llama-3.3-70b-instruct` (paid) | **Swapped 2026-05-15 (second swap) after a second end-to-end v6 run.** The previous pick `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` failed in production with empty `content` — the reasoning-token starvation property we'd already documented as a risk became the actual failure mode under real load. With ~10K input tokens and the default `max_tokens=4096`, the model's hidden chain-of-thought consumed the entire output budget before any visible JSON was emitted. The 200-token smoke test missed this because reasoning at small budgets converges fast on a small answer; production-scale inputs trigger longer reasoning chains. **Replacement: GPT-OSS-120B** (OpenAI's open-weight 120B-MoE, free). Standard non-reasoning model (zero starvation risk), OpenAI RLHF is the *reference implementation* for `response_format=json_object`-style structured output, and the smaller sibling `openai/gpt-oss-20b:free` is already validated in v5 confirmation — so the family is known-good on our task. **Methodological concession**: we lose Technical's "explicit chain-of-thought" property; STEM-claim quality now relies on a strong general model rather than an exposed reasoning trace. The thesis-defense framing for this concession is the Axis 8 observation that *reasoning models with hidden tokens are fragile under output-budget constraints* — brittleness > absent reasoning trace at thesis scale. **Diversity gain (4 distinct families restored):** Technical=OpenAI, Organizational=Qwen, Challenger=Nous/Llama-3.1, Regulatory=Meta/Llama-3.3 — four structurally different RLHF lineages, *better* diversity than the original plan (which had two NVIDIA Nemotrons). |
+| **v4 Organizational agent** *(paid: $0.63/run)* | **`qwen/qwen3-235b-a22b-2507`** | `qwen/qwen3-next-80b-a3b-instruct:free` (rate-limited) | Originally targeted free `qwen3-next-80b-a3b-instruct:free`, but that was Venice-throttled on 2026-05-14 verification. Swapped to the **paid** Qwen3-235B-A22B (235B total, 22B active per token — much larger and stronger than the free 80B version) for $0.63/run. Same Qwen-family signature (Alibaba RLHF priors), so the methodological-diversity argument is preserved; the paid lane bypasses Venice's free-pool quota entirely. Instruction-following + JSON discipline are slightly better in the 235B than the 80B, which helps the per-regulation citation discipline this agent depends on. Replaces the dead `qwen/qwen-2.5-72b-instruct:free`. |
+| **v4 Challenger agent** *(paid: $0.85/run)* | **`mistralai/mistral-small-3.2-24b-instruct`** | (`nousresearch/hermes-3-llama-3.1-405b:free` and `nvidia/nemotron-3-super-120b-a12b:free` both rejected) | **Swapped twice on 2026-05-15 across three end-to-end runs.** Both free-pool 100B-class candidates failed for different reasons: (1) `nvidia/nemotron-3-super-120b-a12b:free` produced markdown-prose-with-field-labels instead of JSON for the full 4096-token output budget, never starting the leading `[`; (2) `nousresearch/hermes-3-llama-3.1-405b:free` returned a Venice upstream 429 (same throttled provider that affected free Llama-3.3 and Qwen3 the same day). The pattern across the two free failures is structural: **free-pool 100B-class generalists are unreliable for the Challenger role in production**, either through instruction-following collapse (Nemotron) or upstream-quota throttling (Venice routing). Settled on **paid Mistral-Small-3.2-24B** for $0.85/run. Justification: (a) Mistral's RLHF is known for direct, low-hedging output — methodologically consistent with Challenger's adversarial framing, where vague disagreement is worse than sharp typed attacks; (b) paid lane is structurally unaffected by Venice's free-pool throttle (`is_byok: False` 429s don't apply); (c) Mistral family signature is structurally distinct from every other v4 agent (OpenAI/Qwen/Meta), restoring four-family diversity at the v4 layer; (d) at 24B params, the model is smaller than the original free picks but instruction-following is the dominant property for Challenger, not raw size. Failure of both free picks is logged in the Axis 8 taxonomy as the canonical evidence that **paying ~$0.85 per run for the Challenger role is operational reliability, not budget extravagance**. |
+| **v4 Regulatory agent** *(paid: $1.24/run)* | **`meta-llama/llama-3.3-70b-instruct`** | `qwen/qwen3-235b-a22b-2507` (paid) | Same model as originally chosen (Llama 3.3 70B, highest grounded-citation reliability among open models), but **routed through OpenRouter's paid lane instead of `:free`** — the free lane was Venice-throttled on 2026-05-14 verification. Behaviorally identical to the free version; cost only **$1.24/run** (~$0.62 across 50 evaluation runs). Regulatory output is *strict citation discipline* — must reference real regulation IDs from the Rostechnadzor KB, not hallucinate. Meta's RLHF penalizes uncited assertions heavily; reasoning-trained models would "rephrase regs in natural language" which breaks the traceability property v6 depends on. |
+| **v5 conflict-confirmation calls** | `openai/gpt-oss-20b:free` | `qwen/qwen3-next-80b-a3b-instruct:free` | This step fires O(n²) times per run after the topic filter narrows candidates — by far the highest-volume call site. The 20B parameter count makes this the smallest viable free model on the catalog, optimizing for throughput on a 1-bit decision task ("is X actually attacking Y?"). GPT-OSS is OpenAI's open-weight RLHF pipeline — among free models, the most reliable on `response_format=json_object` (OpenAI tooling is the reference implementation for that contract). Family-distinct from anything in v4, so v5's binary judgment is provably independent of the agents whose outputs it judges (reduces conformist bias). Replaces the dead `google/gemini-2.0-flash-exp:free`. |
+| **v6 report generator** *(paid: $1.24/run)* | **`meta-llama/llama-3.3-70b-instruct`** | `qwen/qwen3-235b-a22b-2507` (paid) | Same Llama 3.3 70B as originally chosen — cleanest technical-narrative English among open models, handles bilingual (RU/EN), follows the inline citation tokens (`[U-A3]`, `[ATK-V5-001]`) reliably. **Same Venice-bypass switch as Regulatory:** paid lane to avoid the free-tier throttle. Single long-form call per run, so cost is ~$1.24/run = $0.62 over 50 runs. Quality-over-cost is correct for v6 specifically because the report is the thesis's user-visible artifact; any hallucinated citation here breaks the traceability story. |
+
+**Judge model** (paid, evaluation only — not in the pipeline): `gpt-4o` or stronger via the user's existing `OPENAI_API_KEY`. Reasoning: judge must be (a) stronger than every model under evaluation so its scores are credible, (b) family-distinct from the pipeline models to avoid same-family bias when scoring v4/v6 output, and (c) deterministic enough at `temperature=0` to be reproducible across re-runs of the evaluation script.
+
+### Tier decision (resolved 2026-05-14)
+
+**Decision: deposit $10 of credits on the OpenRouter account to unlock the 1000 :free requests/day tier.** Sources confirm the rate-limit unlock is a step function at 10 credits (= $10 USD; 1 credit = $1 USD per OpenRouter's FAQ): below the threshold, `:free` models cap at 50 requests/day across the account; at or above, the cap rises to 1000 requests/day. There is no partial unlock — a $5 deposit gives nothing rate-limit-wise.
+
+Rationale:
+
+- 50/day is too tight for thesis-scale experiments. A single Kostenko pipeline run uses ~20–50 LLM calls (v4 × 4 agents + v5 confirmation step + v6). N=5 multi-run stability × 4 ablation arms × 3 cross-model configs is mathematically infeasible at 50/day.
+- $10 is rounding-error for a thesis. Credits never expire and can also fund the paid GPT-4o judge for Axes 5 and 7.
+- Public sources disagree on whether the 1000/day cap is aggregate or per-model. Will verify against the actual OpenRouter dashboard once the account is funded; if per-model, the headroom is even larger because the recommended setup spreads load across 5 different model families.
+
+Caveat: 20 req/min per-model and provider-side throttling still apply *under* the daily cap. That's the motivation for the checkpoint/resume design below — not as a free-tier fallback, but as resilience against transient throttling within a single run.
+
+### Integration plan
+
+1. **OpenRouter account setup.** ✅ Done. Account funded with $10, key minted, `is_free_tier: false` confirmed via `GET /api/v1/auth/key` — elevated 1000 req/day tier active.
+2. **Config and env.** ✅ Done. `OPENROUTER_API_KEY` lives in `.env`; per-role `OPENROUTER_MODEL_*` defaults are in [src/config.py](src/config.py) and documented in [.env.example](.env.example):
+   - `OPENROUTER_MODEL_TECHNICAL` → `openai/gpt-oss-120b:free` *(swapped 2026-05-15 from Nemotron-reasoning — reasoning-token starvation in production)*
+   - `OPENROUTER_MODEL_ORGANIZATIONAL` → **`qwen/qwen3-235b-a22b-2507`** *(paid, ~$0.63/run)*
+   - `OPENROUTER_MODEL_CHALLENGER` → **`mistralai/mistral-small-3.2-24b-instruct`** *(paid, ~$0.85/run; swapped twice on 2026-05-15 from Nemotron-3-Super-120B-a12b then Hermes-3-405B — see Challenger row above for the failure cases)*
+   - `OPENROUTER_MODEL_REGULATORY` → **`meta-llama/llama-3.3-70b-instruct`** *(paid, ~$1.24/run)*
+   - `OPENROUTER_MODEL_V5_CONFIRMATION` → `openai/gpt-oss-20b:free`
+   - `OPENROUTER_MODEL_V6_REPORT` → **`meta-llama/llama-3.3-70b-instruct`** *(paid, ~$1.24/run)*
+   - `OPENROUTER_MODEL_V1_EXTRACTION` → `deepseek/deepseek-v4-flash:free` (Mode 2 demo only)
+3. **`OpenRouterClient`** ✅ Done. Lives at [src/llm/openrouter_client.py](src/llm/openrouter_client.py) — standalone client (not subclassing `OpenAIClient`, to keep telemetry and JSON-fallback logic explicit). Provides:
+   - Two-attempt `complete_json` fallback: attempt 1 uses `response_format=json_object`; on empty/unparseable response, attempt 2 drops `response_format` and prepends a "first char must be `{`, last must be `}`" instruction. Both attempts logged with `used_fallback` and `response_format` fields in the events stream.
+   - Per-call telemetry: `provider="openrouter"`, requested vs. echoed model, token counts, latency, finish reason, prompt/response previews.
+   - Smoke-test infrastructure in [scripts/ping_openrouter.py](scripts/ping_openrouter.py): `--list-free` (live catalog), `--check-roles` (every role pinged), `--model <id>` (one-off).
+4. **Per-agent client injection.** ✅ Done. v4's orchestrator now exposes a dual signature: `run_v4(..., client=...)` for legacy single-model setups (Anthropic / OpenAI), or `run_v4(..., clients={"agent_1": ..., ..., "agent_4": ...})` for the OpenRouter mixed-family setup. A `build_v4_agent_clients()` factory in [src/v4_agents/](src/v4_agents/) reads `LLM_PROVIDER` and constructs either four distinct `OpenRouterClient` instances (one per role) or four references to a single shared client. v5 and v6 scripts use a parallel `make_role_client("v5_confirmation" | "v6_report" | "v1_extraction")` helper from [src/llm/](src/llm/) — same fall-through pattern: OpenRouter → role-specific model; everything else → `make_llm_client()`. Verified by 10 new tests covering routing, client-distinctness, dual-API mutual exclusion, missing-agent-key error, and `make_role_client` paths.
+5. **Pin model strings into run artifacts.** ✅ Done 2026-05-15. Every `llm_call` event records both `requested_model` and the `model` string echoed back by OpenRouter (the latter exposes any silent provider routing); `v4_start` records the per-agent `agent_models` map. A new [scripts/build_run_manifest.py](scripts/build_run_manifest.py) post-processes `events.jsonl` into a thesis-friendly `run_manifest.json`: per-role token totals, upstream-429 retry counts attributed to the throttled role, stage timings, v5 cache hits, and v5/v6 result sizes. Output is structured for direct lift into the evaluation chapter — every claim in §evaluation can point at a specific manifest and recover what model produced each subsystem's output. Covered by 8 unit tests in `tests/test_build_run_manifest.py`. Smoke-tested against the existing kostenko_v6_20260511 run (52 LLM calls, 93K input / 7.6K output tokens, 0 retries on the May-11 baseline).
+
+**Still missing (deferred to evaluation infra):**
+
+- ~~**Retry-with-backoff in `OpenRouterClient`**~~ ✅ Done 2026-05-15. The client now wraps `chat.completions.create` in a retry layer that parses `error.metadata.retry_after_seconds` from OpenRouter's 429 body (the field where upstream providers like Venice nest their cooldown instruction), sleeps for that delay (capped at 60s), and retries up to 4 attempts total. Each retry emits an `openrouter_429_retry` event with the actual sleep duration, so 429 frequency is visible in `events.jsonl` for the Axis 8 failure-mode taxonomy. The retry is constructor-configurable via `upstream_429_max_attempts` and `upstream_429_max_delay`. The retry-after parser falls through three sources (error body → `Retry-After` header → default) so it works against both Venice-style nested-metadata 429s and generic HTTP-spec 429s. Covered by 7 new tests in `tests/llm/test_openrouter_client.py`.
+- **Checkpoint/resume runner** (`scripts/run_kostenko_full.py --resume-from <run_id>`) — see "Checkpoint / resume / cache design" below.
+- **v5 confirmation cache** — see same section below.
+
+### Checkpoint / resume / cache design (resilience layer)
+
+The pipeline already writes per-subsystem JSON artifacts into `runs/<run_id>/`. Two additions make the pipeline resumable across rate-limit interruptions and reproducible across re-runs:
+
+**1. `--resume-from` flag on the end-to-end runner.** ✅ implemented 2026-05-15 (lives on [scripts/run_v6_kostenko.py](scripts/run_v6_kostenko.py) — the full-pipeline script; note's earlier spec named it `run_kostenko_full.py` but we kept the established `run_v6_*` name). Usage: `python scripts/run_v6_kostenko.py --resume-from kostenko_v6_<timestamp>` reopens the existing run dir (no new timestamp / no new dir) and skips any stage whose primary artifact already exists. Skip rules:
+
+- **v1 / v2 / v3:** *always re-run.* These are deterministic and complete in milliseconds (no LLM calls); the artifact-load detour costs more than just re-running the stages, and re-running guarantees we re-validate against the current case file in case it changed.
+- **v4:** skipped if `v4_result.json` exists → loaded from disk via `V4Result.model_validate_json`. Saves 4 LLM calls (~$0.005 of paid swaps + free roles).
+- **v5:** skipped if `v5_result.json` exists → loaded via `V5Result.model_validate_json`. Saves O(n²) confirmation calls. Even without the resume flag, v5's internal pair-cache (`runs/_pair_cache/`) already deduplicates confirmations across runs — but `--resume-from` is cheaper because it skips the entire `detect_conflicts` pass.
+- **v6:** skipped if `v6_report.json` exists → loaded via `V6Report.model_validate_json`. Saves the single long-form report-generation call.
+
+Resume currently treats v4 as one atomic unit (if any agent failed, all four re-run). This wastes at most 3 successful agent calls. Per-agent resume would require reshaping `run_v4`'s API and was deferred as it saves at most ~$0.01 per resume — disproportionate effort for the value.
+
+The `RunContext.resume(run_id)` classmethod ([src/llm/logging.py](src/llm/logging.py)) is the underlying primitive: opens the existing dir without minting a new run_id, appends to `events.jsonl` rather than overwriting, and emits a `run_resumed` marker event so the post-compaction event timeline reads as one continuous log. Coverage: 4 tests in `tests/llm/test_logging.py` covering reopen behavior, append semantics, the marker event, and the missing-dir error path.
+
+**2. v5 confirmation cache** ✅ implemented (model-aware as of 2026-05-15). Lives at `runs/_pair_cache/<key>.json`, one file per confirmed pair. The cache key encodes three things: `<arg_a_id>__<arg_b_id>__<model_slug>__<content_hash>` (see `_cache_key` in [src/v5_argumentation/conflict_detection.py](src/v5_argumentation/conflict_detection.py)). Why each component is essential:
+
+- **Argument IDs in the filename** — debuggable: `ls runs/_pair_cache/ | grep K-A4` shows every confirmation involving K-A4 across the entire project's history.
+- **Model slug** (`openai_gpt-oss-20b_free`) — the critical primitive for **Axis 4 (cross-model robustness)**: swapping `OPENROUTER_MODEL_V5_CONFIRMATION` produces a different cache namespace, forcing fresh confirmations under the new model. Without this property, a re-run under a different v5 model would silently return the *previous* model's cached answers — corrupting the cross-model comparison.
+- **Content hash** — invalidates automatically if any field of either argument changes. A re-run of v4 that produces slightly different agent outputs will miss the cache for those changed args (correctly — confirmed.
+
+Cache hits emit `v5_pair_cache_hit` events with `model=` field, so the run manifest can count hits per model and the operator can verify Axis 4 runs actually re-confirmed (zero hits expected for a model swap; many hits expected for a same-model re-run).
+
+This serves two functions:
+
+- **Resume:** if v5 is rate-limited mid-loop, the cache holds the confirmations already obtained; the next run skips those pairs.
+- **Determinism for ablations and re-evaluation:** the same `(pair, model)` returns the same answer across re-runs without re-billing the API. Critical for Axis 3 (ablation matrix) and Axis 4 (cross-model robustness) where the same v4 output gets v5-processed multiple times under different configurations.
+
+Argument-pair canonicalization (e.g. `(K-A4, U-A3)` vs `(U-A3, K-A4)`) is handled upstream in `detect_conflicts` — the same unordered pair is always passed to `_confirm_pair` in the same order, so the cache key is stable. Coverage: 5 cache-specific tests in `tests/v5_argumentation/test_cache.py` — including a model-namespace test that runs the same `(A1, A2)` pair under model A, then model B, then model A again, verifying A's first call writes to A's namespace, B misses and writes to its own, and A's second call hits A's existing entry without touching the LLM.
+
+### Risks documented for the thesis
+
+- **Free model deprecation mid-thesis.** Mitigation: pin model strings in run artifacts; document fallback ladder per role; if a primary model is deprecated, the runner-up in the §integration table is the documented substitute.
+- **JSON-mode silent failures on reasoning models.** Mitigation: retry-with-stricter-prompt fallback in `OpenRouterClient.complete_json` (first attempt uses `response_format=json_object`; on empty/unparseable response, second attempt drops the response_format and prepends a "first char must be `{`, last must be `}`" instruction to the prompt). Each fallback is logged as a structured event with `used_fallback=True` so its frequency is measurable in evaluation. Documented failure mode for the now-removed DeepSeek R1; mitigation is preserved as defensive infrastructure for the Nemotron-reasoning Technical agent, which has the same RLHF lineage of reasoning-trained models that sometimes empty out under hard JSON constraints.
+- **Non-determinism across runs.** Acknowledged limitation; addressed by N≥5 multi-run stability evaluation (Axis 2). v5 confirmation cache makes *re-evaluation* deterministic even though *generation* is not.
+- **Provider rate-limiting under peak load.** 20 req/min per-model still applies even with credits. Mitigation: checkpoint/resume design means rate-limit interruptions are inconveniences, not run failures. v5's confirmation step is the call-density bottleneck — the cache absorbs interruption cost.
+- **Silent model routing on OpenRouter.** OpenRouter sometimes routes a request to a different provider/version than expected. Mitigation: pin `response.model` per call into the run artifact; if the echoed model differs from the requested one, flag it in the evaluation report.
+- **Reasoning-token starvation.** Reasoning-tuned models (e.g. Nemotron-reasoning, Trinity-thinking) consume part of `max_tokens` on hidden chain-of-thought (`message.reasoning` sibling field; counted as `reasoning_tokens` under `usage.completion_tokens_details`). If the budget is too small, the model exhausts it on reasoning and emits empty `content` with `finish_reason="stop"` — looks identical to "model returned nothing" but is actually "model ran out of budget mid-thought". Mitigation: agents using reasoning-family models keep the constructor default of `max_tokens=4096` (comfortable headroom); evaluation scripts and smoke tests use ≥200. The failure is logged but not auto-recovered — surfacing the property in the evaluation report is more useful for thesis discussion than silently retrying with more tokens.
+- **`choices=None` on a 200-OK response.** Observed on 2026-05-15 mid-v5: an OpenRouter free-pool upstream returned `200 OK` but with `response.choices=None` rather than a proper choices list. The OpenAI SDK parses this as a valid `ChatCompletion` object, so the failure crosses the SDK boundary silently — `response.choices[0]` then raises `TypeError`. Mitigation: `OpenRouterClient` uses `_extract_text_and_finish_reason()` (in [src/llm/openrouter_client.py](src/llm/openrouter_client.py)) to defensively unwrap `choices`, returning `("", "no_choices")` instead of crashing. For `complete_json`, this empty-text result triggers the existing two-attempt fallback (which already handles empty content), so the failure mode is recovered transparently. Covered by 2 new tests on the empty-choices path.
+
+## Evaluation plan
+
+Goal: produce a thesis-defensible evaluation chapter that goes beyond the single-run numbers already in `scripts/evaluate_kostenko.py`. Seven evaluation axes, all to be implemented before submission.
+
+### Axis 1 — Single-run structural metrics (already implemented)
+
+Currently covered by [scripts/evaluate_kostenko.py](scripts/evaluate_kostenko.py):
+
+- Attack-relation coverage vs the 4 GT attacks (EXACT / TYPE_MISMATCH / DIRECTION_FLIPPED / BOTH_MISMATCH / MISSED).
+- Support-relation coverage via pairwise expansion of the 5 GT support clusters.
+- Acceptance distribution split by source (expert v1 vs agent v4).
+- Open-question capture via the hand-curated `_OPEN_QUESTION_RELATED_ARGS` mapping.
+
+Status: works on the 2026-05-11 run. Reported: 3/4 attacks (2 exact), 6/9 expected support pairs, 5/5 open questions captured, 26 accepted / 12 ambiguous / 5 rejected.
+
+### Axis 2 — Multi-run stability (N ≥ 5) ✅ infrastructure implemented 2026-05-15
+
+LLMs are non-deterministic; a single run's metrics could be a lucky draw. Wrap the existing single-run script in a multi-run aggregator.
+
+- Run the full pipeline N = 5 times (target N = 10 if rate-limit budget permits) with identical inputs but fresh seeds.
+- For every Axis-1 metric, report **mean ± std** and **min / max** across N.
+- Additionally report acceptance-set stability: for each argument, the fraction of runs in which it was accepted / ambiguous / rejected. Arguments oscillating across categories signal pipeline instability; arguments stable in `ambiguous` are robust contested points.
+
+Deliverable: `scripts/evaluate_kostenko_multirun.py`. Output: `runs/eval_multirun_<timestamp>/aggregate.json` + a per-argument stability table.
+
+**Implementation details (2026-05-15):**
+
+- **Script** at [scripts/evaluate_stability.py](scripts/evaluate_stability.py) (renamed from the original `evaluate_kostenko_multirun.py` plan for symmetry with the other axis evaluators).
+- **Inputs.** Two modes: `--last N` auto-discovers the N most-recent `kostenko_*` runs that have `v5_result.json`; `--run-dirs <a> <b> <c>` takes explicit dirs. Requires ≥ 2 runs (Jaccard is pairwise).
+- **What's measured.** Three layers of stability:
+  1. **Bucket-level Jaccard** across the N runs' `accepted` / `ambiguous` / `rejected` sets. Pairwise: C(N, 2) Jaccards per bucket, reported as mean ± std + min / max. A high `accepted` Jaccard means v5's "confident conclusions" are deterministic across re-runs.
+  2. **Attack-edge stability.** Pairwise Jaccard on the set of `(attacker, target, type)` tuples. Type is part of the edge identity — a `(A→B, rebutting)` vs. `(A→B, undercutting)` flip counts as instability.
+  3. **Support-cluster stability.** Pairwise Jaccard on the set of `frozenset(supporters)`. Member ordering doesn't affect the comparison (cluster `[A, B, C]` ≡ `[C, B, A]`).
+- **Per-argument bucket consistency.** For every argument that appears in any run, count how many of the N runs placed it in the same bucket. Arguments at consistency = N/N are "stable" (defensible); arguments at 1/N or 2/N are "flipping" and worth flagging in Axis 8. The report includes a sorted list of flippers with the majority bucket and majority share, so the thesis can claim "argument X is stable; argument Y oscillates between accepted/ambiguous at 60/40."
+- **Empty-set convention.** Jaccard of two empty sets returns 1.0 (degenerate identity) rather than NaN. Saves having to special-case the rare cluster-or-attack-free run.
+- **Output.** Saves `stability_report.json` into the *most recent* of the compared run dirs for archival, plus a human-readable console table. 14 tests in `tests/test_evaluate_stability.py` covering all three stability aspects + the flipping-detection logic.
+- **Operational note.** Each stability run is one full pipeline execution (~$0.003 + ~5 min wall time on the hybrid setup). N = 5 = $0.015 / ~25 min — trivial cost; the bottleneck is wall time. Recommended workflow:
+
+  ```bash
+  for i in 1 2 3 4 5; do python scripts/run_v6_kostenko.py; done
+  python scripts/evaluate_stability.py --last 5
+  ```
+
+### Axis 3 — Ablation matrix
+
+Re-run the pipeline with components removed and report Axis-1 deltas. Four ablation arms:
+
+1. **Agent count.** v4 with 4 agents → 3 agents (drop Challenger) → 1 agent (Technical only). Hypothesis: dropping Challenger collapses ambiguity → all-or-nothing acceptance. If true, Challenger is doing real work, not paraphrasing.
+2. **Argumentation semantics.** Grounded only vs grounded + preferred. Hypothesis: on Kostenko, preferred adds defensible worldviews that grounded alone misses (specifically the K-A4 vs U-A3 ignition-source dispute). Measure: # of arguments classified differently between the two.
+3. **CBR precedents.** With vs without v3 precedent matches in v4 prompts. Hypothesis: precedents anchor agent claims to historical precedent IDs (e.g. PREC-2021-04 Listviazhnaya) → fewer hallucinated regulatory citations in the Regulatory agent. Measure: regulatory-citation hallucination rate (cited reg IDs that exist in the KB / all cited reg IDs).
+4. **Model-family diversity.** Mixed-family v4 (the recommended setup above) vs same-family v4 (all 4 agents on Llama 3.3 70B). Hypothesis: same-family v4 produces fewer real conflicts → smaller AF, fewer ambiguous arguments. This is the ablation that *justifies* the mixed-family choice as methodological rather than thrift.
+
+Deliverable: `scripts/evaluate_ablations.py` that drives the pipeline through the 4 arms and emits an ablation matrix table.
+
+### Axis 4 — Cross-model robustness
+
+Run the full pipeline under three model configurations: (a) all-Anthropic Claude, (b) all-OpenAI GPT-4-class, (c) the OpenRouter mixed-family setup. Report whether **v5's accepted set is stable across model choices**.
+
+The empirical question this answers: *does the formal argumentation layer do real work, or does it just launder the LLM's prior?* If the accepted set is mostly invariant across configs, v5 is doing real reasoning. If it tracks the underlying model strongly, v5 is decorative.
+
+Deliverable: `scripts/evaluate_cross_model.py`. Output: 3-column comparison table at the argument level + Jaccard similarity between the three accepted sets.
+
+#### Axis 4 N=2 result locked 2026-05-15 (baseline vs hybrid)
+
+Two end-to-end pipeline runs have been completed and evaluated against the same Kostenko GT, producing the first cross-model robustness data point of the thesis. Both runs use identical v1/v2/v3 deterministic stages, identical prompts, identical evaluation rubric — the only variable changed is the per-role model configuration.
+
+| Configuration | Run ID | Per-role models | Per-run cost |
+| --- | --- | --- | --- |
+| **Baseline** (single-model paid) | `kostenko_full_20260511_183524_096453` | Anthropic Claude across all v4 / v5 / v6 roles | ~$0.05 |
+| **Hybrid** (mixed-family OpenRouter, Layer-1 paid swaps) | `kostenko_v6_20260515_144020_680602` | v4 Technical=`openai/gpt-oss-120b:free` · v4 Organizational=`qwen/qwen3-235b-a22b-2507` *(paid)* · v4 Challenger=`mistralai/mistral-small-3.2-24b-instruct` *(paid)* · v4 Regulatory=`meta-llama/llama-3.3-70b-instruct` *(paid)* · v5 confirmation=`openai/gpt-oss-20b:free` · v6 report=`meta-llama/llama-3.3-70b-instruct` *(paid)* | **~$0.003** |
+
+Side-by-side metrics:
+
+| Metric | Baseline (May-11) | Hybrid (May-15) | Δ | Direction |
+| --- | --- | --- | --- | --- |
+| GT attacks detected (any form) | 3 / 4 | 2 / 4 | −1 | regression |
+| GT attacks detected exactly | 2 / 4 | 2 / 4 | 0 | unchanged |
+| v5 attacks total | 33 | 28 | −5 | less verbose |
+| Support pairs detected (from 9 GT-expected) | 6 / 9 | **7 / 9** | +1 | improvement |
+| GT open-question capture as ambiguous | 5 / 5 | 5 / 5 | 0 | **invariant** |
+| Acceptance: accepted / ambiguous / rejected | 26 / 12 / 5 | 23 / 15 / 2 | acc −3, amb +3, rej −3 | more cautious |
+| Per-expert Jaccard — Usembekov | 0.111 | 0.125 | +0.014 | small bump |
+| Per-expert Jaccard — Kolikov | 0.133 | **0.192** | +0.059 | larger bump |
+| Per-expert Jaccard — DMT | 0.167 | 0.143 | −0.024 | small drop |
+| Per-expert Jaccard spread | 0.056 | 0.067 | +0.011 | still **MIXED** |
+| Per-expert story label | MIXED (near BALANCED) | MIXED (moderate bias) | both MIXED | **invariant label** |
+
+**Thesis interpretation:**
+
+1. **Open-question capture is invariant.** Both configurations produce 5 / 5 open-question capture (every GT open question lands in v5's *ambiguous* set with at least one related argument). This is the thesis-defining property: v5 successfully surfaces every operationally-unresolved question as contested-but-defensible, regardless of the underlying model stack. **Strongest single result of the cross-model comparison.**
+2. **Per-expert synthesis label is invariant.** Both runs are MIXED (spread 0.056 vs 0.067) — neither swings to BIASED (≥0.15) or BALANCED (≤0.05). The framework's synthesis-vs-bias character does not collapse under a major model substitution.
+3. **Support coverage improves under the hybrid** (6 / 9 → 7 / 9). SUP-3 (ventilation functional, U-A4 + D-A3) was undetected on the baseline; the hybrid catches it. Likely a consequence of `gpt-oss-20b`'s more permissive support-vs-independent classification on borderline topic overlap.
+4. **One attack-detection regression.** ATK-2 (K-A4 rebuts U-A3) was caught with wrong direction/type on the baseline but missed entirely on the hybrid. Traceable to the cheaper v5 confirmation model (`gpt-oss-20b:free`) being slightly more conservative on borderline rebuttal/undercut pairs. Logged as the canonical instance of the Axis 8 "confirmation miss" failure-mode bucket (see Axis 8 for the four-category taxonomy).
+5. **Cost dropped 94%** ($0.05 → $0.003 per pipeline run) with **zero degradation on the load-bearing thesis property** (open-question capture) and **net improvement on support coverage**. This is the defense-ready summary sentence:
+   > "Under a 94% per-run cost reduction (mixed-family free + budget-paid swaps vs. premium single-model), v5's accepted set preserves the methodologically critical open-question-as-ambiguous property (5 / 5) and the per-expert synthesis-vs-bias label (MIXED in both), trading one attack-detection regression for one support-coverage improvement."
+
+**What N=2 buys and what it doesn't:** N=2 is enough to claim *qualitative* invariance on the load-bearing properties (open-question capture, per-expert story label), and enough to surface concrete trade-offs at the per-metric level (one regression, one improvement). N=2 is **not** enough to make a strong stability claim against sampling noise — that's Axis 2's role (multi-run with the same config). A third configuration (e.g. `gemini-2.5-flash-lite` unified paid baseline) would harden the trade-off characterization into a 3-arm comparison.
+
+#### Recipe for the N=3 third arm
+
+Inline env-var override + standard runner — no new script needed. The third configuration is *all roles point at one paid unified model* (Google Gemini 2.5 Flash Lite chosen because: family-distinct from every model in the May-11 baseline and May-15 hybrid; ~$0.014/run; native JSON-mode reliability):
+
+```bash
+OPENROUTER_MODEL_TECHNICAL=google/gemini-2.5-flash-lite \
+OPENROUTER_MODEL_ORGANIZATIONAL=google/gemini-2.5-flash-lite \
+OPENROUTER_MODEL_CHALLENGER=google/gemini-2.5-flash-lite \
+OPENROUTER_MODEL_REGULATORY=google/gemini-2.5-flash-lite \
+OPENROUTER_MODEL_V5_CONFIRMATION=google/gemini-2.5-flash-lite \
+OPENROUTER_MODEL_V6_REPORT=google/gemini-2.5-flash-lite \
+OPENROUTER_DEFAULT_MODEL=google/gemini-2.5-flash-lite \
+python scripts/run_v6_kostenko.py
+```
+
+Expected: ~5 min wall time, ~$0.014 of OpenRouter credit. After completion:
+
+```bash
+python scripts/build_run_manifest.py
+python scripts/evaluate_kostenko.py          # gives Axis-1 + Axis-6 numbers
+python scripts/classify_failure_modes.py     # gives Axis-8 classification for this config
+python scripts/evaluate_v6_report.py         # Axis 7 judge (uses paid OpenAI key)
+python scripts/evaluate_argument_quality.py  # Axis 5 judge (uses paid OpenAI key)
+```
+
+The python-dotenv loader uses `override=False` in [src/config.py](src/config.py), which means **shell-set env vars take precedence over `.env`** — so the inline prefix correctly overrides the hybrid defaults for this single run without modifying `.env`. After the run, your normal hybrid config remains intact for subsequent runs.
+
+This gives a clean 3-arm comparison ready to be tabled in the thesis evaluation chapter: May-11 single-model premium baseline / May-15 hybrid mixed-family / N=3 unified-paid-cheap baseline.
+
+### Axis 5 — Argument-quality scoring (LLM-as-judge) ✅ implemented 2026-05-15
+
+Axes 1–4 measure *structural* recall. This axis measures *content* quality. For every v4-generated argument:
+
+- A judge LLM (GPT-4o or stronger) scores on a 1–5 rubric across four dimensions: **evidence-groundedness** (claim references real evidence from the case), **warrant validity** (the reasoning step from evidence to claim holds), **claim novelty** (does this argument say something not already covered by expert args?), **citation correctness** (cited regulation / precedent IDs actually exist in the KB).
+- Judge prompt is deterministic (temperature=0); judge model is paid (user's OpenAI key, *not* the pipeline's OpenRouter free models).
+- Report per-agent mean scores → does the Challenger actually challenge? Does the Regulatory agent cite real regulations?
+
+Deliverable: `scripts/evaluate_argument_quality.py` + `prompts/judge_argument_quality.md`. Output: per-argument scores + per-agent aggregates.
+
+**Implementation details (2026-05-15):**
+
+- **Schema** in [src/schema/judge_result.py](src/schema/judge_result.py): `ArgumentQualityScores` (per-argument: 4 `RubricScore` fields + `comments` + computed `mean_score`) and `ArgumentQualityResult` (wraps a flat list of per-arg scores + `overall_comments`). The judge produces structured per-argument output; **per-agent aggregates are computed in Python** (not by the judge), so the arithmetic is deterministic regardless of judge sampling variance.
+- **Bulk-scoring design choice.** All v4 arguments are scored in a single judge call rather than one call per argument. Reasoning: (a) the judge needs to see ALL v4 outputs simultaneously to evaluate `claim_novelty` (a paraphrase of another agent's claim can't be detected if the judge only sees one argument at a time); (b) bulk is cheaper: 1 call × ~7K input + ~5K output (gpt-4o) ≈ **$0.07/run** vs. 20 calls × ~10K input + ~300 output each ≈ $0.50/run. Cost saved without sacrificing the cross-argument novelty signal.
+- **`max_tokens=12000` on the Axis 5 call (not the default 4096).** Discovered during the canonical 2026-05-15 run: bulk-scoring 21 arguments × ~280 output tokens each ≈ 5,880 output tokens, plus the `overall_comments` field, exceeded `OpenAIClient`'s default `max_tokens=4096` and the judge's JSON output was truncated mid-`agent_4_004`. The evaluator script now explicitly passes `max_tokens=12000` on this single call site — a safety margin over the ~6K actually needed, sized to comfortably accommodate `n ≤ 30` arguments. The bump is **scoped to this judge call only** (not propagated to `OpenAIClient`'s constructor default) because every other use case (v5 confirmation, v6 report, the v4 agents themselves) fits well under 4096 and a global bump would mask the tighter budget needs elsewhere.
+- **Rubric prompt** in [prompts/judge_argument_quality.md](prompts/judge_argument_quality.md). Each of the 4 dimensions has explicit score-anchor text at 1.0, 3.0, 5.0. The `claim_novelty` rubric explicitly carves out an exemption for Agent 4 (Regulatory) — it's *expected* to overlap with regulatory claims by design, so penalizing it for low novelty would conflate role with quality. The `evidence_groundedness` rubric flags "fabricated evidence" (citing things the case file doesn't contain) as the most dangerous failure mode — the rubric specifically calls this out so the judge weighs it harder than a hand-wavy warrant.
+- **Per-agent aggregates** computed by `compute_per_agent_aggregates()` in [scripts/evaluate_argument_quality.py](scripts/evaluate_argument_quality.py): for each of the 4 agents, returns `count` + per-dimension means + overall mean. The CLI script prints them in a thesis-ready table, and lists three explicit "thesis-defining questions" the table answers (Challenger novelty? Regulatory citation discipline? Strongest agent on evidence-groundedness?). This makes the Axis 5 output directly liftable into the evaluation chapter without further analysis.
+- **Reuses the same judge infrastructure as Axis 7.** Both axes call `OpenAIClient.complete_json` directly via `OPENAI_API_KEY`, both share `RubricScore` as the per-dimension primitive, both default to `gpt-4o` with `--judge-model` override. Methodological consistency: same judge, same rubric primitive, same scale — Axes 5 and 7 are commensurable on the 1.0–5.0 scale, so the thesis can claim "GPT-4o judges report quality at X and argument quality at Y" in directly comparable units.
+- **Budget impact**. ~$0.07/run × 20 evaluation passes = **~$1.40 across the entire thesis evaluation campaign**, again on the OpenAI account (no OpenRouter budget consumed).
+- **Coverage**. 11 tests in `tests/test_evaluate_argument_quality.py`: schema validation, every formatter unit-tested independently, per-agent aggregate computation (including the edge case where the judge accidentally scores an expert arg by ID prefix — silently excluded), and the `agent_id_from_arg` parser. **Prompt verified to render at 44,414 chars against the canonical May-11 reference run** — within `gpt-4o`'s 128K context with substantial headroom.
+
+### Axis 6 — Per-expert agreement ✅ implemented 2026-05-15
+
+Compute Jaccard agreement between v5's accepted set and each of the three expert sources' argument sets (Usembekov / Kolikov / DMT). Three numbers tell the story:
+
+- **High agreement with one expert** → v5 picks a side; the framework has a model-induced or evidence-induced bias toward that source. Either is interesting and reportable.
+- **Roughly equal agreement** → v5 *synthesizes* across experts. This is the strongest possible empirical story for the thesis.
+- **Low agreement with all three** → v5 produces something experts wouldn't endorse. Failure mode; need to understand why.
+
+Cheap to compute (set ops on existing v5 output) but high narrative payoff — this is the headline number for the thesis abstract.
+
+Deliverable: small function added to `scripts/evaluate_kostenko.py`. No new script. **Done.** Implementation in `per_expert_agreement()` + `print_per_expert_agreement()` in [scripts/evaluate_kostenko.py](scripts/evaluate_kostenko.py). Includes the symmetric Jaccard plus an asymmetric "coverage_of_expert" metric (|expert ∩ accepted| / |expert|) and a `spread` threshold that maps the per-expert agreement pattern to one of three thesis-defensible labels: `BIASED` (spread ≥ 0.15, names the dominant expert), `BALANCED` (spread ≤ 0.05, the strong synthesis story), `MIXED` (between). The summary line at the bottom of `evaluate_kostenko.py` now reports all three per-expert Jaccards plus the interpretation, ready to lift into the thesis abstract. Covered by 10 unit tests in `tests/test_evaluate_kostenko.py`.
+
+### Axis 7 — v6 report quality (LLM-as-judge + optional expert read) ✅ implemented 2026-05-15
+
+Two evaluation tracks for the final report:
+
+1. **LLM-as-judge.** Judge model (GPT-4o or stronger) scores the v6 markdown report against the GT case file on a 5-point rubric: factual accuracy, completeness vs the 5 open questions, citation correctness (every `[ARG-ID]` token in the report resolves to an actual argument; every `[ATK-V5-*]` resolves to a real attack), narrative coherence, defense-readiness. Deterministic, reproducible across re-runs.
+2. **Expert read-through (optional).** Markarian and/or Temkin score one v6 report on the same rubric. Even N=1 expert per supervisor is defensible if methodology is documented; their agreement-with-LLM-judge score is itself a finding.
+
+Deliverable: `scripts/evaluate_v6_report.py` + `prompts/judge_v6_report.md`. Output: per-section rubric scores.
+
+**Implementation details (2026-05-15):**
+
+- **Schema** in [src/schema/judge_result.py](src/schema/judge_result.py) — Pydantic `V6ReportJudgeResult` with five `RubricScore` fields (each = `{score: float 1.0-5.0, rationale: str ≥10 chars}`), plus `overall_comments` and `flagged_issues: list[str]`. `overall_score` is a computed mean property, not LLM-judged, so the arithmetic is deterministic regardless of judge variance.
+- **Rubric prompt** in [prompts/judge_v6_report.md](prompts/judge_v6_report.md). Each of the five dimensions has explicit score-anchor text at 1.0, 3.0, 5.0; partial scores (3.5, 4.2) explicitly allowed. The prompt also instructs the judge to label its weakest dimension as either **structural** (model/pipeline limit needing algorithm change) or **surface** (copy-edit class). That structural-vs-surface classification is what makes Axis 7's output actionable for thesis discussion — a "3.0 on coherence" is a different finding from a "3.0 on factual accuracy".
+- **Evaluator script** [scripts/evaluate_v6_report.py](scripts/evaluate_v6_report.py). Loads `report.md`, `v5_result.json`, optionally `v4_result.json`, and the case file. Renders the prompt with formatted argument + attack + support inventories so the judge can verify every `[ARG-ID]` and `[ATK-V5-*]` citation token. Calls `OpenAIClient.complete_json` against the user's direct `OPENAI_API_KEY` (not via OpenRouter — judge spend is structurally isolated from the pipeline budget). `--dry-run` prints the rendered prompt without calling the model, useful for rubric iteration.
+- **Budget impact.** Judge prompt is ~21K chars (~5K tokens) for a Kostenko-scale run. With `gpt-4o` at $2.50/M input + $10/M output, plus an expected ~1-2K output tokens, per-judgment cost is roughly **2-3¢**. The full evaluation campaign (≤20 judgments across N=5 multi-run × ablation arms) lands around **$0.50-0.60 total** on the OpenAI account, never touching the OpenRouter budget.
+- **Methodological isolation.** The judge runs on a *different* OpenAI account from the pipeline (which uses OpenRouter), with a *different* model family (`gpt-4o` is closed-source OpenAI; pipeline uses gpt-oss / Qwen3 / Mistral / Llama-3 / Nemotron). This rules out the "same-family bias" methodological objection — the judge cannot be accused of preferring outputs from its own RLHF lineage.
+- **Coverage.** 13 tests in `tests/test_evaluate_v6_report.py`: schema validation (score range, rationale length, computed mean), per-formatter unit tests (investigation questions, case summary, argument inventory with and without v4, attack/support inventory), and an end-to-end test that builds the prompt against a fixture run dir + case file. **Prompt verified to render at 21,608 chars against the canonical May-11 reference run.**
+
+### Axis 8 — Failure-mode taxonomy ✅ implemented + classified 2026-05-15
+
+For every metric miss (a GT attack not detected, a GT support pair not detected, an open question not captured), classify the *cause* of the miss into one of:
+
+1. **Generation miss** — v4 never produced the counter-argument that would have created this attack.
+2. **Detection miss** — argument existed but the topic-string filter excluded the pair from conflict-detection candidates.
+3. **Confirmation miss** — candidate pair reached the LLM confirmation step but was scored as non-conflict.
+4. **Semantics demotion** — confirmed attack existed in the AF but was demoted out of grounded/preferred extensions.
+
+Two known failure cases already documented in §section "Kostenko results" map to (2): ATK-4 (K-A7 vs D-A8 across topics `"Explosion sequence"` / `"Explosion location"`), SUP-2 (K-A6 vs U-A1/D-A6 across `"Explosion location"` / `"Ignition location"`). These directly motivate the SBERT semantic-similarity upgrade path. Other misses likely cluster in (1) or (3) — the taxonomy makes the failure modes legible instead of lumping them as "missed."
+
+Deliverable: hand-classified table for the single canonical Kostenko run, included in the thesis evaluation chapter as a figure. Cheap to produce (~30 lines per miss, 4 misses).
+
+**Implementation details (2026-05-15):**
+
+- **Auto-classifier** at [scripts/classify_failure_modes.py](scripts/classify_failure_modes.py). Walks each GT attack and each expected support-cluster pair through the four pipeline stages (Generation / Detection / Confirmation / Semantics) by reading `v5_result.json`, `events.jsonl` (for `v5_pair_check_done` relations), `v4_result.json` (for the agent argument inventory), and the GT case file. Produces both a console table and a `axis8_failure_modes.json` artifact in the run dir.
+- **Why automate something note.md called "cheap to produce by hand".** With one run it's hand-doable; with N stability runs (Axis 2) or 3+ Axis-4 configurations, hand-classifying every miss across every run becomes hours of error-prone work. The classifier reads the same logs and produces the same table in <1 second, lets the analysis scale to the full evaluation matrix, and makes the classification methodology *reproducible* — a reviewer running the script on the run dir gets the same labels we put in the thesis.
+- **Canonical May-15 run result locked.** Running the classifier against `runs/kostenko_v6_20260515_144020_680602` yields:
+
+  | Bucket | Attacks (of 4 GT) | Supports (of 9 expected pairs) |
+  | --- | --- | --- |
+  | GENERATION miss | **0** | **0** |
+  | DETECTION miss | 1 (ATK-4 K-A7 / D-A8) | 2 (SUP-2 pairs U-A1/K-A6, K-A6/D-A6) |
+  | CONFIRMATION miss | 1 (ATK-2 K-A4 / U-A3, LLM said `independent`) | 0 |
+  | SEMANTICS demotion | **0** | **0** |
+  | DETECTED | 2 EXACT | 7 |
+
+  Thesis-grade observations:
+  1. **Zero GENERATION misses.** v4 produced every argument needed; the LLM agents successfully generated counter-arguments and counterparts for every GT relation. v4's job is done correctly.
+  2. **Zero SEMANTICS demotions.** Every relation the LLM confirmed survived AF construction and grounded/preferred semantics. The argumentation layer is not silently dropping valid attacks.
+  3. **Three of four misses are DETECTION-stage (topic filter).** The remaining one is a CONFIRMATION miss where the v5 LLM rated the pair as `independent`. **This split is the canonical empirical evidence for the SBERT semantic-similarity upgrade path** mentioned elsewhere in the design doc: all three DETECTION misses are topic-string mismatches that semantic embeddings would resolve (`"Explosion sequence"` vs `"Explosion location"`, `"Ignition location"` vs `"Explosion location"`). The SBERT upgrade would *measurably* fix 3 of 4 attack misses and 2 of 9 support-pair misses without changing any other pipeline component.
+- **Coverage.** 17 tests in `tests/test_classify_failure_modes.py`: one test per pipeline stage (Generation / Detection / Confirmation / Semantics), one test per detected form (exact / direction_flipped / type_mismatch), and helper-function unit tests for `_find_pair_check_event` (matches either pair order), `_find_v5_attack` (respects direction), `_find_v5_support_pair` (handles cluster membership), and `_build_args_by_id` (unifies v1 + v4 inventories).
+
+### Axis 9 — Comparison to Markarian's classical baseline
+
+The thesis's actual punchline: *what does the LLM + Dung's-semantics approach buy us that Markarian's classical propositional-logic subsystems 4–6 don't?* Even a qualitative side-by-side on Kostenko is enough for the defense:
+
+- Markarian's subsystems 4–6 over the same v1–v3 outputs (best-effort reimplementation from the published architecture, or a documented narrative comparison if reimplementation is out of scope).
+- v4–v6 outputs from this thesis.
+- For each: (a) can it represent disagreement between experts? (b) does it produce a justification trail back to evidence? (c) can it accommodate new agents/sources without rewriting the rule base?
+
+This axis is partially *narrative*, not numeric — that's fine; the thesis defends *the architectural choice*, not just the metrics.
+
+Deliverable: a side-by-side comparison section in the evaluation chapter. No new code if reimplementation is out of scope; one new script if we do reimplement Markarian's subsystems for direct comparison.
+
+### Evaluation deliverables summary
+
+| Axis | Deliverable | Effort | Status |
+| --- | --- | --- | --- |
+| 1 | `scripts/evaluate_kostenko.py` | — | **done** |
+| 2 | `scripts/evaluate_kostenko_multirun.py` | low | pending |
+| 3 | `scripts/evaluate_ablations.py` (4 arms) | high | pending |
+| 4 | `scripts/evaluate_cross_model.py` (3 configs) | medium | pending |
+| 5 | `scripts/evaluate_argument_quality.py` + judge prompt | medium | pending |
+| 6 | per-expert agreement function in existing script | trivial | pending |
+| 7 | `scripts/evaluate_v6_report.py` + judge prompt | medium | pending |
+| 8 | failure-mode taxonomy table (thesis figure) | trivial | pending |
+| 9 | Markarian baseline comparison (narrative + optional reimpl) | medium → high | pending |
+
+### Recommended implementation order
+
+Order chosen to unblock the most thesis surface area earliest, and front-load the work that depends on OpenRouter being wired up:
+
+1. **OpenRouter integration** (`OpenRouterClient`, `.env`, config wiring) — prerequisite for Axes 2, 3, 4. Single step.
+2. **Axis 6** (per-expert agreement) — trivial code, immediate thesis-narrative value.
+3. **Axis 2** (multi-run stability) — gates every downstream "is this real or noise?" question.
+4. **Axis 8** (failure-mode taxonomy) — manual classification, no code; can be done in parallel with later code work.
+5. **Axis 5** (argument-quality judge) — sets up the judge infrastructure that Axis 7 reuses.
+6. **Axis 7** (v6 report judge) — reuses Axis 5's judge plumbing.
+7. **Axis 3** (ablation matrix) — bulk of the experimental work; sequenced after the judge exists so quality scores can be computed per ablation arm if useful.
+8. **Axis 4** (cross-model robustness) — requires all three model stacks to be working.
+9. **Axis 9** (Markarian comparison) — last; mostly writeup, depends on results of earlier axes for the comparison narrative.

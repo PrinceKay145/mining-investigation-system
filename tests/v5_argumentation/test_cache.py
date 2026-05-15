@@ -36,18 +36,37 @@ def _arg(arg_id: str, topic: str = "X", claim: str = "claim") -> Argument:
 
 def test_cache_key_is_stable_for_same_content():
     a, b = _arg("A1"), _arg("A2")
-    assert _cache_key(a, b) == _cache_key(a, b)
+    assert _cache_key(a, b, "m1") == _cache_key(a, b, "m1")
 
 
 def test_cache_key_changes_when_argument_content_changes():
     a, b = _arg("A1", claim="original"), _arg("A2")
     a_modified = _arg("A1", claim="MODIFIED")
-    assert _cache_key(a, b) != _cache_key(a_modified, b)
+    assert _cache_key(a, b, "m1") != _cache_key(a_modified, b, "m1")
 
 
 def test_cache_key_includes_argument_ids():
     a, b = _arg("A1"), _arg("A2")
-    assert _cache_key(a, b).startswith("A1__A2__")
+    assert _cache_key(a, b, "m1").startswith("A1__A2__")
+
+
+def test_cache_key_changes_when_model_changes():
+    """Different models must produce different cache keys (Axis 4 prep)."""
+    a, b = _arg("A1"), _arg("A2")
+    assert _cache_key(a, b, "openai/gpt-oss-20b:free") != _cache_key(
+        a, b, "google/gemini-2.5-flash-lite"
+    )
+
+
+def test_cache_key_slugifies_model_for_filesystem_safety():
+    """Model IDs with `/` and `:` are flattened to `_` so they fit in filenames."""
+    a, b = _arg("A1"), _arg("A2")
+    key = _cache_key(a, b, "openai/gpt-oss-20b:free")
+    # The forward-slash and colon must not appear in the key
+    assert "/" not in key
+    assert ":" not in key
+    # And the slugged form should be embedded
+    assert "openai_gpt-oss-20b_free" in key
 
 
 # ---------------------------------------------------------------------------
@@ -155,3 +174,40 @@ def test_cache_none_disables_caching(tmp_path):
     detect_conflicts(args, client2, RunContext(name="r2", base_dir=tmp_path),
                      cache_dir=None)
     assert len(client2.calls) == 1  # called again, no cache
+
+
+def test_cache_namespaces_by_model(tmp_path):
+    """
+    Axis 4 prep: same args confirmed by model A should NOT return cached
+    answers when re-run under model B. Each model gets its own namespace.
+    """
+    args = [_arg("A1"), _arg("A2")]
+    cache_dir = tmp_path / "pair_cache"
+
+    # First confirmation under model A
+    client_a = FakeClient(
+        {frozenset({"A1", "A2"}): _resp("rebutting")},
+        model="openai/gpt-oss-20b:free",
+    )
+    detect_conflicts(args, client_a, RunContext(name="r1", base_dir=tmp_path),
+                     cache_dir=cache_dir)
+    assert len(client_a.calls) == 1
+
+    # Re-run with same args + same cache_dir, but DIFFERENT model →
+    # should miss the cache and call the new client
+    client_b = FakeClient(
+        {frozenset({"A1", "A2"}): _resp("support")},  # different answer for B
+        model="google/gemini-2.5-flash-lite",
+    )
+    detect_conflicts(args, client_b, RunContext(name="r2", base_dir=tmp_path),
+                     cache_dir=cache_dir)
+    assert len(client_b.calls) == 1, "model B should not have hit model A's cache"
+
+    # And running model A AGAIN should hit ITS cache (not model B's)
+    client_a_again = FakeClient(
+        {},  # would raise KeyError if called
+        model="openai/gpt-oss-20b:free",
+    )
+    detect_conflicts(args, client_a_again, RunContext(name="r3", base_dir=tmp_path),
+                     cache_dir=cache_dir)
+    assert client_a_again.calls == [], "model A's own cache should still hit"

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "The explosive methane cloud originated from continuous seepage of the K2 companion seam into the sub‑conveyor zone of longwall 48K3‑Z, where ventilation was locally insufficient to dilute the gas.",
+    "evidence": "K-A2 reports floor‑level CH4 up to 17.9 % at section 140 and stagnant air velocity of 0.25 m/s; D-A1 describes K2 seam thickness, CH4 content (~15 m³/t) and lack of pre‑drainage boreholes; U-A4 shows overall ventilation rates were stable, indicating the problem was local rather than system‑wide.",
+    "warrant": "High measured CH4 concentrations together with very low local airflow demonstrate that methane released from the K2 seam accumulated in the sub‑conveyor dead‑space. Because the main ventilation fan was operating within design parameters, the only plausible pathway for such a high local concentration is the geometrical stagnation zone created by the 1K‑N‑N‑vt scheme, matching the known behaviour of companion‑seam gas migration.",
+    "confidence": 0.88,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The ignition energy was supplied by mechanical sparking of the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor zone.",
+    "evidence": "K-A5 documents witness reports of visible sparks from the AFC chain (Protocols 35,37,42,43) and confirms that chain sparking is a known ignition mechanism (16 % of Russian explosions); K-A4 excludes electrical sources; U-A3 lists other possible sources but their presence (angle grinder, aerosol can) is not corroborated by post‑event forensic traces, whereas AFC chain operation was recorded at 02:29 when power was cut.",
+    "warrant": "Mechanical chain sparking can generate temperatures >1500 °C, sufficient to ignite a CH4‑air mixture at concentrations above the LEL. The coincidence of the spark reports, the location of the methane pocket, and the timing of the power cut strongly link the AFC chain to the ignition event, outweighing less‑direct evidence for other items.",
+    "confidence": 0.81,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Explosion type",
+    "claim": "The primary explosion was a methane deflagration; the subsequent large‑scale blast was amplified by secondary coal‑dust ignition, but methane provided the initial over‑pressure and flame front.",
+    "evidence": "K-A6 places the epicentre in the upper longwall at 02:43 with seismic signatures typical of a gas explosion; K-A8 shows miners remained conscious after the shock, inconsistent with a pure coal‑dust explosion; D-A7 argues for a dust‑driven propagation, which is compatible with a secondary dust explosion following the methane flash; CO sensor spikes (U-A1, D-A6) indicate solid‑material combustion concurrent with methane burn.",
+    "warrant": "A methane flash can generate a pressure wave that lifts settled coal dust, creating a combustible dust cloud that then detonates. The early seismic event, the timing of the 99.99 % CH4 reading (K-A7), and the survival of personnel support a methane‑initiated event, while the observed extensive damage along conveyor routes and dust deposits confirm a secondary dust contribution.",
+    "confidence": 0.79,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "Overall ventilation performance met design specifications, but the combined 1K‑N‑N‑vt scheme created a stagnant sub‑conveyor pocket that allowed methane to reach explosive limits.",
+    "evidence": "U-A4 shows stable airflow readings (incoming 1943 m³/min, outgoing 1507 m³/min) and no sudden failure; D-A3 notes that the scheme “creates structural vulnerability to methane accumulation in sub‑conveyor zones”; K-A2 measurements of 0.25 m/s air speed in the same zone confirm stagnation.",
+    "warrant": "When the bulk ventilation is adequate, local dead‑spaces can still develop if the airflow pattern bypasses them. The measured low velocity and high CH4 concentration in the sub‑conveyor area demonstrate that the ventilation design, while globally compliant, failed to provide sufficient dilution locally, satisfying the definition of a ventilation inadequacy (TC‑06) for that zone.",
+    "confidence": 0.84,
+    "cause_categories": ["TC-06"]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Gas-dynamic event",
+    "claim": "No sudden outburst or rapid pressure drop preceded the ignition; the methane release was gradual and driven by seam decompression rather than a seismic‑induced gas‑dynamic event.",
+    "evidence": "K-A1 reports atmospheric pressure change of only +1.1 % (below the >1 % rapid drop threshold); D-A2 shows no spike in CH4 levels before 02:24; K-A8 and K-A9 attribute the seismic signatures to the explosion itself, not to a pre‑existing outburst.",
+    "warrant": "A genuine gas‑dynamic outburst would appear as a sharp, high‑amplitude CH4 surge in SCADA data and be correlated with a rapid external pressure change. The absence of such signatures, together with the timing of the seismic events after the CO spike, indicates that the gas release was a slow seep from the K2 seam, not a dynamic outburst.",
+    "confidence": 0.86,
+    "cause_categories": ["TC-08"]
+  }
+]

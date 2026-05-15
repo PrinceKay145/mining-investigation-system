@@ -1,0 +1,485 @@
+{
+  "scores": [
+    {
+      "arg_id": "agent_1_001",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A2, D-A1, and U-A4, all of which are verifiable and traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant logically connects the evidence of methane concentration and airflow to the claim of methane accumulation, with a clear reasoning chain."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument synthesizes multiple sources to provide a detailed explanation of methane accumulation, adding depth to existing claims."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, TC-07) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence grounding and correct citations make this argument robust.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_1_002",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A4, U-A3, and other sources, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links mechanical sparking to methane ignition, supported by historical data and eyewitness reports."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "While the claim is well-argued, it overlaps with existing expert arguments, offering limited new insights."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category TC-02 is correctly cited and relevant to the argument."
+      },
+      "comments": "Excellent evidence and warrant, but novelty is slightly limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_1_003",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A8, K-A6, and other sources, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant logically connects the evidence to the claim, though the distinction between methane and coal dust contributions could be clearer."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a nuanced view of explosion dynamics, adding depth to existing discussions."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, TC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and correct citations, with a well-reasoned warrant.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_1_004",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by D-A3, U-A4, and K-A2, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively explains the localized ventilation failure, supported by evidence."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The claim overlaps with existing discussions but provides a specific focus on micro-environment failures."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category TC-06 is correctly cited and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_1_005",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1, D-A6, K-A6, and other sources, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant logically connects the sequence of events, though some assumptions about timing are not fully supported."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a detailed sequence of events, adding depth to existing discussions."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, TC-02, TC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and correct citations, with a well-reasoned sequence of events.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_2_001",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1 and U-A3, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links the presence of ignition-capable materials to organizational failures."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on organizational failures contributing to ignition."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category OC-06 is correctly cited and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel organizational perspective.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_2_002",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A2, D-A1, and D-A3, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links degasification failures to methane release, supported by evidence."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on organizational failures in degasification planning."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (OC-09, OC-10, OC-08) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel organizational perspective.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_2_003",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by D-A3, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant logically connects ventilation design flaws to methane accumulation, though the term 'failure' may be misleading."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing discussions but provides a specific focus on documentation compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (OC-05, OC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and correct citations, though novelty is somewhat limited.",
+      "mean_score": 4.375
+    },
+    {
+      "arg_id": "agent_2_004",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1 and D-A5, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links supervision failures to unauthorized work activities."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on supervision failures contributing to ignition."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (OC-01, OC-02) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel organizational perspective.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_2_005",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by D-A7 and D-A9, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links coal dust accumulation to explosion propagation, supported by evidence."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on organizational failures in dust control."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (OC-01, TC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel organizational perspective.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_2_006",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by PREC-2024-01, K-A7, and D-A1, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant logically connects past incidents to current failures, though the link to specific controls could be clearer."
+      },
+      "claim_novelty": {
+        "score": 4.5,
+        "rationale": "The argument provides a novel perspective on learning from past incidents."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (OC-10, OC-03) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and novelty, with a well-reasoned warrant.",
+      "mean_score": 4.625
+    },
+    {
+      "arg_id": "agent_3_001",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1, D-A5, U-A3, and K-A4, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant effectively questions the angle grinder's role as the ignition source, supported by evidence."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on the uncertainty of the ignition source."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category TC-02 is correctly cited and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel perspective on ignition uncertainty.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_3_002",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A8, K-A7, D-A9, K-A6, U-A1, and D-A6, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.0,
+        "rationale": "The warrant effectively questions the dominance of coal dust in the explosion, supported by evidence."
+      },
+      "claim_novelty": {
+        "score": 4.0,
+        "rationale": "The argument provides a new perspective on the relative contributions of methane and coal dust."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, TC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, with a novel perspective on explosion dynamics.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_3_003",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by D-A3 and agent_1_004, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 3.5,
+        "rationale": "The warrant questions the term 'functional ventilation failure,' though the distinction between design and operational failure could be clearer."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing discussions but provides a specific focus on terminology."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category TC-06 is correctly cited and relevant to the argument."
+      },
+      "comments": "Strong evidence, though the warrant and novelty are somewhat limited.",
+      "mean_score": 4.25
+    },
+    {
+      "arg_id": "agent_3_004",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A2, D-A1, K-A7, and D-A2, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 3.5,
+        "rationale": "The warrant acknowledges the K2 seam as a primary source but suggests other sources without strong evidence."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing discussions but provides a specific focus on potential additional sources."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "The cause category TC-01 is correctly cited and relevant to the argument."
+      },
+      "comments": "Strong evidence, though the warrant and novelty are somewhat limited.",
+      "mean_score": 4.25
+    },
+    {
+      "arg_id": "agent_3_005",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by agent_1_005, U-A1, D-A6, K-A6, K-A7, and K-A8, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 3.5,
+        "rationale": "The warrant questions the sequence of events, though the evidence for timing and interactions is not fully conclusive."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing discussions but provides a specific focus on sequence plausibility."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, TC-02, TC-10) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence, though the warrant and novelty are somewhat limited.",
+      "mean_score": 4.25
+    },
+    {
+      "arg_id": "agent_4_001",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1, U-A4, and REG-01, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links methane monitoring non-compliance to the accident."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing regulatory discussions but provides a specific focus on compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-01, OC-01) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_4_002",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A2, D-A3, and REG-02, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links ventilation design non-compliance to methane accumulation."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing regulatory discussions but provides a specific focus on compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-06, OC-05) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_4_003",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by K-A2, D-A1, and REG-03, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links degasification non-compliance to methane release."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing regulatory discussions but provides a specific focus on compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-07, OC-01) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_4_004",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by U-A1, K-A4, and REG-05, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links equipment certification non-compliance to ignition."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing regulatory discussions but provides a specific focus on compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-02, OC-06) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    },
+    {
+      "arg_id": "agent_4_005",
+      "evidence_groundedness": {
+        "score": 5.0,
+        "rationale": "The evidence is well-supported by D-A7, D-A9, and REG-06, all traceable to the case file."
+      },
+      "warrant_validity": {
+        "score": 4.5,
+        "rationale": "The warrant effectively links dust control non-compliance to the secondary explosion."
+      },
+      "claim_novelty": {
+        "score": 3.5,
+        "rationale": "The argument overlaps with existing regulatory discussions but provides a specific focus on compliance."
+      },
+      "citation_correctness": {
+        "score": 5.0,
+        "rationale": "All cause categories cited (TC-10, OC-05) are correct and relevant to the argument."
+      },
+      "comments": "Strong evidence and warrant, though novelty is somewhat limited.",
+      "mean_score": 4.5
+    }
+  ],
+  "overall_comments": "The Technical agent produced the strongest arguments overall, with high scores in evidence-groundedness and warrant validity. The Challenger agent produced the weakest arguments, with lower scores in claim novelty and warrant validity due to overlapping discussions and less conclusive evidence.",
+  "per_agent_aggregates": {
+    "agent_1": {
+      "label": "Technical",
+      "count": 5,
+      "mean_evidence_groundedness": 5.0,
+      "mean_warrant_validity": 4.3,
+      "mean_claim_novelty": 3.8,
+      "mean_citation_correctness": 5.0,
+      "overall_mean": 4.525
+    },
+    "agent_2": {
+      "label": "Organizational",
+      "count": 6,
+      "mean_evidence_groundedness": 5.0,
+      "mean_warrant_validity": 4.333333333333333,
+      "mean_claim_novelty": 4.0,
+      "mean_citation_correctness": 5.0,
+      "overall_mean": 4.583333333333333
+    },
+    "agent_3": {
+      "label": "Challenger",
+      "count": 5,
+      "mean_evidence_groundedness": 5.0,
+      "mean_warrant_validity": 3.7,
+      "mean_claim_novelty": 3.7,
+      "mean_citation_correctness": 5.0,
+      "overall_mean": 4.35
+    },
+    "agent_4": {
+      "label": "Regulatory",
+      "count": 5,
+      "mean_evidence_groundedness": 5.0,
+      "mean_warrant_validity": 4.5,
+      "mean_claim_novelty": 3.5,
+      "mean_citation_correctness": 5.0,
+      "overall_mean": 4.5
+    }
+  },
+  "judge_model": "gpt-4o"
+}

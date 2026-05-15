@@ -30,8 +30,15 @@ from dataclasses import dataclass
 
 from pydantic import ValidationError
 
+from config import (
+    LLM_PROVIDER,
+    OPENROUTER_MODEL_CHALLENGER,
+    OPENROUTER_MODEL_ORGANIZATIONAL,
+    OPENROUTER_MODEL_REGULATORY,
+    OPENROUTER_MODEL_TECHNICAL,
+)
 from kb.store import KnowledgeBase
-from llm import LLMClient
+from llm import LLMClient, OpenRouterClient, make_llm_client
 from llm.logging import RunContext
 from prompts import load_prompt
 from schema.argument import Argument
@@ -50,7 +57,14 @@ from v4_agents.context import (
     format_regulatory_requirements,
 )
 
-__all__ = ["run_v4", "V4Result", "AgentRunFailure"]
+__all__ = [
+    "run_v4",
+    "build_v4_agent_clients",
+    "V4Result",
+    "AgentRunFailure",
+]
+
+_AGENT_IDS = ("agent_1", "agent_2", "agent_3", "agent_4")
 
 
 # ---------------------------------------------------------------------------
@@ -182,17 +196,70 @@ def _run_agent(
 # Orchestrator
 # ---------------------------------------------------------------------------
 
+def build_v4_agent_clients(
+    *,
+    run_context: RunContext | None = None,
+) -> dict[str, LLMClient]:
+    """
+    Build the per-agent LLM client map for `run_v4(..., clients=...)`.
+
+    Selection logic:
+      - `LLM_PROVIDER == "openrouter"`: each agent gets its own
+        `OpenRouterClient` with the role-specific model pulled from the
+        `OPENROUTER_MODEL_{TECHNICAL,ORGANIZATIONAL,CHALLENGER,REGULATORY}`
+        env vars. This is the mixed-family setup (see note.md "LLM
+        provisioning") — the four agents argue with structurally different
+        priors, which is the methodological point of the diversity claim.
+      - Any other provider ("anthropic", "openai"): a single shared client
+        is constructed via `make_llm_client()` and assigned to all four
+        agents. Per-role differentiation isn't supported for those providers
+        (their pricing is uniform across a single model anyway).
+
+    `run_context` is forwarded to each client so per-call telemetry lands in
+    the same `events.jsonl`.
+
+    Returns:
+        dict keyed by `"agent_1"`, `"agent_2"`, `"agent_3"`, `"agent_4"`.
+    """
+    if LLM_PROVIDER == "openrouter":
+        return {
+            "agent_1": OpenRouterClient(
+                model=OPENROUTER_MODEL_TECHNICAL, run_context=run_context,
+            ),
+            "agent_2": OpenRouterClient(
+                model=OPENROUTER_MODEL_ORGANIZATIONAL, run_context=run_context,
+            ),
+            "agent_3": OpenRouterClient(
+                model=OPENROUTER_MODEL_CHALLENGER, run_context=run_context,
+            ),
+            "agent_4": OpenRouterClient(
+                model=OPENROUTER_MODEL_REGULATORY, run_context=run_context,
+            ),
+        }
+
+    shared = make_llm_client(run_context=run_context)
+    return {agent_id: shared for agent_id in _AGENT_IDS}
+
+
 def run_v4(
     *,
     case: CaseFile,
     classification: ClassificationResult,
     match_result: PrecedentMatchResult,
     kb: KnowledgeBase,
-    client: LLMClient,
+    client: LLMClient | None = None,
+    clients: dict[str, LLMClient] | None = None,
     run: RunContext,
 ) -> V4Result:
     """
     Run the four specialist agents and return their parsed argument sets.
+
+    Client selection — pass exactly one of:
+      - `client`: a single `LLMClient` used for all four agents (legacy
+        single-model setup; works for Anthropic / OpenAI).
+      - `clients`: a `dict[agent_id, LLMClient]` for per-agent assignment.
+        Use `build_v4_agent_clients()` to construct this for the OpenRouter
+        mixed-family setup.
 
     Sequence:
         1. Build the shared context (formatted strings from v1/v2/v3 outputs
@@ -205,10 +272,33 @@ def run_v4(
         4. Save the combined V4Result to `runs/<run_id>/v4_result.json`.
 
     Raises:
+        ValueError: if neither or both of `client` / `clients` are provided,
+            or if `clients` is missing any of the four agent keys.
         AgentRunFailure: if any agent fails parsing/validation. The raw
-        response is persisted as an artifact regardless.
+            response is persisted as an artifact regardless.
     """
-    run.event("v4_start", case_arguments=len(case.arguments))
+    if (client is None) == (clients is None):
+        raise ValueError(
+            "run_v4 requires exactly one of `client` (single LLMClient for all "
+            "four agents) or `clients` (dict[agent_id, LLMClient] for per-agent "
+            "assignment via build_v4_agent_clients())."
+        )
+
+    if clients is None:
+        clients = {agent_id: client for agent_id in _AGENT_IDS}
+    else:
+        missing = set(_AGENT_IDS) - clients.keys()
+        if missing:
+            raise ValueError(
+                f"run_v4 `clients` dict is missing entries for: {sorted(missing)}. "
+                f"Expected keys: {_AGENT_IDS}."
+            )
+
+    run.event(
+        "v4_start",
+        case_arguments=len(case.arguments),
+        agent_models={a: clients[a].model for a in _AGENT_IDS},
+    )
 
     # --- Shared context for all agents ---
     base_context = {
@@ -235,15 +325,15 @@ def run_v4(
     with ThreadPoolExecutor(max_workers=3) as pool:
         f1 = pool.submit(
             _run_agent,
-            agent_id="agent_1", client=client, run=run, context_vars=base_context,
+            agent_id="agent_1", client=clients["agent_1"], run=run, context_vars=base_context,
         )
         f2 = pool.submit(
             _run_agent,
-            agent_id="agent_2", client=client, run=run, context_vars=base_context,
+            agent_id="agent_2", client=clients["agent_2"], run=run, context_vars=base_context,
         )
         f4 = pool.submit(
             _run_agent,
-            agent_id="agent_4", client=client, run=run, context_vars=agent_4_context,
+            agent_id="agent_4", client=clients["agent_4"], run=run, context_vars=agent_4_context,
         )
         a1 = f1.result()
         a2 = f2.result()
@@ -258,7 +348,7 @@ def run_v4(
         "agent_4_arguments": format_agent_arguments(a4),
     }
     a3 = _run_agent(
-        agent_id="agent_3", client=client, run=run, context_vars=agent_3_context,
+        agent_id="agent_3", client=clients["agent_3"], run=run, context_vars=agent_3_context,
     )
 
     # --- Persist combined result ---

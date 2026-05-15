@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "K",
+    "topic": "Methane source",
+    "claim": "The explosive methane that ignited the accident originated from continuous release of CH4 from the K2 seam into the goaf and sub‑conveyor zone, where inadequate ventilation allowed concentrations to reach the explosive limit.",
+    "evidence": "K‑A2 (K2 seam release and decompression zones), D‑A1 (K2 seam continuously releasing CH4 near 48K3‑Z), D‑A3 (ventilation scheme created stagnant sub‑conveyor zone despite adequate overall airflow).",
+    "warrant": "The combination of a nearby high‑CH4 seam, the absence of dedicated degasification boreholes, and the low‑velocity pocket in the sub‑conveyor area explains why methane accumulated to near‑100 % in the ignition zone.",
+    "confidence": 0.88,
+    "cause_categories": [
+      "TC-01",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "U",
+    "topic": "Ignition source",
+    "claim": "The ignition was most likely a mechanical spark from the armored face conveyor (AFC) chain operating in the methane‑rich sub‑conveyor zone, possibly assisted by the nearby angle grinder or flammable aerosol.",
+    "evidence": "U‑A3 (multiple ignition‑capable items present at the site), U‑A1 (angle grinder, aerosol can, synthetic oil found at the ignition location), K‑A4 (witness reports of sparking during conveyor operation), D‑A5 (analysis excludes electrical, self‑ignition and chemical resin, leaving mechanical sparks as the probable cause).",
+    "warrant": "The presence of a running conveyor with documented sparking, the location of ignition‑capable items, and the CO signature indicating solid‑material combustion together show that a mechanical spark supplied the ignition energy for the methane‑air mixture.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "D",
+    "topic": "Explosion type",
+    "claim": "The accident progressed from an initial methane deflagration to a coal‑dust explosion, with coal dust serving as the primary fuel that propagated the blast over several kilometres.",
+    "evidence": "D‑A7 (five‑stage sequence: gas fire → methane deflagration → initial dust explosion → full‑scale coal dust explosion), D‑A9 (explosion covered 4+ km, destruction pattern consistent with dust explosion), K‑A7 (first explosion displaced 99.99 % CH4, indicating methane deflagration), K‑A8 (video shows workers breathing after shock wave, inconsistent with a coal‑dust‑only explosion).",
+    "warrant": "The spatial progression and long‑range propagation along conveyor routes, together with the lack of immediate CO poisoning, demonstrate that coal dust, not methane, dominated the explosive fuel after the initial methane ignition.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "D",
+    "topic": "Ventilation",
+    "claim": "Although overall ventilation met design flow rates, the specific combined ventilation scheme created a stagnant sub‑conveyor zone where methane accumulated to explosive levels, contributing to the accident.",
+    "evidence": "D‑A3 (ventilation adequate but combined scheme caused structural vulnerability to methane accumulation in sub‑conveyor zones), K‑A2 (high methane concentration in sub‑conveyor zone with low airflow 0.25 m/s), D‑A8 (no sudden gas outburst; methane levels normal except localized accumulation).",
+    "warrant": "The measured airflow (2572 m3/min) satisfied design, yet the geometry of the 1K‑N‑N‑vt scheme left a low‑velocity pocket where methane released from K2 could not be diluted, allowing concentrations to reach the explosive limit near the ignition point.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06"
+    ]
+  }
+]

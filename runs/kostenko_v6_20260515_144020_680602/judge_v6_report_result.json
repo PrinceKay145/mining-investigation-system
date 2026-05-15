@@ -1,0 +1,30 @@
+{
+  "factual_accuracy": {
+    "score": 4.0,
+    "rationale": "The report aligns well with the ground-truth facts, accurately identifying the methane source and ignition mechanism. However, it does not address the role of seismic activity, which is part of the ground-truth questions."
+  },
+  "completeness": {
+    "score": 3.0,
+    "rationale": "The report addresses most open questions, such as the cause of the explosion and methane source, but it does not explicitly engage with the role of seismic activity or propose measures to prevent similar accidents."
+  },
+  "citation_correctness": {
+    "score": 4.5,
+    "rationale": "Most citations resolve correctly to the argument inventory, supporting claims about ignition sources and methane accumulation. However, there are a few instances where citations like [TC-01] and [PREC-2021-04] are not in the provided inventory."
+  },
+  "narrative_coherence": {
+    "score": 3.5,
+    "rationale": "The report generally follows a logical structure, but transitions between sections could be more explicit. The narrative sometimes feels like a list of conclusions rather than a cohesive story."
+  },
+  "defense_readiness": {
+    "score": 3.0,
+    "rationale": "The report is mostly ready for filing but requires an editing pass to improve narrative flow and ensure all regulatory violations are clearly linked to the accident's causation."
+  },
+  "overall_comments": "The report's strongest dimension is factual accuracy, with most claims aligning with the ground truth. Its weakest dimension is completeness, as it misses addressing all open questions. This weakness is structural, requiring more thorough engagement with the investigation questions.",
+  "flagged_issues": [
+    "[TC-01] and [PREC-2021-04] do not exist in the argument inventory",
+    "Role of seismic activity not addressed",
+    "Measures to prevent similar accidents not proposed"
+  ],
+  "overall_score": 3.6,
+  "judge_model": "gpt-4o"
+}

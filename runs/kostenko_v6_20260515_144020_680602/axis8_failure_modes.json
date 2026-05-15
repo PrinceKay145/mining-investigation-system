@@ -1,0 +1,196 @@
+{
+  "run_id": "kostenko_v6_20260515_144020_680602",
+  "attacks": [
+    {
+      "gt_id": "ATK-1",
+      "gt_attacker": "U-A3",
+      "gt_target": "D-A5",
+      "gt_type": "rebutting",
+      "llm_relation": "rebutting",
+      "llm_rationale": "Argument A asserts a specific external ignition source, while Argument B concludes the ignition source is unknown, directly contradicting each other\u2019s conclusions.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "ATK-V5-001"
+    },
+    {
+      "gt_id": "ATK-2",
+      "gt_attacker": "K-A4",
+      "gt_target": "U-A3",
+      "gt_type": "rebutting",
+      "llm_relation": "independent",
+      "llm_rationale": "Both arguments address the same topic but attribute ignition to different sources; neither directly undermines the other's evidence or reasoning, so they are independent.",
+      "stage": "confirmation_miss",
+      "reason": "LLM classified pair as 'independent' instead of attack; expected 'rebutting'"
+    },
+    {
+      "gt_id": "ATK-3",
+      "gt_attacker": "D-A9",
+      "gt_target": "K-A8",
+      "gt_type": "rebutting",
+      "llm_relation": "rebutting",
+      "llm_rationale": "Argument A concludes methane was the primary fuel, while Argument B concludes coal dust was the primary fuel; the two conclusions are directly incompatible and cannot both be true.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "ATK-V5-012"
+    },
+    {
+      "gt_id": "ATK-4",
+      "gt_attacker": "K-A7",
+      "gt_target": "D-A8",
+      "gt_type": "undercutting",
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair (attacker topic='Explosion sequence', target topic='Explosion location')",
+      "attacker_topic": "Explosion sequence",
+      "target_topic": "Explosion location"
+    }
+  ],
+  "supports": [
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "U-A2",
+        "K-A3"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently conclude that spontaneous combustion is excluded, each providing separate evidence and warrants that reinforce the same conclusion.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-001"
+    },
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "U-A2",
+        "D-A4"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently conclude that spontaneous combustion was excluded as an ignition source, using different but consistent evidence and warrants, thereby reinforcing each other.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-003"
+    },
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "K-A3",
+        "D-A4"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently conclude that spontaneous combustion is excluded, each providing separate evidence (lab classification and CO/H2 monitoring for A; goaf CO monitoring for B) that reinforce",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-010"
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "U-A1",
+        "K-A6"
+      ],
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair ('Ignition location' vs 'Explosion location')",
+      "topics": [
+        "Ignition location",
+        "Explosion location"
+      ]
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "U-A1",
+        "D-A6"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments conclude the initial ignition occurred in the upper part of longwall 48K3-Z near sections 142\u2011145, each providing independent evidence (physical inspection vs. CO sensor data) that rein",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-002"
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "K-A6",
+        "D-A6"
+      ],
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair ('Explosion location' vs 'Ignition location')",
+      "topics": [
+        "Explosion location",
+        "Ignition location"
+      ]
+    },
+    {
+      "gt_cluster_id": "SUP-3",
+      "gt_cluster_topic": "Ventilation technically functional before accident",
+      "pair": [
+        "U-A4",
+        "D-A3"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments agree that the ventilation system was operating within acceptable limits; A rules out a sudden failure, while B explains how the design scheme could still allow methane buildup, reinfor",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-005"
+    },
+    {
+      "gt_cluster_id": "SUP-4",
+      "gt_cluster_topic": "K2 seam was the primary methane source",
+      "pair": [
+        "K-A2",
+        "D-A1"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments attribute the methane at the ignition location to the K2 seam, providing complementary evidence that reinforces the same conclusion.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-009"
+    },
+    {
+      "gt_cluster_id": "SUP-5",
+      "gt_cluster_topic": "No sudden gas outburst occurred",
+      "pair": [
+        "K-A1",
+        "D-A2"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments conclude that no significant gas outburst occurred; A rules out pressure as a cause, while B observes no outburst in the data, reinforcing the same overall conclusion.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-007"
+    }
+  ],
+  "summary": {
+    "attacks_total": 4,
+    "attacks_detected": 2,
+    "supports_total": 9,
+    "supports_detected": 7,
+    "by_stage": {
+      "GENERATION": {
+        "attacks": 0,
+        "supports": 0
+      },
+      "DETECTION": {
+        "attacks": 1,
+        "supports": 2
+      },
+      "CONFIRMATION": {
+        "attacks": 1,
+        "supports": 0
+      },
+      "SEMANTICS": {
+        "attacks": 0,
+        "supports": 0
+      },
+      "DETECTED": {
+        "attacks": 2,
+        "supports": 7
+      }
+    }
+  }
+}

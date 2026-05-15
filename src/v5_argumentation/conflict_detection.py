@@ -74,20 +74,40 @@ def topic_filter(arguments: list[Argument]) -> list[tuple[Argument, Argument]]:
 # Step 2 — LLM confirmation (per pair)
 # ---------------------------------------------------------------------------
 
-def _cache_key(arg_a: Argument, arg_b: Argument) -> str:
+def _slugify_model(model: str) -> str:
     """
-    Stable cache key based on content hash.
+    Make a model ID filesystem-safe by replacing `/` and `:` with `_`.
 
-    Includes a hash suffix so the cache invalidates automatically if any
-    field of either argument changes — protects against stale hits when
-    v4 produces different agent outputs in a re-run.
+    Example: `openai/gpt-oss-20b:free` → `openai_gpt-oss-20b_free`.
+    """
+    return model.replace("/", "_").replace(":", "_")
+
+
+def _cache_key(arg_a: Argument, arg_b: Argument, model: str) -> str:
+    """
+    Stable cache key based on (model, content hash).
+
+    The cache key includes both:
+      - a content hash of both arguments — so any change to either
+        argument's fields invalidates the entry (no stale hits when v4
+        produces different agent outputs in a re-run);
+      - the LLM model string that confirmed the pair — so the same
+        `(arg_a, arg_b)` pair confirmed by gpt-oss-20b does **not** return
+        a cached gpt-oss-20b answer when the configured model is, say,
+        gemini-2.5-flash. Each model gets its own cache namespace.
+
+    The model-namespace property is the critical primitive for Axis 4
+    (cross-model robustness): swapping `OPENROUTER_MODEL_V5_CONFIRMATION`
+    forces fresh confirmations under the new model, exactly what the
+    cross-model comparison requires.
     """
     content = json.dumps(
         [arg_a.model_dump(), arg_b.model_dump()],
         sort_keys=True, ensure_ascii=False,
     )
     h = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
-    return f"{arg_a.id}__{arg_b.id}__{h}"
+    model_slug = _slugify_model(model)
+    return f"{arg_a.id}__{arg_b.id}__{model_slug}__{h}"
 
 
 def _cache_get(cache_dir: Path | None, key: str) -> ConflictDetectionResponse | None:
@@ -125,13 +145,14 @@ def _confirm_pair(
     and persist the response. The cache key is content-hash based so changes
     to argument content invalidate the cache automatically.
     """
-    key = _cache_key(arg_a, arg_b)
+    key = _cache_key(arg_a, arg_b, client.model)
     cached = _cache_get(cache_dir, key)
     if cached is not None:
         run.event(
             "v5_pair_cache_hit",
             arg_a=arg_a.id, arg_b=arg_b.id,
             relation=cached.relation,
+            model=client.model,
         )
         return cached
 

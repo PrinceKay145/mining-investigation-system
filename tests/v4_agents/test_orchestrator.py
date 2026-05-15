@@ -19,7 +19,7 @@ from llm.client import CompletionResult
 from llm.logging import RunContext
 from v2_identification import classify
 from v3_precedent_matching import match_precedents
-from v4_agents import run_v4, AgentRunFailure
+from v4_agents import build_v4_agent_clients, run_v4, AgentRunFailure
 
 
 # ---------------------------------------------------------------------------
@@ -32,10 +32,11 @@ class FakeClient:
     which agent's prompt was rendered (each prompt has a unique role line).
     """
 
-    def __init__(self, responses: dict[str, str]):
+    def __init__(self, responses: dict[str, str], model: str = "fake-model"):
         # responses maps agent_id -> JSON string the model "returned"
         self.responses = responses
         self.calls: list[dict] = []  # records each call for assertion
+        self.model = model  # LLMClient Protocol requires `.model`
 
     def complete(self, prompt: str, system=None, max_tokens=None, temperature: float = 1.0) -> CompletionResult:
         # Match on the system-role prefix — unambiguous even when other
@@ -332,3 +333,119 @@ def test_run_v4_strips_code_fences(setup):
         client=client, run=setup.run,
     )
     assert len(result.agent_1_arguments) == 2
+
+
+# ---------------------------------------------------------------------------
+# Per-agent client injection (clients= API)
+# ---------------------------------------------------------------------------
+
+def _make_four_fake_clients_by_agent() -> dict[str, FakeClient]:
+    """Build four distinct FakeClient instances, each tagged with its own model."""
+    return {
+        agent_id: FakeClient(
+            responses={agent_id: _make_response(agent_id)},
+            model=f"{agent_id}-model",
+        )
+        for agent_id in ("agent_1", "agent_2", "agent_3", "agent_4")
+    }
+
+
+def test_run_v4_clients_dict_routes_each_agent_to_its_own_client(setup):
+    """With clients=, each agent must call its own dedicated client (and only that one)."""
+    clients = _make_four_fake_clients_by_agent()
+    run_v4(
+        case=setup.case, classification=setup.classification,
+        match_result=setup.match_result, kb=setup.kb,
+        clients=clients, run=setup.run,
+    )
+    # Each per-agent fake should have been called exactly once, with its own agent_id
+    for agent_id, fake in clients.items():
+        assert len(fake.calls) == 1, f"{agent_id} client should be called exactly once"
+        assert fake.calls[0]["agent"] == agent_id
+
+
+def test_run_v4_logs_agent_models_in_v4_start_event(setup):
+    """v4_start event records each agent's model, supporting cross-model-robustness Axis 4."""
+    clients = _make_four_fake_clients_by_agent()
+    run_v4(
+        case=setup.case, classification=setup.classification,
+        match_result=setup.match_result, kb=setup.kb,
+        clients=clients, run=setup.run,
+    )
+    import json
+    events = [
+        json.loads(line) for line in (setup.run.dir / "events.jsonl").read_text().splitlines()
+    ]
+    v4_start = next(e for e in events if e["event"] == "v4_start")
+    assert v4_start["agent_models"] == {
+        "agent_1": "agent_1-model",
+        "agent_2": "agent_2-model",
+        "agent_3": "agent_3-model",
+        "agent_4": "agent_4-model",
+    }
+
+
+def test_run_v4_rejects_passing_both_client_and_clients(setup):
+    fake = FakeClient({a: _make_response(a) for a in ("agent_1", "agent_2", "agent_3", "agent_4")})
+    clients = _make_four_fake_clients_by_agent()
+    with pytest.raises(ValueError, match="exactly one"):
+        run_v4(
+            case=setup.case, classification=setup.classification,
+            match_result=setup.match_result, kb=setup.kb,
+            client=fake, clients=clients, run=setup.run,
+        )
+
+
+def test_run_v4_rejects_passing_neither_client_nor_clients(setup):
+    with pytest.raises(ValueError, match="exactly one"):
+        run_v4(
+            case=setup.case, classification=setup.classification,
+            match_result=setup.match_result, kb=setup.kb,
+            run=setup.run,
+        )
+
+
+def test_run_v4_rejects_clients_dict_missing_agent_key(setup):
+    clients = _make_four_fake_clients_by_agent()
+    del clients["agent_3"]
+    with pytest.raises(ValueError, match="missing entries"):
+        run_v4(
+            case=setup.case, classification=setup.classification,
+            match_result=setup.match_result, kb=setup.kb,
+            clients=clients, run=setup.run,
+        )
+
+
+# ---------------------------------------------------------------------------
+# build_v4_agent_clients factory
+# ---------------------------------------------------------------------------
+
+def test_build_v4_agent_clients_shares_one_client_for_anthropic(monkeypatch):
+    monkeypatch.setattr("v4_agents.LLM_PROVIDER", "anthropic")
+    monkeypatch.setattr("llm.client.ANTHROPIC_API_KEY", "dummy")
+    clients = build_v4_agent_clients()
+    # Single shared client → all four references point at the same instance
+    distinct_instances = {id(c) for c in clients.values()}
+    assert len(distinct_instances) == 1
+    assert set(clients.keys()) == {"agent_1", "agent_2", "agent_3", "agent_4"}
+
+
+def test_build_v4_agent_clients_one_per_agent_for_openrouter(monkeypatch):
+    """Under LLM_PROVIDER=openrouter, each agent gets its own client with its role's model."""
+    monkeypatch.setattr("v4_agents.LLM_PROVIDER", "openrouter")
+    monkeypatch.setattr("llm.openrouter_client.OPENROUTER_API_KEY", "dummy")
+    monkeypatch.setattr("v4_agents.OPENROUTER_MODEL_TECHNICAL", "model-tech")
+    monkeypatch.setattr("v4_agents.OPENROUTER_MODEL_ORGANIZATIONAL", "model-org")
+    monkeypatch.setattr("v4_agents.OPENROUTER_MODEL_CHALLENGER", "model-chal")
+    monkeypatch.setattr("v4_agents.OPENROUTER_MODEL_REGULATORY", "model-reg")
+
+    clients = build_v4_agent_clients()
+
+    # Four distinct instances
+    distinct_instances = {id(c) for c in clients.values()}
+    assert len(distinct_instances) == 4
+    # Each agent got its role-specific model
+    assert clients["agent_1"].model == "model-tech"
+    assert clients["agent_2"].model == "model-org"
+    assert clients["agent_3"].model == "model-chal"
+    assert clients["agent_4"].model == "model-reg"

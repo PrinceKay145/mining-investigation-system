@@ -45,17 +45,29 @@ def section(title: str) -> None:
 # ---------------------------------------------------------------------------
 
 def find_most_recent_run() -> Path:
-    """Locate the most recent runs/kostenko_full_*/ that has a v5_result.json."""
+    """
+    Locate the most recent Kostenko run that has a v5_result.json.
+
+    Matches any directory under `runs/` whose name starts with `kostenko_`
+    — covers both the legacy `kostenko_full_*` naming and the current
+    `kostenko_v6_*` produced by `scripts/run_v6_kostenko.py`. Excludes
+    private dirs like `_pair_cache/`.
+    """
     if not RUNS_DIR.is_dir():
         raise FileNotFoundError(f"No runs directory at {RUNS_DIR}")
     candidates = sorted(
-        (p for p in RUNS_DIR.glob("kostenko_full_*") if (p / "v5_result.json").is_file()),
+        (
+            p for p in RUNS_DIR.iterdir()
+            if p.is_dir()
+            and p.name.startswith("kostenko_")
+            and (p / "v5_result.json").is_file()
+        ),
         key=lambda p: p.stat().st_mtime,
         reverse=True,
     )
     if not candidates:
         raise FileNotFoundError(
-            f"No kostenko_full_* run with v5_result.json in {RUNS_DIR}"
+            f"No kostenko_* run with v5_result.json in {RUNS_DIR}"
         )
     return candidates[0]
 
@@ -299,6 +311,122 @@ def print_open_question_coverage(rep: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Axis 6 — Per-expert agreement (Jaccard with Usembekov / Kolikov / DMT)
+# ---------------------------------------------------------------------------
+
+# Expert-source ID prefixes for the three Kostenko commission reports.
+# See note.md "Kostenko knowledge base" section for the full per-expert
+# argument inventory.
+_EXPERT_PREFIXES: dict[str, str] = {
+    "U-": "Usembekov",
+    "K-": "Kolikov",
+    "D-": "DMT",
+}
+
+
+def _expert_from_id(arg_id: str) -> str | None:
+    """Return the expert source name for an argument ID, or None if it's an agent ID."""
+    for prefix, name in _EXPERT_PREFIXES.items():
+        if arg_id.startswith(prefix):
+            return name
+    return None
+
+
+def per_expert_agreement(v5: dict, case: dict) -> dict:
+    """
+    Compute Jaccard agreement between v5's accepted set and each expert source.
+
+    Three stats per expert:
+      - `jaccard` = |X ∩ A| / |X ∪ A| (symmetric agreement, the headline metric)
+      - `coverage_of_expert` = |X ∩ A| / |X| (what fraction of this expert's
+        args did v5 accept? — asymmetric, easier to interpret)
+      - per-bucket counts (accepted / ambiguous / rejected for this expert's args)
+
+    The Jaccard *spread* (max - min across the three experts) tells the
+    thesis story: large spread = v5 aligns with one expert (bias); small
+    spread = v5 synthesizes across experts (the strong story).
+    """
+    accepted = set(v5["accepted"])
+    ambiguous = set(v5["ambiguous"])
+    rejected = set(v5["rejected"])
+
+    expert_args: dict[str, set[str]] = {name: set() for name in _EXPERT_PREFIXES.values()}
+    for arg in case["arguments"]:
+        expert = _expert_from_id(arg["id"])
+        if expert is not None:
+            expert_args[expert].add(arg["id"])
+
+    rows = []
+    for expert, expert_set in expert_args.items():
+        intersection = expert_set & accepted
+        union = expert_set | accepted
+        jaccard = len(intersection) / len(union) if union else 0.0
+        coverage = len(intersection) / len(expert_set) if expert_set else 0.0
+        rows.append({
+            "expert": expert,
+            "expert_arg_count": len(expert_set),
+            "accepted_count": len(intersection),
+            "ambiguous_count": len(expert_set & ambiguous),
+            "rejected_count": len(expert_set & rejected),
+            "jaccard": jaccard,
+            "coverage_of_expert": coverage,
+        })
+
+    jaccards = [r["jaccard"] for r in rows if r["expert_arg_count"] > 0]
+    spread = max(jaccards) - min(jaccards) if jaccards else 0.0
+    return {
+        "rows": rows,
+        "spread": spread,
+        "interpretation": _interpret_spread(spread, rows),
+    }
+
+
+def _interpret_spread(spread: float, rows: list[dict]) -> str:
+    """Map per-expert Jaccard spread to one of three thesis-defensible stories."""
+    if not rows or all(r["expert_arg_count"] == 0 for r in rows):
+        return "NO_EXPERTS — no expert-sourced arguments in this case file"
+    if spread >= 0.15:
+        max_row = max(rows, key=lambda r: r["jaccard"])
+        return (
+            f"BIASED — v5 aligns most strongly with {max_row['expert']} "
+            f"(Jaccard={max_row['jaccard']:.2f}); spread={spread:.2f}"
+        )
+    if spread <= 0.05:
+        return (
+            "BALANCED — v5 synthesizes across experts "
+            f"(Jaccard differences within {spread:.2f})"
+        )
+    return f"MIXED — partial synthesis with some bias (spread={spread:.2f})"
+
+
+def print_per_expert_agreement(rep: dict) -> None:
+    section("Per-expert agreement (Axis 6)")
+    print()
+    print(
+        f"  {'Expert':<12}  {'Args':>4}  {'Accept':>6}  {'Ambig':>6}  "
+        f"{'Reject':>6}  {'Coverage':>9}  {'Jaccard':>8}"
+    )
+    print(
+        f"  {'-'*12}  {'-'*4}  {'-'*6}  {'-'*6}  {'-'*6}  {'-'*9}  {'-'*8}"
+    )
+    for r in rep["rows"]:
+        if r["expert_arg_count"] == 0:
+            continue
+        print(
+            f"  {r['expert']:<12}  {r['expert_arg_count']:>4}  "
+            f"{r['accepted_count']:>6}  {r['ambiguous_count']:>6}  "
+            f"{r['rejected_count']:>6}  "
+            f"{r['coverage_of_expert']*100:>8.1f}%  {r['jaccard']:>8.3f}"
+        )
+    print()
+    print(f"  Jaccard spread (max - min):  {rep['spread']:.3f}")
+    print(f"  Story:                       {rep['interpretation']}")
+    print()
+    print("  Coverage = |expert ∩ accepted| / |expert|")
+    print("  Jaccard  = |expert ∩ accepted| / |expert ∪ accepted|")
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -336,6 +464,9 @@ def main() -> None:
     oq_rep = open_question_coverage(v5, case)
     print_open_question_coverage(oq_rep)
 
+    pea_rep = per_expert_agreement(v5, case)
+    print_per_expert_agreement(pea_rep)
+
     # --- Final summary ---
     section("Summary")
     print(f"  Attack coverage:       {attack_rep['detected']}/{attack_rep['gt_count']} "
@@ -344,6 +475,11 @@ def main() -> None:
           f"{support_rep['total_pairs_expected']} expected pairs detected")
     print(f"  Open-question capture: {oq_rep['captured']}/{oq_rep['total']} captured "
           f"as ambiguous")
+    print(f"  Per-expert Jaccard:    " + ", ".join(
+        f"{r['expert']}={r['jaccard']:.2f}" for r in pea_rep["rows"]
+        if r["expert_arg_count"] > 0
+    ))
+    print(f"  ({pea_rep['interpretation']})")
     print(f"  Acceptance:            "
           f"{acc_rep['expert_dist']['accepted'] + acc_rep['agent_dist']['accepted']} accepted, "
           f"{acc_rep['expert_dist']['ambiguous'] + acc_rep['agent_dist']['ambiguous']} ambiguous, "

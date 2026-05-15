@@ -46,6 +46,41 @@ class RunContext:
         self._events_path: Path = self.dir / "events.jsonl"
         self._logger: logging.Logger = self._build_logger(log_level or DEFAULT_LOG_LEVEL)
 
+    @classmethod
+    def resume(
+        cls,
+        run_id: str,
+        base_dir: Path | None = None,
+        log_level: str | None = None,
+    ) -> "RunContext":
+        """
+        Reopen an existing run for resumed execution.
+
+        Unlike `__init__`, this does NOT mint a new `run_id` or create a
+        new directory. The existing `events.jsonl` is appended to (not
+        overwritten), so the resumed run's timeline reads as one continuous
+        log with the original execution.
+
+        Used by `run_v6_kostenko.py --resume-from <run_id>` when an earlier
+        run was interrupted (e.g. by a sustained upstream 429) and the
+        operator wants to pick up at the first missing stage artifact
+        rather than redoing the entire pipeline.
+
+        Raises:
+            FileNotFoundError: if the run directory doesn't exist.
+        """
+        rc = cls.__new__(cls)
+        rc.run_id = run_id
+        rc.dir = (base_dir or RUNS_DIR) / run_id
+        if not rc.dir.is_dir():
+            raise FileNotFoundError(
+                f"Cannot resume — run dir not found: {rc.dir}"
+            )
+        rc._events_path = rc.dir / "events.jsonl"
+        rc._logger = rc._build_logger(log_level or DEFAULT_LOG_LEVEL)
+        rc.event("run_resumed", run_id=run_id)
+        return rc
+
     # -- public API ---------------------------------------------------------
 
     @property

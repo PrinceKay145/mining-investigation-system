@@ -1,0 +1,83 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be brought into a high-methane zone, directly enabling a mechanical or chemical ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. U-A3: multiple ignition-capable items present at ignition location. D-A5: no evidence of resin use or angle grinder use at location, but physical presence confirmed.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active longwall with known methane emissions constitutes a clear violation of underground safety protocols. This indicates a breakdown in supervision and enforcement of labor discipline, as such items should have been prohibited and inspected out before entry. The recurrence of such violations suggests systemic failure in pre-shift checks and ongoing monitoring.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06",
+      "TC-02",
+      "TC-04"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Degasification planning",
+    "claim": "Failure to implement pre-drainage of the K2 companion seam constituted a critical organizational failure in hazard control planning, allowing uncontrolled methane release into the longwall goaf.",
+    "evidence": "K-A2: K2 seam identified as primary methane source due to abutment pressure; D-A1: no borehole pre-drainage of K2 seam despite 15 m3/t gas content; gas drainage system captured only 34.1% CH4 at perimeter wall. D-A3: no borehole drainage of K2 despite known structural vulnerability.",
+    "warrant": "The absence of pre-drainage boreholes for a high-gas companion seam directly contradicts standard degasification practices in high-risk environments. This reflects a failure in project documentation compliance (OC-05) and hazard identification (OC-10), as the risk was foreseeable and documented in geological data. Management decisions likely prioritized production over proactive degasification, accepting latent risk.",
+    "confidence": 0.82,
+    "cause_categories": [
+      "OC-08",
+      "OC-10",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme was structurally inadequate for the geological conditions, indicating a failure in technical documentation compliance and hazard assessment, allowing methane accumulation in stagnant sub-conveyor zones.",
+    "evidence": "D-A3: ventilation operated within design parameters but created stagnant sub-conveyor zones; 1K-N-N-vt combined ventilation scheme creates structural vulnerability; air velocity at floor 0.25 m/s (stagnant); K-A2: methane concentrations 1.2–17.9% at floor level in sections 128–142.",
+    "warrant": "While ventilation met nominal flow requirements, the design failed to address localized stagnation where methane accumulated. This indicates that the technical documentation (ventilation passport) did not account for real-world flow dynamics or companion seam risks, a failure in both hazard identification (OC-10) and project documentation (OC-08). The system prioritized average readings over localized safety, enabling explosive conditions.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "OC-08",
+      "OC-10",
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Persistent presence of prohibited materials and unreported equipment damage indicates a systemic failure in production control and internal safety supervision (proizvodstvennyy kontrol), allowing hazardous conditions to persist unchecked.",
+    "evidence": "U-A1: angle grinder, flammable aerosol, synthetic oil, and chemical ampoules found underground; D-A5: damaged shearer (external teeth missing, mount sheared) with no record of repair or reporting.",
+    "warrant": "The failure to detect and remove prohibited ignition sources and to report critical equipment damage reflects a collapse in routine supervision. Production control (OC-01) requires continuous monitoring and corrective action. The accumulation of such violations suggests a culture where safety checks are ritualized rather than effective, consistent with patterns seen in PREC-2021-04 (Shakhta Listvyazhnaya).",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-01",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "The failure to recognize and mitigate the combined hazard of K2 seam methane release and conveyor sparking risk in stagnant zones reflects a critical deficit in hazard identification and risk communication.",
+    "evidence": "K-A4: sparking from AFC chain in methane-rich zone; K-A2: methane accumulation in sub-conveyor zone due to K2 seam release; D-A3: no borehole drainage of K2; manufacturer instruction 9.2.1 requires compressed air ventilation of scraper chain when methane is present.",
+    "warrant": "The manufacturer’s instruction explicitly requires mitigation when methane is present, yet no such measures were implemented. This indicates that the hazard was either not recognized or not communicated to operating personnel. The organizational system failed to integrate technical guidance into operational procedures, a failure in hazard recognition (OC-10) and training (OC-03).",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-10",
+      "OC-03"
+    ]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Naryad-dopusk compliance",
+    "claim": "The unauthorized use of an angle grinder and presence of flammable materials suggest work was conducted without proper naryad-dopusk authorization and safety briefing, violating procedural compliance systems.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can and synthetic oil bottle present; no documentation of hot work or chemical use at location.",
+    "warrant": "The use of ignition-capable tools and substances in a gassy environment requires formal work permits (naryad-dopusk) with risk assessment and controls. Their undocumented presence implies either unauthorized work or falsification of work records, indicating a breakdown in the naryad system (OC-02). This procedural failure enabled direct ignition risk to materialize.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "OC-02",
+      "OC-06"
+    ]
+  }
+]

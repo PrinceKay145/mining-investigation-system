@@ -4,8 +4,11 @@ __pycache__/
 *.pyc
 .faiss/
 outputs/
-runs/
+# runs/  # NOT ignored — run artifacts ARE committed so the thesis writer
+        #  (LLM or human) can read every per-run JSON / report / event log.
 .pytest_cache/
 *.db
 .DS_Store
 CLAUDE.md
+.claude/  # Claude Code local state (settings, scheduled tasks)
+.vscode/  # IDE-local preferences

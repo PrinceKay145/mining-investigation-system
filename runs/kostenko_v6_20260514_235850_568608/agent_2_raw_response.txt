@@ -1,0 +1,73 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling a mechanical or chemical ignition source.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. U-A3 confirms multiple ignition-capable items were present at ignition location.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active mining section with known methane accumulation constitutes a clear violation of underground safety protocols. This indicates a systemic failure in supervision and enforcement of labor discipline, as such items should have been detected and removed during entry checks or routine inspections. The recurrence of similar violations in precedent case PREC-2021-04 (Shakhta Listvyazhnaya) suggests persistent organizational weakness in this area.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06",
+      "TC-02",
+      "TC-04"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the goaf and longwall area.",
+    "evidence": "K-A2: primary methane source is K2 seam released via abutment pressure decompression; D-A1: no borehole pre-drainage of K2 despite 15 m3/t gas content; 3.35m separation and weak rock layer increase risk; D-A3: ventilation adequate but structurally unable to dilute sub-conveyor methane accumulation.",
+    "warrant": "The K2 seam’s high gas content and proximity to K3 were known geological conditions. The lack of pre-drainage boreholes indicates either a failure to identify this hazard during planning (OC-10) or a decision to proceed without adequate mitigation, likely due to cost or production pressures. This represents a critical gap in project documentation and risk assessment processes, especially given that undrained companion seams are a recognized hazard in Russian coal mining (as seen in PREC-2021-04).",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-08",
+      "OC-09",
+      "OC-10",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme, while operating within design parameters, was inherently flawed in its ability to prevent methane accumulation in sub-conveyor zones, indicating a failure in technical documentation compliance and hazard anticipation.",
+    "evidence": "D-A3: 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone; air velocity at floor 0.25 m/s; methane concentrations up to 17.9% at floor level in sections 128-142; design airflow met but local stagnation unaddressed.",
+    "warrant": "Although ventilation was functioning as designed, the design itself failed to account for localized methane accumulation risks in low-velocity zones beneath conveyors. This reflects a systemic issue in project documentation (OC-08) — the ventilation plan did not incorporate mitigation for known accumulation risks despite guidance on scraper chain ventilation (K-A4 cites manufacturer instruction 9.2.1). The persistence of such flawed designs across Russian mines suggests organizational inertia in updating technical standards.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-05",
+      "OC-08",
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Insufficient production control (proizvodstvennyy kontrol) failed to detect and prevent unauthorized work activities and the presence of ignition sources, allowing hazardous conditions to develop unchecked.",
+    "evidence": "U-A1: angle grinder with 6 used disks found; U-A3: equipment running at time of accident; D-A5: damaged shearer with missing teeth and sheared mount; no evidence of work permits or supervision logs for hot work or maintenance in the area.",
+    "warrant": "The use of an angle grinder (requiring hot work authorization) and the operation of damaged equipment indicate a breakdown in the mandatory production control system. Under Russian industrial safety rules, such activities require formal work permits (naryad-dopusk) and supervision. The absence of documented oversight implies either non-enforcement or falsification of records. This aligns with OC-01, the most frequently cited organizational failure in mining accidents, and mirrors the 'gross violations' cited in PREC-2021-04.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-01",
+      "OC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Explosion sequence",
+    "claim": "Failure to control coal dust accumulations along conveyor routes enabled the transition from a localized methane fire to a full-scale propagating coal dust explosion, indicating a systemic failure in housekeeping and hazard monitoring.",
+    "evidence": "D-A7: coal dust accumulations observed on conveyor lines; D-A9: explosion propagated over 4+ km along conveyor routes, including fresh-air side; slate barrier activated; destruction pattern consistent with dust explosion.",
+    "warrant": "Coal dust accumulation to explosive levels (≥100 g/m²) is a preventable condition requiring regular cleaning and stone dusting. The fact that dust was present in sufficient quantity to propagate an explosion across the mine indicates a chronic failure in maintenance and inspection routines. This reflects a broader organizational tolerance for deferred housekeeping, likely driven by production priorities over safety compliance — a recurring pattern in major coal mine disasters.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-01",
+      "OC-10",
+      "TC-10"
+    ]
+  }
+]
