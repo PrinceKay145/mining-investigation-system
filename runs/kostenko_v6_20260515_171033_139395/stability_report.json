@@ -1,0 +1,212 @@
+{
+  "n_runs": 5,
+  "run_ids": [
+    "kostenko_v6_20260515_171033_139395",
+    "kostenko_v6_20260515_171757_180396",
+    "kostenko_v6_20260515_172822_319353",
+    "kostenko_v6_20260515_173447_867193",
+    "kostenko_v6_20260515_173850_754463"
+  ],
+  "bucket_stability": [
+    {
+      "bucket": "accepted",
+      "mean": 0.7771246122970261,
+      "std": 0.05332170276515857,
+      "min": 0.6896551724137931,
+      "max": 0.8571428571428571,
+      "n": 10
+    },
+    {
+      "bucket": "ambiguous",
+      "mean": 0.7794957983193277,
+      "std": 0.08129415863466077,
+      "min": 0.6666666666666666,
+      "max": 0.8571428571428571,
+      "n": 10
+    },
+    {
+      "bucket": "rejected",
+      "mean": 0.16999999999999998,
+      "std": 0.24867550376512662,
+      "min": 0.0,
+      "max": 0.6666666666666666,
+      "n": 10
+    }
+  ],
+  "attack_stability": {
+    "aspect": "attack_edges",
+    "mean": 0.4695529100781334,
+    "std": 0.08219330922376349,
+    "min": 0.38095238095238093,
+    "max": 0.6578947368421053,
+    "n": 10
+  },
+  "support_stability": {
+    "aspect": "support_clusters",
+    "mean": 0.5237820044516619,
+    "std": 0.06565196961504528,
+    "min": 0.45161290322580644,
+    "max": 0.6428571428571429,
+    "n": 10
+  },
+  "per_argument": {
+    "always_same_bucket": [
+      "D-A1",
+      "D-A2",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_2_001",
+      "agent_2_004",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    "flipping": [
+      {
+        "arg_id": "D-A3",
+        "buckets": {
+          "accepted": 4,
+          "rejected": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_2_002",
+        "buckets": {
+          "accepted": 4,
+          "rejected": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_2_003",
+        "buckets": {
+          "accepted": 4,
+          "rejected": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_2_005",
+        "buckets": {
+          "accepted": 4,
+          "ambiguous": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "K-A4",
+        "buckets": {
+          "ambiguous": 4,
+          "accepted": 1
+        },
+        "majority": "ambiguous",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_1_002",
+        "buckets": {
+          "ambiguous": 4,
+          "rejected": 1
+        },
+        "majority": "ambiguous",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_3_002",
+        "buckets": {
+          "ambiguous": 4,
+          "accepted": 1
+        },
+        "majority": "ambiguous",
+        "majority_share": 0.8
+      },
+      {
+        "arg_id": "agent_1_004",
+        "buckets": {
+          "accepted": 2,
+          "ambiguous": 3
+        },
+        "majority": "ambiguous",
+        "majority_share": 0.6
+      },
+      {
+        "arg_id": "agent_3_004",
+        "buckets": {
+          "accepted": 3,
+          "rejected": 1,
+          "ambiguous": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.6
+      },
+      {
+        "arg_id": "agent_3_003",
+        "buckets": {
+          "rejected": 3,
+          "accepted": 2
+        },
+        "majority": "rejected",
+        "majority_share": 0.6
+      },
+      {
+        "arg_id": "agent_3_005",
+        "buckets": {
+          "rejected": 2,
+          "accepted": 3
+        },
+        "majority": "accepted",
+        "majority_share": 0.6
+      },
+      {
+        "arg_id": "agent_1_003",
+        "buckets": {
+          "ambiguous": 2,
+          "accepted": 3
+        },
+        "majority": "accepted",
+        "majority_share": 0.6
+      },
+      {
+        "arg_id": "agent_1_005",
+        "buckets": {
+          "accepted": 2,
+          "rejected": 2,
+          "ambiguous": 1
+        },
+        "majority": "accepted",
+        "majority_share": 0.4
+      }
+    ],
+    "summary": {
+      "total_arguments": 42,
+      "stable_arguments": 29,
+      "flipping_arguments": 13,
+      "stability_rate": 0.6904761904761905
+    }
+  }
+}

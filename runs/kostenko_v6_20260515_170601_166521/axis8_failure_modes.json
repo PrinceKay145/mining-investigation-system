@@ -1,0 +1,195 @@
+{
+  "run_id": "kostenko_v6_20260515_170601_166521",
+  "attacks": [
+    {
+      "gt_id": "ATK-1",
+      "gt_attacker": "U-A3",
+      "gt_target": "D-A5",
+      "gt_type": "rebutting",
+      "llm_relation": "rebutting",
+      "llm_rationale": "Argument A claims a specific external source caused the ignition, while Argument B claims the ignition source is unknown and may never be identified, directly contradicting each other on the certainty",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "ATK-V5-004"
+    },
+    {
+      "gt_id": "ATK-2",
+      "gt_attacker": "K-A4",
+      "gt_target": "U-A3",
+      "gt_type": "rebutting",
+      "llm_relation": "rebutting",
+      "llm_rationale": "Argument A suggests multiple external sources for ignition, while Argument B specifically identifies sparking from the AFC chain as the most probable cause. These conclusions are mutually exclusive an",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "ATK-V5-007"
+    },
+    {
+      "gt_id": "ATK-3",
+      "gt_attacker": "D-A9",
+      "gt_target": "K-A8",
+      "gt_type": "rebutting",
+      "llm_relation": "rebutting",
+      "llm_rationale": "Argument A claims the explosion was primarily methane-driven, while Argument B claims it was primarily coal dust-driven. These conclusions are mutually exclusive and cannot both be true.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "ATK-V5-024"
+    },
+    {
+      "gt_id": "ATK-4",
+      "gt_attacker": "K-A7",
+      "gt_target": "D-A8",
+      "gt_type": "undercutting",
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair (attacker topic='Explosion sequence', target topic='Explosion location')",
+      "attacker_topic": "Explosion sequence",
+      "target_topic": "Explosion location"
+    }
+  ],
+  "supports": [
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "U-A2",
+        "K-A3"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently conclude that spontaneous combustion is excluded as a cause, citing similar evidence regarding gas analysis (R1, R2, R3 ratios, CO, H2) and coal classification.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-003"
+    },
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "U-A2",
+        "D-A4"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently exclude spontaneous combustion as a cause of ignition, using similar evidence of no CO accumulation and low indicator gas ratios.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-002"
+    },
+    {
+      "gt_cluster_id": "SUP-1",
+      "gt_cluster_topic": "Spontaneous combustion excluded",
+      "pair": [
+        "K-A3",
+        "D-A4"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments independently exclude spontaneous combustion as an ignition source, using different but complementary evidence (laboratory classification and expert opinion for A, goaf monitoring for B",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-008"
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "U-A1",
+        "K-A6"
+      ],
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair ('Ignition location' vs 'Explosion location')",
+      "topics": [
+        "Ignition location",
+        "Explosion location"
+      ]
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "U-A1",
+        "D-A6"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments agree on the ignition location (upper part of longwall near sections 142-145) and the timing of the initial CO spike (02:24). Argument A provides physical evidence, while Argument B use",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-001"
+    },
+    {
+      "gt_cluster_id": "SUP-2",
+      "gt_cluster_topic": "Ignition location: upper longwall, sections 142-145",
+      "pair": [
+        "K-A6",
+        "D-A6"
+      ],
+      "stage": "detection_miss",
+      "reason": "topic filter excluded the pair ('Explosion location' vs 'Ignition location')",
+      "topics": [
+        "Explosion location",
+        "Ignition location"
+      ]
+    },
+    {
+      "gt_cluster_id": "SUP-3",
+      "gt_cluster_topic": "Ventilation technically functional before accident",
+      "pair": [
+        "U-A4",
+        "D-A3"
+      ],
+      "llm_relation": "undercutting_b_to_a",
+      "llm_rationale": "Argument B suggests that while ventilation was within design parameters, the scheme created structural vulnerabilities leading to methane accumulation. This challenges Argument A's conclusion that tec",
+      "stage": "confirmation_miss",
+      "reason": "LLM classified pair as 'undercutting_b_to_a' instead of 'support'"
+    },
+    {
+      "gt_cluster_id": "SUP-4",
+      "gt_cluster_topic": "K2 seam was the primary methane source",
+      "pair": [
+        "K-A2",
+        "D-A1"
+      ],
+      "llm_relation": "support",
+      "llm_rationale": "Both arguments identify the K2 seam as the primary source of methane, with A focusing on decompression zones and B on continuous release into the goaf, which are compatible explanations.",
+      "stage": "detected",
+      "form": "exact",
+      "v5_id": "SUP-V5-005"
+    },
+    {
+      "gt_cluster_id": "SUP-5",
+      "gt_cluster_topic": "No sudden gas outburst occurred",
+      "pair": [
+        "K-A1",
+        "D-A2"
+      ],
+      "llm_relation": "independent",
+      "llm_rationale": "Argument A addresses the contribution of atmospheric pressure changes to methane release, while Argument B claims no sudden gas outburst occurred. These address different aspects of the gas-dynamic ev",
+      "stage": "confirmation_miss",
+      "reason": "LLM classified pair as 'independent' instead of 'support'"
+    }
+  ],
+  "summary": {
+    "attacks_total": 4,
+    "attacks_detected": 3,
+    "supports_total": 9,
+    "supports_detected": 5,
+    "by_stage": {
+      "GENERATION": {
+        "attacks": 0,
+        "supports": 0
+      },
+      "DETECTION": {
+        "attacks": 1,
+        "supports": 2
+      },
+      "CONFIRMATION": {
+        "attacks": 0,
+        "supports": 2
+      },
+      "SEMANTICS": {
+        "attacks": 0,
+        "supports": 0
+      },
+      "DETECTED": {
+        "attacks": 3,
+        "supports": 5
+      }
+    }
+  }
+}

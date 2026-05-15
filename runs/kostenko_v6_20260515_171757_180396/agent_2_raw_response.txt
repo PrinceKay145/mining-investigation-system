@@ -1,0 +1,80 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. U-A3 confirms multiple ignition-capable items were present at ignition location.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active mining section with known methane accumulation constitutes a clear violation of underground safety protocols. This indicates a systemic failure in supervision and enforcement of labor discipline, as such items should have been detected and removed during entry checks or routine inspections.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the goaf and longwall area.",
+    "evidence": "K-A2: primary methane source is K2 seam released via abutment pressure decompression; D-A1: no borehole pre-drainage of K2 seam despite 15 m3/t gas content; D-A3: ventilation adequate but structurally unable to dilute sub-conveyor methane accumulation due to lack of degasification.",
+    "warrant": "The K2 seam’s high gas content and proximity to K3 were known geological conditions. The absence of pre-drainage boreholes indicates a failure to design a degasification system that accounts for companion seam hazards, which is a core responsibility of mine planning and geotechnical risk management. This reflects a deficiency in both hazard identification and project documentation.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-09",
+      "OC-10",
+      "OC-08"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme was technically compliant but organizationally inadequate, as management failed to recognize the inherent risk of methane accumulation in stagnant sub-conveyor zones under the 1K-N-N-vt combined ventilation system.",
+    "evidence": "D-A3: airflow met design parameters but created stagnant sub-conveyor zone; K-A2: air velocity at floor 0.25 m/s, insufficient to dilute methane; U-A1: ignition occurred in upper longwall where accumulation was undetected by cross-section sensors.",
+    "warrant": "While ventilation volume was within specifications, the design allowed for undetectable methane accumulation in low-flow zones. This indicates a failure to assess the operational limitations of the ventilation scheme under real-world conditions, pointing to a gap in hazard identification and production control oversight.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-10",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Production control and supervision systems failed to detect and prevent unauthorized work activities involving hot work or mechanical ignition sources in a gassy environment.",
+    "evidence": "U-A1: angle grinder with 6 used disks found at ignition site; U-A3: shearer and conveyor were operating at time of ignition; no naryad-dopusk documentation cited for use of angle grinder or maintenance work in high-risk zone.",
+    "warrant": "The use of an angle grinder — a hot work tool — in a methane-prone area would require formal authorization, risk assessment, and monitoring under the naryad-dopusk system. Its undocumented use implies either absence of work permits or failure of supervisory enforcement, indicating a breakdown in production control and procedural compliance.",
+    "confidence": 0.82,
+    "cause_categories": [
+      "OC-01",
+      "OC-02"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Explosion sequence",
+    "claim": "Failure to control coal dust accumulations along conveyor routes enabled the transition from a localized methane fire to a full-scale propagating coal dust explosion.",
+    "evidence": "D-A7: coal dust accumulations observed on conveyor lines; D-A9: explosion propagated over 4+ km on fresh-air side, characteristic of coal dust; slate barrier activated; destruction pattern consistent with dust explosion.",
+    "warrant": "Coal dust accumulation is a preventable hazard requiring regular cleaning, monitoring, and inerting. The presence of explosive dust layers on conveyors indicates a failure in routine hazard control and housekeeping — a core function of production supervision and safety management. This reflects a systemic neglect of dust control protocols.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "Despite precedent cases involving companion seam methane (e.g., PREC-2021-04), the mine failed to implement enhanced degasification and monitoring for the K2 seam, indicating a failure to learn from prior industry accidents.",
+    "evidence": "K-A2 and D-A1: K2 seam identified as methane source with no pre-drainage; PREC-2021-04: Listvyazhnaya explosion caused by methane accumulation from undrained zones; PREC-2024-01: Alardinskaya incident involved goaf methane ignition with evacuation.",
+    "warrant": "The recurrence of methane accumulation from undrained seams in multiple recent accidents suggests a pattern of organizational failure in hazard recognition and knowledge transfer. The absence of preventive measures for K2, despite known risks and national-level reforms post-Listvyazhnaya, indicates a failure to integrate lessons from precedent cases into local risk management.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "OC-10",
+      "OC-01"
+    ]
+  }
+]

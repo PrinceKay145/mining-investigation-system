@@ -1,0 +1,65 @@
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "U-A1 cites the angle grinder as potential evidence, but D-A5 notes no documentation of its use. K-A4 focuses on AFC chain sparking, while U-A3 and D-A5 acknowledge multiple possible sources without definitive proof.",
+    "warrant": "The presence of the angle grinder does not confirm its use as an ignition source. The CO sensor data (U-A1) could also be explained by other combustible materials or the AFC chain (K-A4). The lack of direct evidence linking the angle grinder to the ignition event weakens the claim.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The explosion sequence may have involved a primary coal dust explosion followed by a methane deflagration, contrary to the consensus of a methane deflagration followed by a dust explosion.",
+    "evidence": "D-A7 and D-A9 describe a sequence where a gas fire leads to a methane deflagration, but the evidence of coal dust accumulations and the propagation pattern along conveyor lines (D-A9) could also support a primary dust explosion.",
+    "warrant": "The propagation of the explosion along conveyor lines and the presence of coal dust accumulations (D-A9) are consistent with a primary dust explosion. The initial fire (D-A6) could have ignited the coal dust, which then triggered the methane deflagration. This alternative sequence is plausible given the evidence.",
+    "confidence": 0.6,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's adequacy is overstated — the stagnant sub-conveyor zone was a known risk that should have been addressed with additional controls, not just attributed to the ventilation scheme.",
+    "evidence": "D-A3 acknowledges the ventilation scheme's structural vulnerability, but agent_1_005 and agent_2_003 attribute the issue solely to the scheme. K-A2 and D-A1 highlight the methane accumulation in the sub-conveyor zone, which could have been mitigated with additional measures.",
+    "warrant": "The ventilation scheme's inadequacy is clear, but the focus on the scheme alone overlooks the need for additional controls (e.g., local ventilation, monitoring) in known high-risk zones. The evidence suggests a systemic failure in hazard management, not just ventilation design.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The K2 seam's methane release may not be the sole source of elevated methane — other geological or operational factors could have contributed to the accumulation.",
+    "evidence": "K-A2 and D-A1 focus on the K2 seam, but D-A3 notes the ventilation scheme's role in methane accumulation. The evidence does not rule out additional sources, such as roof falls or other geological disturbances.",
+    "warrant": "While the K2 seam is a significant source, the evidence does not exclude other potential sources. The ventilation scheme's inadequacy (D-A3) and the presence of other geological hazards (K-A2) suggest a more complex methane accumulation scenario.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-01",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Explosion location",
+    "claim": "The explosion location is uncertain — the evidence for the upper part of longwall 48K3-Z (K-A6) conflicts with the lower area near section 20 (D-A8).",
+    "evidence": "K-A6 cites seismic events and ventilation fan data for the upper part, while D-A8 describes physical evidence of a pressure wave from the goaf side near section 20. The two locations are distinct and not reconciled in the evidence.",
+    "warrant": "The discrepancy between the upper and lower locations suggests uncertainty in the explosion's origin. The evidence does not conclusively support one location over the other, indicating a need for further investigation.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-01"
+    ]
+  }
+]

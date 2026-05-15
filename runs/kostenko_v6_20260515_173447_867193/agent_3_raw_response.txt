@@ -1,0 +1,54 @@
+```json
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "U-A1, U-A3, D-A5. U-A1 and U-A3 mention the angle grinder but do not confirm it was used at the ignition location. D-A5 explicitly states the ignition source is unknown and may never be identified.",
+    "warrant": "The presence of the angle grinder does not confirm it was used or caused ignition. The confidence in U-A3 (0.65) and D-A5 (0.45) is lower than agent_1_002's confidence (0.81), indicating uncertainty. The evidence does not conclusively support the AFC chain as the ignition source either, as D-A5 notes post-explosion wave damage may have destroyed evidence.",
+    "confidence": 0.7,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The explosion sequence may have involved both methane and coal dust, with the initial explosion being methane-driven and the secondary explosion involving coal dust.",
+    "evidence": "K-A8, D-A7, D-A9. K-A8 suggests the initial explosion was methane-driven, while D-A7 and D-A9 describe a secondary dust explosion. The evidence supports both methane and coal dust involvement, not just one or the other.",
+    "warrant": "Agent_1_004 dismisses coal dust as a primary fuel, but D-A7 and D-A9 provide strong evidence for a coal dust explosion. The explosion propagated along conveyor lines, which is characteristic of dust explosions. The initial explosion may have been methane-driven, but the secondary explosion likely involved coal dust.",
+    "confidence": 0.75,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design may have contributed to the accident, but the evidence does not conclusively prove it was the primary cause of methane accumulation.",
+    "evidence": "U-A4, D-A3, agent_1_005, agent_2_003. U-A4 shows stable ventilation rates, while D-A3 and agent_1_005 note localized stagnant zones. Agent_2_003 suggests the ventilation scheme was structurally vulnerable but does not prove it was the primary cause.",
+    "warrant": "The evidence shows both that the ventilation system was operating within design parameters and that it had structural weaknesses. However, the methane accumulation may have been caused by other factors, such as the lack of pre-drainage boreholes (K-A2, D-A1). The ventilation system's role is not conclusively established as the primary cause.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-06"]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The methane source may have been a combination of the K2 seam and other factors, such as roof movement or support displacement.",
+    "evidence": "K-A2, D-A1, D-A7. K-A2 and D-A1 identify the K2 seam as a primary source, but D-A7 notes a small CH4 increase at 02:04-02:12, possibly due to roof movement or support displacement. The evidence supports multiple sources of methane, not just the K2 seam.",
+    "warrant": "Agent_1_001 focuses on the K2 seam as the primary source, but D-A7 suggests other factors may have contributed. The evidence does not rule out additional methane sources, such as roof movement or support displacement, which could have released methane from other seams or the goaf.",
+    "confidence": 0.6,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Organizational causes",
+    "claim": "The organizational failures identified by agent_2 may have contributed to the accident, but their role as primary causes is not conclusively established.",
+    "evidence": "agent_2_001, agent_2_002, agent_2_004. These arguments highlight organizational failures, but they do not prove these were the primary causes of the accident. The technical evidence (e.g., methane accumulation, ignition sources) is more directly linked to the accident.",
+    "warrant": "While organizational failures are important, the evidence does not conclusively establish them as primary causes. The technical causes (e.g., methane accumulation, ignition sources) are more directly linked to the accident. The organizational failures may have contributed, but they are not the sole or primary causes.",
+    "confidence": 0.6,
+    "cause_categories": ["OC-01", "OC-06"]
+  }
+]
+```

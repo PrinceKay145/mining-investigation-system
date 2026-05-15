@@ -1,0 +1,78 @@
+{
+  "run_id": "kostenko_v6_20260515_170601_166521",
+  "run_dir": "runs/kostenko_v6_20260515_170601_166521",
+  "v4_agent_models_requested": {
+    "agent_1": "google/gemini-2.5-flash-lite",
+    "agent_2": "google/gemini-2.5-flash-lite",
+    "agent_3": "google/gemini-2.5-flash-lite",
+    "agent_4": "google/gemini-2.5-flash-lite"
+  },
+  "per_role": {
+    "agent_1": {
+      "requested_model": "google/gemini-2.5-flash-lite",
+      "echoed_models": [
+        "google/gemini-2.5-flash-lite"
+      ],
+      "call_count": 68,
+      "input_tokens": 133841,
+      "output_tokens": 16498,
+      "latency_ms_mean": 1279,
+      "latency_ms_max": 11961,
+      "retry_count": 0
+    }
+  },
+  "stage_timing": {
+    "agent_2": {
+      "started_at": "2026-05-15T17:06:01.253473",
+      "finished_at": "2026-05-15T17:06:08.741962"
+    },
+    "agent_1": {
+      "started_at": "2026-05-15T17:06:01.254228",
+      "finished_at": "2026-05-15T17:06:08.782331"
+    },
+    "agent_4": {
+      "started_at": "2026-05-15T17:06:01.252510",
+      "finished_at": "2026-05-15T17:06:13.222774"
+    },
+    "agent_3": {
+      "started_at": "2026-05-15T17:06:13.234198",
+      "finished_at": "2026-05-15T17:06:21.183334"
+    },
+    "v4": {
+      "started_at": "2026-05-15T17:06:01.249870",
+      "finished_at": "2026-05-15T17:06:21.185994"
+    },
+    "v5_pair_check": {
+      "started_at": "2026-05-15T17:06:33.802981",
+      "finished_at": "2026-05-15T17:09:59.768117"
+    },
+    "v5": {
+      "started_at": "2026-05-15T17:06:21.211821",
+      "finished_at": "2026-05-15T17:09:59.784953"
+    },
+    "v6": {
+      "started_at": "2026-05-15T17:09:59.809015",
+      "finished_at": "2026-05-15T17:10:31.833435"
+    }
+  },
+  "v5_cache_hits": 0,
+  "v5_summary": {
+    "accepted": 24,
+    "rejected": 15,
+    "ambiguous": 7,
+    "consensus": false
+  },
+  "v6_summary": {
+    "run_id": "kostenko_v6_20260515_170601_166521",
+    "v6_report": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_170601_166521/v6_report.json",
+    "markdown": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_170601_166521/report.md",
+    "html": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_170601_166521/report.html",
+    "graph": "/Users/princekay/School/Masters-MISIS/Diplom/mining-investigation-system/runs/kostenko_v6_20260515_170601_166521/argumentation_graph.png"
+  },
+  "totals": {
+    "llm_calls": 68,
+    "input_tokens": 133841,
+    "output_tokens": 16498,
+    "upstream_429_retries": 0
+  }
+}

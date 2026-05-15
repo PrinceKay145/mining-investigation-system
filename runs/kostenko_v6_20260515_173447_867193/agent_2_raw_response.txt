@@ -1,0 +1,83 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144. U-A3 confirms these items are ignition-capable and were located at the ignition site.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active mining section with known methane emissions indicates a breakdown in underground supervision and enforcement of safety rules. Such items should be strictly controlled under the naryad system and pre-shift inspections. Their presence reflects a systemic failure in labor discipline and daily production control.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the goaf and longwall zone.",
+    "evidence": "K-A2 and D-A1: K2 seam is 3.35m below K3, with high gas content (~15 m3/t), releasing methane due to abutment pressure; no borehole pre-drainage of K2 was implemented. D-A1 notes gas drainage system captured only 34.1% CH4 at perimeter wall, indicating incomplete capture.",
+    "warrant": "The K2 seam’s proximity and high gas content represent a foreseeable hazard. The lack of pre-drainage boreholes indicates either a failure in geotechnical hazard forecasting (OC-09) or a decision to proceed without adequate degasification — a known risk factor in methane explosions. This reflects a systemic failure in hazard identification and degasification planning.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-10",
+      "OC-09",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme, while operating within design parameters, was structurally vulnerable to methane accumulation in sub-conveyor zones due to inadequate risk assessment in technical documentation.",
+    "evidence": "D-A3: the 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zones where methane accumulates despite adequate overall airflow. K-A2 confirms floor-level methane concentrations up to 17.9% in sections 128-142, while cross-section averages remain low.",
+    "warrant": "The ventilation system’s design allowed for undetected methane accumulation in low-velocity zones, which sensors failed to capture. This indicates a failure in technical documentation to account for real-world airflow distribution and localized hazards — a violation of industrial safety standards in project design (OC-08) and a failure in hazard identification (OC-10).",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-08",
+      "OC-10",
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Production control and supervision systems failed to detect and prevent unauthorized work activities and the presence of ignition sources, indicating a collapse in internal safety oversight.",
+    "evidence": "U-A1: multiple prohibited items (angle grinder, flammable can, oil bottle) found at ignition location. D-A5 notes no evidence of angle grinder use recorded, yet physical items remain. U-A3 links these to potential ignition.",
+    "warrant": "The presence of unapproved tools and flammable materials underground — especially an angle grinder with used disks — strongly suggests hot work or maintenance occurred without authorization or documentation. This points to a failure in the naryad-dopusk system and absence of effective production control (OC-01), allowing high-risk activities to proceed unchecked.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-01",
+      "OC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Explosion sequence",
+    "claim": "Failure to control coal dust accumulations on conveyor lines enabled the propagation of a full-scale explosion, indicating a systemic breakdown in housekeeping and hazard monitoring.",
+    "evidence": "D-A7 and D-A9: coal dust accumulations observed on conveyor lines; explosion propagated over 4+ km along conveyor routes, including fresh-air side, consistent with coal dust explosion. Slate barrier activated, confirming explosive dust presence.",
+    "warrant": "Coal dust buildup on conveyors is a preventable hazard requiring regular cleaning and monitoring. The fact that it reached explosive levels indicates a failure in routine safety inspections and maintenance discipline. This reflects a chronic deficiency in production control and emergency preparedness, allowing a secondary hazard to amplify a localized fire into a mine-wide disaster.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "Despite precedent cases involving companion seam methane and conveyor sparking, the mine failed to implement targeted controls, indicating a failure in organizational learning and hazard communication.",
+    "evidence": "PREC-2021-04 (Shakhta Listvyazhnaya) involved methane explosion from undrained seams; K-A4 identifies conveyor sparking as a leading cause in Russian mines (16% of explosions 2004–2019). Yet no borehole drainage of K2 seam and no compressed air ventilation of AFC chain per manufacturer instructions (K-A4).",
+    "warrant": "The recurrence of similar technical conditions — undrained gassy seams and unmitigated mechanical ignition sources — in the context of known industry patterns indicates a failure to apply lessons from past accidents. Management did not update hazard assessments or enforce manufacturer safety requirements, reflecting a systemic failure in hazard recognition and organizational learning.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-10",
+      "OC-05"
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "The mine failed to comply with REG-01 by not ensuring continuous monitoring of CH4 concentration in the longwall face, outgoing air stream, and goaf, which contributed to the accident",
+    "evidence": "Evidence from U-A1, K-A2, and D-A1 suggests that methane accumulation was a critical factor in the accident. REG-01 requires continuous monitoring of CH4 concentration, but the evidence does not indicate that this was done effectively",
+    "warrant": "The regulation requires continuous monitoring to prevent methane accumulation, which is a critical factor in methane explosions. The evidence suggests that the mine did not comply with this regulation, which contributed to the accident",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-01",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "The mine's ventilation design did not comply with REG-02, which requires specific design measures to prevent stagnant methane zones, contributing to the accident",
+    "evidence": "Evidence from U-A4, K-A2, and D-A3 suggests that the ventilation design was inadequate, allowing methane to accumulate in sub-conveyor zones. REG-02 requires specific design measures to prevent this",
+    "warrant": "The regulation requires ventilation designs that prevent stagnant methane zones, which is critical for preventing methane explosions. The evidence suggests that the mine's design did not comply with this regulation, contributing to the accident",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "The mine failed to comply with REG-03 by not conducting pre-drainage of the companion seam, which contributed to the accident",
+    "evidence": "Evidence from K-A2 and D-A1 suggests that the companion seam was not pre-drained, which allowed methane to accumulate. REG-03 requires pre-drainage of companion seams to prevent this",
+    "warrant": "The regulation requires pre-drainage of companion seams to prevent methane accumulation, which is critical for preventing methane explosions. The evidence suggests that the mine did not comply with this regulation, contributing to the accident",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-07",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "The mine failed to ensure that all electrical equipment was explosion-proof, as required by REG-05, which contributed to the accident",
+    "evidence": "Evidence from U-A1 and K-A5 suggests that non-explosion-proof equipment was present in the mine, which could have provided an ignition source. REG-05 requires all electrical equipment to be explosion-proof",
+    "warrant": "The regulation requires explosion-proof equipment to prevent ignition sources, which is critical for preventing methane explosions. The evidence suggests that the mine did not comply with this regulation, contributing to the accident",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "The mine failed to comply with REG-06 by not implementing adequate dust control measures, which contributed to the accident",
+    "evidence": "Evidence from D-A7 and D-A9 suggests that coal dust accumulations were present in the mine, which could have contributed to the explosion. REG-06 requires adequate dust control measures to prevent this",
+    "warrant": "The regulation requires dust control measures to prevent coal dust explosions, which can propagate methane explosions. The evidence suggests that the mine did not comply with this regulation, contributing to the accident",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-10",
+      "OC-05"
+    ]
+  }
+]

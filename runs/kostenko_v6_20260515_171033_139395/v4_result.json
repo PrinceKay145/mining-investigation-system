@@ -1,0 +1,278 @@
+{
+  "agent_1_arguments": [
+    {
+      "id": "agent_1_001",
+      "source": "agent_1",
+      "topic": "Methane source",
+      "claim": "The explosive methane originated from the K2 companion seam, which released gas into the sub‑conveyor zone of the upper longwall 48K3‑Z because the abutment pressure zone created a local ventilation dead‑space where methane could accumulate to >5%.",
+      "evidence": "K-A2 reports floor‑level methane up to 17.9% at section 140 and stagnant air velocity (0.25 m/s) in the sub‑conveyor zone; D-A1 describes continuous K2 emission (~15 m³/t) and lack of pre‑drainage boreholes; U-A4 shows overall ventilation flow was stable, so the accumulation must be local.",
+      "warrant": "High measured concentrations together with very low local air speed indicate that methane from the K2 seam was not being swept away. The abutment pressure zone is known to fracture the K2 seam and inject gas into the goaf; without dedicated drainage, the gas pools in the dead‑space, creating an explosive atmosphere while bulk ventilation readings remain normal.",
+      "confidence": 0.88,
+      "cause_categories": [
+        "TC-01",
+        "TC-07"
+      ]
+    },
+    {
+      "id": "agent_1_002",
+      "source": "agent_1",
+      "topic": "Ignition source",
+      "claim": "The ignition energy was supplied by mechanical sparking of the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor zone.",
+      "evidence": "K-A4 documents witness reports of visible sparks from the AFC chain, manufacturer instructions requiring compressed‑air ventilation when methane is present, and a statistical link (16% of Russian explosions) between conveyor sparking and methane ignition; U-A1 and U-A3 note presence of combustible items but CO sensor data (sharp rise at 02:24) is consistent with solid‑fuel combustion rather than pure methane, supporting a localized hot‑spot created by a spark.",
+      "warrant": "A mechanical spark provides sufficient energy (>0.2 mJ) to ignite a methane‑air mixture at concentrations >5%. The AFC chain operates continuously in the identified zone, and the observed sparks coincide temporally with the CO spike, making the chain the most plausible ignition source despite the presence of other combustible objects.",
+      "confidence": 0.79,
+      "cause_categories": [
+        "TC-02"
+      ]
+    },
+    {
+      "id": "agent_1_003",
+      "source": "agent_1",
+      "topic": "Explosion type",
+      "claim": "The primary explosion was a methane deflagration; a secondary coal‑dust explosion was triggered by the pressure wave and contributed to the extensive propagation of the blast.",
+      "evidence": "K-A6 locates the epicenter in the upper longwall at 02:43, matching the time of the methane‑rich environment; K-A8 shows workers remained conscious after the shock, inconsistent with a pure dust explosion; D-A9 provides evidence of abundant settled coal dust on conveyor routes and a 4 km blast travel distance, which requires dust as a propagating fuel.",
+      "warrant": "A methane deflagration can generate a pressure wave sufficient to lift and disperse settled coal dust, creating a combustible dust cloud that then detonates, extending the blast along the conveyor network. The initial high‑temperature fire (CO spike) ignites methane; the subsequent dust explosion explains the long‑range damage while the survival of miners indicates methane was the dominant initial energy source.",
+      "confidence": 0.81,
+      "cause_categories": [
+        "TC-01",
+        "TC-10"
+      ]
+    },
+    {
+      "id": "agent_1_004",
+      "source": "agent_1",
+      "topic": "Explosion sequence",
+      "claim": "The accident progressed as follows: (1) gas fire began at 02:24 in sections 142‑145 (CO spike); (2) mechanical spark ignited the methane‑rich atmosphere at ~02:43, producing the first methane explosion; (3) the resulting pressure wave entrained coal dust from the conveyor and support surfaces; (4) a secondary dust explosion propagated along the ventilation and transport routes, reaching distant workings.",
+      "evidence": "D-A6 records CO rise at 02:24:20 confirming fire start; K-A6 timestamps seismic events at 02:43:32‑34 indicating the first explosion; K-A7 and D-A1 describe methane displacement to 99.99% after the first blast; D-A9 documents dust accumulation and long‑range blast path.",
+      "warrant": "The temporal ordering of sensor data (CO → seismic → methane surge) matches the described steps. A methane explosion alone cannot travel several kilometres; dust entrainment provides the necessary fuel for the observed propagation, fitting the physical model of a primary gas explosion followed by a secondary dust explosion.",
+      "confidence": 0.78,
+      "cause_categories": [
+        "TC-01",
+        "TC-10"
+      ]
+    },
+    {
+      "id": "agent_1_005",
+      "source": "agent_1",
+      "topic": "Ventilation",
+      "claim": "Overall ventilation flow met design specifications, but the combined 1K‑N‑N‑vt scheme created a stagnant sub‑conveyor zone where methane accumulated, representing a functional ventilation failure in that micro‑environment.",
+      "evidence": "U-A4 shows global airflow was stable (1943 m³/min inlet, 1507 m³/min outlet); D-A3 notes the scheme’s structural vulnerability to methane build‑up in the lower longwall sub‑conveyor area; K-A2 and K-A4 identify the same zone as the location of high methane and ignition.",
+      "warrant": "Even with adequate total airflow, poor airflow distribution can produce local dead‑spaces. The measured air speed of 0.25 m/s (K-A2) is far below the design minimum needed to dilute methane, confirming a localized ventilation inadequacy that allowed explosive concentrations to develop.",
+      "confidence": 0.84,
+      "cause_categories": [
+        "TC-06"
+      ]
+    }
+  ],
+  "agent_2_arguments": [
+    {
+      "id": "agent_2_001",
+      "source": "agent_2",
+      "topic": "Ignition source",
+      "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, aerosol can, synthetic oil) to be present and used in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+      "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. D-A5: no evidence of angle grinder use documented, yet physical items present.",
+      "warrant": "The presence of multiple unauthorized, ignition-capable items in the longwall section indicates a systemic failure in enforcing safety rules underground. These items should have been prohibited or controlled under naryad-dopusk and explosion safety protocols. Their presence reflects a breakdown in supervision and labor discipline (OC-06), likely enabled by weak production control (OC-01).",
+      "confidence": 0.85,
+      "cause_categories": [
+        "OC-06",
+        "OC-01"
+      ]
+    },
+    {
+      "id": "agent_2_002",
+      "source": "agent_2",
+      "topic": "Methane source",
+      "claim": "Degasification planning failed to address the known hazard of methane release from the K2 companion seam, resulting in uncontrolled accumulation in the goaf and sub-conveyor zone.",
+      "evidence": "K-A2: K2 seam methane release due to abutment pressure; D-A1: no borehole pre-drainage of K2 seam despite 15 m3/t gas content; 3.35m separation and weak rock layer; gas drainage system captured only 34.1% CH4 at perimeter wall.",
+      "warrant": "The absence of pre-drainage boreholes for a high-gas companion seam directly violates standard degasification planning requirements. This represents a failure in hazard identification (OC-10) and technical documentation compliance (OC-05), as the geological risk was foreseeable. The organizational system failed to mandate or implement adequate degasification measures despite known conditions.",
+      "confidence": 0.78,
+      "cause_categories": [
+        "OC-10",
+        "OC-05"
+      ]
+    },
+    {
+      "id": "agent_2_003",
+      "source": "agent_2",
+      "topic": "Ventilation",
+      "claim": "The mine's ventilation scheme was structurally inadequate for the geological conditions, creating stagnant zones where methane could accumulate undetected, due to deficiencies in project documentation and hazard assessment.",
+      "evidence": "D-A3: 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone; air velocity at floor: 0.25 m/s; methane concentrations up to 17.9% at floor level in sections 128-142; average cross-section readings remained below threshold, masking danger.",
+      "warrant": "The ventilation design failed to account for methane accumulation in low-velocity zones beneath the conveyor, a known risk in longwall mining. This indicates a failure in project documentation (OC-08) and hazard identification (OC-10). The organizational system allowed a design that met nominal airflow requirements but created localized explosive atmospheres, violating industrial safety standards.",
+      "confidence": 0.82,
+      "cause_categories": [
+        "OC-08",
+        "OC-10"
+      ]
+    },
+    {
+      "id": "agent_2_004",
+      "source": "agent_2",
+      "topic": "Supervision failure",
+      "claim": "Supervision systems failed to detect or prevent unauthorized work activities and the presence of prohibited materials, indicating a collapse in production control and labor discipline.",
+      "evidence": "U-A1: multiple ignition-capable items found at ignition location; D-A5: no documentation of angle grinder use; U-A3: equipment (shearer, conveyor) running at 02:29 despite high-risk conditions.",
+      "warrant": "The presence of unapproved tools and chemicals, combined with continued operation of equipment in a known methane-prone area, indicates that frontline supervision (proizvodstvennyy kontrol) was ineffective. This is a direct failure of OC-01 (insufficient production control) and OC-06 (labor discipline), suggesting systemic tolerance of procedural violations.",
+      "confidence": 0.88,
+      "cause_categories": [
+        "OC-01",
+        "OC-06"
+      ]
+    },
+    {
+      "id": "agent_2_005",
+      "source": "agent_2",
+      "topic": "Hazard recognition",
+      "claim": "The mine management failed to recognize and act on the combined hazard of K2 seam methane release and mechanical ignition sources in the conveyor zone, despite available monitoring and precedent cases.",
+      "evidence": "K-A2, D-A1: K2 methane release into goaf; K-A4: conveyor sparking observed in methane-rich zone; PREC-2021-04: similar methane explosion with gross violations; PREC-2024-01: goaf methane ignition with evacuation.",
+      "warrant": "The combination of methane accumulation and mechanical ignition sources in the same zone was a known risk pattern, reinforced by precedent cases. The failure to implement additional controls (e.g., conveyor ventilation, stricter access) indicates a systemic failure in hazard recognition (OC-10) and learning from past incidents. Management did not escalate risk mitigation despite clear indicators.",
+      "confidence": 0.75,
+      "cause_categories": [
+        "OC-10"
+      ]
+    },
+    {
+      "id": "agent_2_006",
+      "source": "agent_2",
+      "topic": "Degasification planning",
+      "claim": "The absence of a pre-drainage program for the K2 seam constitutes a deliberate or negligent omission in degasification planning, reflecting a failure in geotechnical forecasting and technical documentation.",
+      "evidence": "D-A1: no borehole pre-drainage of K2 seam; K-A2: abutment pressure creates decompression zone fracturing K2; D-A3: leakage coefficient 1.3, indicating poor sealing and gas migration pathways.",
+      "warrant": "Given the known gas content and geological proximity of K2, pre-drainage should have been a mandatory component of the degasification plan. Its absence indicates either a failure in geotechnical forecasting (OC-09) or a decision to bypass safety requirements, possibly due to production pressures. This represents a systemic deficiency in technical planning and risk management.",
+      "confidence": 0.7,
+      "cause_categories": [
+        "OC-09",
+        "OC-05"
+      ]
+    }
+  ],
+  "agent_3_arguments": [
+    {
+      "id": "agent_3_001",
+      "source": "agent_3",
+      "topic": "Ignition source",
+      "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+      "evidence": "U-A1 cites the angle grinder as potential evidence, but D-A5 notes no documentation of its use. K-A4 focuses on AFC chain sparking, while U-A3 and D-A5 acknowledge multiple possible sources without definitive proof.",
+      "warrant": "The presence of the angle grinder does not confirm its use as an ignition source. The CO sensor data (U-A1) could also be explained by other combustible materials or the AFC chain (K-A4). The lack of direct evidence linking the angle grinder to the ignition event weakens the claim.",
+      "confidence": 0.7,
+      "cause_categories": [
+        "TC-02"
+      ]
+    },
+    {
+      "id": "agent_3_002",
+      "source": "agent_3",
+      "topic": "Explosion type",
+      "claim": "The explosion sequence may have involved a primary coal dust explosion followed by a methane deflagration, contrary to the consensus of a methane deflagration followed by a dust explosion.",
+      "evidence": "D-A7 and D-A9 describe a sequence where a gas fire leads to a methane deflagration, but the evidence of coal dust accumulations and the propagation pattern along conveyor lines (D-A9) could also support a primary dust explosion.",
+      "warrant": "The propagation of the explosion along conveyor lines and the presence of coal dust accumulations (D-A9) are consistent with a primary dust explosion. The initial fire (D-A6) could have ignited the coal dust, which then triggered the methane deflagration. This alternative sequence is plausible given the evidence.",
+      "confidence": 0.6,
+      "cause_categories": [
+        "TC-01",
+        "TC-10"
+      ]
+    },
+    {
+      "id": "agent_3_003",
+      "source": "agent_3",
+      "topic": "Ventilation",
+      "claim": "The ventilation system's adequacy is overstated — the stagnant sub-conveyor zone was a known risk that should have been addressed with additional controls, not just attributed to the ventilation scheme.",
+      "evidence": "D-A3 acknowledges the ventilation scheme's structural vulnerability, but agent_1_005 and agent_2_003 attribute the issue solely to the scheme. K-A2 and D-A1 highlight the methane accumulation in the sub-conveyor zone, which could have been mitigated with additional measures.",
+      "warrant": "The ventilation scheme's inadequacy is clear, but the focus on the scheme alone overlooks the need for additional controls (e.g., local ventilation, monitoring) in known high-risk zones. The evidence suggests a systemic failure in hazard management, not just ventilation design.",
+      "confidence": 0.75,
+      "cause_categories": [
+        "TC-06",
+        "OC-05"
+      ]
+    },
+    {
+      "id": "agent_3_004",
+      "source": "agent_3",
+      "topic": "Methane source",
+      "claim": "The K2 seam's methane release may not be the sole source of elevated methane — other geological or operational factors could have contributed to the accumulation.",
+      "evidence": "K-A2 and D-A1 focus on the K2 seam, but D-A3 notes the ventilation scheme's role in methane accumulation. The evidence does not rule out additional sources, such as roof falls or other geological disturbances.",
+      "warrant": "While the K2 seam is a significant source, the evidence does not exclude other potential sources. The ventilation scheme's inadequacy (D-A3) and the presence of other geological hazards (K-A2) suggest a more complex methane accumulation scenario.",
+      "confidence": 0.65,
+      "cause_categories": [
+        "TC-01",
+        "TC-07"
+      ]
+    },
+    {
+      "id": "agent_3_005",
+      "source": "agent_3",
+      "topic": "Explosion location",
+      "claim": "The explosion location is uncertain — the evidence for the upper part of longwall 48K3-Z (K-A6) conflicts with the lower area near section 20 (D-A8).",
+      "evidence": "K-A6 cites seismic events and ventilation fan data for the upper part, while D-A8 describes physical evidence of a pressure wave from the goaf side near section 20. The two locations are distinct and not reconciled in the evidence.",
+      "warrant": "The discrepancy between the upper and lower locations suggests uncertainty in the explosion's origin. The evidence does not conclusively support one location over the other, indicating a need for further investigation.",
+      "confidence": 0.7,
+      "cause_categories": [
+        "TC-01"
+      ]
+    }
+  ],
+  "agent_4_arguments": [
+    {
+      "id": "agent_4_001",
+      "source": "agent_4",
+      "topic": "Methane monitoring compliance",
+      "claim": "The mine did not comply with REG-01, as the methane monitoring system did not automatically cut off power when the 1.0% CH4 threshold was reached, contributing to the accident.",
+      "evidence": "U-A1, K-A2, REG-01",
+      "warrant": "The evidence shows that methane levels exceeded 1.0% in the outgoing air stream, and there is no indication that power was automatically cut off, which would have prevented the ignition of the methane-air mixture.",
+      "confidence": 0.85,
+      "cause_categories": [
+        "TC-01",
+        "OC-01"
+      ]
+    },
+    {
+      "id": "agent_4_002",
+      "source": "agent_4",
+      "topic": "Ventilation design compliance",
+      "claim": "The mine's ventilation scheme did not meet the requirements of REG-02, as it failed to prevent methane accumulation in sub-conveyor zones, contributing to the accident.",
+      "evidence": "K-A2, D-A3, REG-02",
+      "warrant": "The evidence indicates that the ventilation scheme created stagnant zones where methane could accumulate, and the mine's design did not account for this, leading to a hazardous atmosphere.",
+      "confidence": 0.8,
+      "cause_categories": [
+        "TC-06",
+        "OC-05"
+      ]
+    },
+    {
+      "id": "agent_4_003",
+      "source": "agent_4",
+      "topic": "Degasification compliance",
+      "claim": "The mine did not comply with REG-03, as it failed to properly degasify the companion seam, leading to uncontrolled methane release and contributing to the accident.",
+      "evidence": "K-A2, D-A1, REG-03",
+      "warrant": "The evidence shows that the mine did not drill pre-drainage boreholes for the companion seam, and the gas balance calculations were not performed, which would have helped to prevent the methane accumulation.",
+      "confidence": 0.8,
+      "cause_categories": [
+        "TC-07",
+        "OC-05"
+      ]
+    },
+    {
+      "id": "agent_4_004",
+      "source": "agent_4",
+      "topic": "Equipment certification",
+      "claim": "The mine did not ensure that all electrical equipment was explosion-proof, as required by REG-05, which may have contributed to the ignition of the methane-air mixture.",
+      "evidence": "U-A1, K-A5, REG-05",
+      "warrant": "The evidence indicates that non-explosion-proof equipment was present in the mine, and while it is not directly linked to the ignition, it increases the risk of an explosion.",
+      "confidence": 0.65,
+      "cause_categories": [
+        "TC-02",
+        "OC-06"
+      ]
+    },
+    {
+      "id": "agent_4_005",
+      "source": "agent_4",
+      "topic": "Dust control compliance",
+      "claim": "The mine did not comply with REG-06, as it failed to maintain adequate dust control measures, which contributed to the secondary explosion and propagation of the fire.",
+      "evidence": "D-A7, D-A9, REG-06",
+      "warrant": "The evidence shows that coal dust accumulations were present on conveyor lines, and the mine did not maintain the required stone dusting program, which would have helped to prevent the secondary explosion.",
+      "confidence": 0.8,
+      "cause_categories": [
+        "TC-10",
+        "OC-05"
+      ]
+    }
+  ]
+}

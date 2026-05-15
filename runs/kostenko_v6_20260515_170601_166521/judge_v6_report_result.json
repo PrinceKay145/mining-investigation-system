@@ -1,0 +1,29 @@
+{
+  "factual_accuracy": {
+    "score": 4.0,
+    "rationale": "The report aligns well with the ground-truth facts, accurately describing the sequence of events and methane sources. However, there is a minor discrepancy regarding the role of coal dust as the sole primary fuel, which is contested by evidence of significant methane involvement."
+  },
+  "completeness": {
+    "score": 3.5,
+    "rationale": "The report addresses most of the open questions, including the cause of the explosion and methane sources. However, it leaves some questions unresolved, such as the exact ignition source and the role of seismic activity."
+  },
+  "citation_correctness": {
+    "score": 4.5,
+    "rationale": "Most citations resolve correctly to the argument inventory, supporting the report's claims. A few citations, such as `[K-A12]`, are missing, but these do not significantly impact the overall traceability."
+  },
+  "narrative_coherence": {
+    "score": 4.0,
+    "rationale": "The report presents a coherent narrative, logically progressing from incident summary to conclusions and unresolved questions. Some transitions between sections could be smoother, but the overall structure is clear."
+  },
+  "defense_readiness": {
+    "score": 3.0,
+    "rationale": "The report is mostly ready for filing but requires an editing pass to address minor tone issues and ensure all citations are correctly resolved. Some sections may benefit from clearer articulation of contested points."
+  },
+  "overall_comments": "The report's strongest dimension is its factual accuracy, closely aligning with the ground-truth case file. Its weakest dimension is completeness, as some open questions remain unresolved. This weakness is structural, requiring deeper investigation rather than simple edits.",
+  "flagged_issues": [
+    "[K-A12] does not exist in the argument inventory",
+    "Unresolved open questions regarding ignition source and seismic activity"
+  ],
+  "overall_score": 3.8,
+  "judge_model": "gpt-4o"
+}

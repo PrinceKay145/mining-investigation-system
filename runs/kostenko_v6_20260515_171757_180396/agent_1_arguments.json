@@ -1,0 +1,65 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "The explosive methane originated from the K2 companion seam, which continuously released gas into the goaf and, because of the sub‑conveyor stagnation zone, accumulated to explosive concentrations in the upper part of longwall 48K3‑Z.",
+    "evidence": "K‑A2 reports methane concentrations up to 17.9 % at floor level near section 140; D‑A1 describes K2 seam thickness, 15 m³/t CH₄ content and lack of pre‑drainage boreholes; D‑A2 shows no sudden outburst but a small CH₄ rise (≈0.05 %) at 02:04‑02:12, consistent with gradual release.",
+    "warrant": "A continuous low‑rate release from a nearby seam will build up in a zone where airflow is weak. The measured high floor‑level CH₄ values and the geological proximity of K2 (3.35 m below K3) prove that K2 was the dominant source, while the stagnant sub‑conveyor area prevented dilution, allowing the mixture to reach the LEL.",
+    "confidence": 0.88,
+    "cause_categories": [
+      "TC-01",
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The ignition was most likely caused by mechanical sparking of the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor zone.",
+    "evidence": "K‑A4 documents eyewitness reports of visible sparks from the AFC chain and confirms that the sparking zone overlapped the measured methane accumulation area; U‑A3 lists the AFC chain among possible ignition items; D‑A6 records a CO spike at 02:24 s in the conveyor drift, consistent with a localized solid‑fuel fire rather than pure methane ignition.",
+    "warrant": "Mechanical sparks from the AFC chain provide sufficient energy (>0.2 mJ) to ignite a CH₄‑air mixture at 5‑15 % concentration. The coincidence of spark reports, high CH₄ levels, and immediate CO rise strongly points to the conveyor as the ignition source, outweighing the less‑direct evidence for angle‑grinder or aerosol can ignition.",
+    "confidence": 0.81,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Ignition location",
+    "claim": "The fire that initiated the accident started in the upper part of longwall 48K3‑Z, specifically in the conveyor drift adjacent to sections 142‑145.",
+    "evidence": "D‑A6 shows a CO increase at sensor OY32(2) at 02:24:20 followed 80 s later at OY42(2), matching airflow travel time from the conveyor drift to the mixing chamber; U‑A1 finds multiple ignition‑capable items (angle grinder, aerosol can, oil bottle) in the same area; K‑A6 records seismic epicenter and fan surge consistent with an event in lava 48K3‑Z.",
+    "warrant": "The earliest detectable combustion product (CO) appears at a sensor located in the conveyor drift, and the spatial‑temporal pattern of the sensor signals together with eyewitness phone calls (02:29) pinpoint the origin to sections 142‑145. Physical evidence of combustible items further corroborates this location.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "TC-01",
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Explosion type",
+    "claim": "The accident began with a methane deflagration that ignited a secondary coal‑dust cloud, producing a combined methane‑dust explosion that propagated along the conveyor routes for several kilometres.",
+    "evidence": "K‑A8 records a miner’s lamp video showing workers surviving the first shock wave, indicating that the initial event was a methane deflagration rather than a dust‑dominated blast; D‑A9 documents extensive settled coal dust on conveyor surfaces and a propagation pattern along fresh‑air side routes, which only dust explosions can achieve; D‑A7 notes pressure‑wave evidence and dust deposits consistent with a dust‑driven secondary phase.",
+    "warrant": "A pure methane explosion would be confined to the immediate gas pocket and would not travel 4 km along conveyors. The observed long‑range propagation, dust deposits, and survival of personnel after the first wave require a secondary dust explosion, which is triggered when the primary methane flame lifts and disperses coal dust, lowering the dust ignition threshold.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "Overall ventilation flow met design specifications, but the combined 1K‑N‑N‑vt scheme created a localized stagnant zone beneath the AFC where methane accumulated, representing a functional ventilation inadequacy rather than a total system failure.",
+    "evidence": "U‑A4 shows stable airflow readings (1943 m³/min in, 1507 m³/min out) eliminating a gross ventilation failure; D‑A3 confirms design airflow of 2572 m³/min and notes a leakage coefficient of 1.3, indicating that a portion of the air bypassed the sub‑conveyor area; K‑A2 and K‑A4 together identify the sub‑conveyor zone as the methane‑rich region where the AFC operated.",
+    "warrant": "Even with adequate total airflow, the geometry of the ventilation network can produce dead‑space where fresh air does not reach. The measured low air velocity (0.25 m/s) at floor level and the documented leakage coefficient demonstrate that the sub‑conveyor zone was effectively isolated, allowing methane to reach explosive limits despite overall compliance.",
+    "confidence": 0.84,
+    "cause_categories": [
+      "TC-06"
+    ]
+  }
+]

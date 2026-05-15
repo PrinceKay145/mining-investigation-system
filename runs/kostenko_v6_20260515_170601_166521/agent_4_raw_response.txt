@@ -1,0 +1,101 @@
+```json
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "Non-compliance with REG-01 regarding methane monitoring limits and automatic cutoff, as evidence suggests methane accumulation in sub-conveyor zones that was not adequately detected or controlled, leading to the explosion.",
+    "evidence": "REG-01, U-A1, K-A2, D-A3, D-A8",
+    "warrant": "Evidence K-A2 and D-A3 indicates that while average cross-section methane concentrations were below limits, stagnant sub-conveyor zones had elevated methane (1.2-17.9% at floor level in sections 128-142). REG-01 mandates continuous monitoring in longwall faces and outgoing air, and implicitly requires monitoring in areas prone to accumulation. The failure to detect or mitigate this localized accumulation, which was present at the ignition location (U-A1, D-A6) and likely contributed to the initial methane explosion (K-A2, D-A8), suggests a failure in the monitoring system's scope or effectiveness. Compliance with REG-01 would have required detection of these elevated levels and automatic power cutoff, potentially preventing ignition. The precedent case PREC-2021-04 (Shaktha Listvyazhnaya) also involved methane accumulation and gross violations of safety requirements, highlighting the critical nature of this regulation.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "TC-11",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "Non-compliance with REG-02 regarding ventilation scheme design, as the '1K-N-N-vt' combined ventilation scheme created structural vulnerabilities leading to methane accumulation in sub-conveyor zones, a condition that contributed to the accident.",
+    "evidence": "REG-02, D-A3, K-A2",
+    "warrant": "Evidence D-A3 explicitly states that the '1K-N-N-vt' combined ventilation scheme creates stagnant sub-conveyor zones where methane can accumulate, even if overall airflow meets design parameters. REG-02 requires ventilation schemes to prevent methane accumulation in such zones. The evidence K-A2 confirms methane accumulation in the sub-conveyor space of the longwall face. A properly designed ventilation scheme, compliant with REG-02, would have prevented or mitigated the formation of these methane-rich pockets, thereby reducing the likelihood of a methane explosion. The failure to address this known design flaw is a direct violation.",
+    "confidence": 0.90,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "Non-compliance with REG-03 regarding degasification of companion seams, as the K2 seam, a significant methane source, was not pre-drained, contributing to methane accumulation in the goaf and subsequent explosion.",
+    "evidence": "REG-03, D-A1, K-A2",
+    "warrant": "Evidence D-A1 states the K2 seam is approximately 5m thick, within 10m of the working seam (K3), and has a high methane content (~15 m3/t). REG-03 mandates pre-drainage boreholes for companion seams with gas content above 9 m3/t under these conditions. The evidence explicitly notes 'No borehole pre-drainage of K2 seam.' This failure to pre-drain the K2 seam allowed for continuous methane release into the goaf (D-A1, K-A2), creating the methane-rich environment that fueled the explosion. Compliance with REG-03 would have significantly reduced the methane load in the goaf, potentially preventing the accumulation to explosive levels.",
+    "confidence": 0.92,
+    "cause_categories": [
+      "TC-07",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "Violation of REG-05 by the presence of non-explosion-proof tools and flammable materials at the ignition location, which likely served as the ignition source for the methane explosion.",
+    "evidence": "REG-05, U-A1, U-A3, D-A5, D-A6",
+    "warrant": "Evidence U-A1 and U-A3 identifies an angle grinder with used disks, an aerosol can marked 'toxic and flammable', and a plastic bottle with synthetic oil at or near the ignition location (U-A1, D-A6). REG-05 explicitly prohibits non-explosion-proof portable tools (like angle grinders) in gas-hazardous areas and flammable aerosol products underground. While D-A5 states the ignition source is unknown, the presence of these items, identified as potential ignition sources (U-A3), directly violates REG-05. Compliance would have meant these items were not present or were properly secured and certified, thus removing a probable ignition source and preventing the explosion.",
+    "confidence": 0.80,
+    "cause_categories": [
+      "TC-02",
+      "TC-04",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "Non-compliance with REG-06 regarding coal dust explosion prevention, as evidence suggests inadequate dust control measures allowed for the propagation of a large-scale explosion.",
+    "evidence": "REG-06, D-A7, D-A9",
+    "warrant": "Evidence D-A7 and D-A9 describes the explosion propagating over 4+ km along conveyor transport routes, with destruction consistent with a powerful dust explosion. D-A9 notes coal dust accumulations on conveyor lines. REG-06 mandates mandatory dust control measures including stone dusting, water barriers, and regular dust sampling to ensure non-combustible content exceeds 70%. The extensive propagation and observed dust accumulations indicate that these measures were either not implemented effectively or were insufficient to prevent the explosion from becoming a large-scale event. Compliance with REG-06, including effective stone dusting and barrier maintenance, would have significantly limited or prevented the propagation of the explosion, mitigating its overall impact.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-10",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_006",
+    "source": "agent_4",
+    "topic": "Production control system",
+    "claim": "Failure of the internal production control system (REG-09) to identify and rectify hazardous conditions, specifically the methane accumulation in sub-conveyor zones and the presence of prohibited ignition sources.",
+    "evidence": "REG-09, U-A1, K-A2, D-A3, D-A5, D-A6",
+    "warrant": "Evidence K-A2 and D-A3 highlights methane accumulation in sub-conveyor zones, a condition that should have been identified and addressed by an effective production control system. Furthermore, U-A1 and D-A5 point to the presence of prohibited ignition sources (angle grinder, flammable aerosol) at the ignition location. REG-09 requires mines to maintain a functioning internal production control system to cover all shifts and ensure identified violations are corrected. The fact that these hazardous conditions persisted and contributed to the accident indicates a failure in the mine's internal oversight and corrective action processes. A robust production control system would have detected and rectified these issues, preventing the accident.",
+    "confidence": 0.80,
+    "cause_categories": [
+      "OC-01",
+      "TC-01",
+      "TC-02",
+      "TC-04",
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_4_007",
+    "source": "agent_4",
+    "topic": "Atmospheric data integrity",
+    "claim": "While not directly proven, the evidence regarding methane accumulation in sub-conveyor zones (K-A2, D-A3) raises concerns about the integrity and comprehensiveness of atmospheric monitoring data, potentially indicating a violation of REG-10.",
+    "evidence": "REG-10, K-A2, D-A3, U-A1, D-A6",
+    "warrant": "Evidence K-A2 and D-A3 clearly shows significant methane accumulation at floor level in sub-conveyor zones, which was not reflected in the average cross-section readings or outgoing air stream. REG-10 mandates that atmospheric monitoring data must not be modified or falsified and that discrepancies must be investigated. The discrepancy between localized high methane concentrations and the reported overall safe levels suggests that either the monitoring network was insufficient to capture these localized hazards, or that the data presented as 'safe' did not accurately reflect the true atmospheric conditions in critical areas. While direct evidence of data falsification is absent, the failure to capture and report these critical localized methane levels could be interpreted as a systemic failure in data integrity or reporting, which REG-10 aims to prevent. Compliance would have ensured that all hazardous methane accumulations were accurately reported and acted upon.",
+    "confidence": 0.60,
+    "cause_categories": [
+      "TC-01",
+      "TC-11",
+      "OC-04"
+    ]
+  }
+]
+```

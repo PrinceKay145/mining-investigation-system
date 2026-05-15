@@ -1,0 +1,64 @@
+```json
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "U-A1 cites the presence of an angle grinder but does not confirm its use at the ignition location; D-A5 notes no evidence of angle grinder use documented; K-A4 focuses on AFC sparking as the most probable ignition source.",
+    "warrant": "The angle grinder's presence alone does not prove it was the ignition source. The lack of documented use and the stronger evidence for AFC sparking (K-A4) make the angle grinder an uncertain factor. The confidence in U-A1 (0.75) may be overstated given the lack of direct evidence.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The explosion sequence may have involved a coal dust explosion earlier than currently proposed, as the initial fire could have lifted dust into suspension before the methane deflagration.",
+    "evidence": "D-A7 proposes a five-stage sequence, but D-A8 and K-A8 suggest miners survived the initial shock wave, which is inconsistent with a pure methane explosion; D-A9 notes coal dust accumulations on conveyor lines, which could have been ignited by the initial fire.",
+    "warrant": "The survival of miners after the shock wave (K-A8) suggests a less severe initial explosion, possibly from coal dust. The initial fire (U-A1) could have lifted dust into suspension, leading to a dust explosion that then triggered the methane deflagration. This alternative sequence is consistent with the evidence but not fully explored by the analysts.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design may have been adequate, but its operation was suboptimal, allowing methane to accumulate in stagnant zones.",
+    "evidence": "U-A4 and D-A3 confirm ventilation rates were within design specifications, but K-A2 and D-A3 note stagnant zones with high methane concentrations; D-A3 mentions a leakage coefficient of 1.3, indicating inefficiency.",
+    "warrant": "While the ventilation system met design airflow rates, the presence of stagnant zones with high methane concentrations suggests operational issues. The leakage coefficient indicates inefficiency, which could have been mitigated with better operational practices. The analysts' focus on design (agent_1_005, agent_2_003) may overlook operational shortcomings.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Degasification planning",
+    "claim": "The failure to pre-drain the K2 seam was a critical oversight, but the evidence does not conclusively prove that this was the sole cause of methane accumulation.",
+    "evidence": "K-A2 and D-A1 identify the K2 seam as a methane source, but D-A2 and K-A2 also note that methane could have been released due to roof movement or support adjustments, which are not directly linked to the lack of pre-drainage.",
+    "warrant": "While the lack of pre-drainage (agent_2_002, agent_4_003) is a significant factor, other mechanisms (e.g., roof movement) could have contributed to methane release. The analysts' confidence in this as a primary cause (0.82-0.8) may be overstated without ruling out other contributing factors.",
+    "confidence": 0.6,
+    "cause_categories": [
+      "TC-07"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Ignition location",
+    "claim": "The ignition location may not be as precisely determined as claimed, as the CO sensor data (D-A6) could reflect combustion from multiple sources or locations.",
+    "evidence": "D-A6 uses CO sensor data to pinpoint the ignition location, but U-A1 notes multiple potential ignition sources (angle grinder, aerosol can, oil bottle) in the same area; the CO spike could be from any of these or a combination.",
+    "warrant": "The CO sensor data (D-A6) is used to triangulate the ignition location, but the presence of multiple potential ignition sources (U-A1) complicates this conclusion. The confidence in D-A6 (0.9) may be overstated given the ambiguity in the evidence.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-02"
+    ]
+  }
+]
+```

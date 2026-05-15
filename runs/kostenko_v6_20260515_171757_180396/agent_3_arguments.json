@@ -1,0 +1,64 @@
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+    "evidence": "U-A1, U-A3, D-A5. U-A1 lists the angle grinder among possible ignition sources, but does not confirm it was used at the ignition location. D-A5 explicitly states the ignition source is unknown and may never be identified, noting that post-explosion wave damage may have destroyed evidence.",
+    "warrant": "The presence of the angle grinder in the conveyor drift does not prove it was used at the ignition location. The evidence for the angle grinder is circumstantial, and D-A5's assessment that the ignition source may never be identified is more consistent with the available data. The analysts' confidence in the AFC chain as the ignition source (agent_1_002) is overstated given the lack of definitive evidence.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-02"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The explosion sequence may have involved a coal dust explosion as the primary event, not a secondary one, given the propagation pattern and destruction evidence.",
+    "evidence": "D-A7, D-A9. D-A7 describes a five-stage sequence starting with a gas fire, but D-A9's evidence of extensive coal dust accumulations and the explosion's propagation along conveyor routes suggests a coal dust explosion could have been the initial event.",
+    "warrant": "The propagation pattern and destruction evidence are more consistent with a coal dust explosion as the primary event. The analysts' claim (agent_1_004) that the accident began with a methane deflagration may be an oversimplification, as the evidence does not definitively establish the sequence of events.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's adequacy is overstated — the stagnant sub-conveyor zone was a known risk that should have been addressed with additional controls, not just attributed to a functional inadequacy.",
+    "evidence": "D-A3, agent_1_005. D-A3 notes the ventilation scheme created a stagnant sub-conveyor zone, and agent_1_005 acknowledges this as a functional inadequacy. However, the evidence does not show that additional controls were implemented to mitigate this risk.",
+    "warrant": "The analysts' claim that the ventilation system was adequate (agent_1_005) is undermined by the evidence that the stagnant sub-conveyor zone was a known risk. The lack of additional controls to address this risk suggests a more significant failure in ventilation management.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-06"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The K2 seam may not have been the sole or primary source of methane — the evidence does not rule out contributions from other sources, such as the K3 seam or degasification failures.",
+    "evidence": "K-A2, D-A1, D-A2. K-A2 and D-A1 identify the K2 seam as the primary source, but D-A2's evidence of no sudden gas outburst does not rule out other sources. The evidence does not definitively establish the K2 seam as the sole or primary source.",
+    "warrant": "The analysts' claim (agent_1_001) that the K2 seam was the dominant source is overstated. The evidence does not rule out contributions from other sources, and the lack of definitive evidence for the K2 seam as the sole source suggests a more nuanced interpretation is warranted.",
+    "confidence": 0.6,
+    "cause_categories": [
+      "TC-01"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Regulatory compliance",
+    "claim": "The mine's failure to comply with REG-01 (methane monitoring) and REG-03 (degasification) was not the sole cause of the accident — the evidence suggests a combination of technical and organizational failures contributed to the accident.",
+    "evidence": "agent_4_001, agent_4_003, agent_2_002. The regulatory compliance checker (agent_4) identifies failures in methane monitoring and degasification, but the organizational and human factors analyst (agent_2) identifies additional failures in labor discipline and hazard recognition.",
+    "warrant": "The analysts' claims (agent_4_001, agent_4_003) that regulatory non-compliance was a primary cause are overstated. The evidence suggests a combination of technical and organizational failures contributed to the accident, and the regulatory failures were part of a broader systemic issue.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-01",
+      "TC-07",
+      "OC-01"
+    ]
+  }
+]

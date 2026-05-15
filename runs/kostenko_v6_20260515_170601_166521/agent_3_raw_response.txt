@@ -1,0 +1,85 @@
+```json
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The claim that the armored face conveyor (AFC) chain was the most probable ignition source (agent_1_001, agent_4_004) is not definitively supported by evidence, as the physical evidence of sparking is circumstantial and the presence of other ignition-capable items (angle grinder, aerosol) remains a strong possibility.",
+    "evidence": "K-A4 (witness testimony of sparking, manufacturer instructions), U-A1 (angle grinder, aerosol can, oil), U-A3 (multiple ignition-capable items), D-A5 (damaged shearer, no angle grinder use evidence at ignition location, ignition source unknown).",
+    "warrant": "While K-A4 provides witness testimony and manufacturer requirements for AFC sparking, it does not offer direct physical evidence of the AFC chain sparking *at the time of ignition*. The presence of an angle grinder and aerosol can (U-A1) at the ignition location, as noted by U-A1 and U-A3, presents equally plausible, if not more direct, ignition sources. D-A5 explicitly states the ignition source is unknown and that evidence of angle grinder use at the ignition location was absent. Therefore, concluding AFC sparking as the *most probable* source over other documented potential sources is an overreach of the available evidence, particularly given the high confidence assigned by agent_1 (0.85) and agent_4 (0.8).",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-02",
+      "TC-04"
+    ]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The assertion that coal dust was the *primary fuel* for the full-scale explosion (agent_1_004, agent_4_005) is challenged by evidence suggesting a significant methane component in the initial and subsequent explosions, particularly the 99.99% methane reading.",
+    "evidence": "D-A9 (propagation along conveyor routes, destruction consistent with dust explosion), K-A7 (99.99% methane displacement into workings, first explosion in goaf), K-A8 (worker survival time suggests methane-dominant explosion), D-A7 (sequence: fire -> methane deflagration -> initial dust explosion -> full-scale dust explosion).",
+    "warrant": "While D-A9 and agent_1_004 strongly argue for coal dust as the primary fuel for the *full-scale* explosion due to propagation patterns, K-A7's report of 99.99% methane in the workings after the initial event, and K-A8's argument that worker survival suggests a methane-dominant explosion, cannot be dismissed. The proposed sequence in D-A7 and agent_1_003 acknowledges an initial methane deflagration. The evidence does not definitively exclude a significant methane contribution to the overall explosion energy, even if coal dust was the dominant fuel for the *final, widespread propagation*. The confidence levels assigned to dust-dominant explosions (agent_1_004: 0.75, agent_4_005: 0.75) may be too high given the conflicting evidence regarding methane's role.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-01",
+      "TC-10"
+    ]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Methane source",
+    "claim": "The claim that the K2 companion seam was the *primary* source of elevated methane (agent_1_002, agent_2_001) overlooks the possibility that the working seam (K3) itself could have contributed significantly, especially given the geological dynamic hazard potential.",
+    "evidence": "K-A2 (K2 seam primary source, abutment pressure decompression), D-A1 (K2 seam continuously releasing CH4, no pre-drainage), D-A3 (no borehole drainage of K2), K-A1 (geological dynamic hazard).",
+    "warrant": "While K-A2 and D-A1 strongly implicate the K2 seam due to its proximity and lack of pre-drainage, they do not definitively exclude the K3 seam itself from contributing to methane accumulation, especially if geological dynamic hazards (TC-08) were active. K-A1 mentions geological dynamic hazard as a potential factor, but this is not fully explored by the analysts in relation to methane release from the K3 seam. The evidence for K2's contribution is strong, but labeling it as the *primary* source without fully assessing K3's potential contribution, especially in conjunction with dynamic events, might be premature. The confidence levels of 0.85 and 0.9 for this claim might be too high.",
+    "confidence": 0.6,
+    "cause_categories": [
+      "TC-01",
+      "TC-07",
+      "TC-08"
+    ]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The assertion that the ventilation scheme created a 'structural vulnerability' (agent_1_005, agent_2_003, agent_4_002) is a strong conclusion, but the evidence does not fully rule out that the *combination* of this vulnerability with other factors (e.g., specific operational practices, localized geological events) was necessary for the accumulation.",
+    "evidence": "D-A3 (combined scheme creates stagnant sub-conveyor zones), K-A2 (methane accumulation in sub-conveyor space), D-A1 (K2 seam continuous release), U-A4 (stable air velocity).",
+    "warrant": "Analysts consistently point to the ventilation scheme's design creating stagnant sub-conveyor zones (D-A3, K-A2). However, the evidence also shows stable air velocity (U-A4) and adequate overall airflow (U-A4, D-A3). This suggests the 'vulnerability' was a pre-existing condition that required specific circumstances to lead to dangerous accumulation. The evidence does not definitively prove that the ventilation scheme *alone* would have led to explosive methane levels without other contributing factors, such as specific operational activities or minor geological shifts that might have temporarily exacerbated gas release or reduced dilution in those specific zones. The confidence levels of 0.8 to 0.9 for this claim might be slightly inflated without further evidence on how the 'vulnerability' interacted with other factors.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-06",
+      "TC-01"
+    ]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Ignition location",
+    "claim": "The precise ignition location remains ambiguous, with conflicting evidence regarding the initial fire versus the initial methane explosion.",
+    "evidence": "U-A1 (initial ignition in upper part of longwall 48K3-Z, sections 142-145), D-A6 (initial fire at sections 142-145, CO sensor at 02:24:20), D-A8 (initial methane explosion most likely near section 20, distinct from fire location), K-A6 (explosion epicenter in upper part of longwall, seismic events at 02:43).",
+    "warrant": "U-A1 and D-A6 strongly suggest an initial *fire* at sections 142-145. However, D-A8 posits an initial *methane explosion* near section 20, distinct from the fire. K-A6 places the explosion epicenter in the upper longwall, aligning with the fire location but not resolving the distinction between fire and explosion origin. The evidence does not definitively establish whether the initial event was a fire igniting methane, or a methane explosion occurring near the fire. This ambiguity impacts the understanding of the sequence and the primary fuel source at the very outset. The confidence levels for specific ignition locations (e.g., agent_1_001: 0.85) may be too high given this discrepancy.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-01",
+      "TC-02",
+      "TC-04"
+    ]
+  },
+  {
+    "id": "agent_3_006",
+    "source": "agent_3",
+    "topic": "Seismic activity",
+    "claim": "The role of seismic activity (K-A6) as a potential trigger for methane release or ignition is not sufficiently explored by any analyst, despite its mention as a geological dynamic hazard.",
+    "evidence": "K-A6 (two seismic events recorded at 02:43:32 and 02:43:34, presumed epicenter includes lava 48K3-Z), K-A1 (geological_dynamic_hazard).",
+    "warrant": "K-A6 notes seismic events occurring shortly before the main explosion. K-A1 lists 'geological_dynamic_hazard' as a cause category. However, none of the analysts explicitly investigate whether these seismic events could have contributed to methane release from the K2 or K3 seams (TC-01, TC-07) or potentially even provided an ignition source (TC-08). The timing of the seismic events (02:43) is close to the reported explosion times, and their potential role as a trigger for gas release or even a direct ignition source (e.g., frictional heating from rock movement) remains an unaddressed question. This is a significant gap in understanding the full causal chain.",
+    "confidence": 0.5,
+    "cause_categories": [
+      "TC-08",
+      "TC-01",
+      "TC-07"
+    ]
+  }
+]
+```

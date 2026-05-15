@@ -1,0 +1,75 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, violating explosion safety protocols.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; D-A5: no evidence of angle grinder use documented, but physical presence confirmed.",
+    "warrant": "The presence of non-explosion-proof tools and flammable substances in a methane-prone area indicates a breakdown in supervision and enforcement of safety rules. These items should have been prohibited underground per standard safety regulations. Their presence reflects a systemic failure in labor discipline and daily oversight (OC-06).",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Degasification planning",
+    "claim": "Failure to implement pre-drainage of the K2 companion seam constituted a critical organizational oversight in degasification planning, allowing uncontrolled methane release into the longwall goaf.",
+    "evidence": "K-A2: K2 seam identified as primary methane source due to abutment pressure decompression; D-A1: no borehole pre-drainage of K2 seam despite 15 m3/t gas content; D-A3: isolation methane removal system only captured 34.1% of CH4, indicating incomplete control.",
+    "warrant": "The absence of pre-drainage boreholes for a known, high-gas companion seam reflects a failure in hazard recognition and technical planning. This is a recurring risk in multi-seam mining operations and should have been addressed in project documentation and degasification design (OC-08, OC-07). Precedent PREC-2021-04 involved similar unmitigated methane sources.",
+    "confidence": 0.82,
+    "cause_categories": [
+      "OC-08",
+      "OC-09"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine's ventilation scheme was operated in violation of technical documentation by maintaining a combined 1K-N-N-vt system that created stagnant zones prone to methane accumulation, despite known design vulnerabilities.",
+    "evidence": "D-A3: ventilation operated within design airflow but used a combined scheme creating stagnant sub-conveyor zones; K-A2: methane accumulated at floor level in sections 128-142 due to poor mixing; leakage coefficient 1.3 indicates inefficiency.",
+    "warrant": "Operating a ventilation system with known structural vulnerabilities in methane-prone areas constitutes a violation of technical documentation (OC-05). The persistent use of a scheme that allows undiluted methane buildup in low-velocity zones suggests production priorities overrode safety considerations, a pattern seen in prior methane explosions.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "Management failed to recognize and act on the hazard posed by mechanical sparking from the armored face conveyor in methane-rich environments, despite manufacturer instructions and historical precedent.",
+    "evidence": "K-A4: sparking observed on AFC; manufacturer instruction 9.2.1 requires compressed air ventilation of scraper chain when methane is present; sparking zone coincides with methane accumulation; 16% of Russian coal mine explosions attributed to conveyor sparking (2004–2019).",
+    "warrant": "The failure to implement a known mitigation measure (compressed air ventilation) in a high-risk area indicates a systemic hazard recognition failure (OC-10). Historical data on conveyor sparking as a leading ignition source should have prompted procedural changes or engineering controls.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-10"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Production control and supervision systems failed to detect or prevent unauthorized work activities and unsafe conditions, including the use of prohibited equipment and unmitigated methane accumulation zones.",
+    "evidence": "U-A1: angle grinder, flammable aerosol, and synthetic oil found at ignition site; D-A6: CO spike at 02:24:20 preceded phone call by 5 minutes, indicating delayed response; no record of work permits or safety checks for hot work.",
+    "warrant": "The presence of multiple ignition-capable items and the lack of immediate reporting indicate a breakdown in real-time supervision and production control (OC-01). Supervisors should have enforced work permit systems and conducted inspections to prevent such conditions.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Naryad-dopusk compliance",
+    "claim": "Work was conducted without proper authorization or safety briefing, as evidenced by the presence of unapproved tools and flammable materials in active mining areas.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can and synthetic oil bottle present; no documentation of approved hot work or material transport underground.",
+    "warrant": "The use of tools and materials that require special permits (naryad-dopusk) without documented authorization indicates a violation of the work assignment system (OC-02). This reflects a culture where procedural compliance is weak and informal practices override formal safety protocols.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-02"
+    ]
+  }
+]

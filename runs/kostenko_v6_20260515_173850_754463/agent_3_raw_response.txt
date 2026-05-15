@@ -1,0 +1,54 @@
+```json
+[
+  {
+    "id": "agent_3_001",
+    "source": "agent_3",
+    "topic": "Ignition source",
+    "claim": "The ignition source remains undetermined — the evidence for the angle grinder, aerosol can, and synthetic oil is circumstantial and no expert confirmed their use at the exact ignition time or location.",
+    "evidence": "U-A1, U-A3, D-A5. The angle grinder and other items were found after the fire, and their temporal correlation to the ignition event is unclear. D-A5 notes that the explosion may have destroyed evidence, making the ignition source unidentifiable.",
+    "warrant": "The presence of ignition-capable items does not prove they were the cause. The lack of direct evidence linking these items to the ignition time (02:24) and the absence of confirmed use at that time weaken the conclusion that they were the ignition source. This aligns with D-A5's assessment that the source may never be identified.",
+    "confidence": 0.7,
+    "cause_categories": ["TC-02", "TC-04"]
+  },
+  {
+    "id": "agent_3_002",
+    "source": "agent_3",
+    "topic": "Explosion type",
+    "claim": "The evidence supports a primary coal dust explosion rather than a methane deflagration, as the propagation pattern and damage scale are more consistent with dust explosions.",
+    "evidence": "D-A7, D-A9. The explosion propagated over 4+ km along conveyor routes, which is characteristic of coal dust explosions. The destruction pattern and body fragmentation also align with a dust explosion. K-A8's video evidence of workers remaining conscious post-shock could also be explained by a dust explosion with delayed CO effects.",
+    "warrant": "Methane explosions typically do not propagate over such long distances or follow conveyor routes. The scale and propagation of the explosion are more consistent with a coal dust explosion, as noted in D-A9. The initial methane fire may have triggered the dust explosion, but the primary energy source was likely coal dust.",
+    "confidence": 0.65,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_3_003",
+    "source": "agent_3",
+    "topic": "Ventilation",
+    "claim": "The ventilation system's design was not the primary cause of methane accumulation, as the stagnant sub-conveyor zone was a known issue that should have been mitigated through additional controls rather than system redesign.",
+    "evidence": "D-A3, agent_1_004. The ventilation system met design flow rates, but the 1K-N-N-vt scheme created a stagnant zone. However, the lack of pre-drainage boreholes for the K2 seam (K-A2, D-A1) was a more direct cause of methane accumulation.",
+    "warrant": "While the ventilation design contributed to the issue, the primary failure was the absence of degasification measures for the K2 seam. The stagnant zone was a known issue, and additional controls (e.g., local ventilation, monitoring) could have mitigated the risk without redesigning the entire system.",
+    "confidence": 0.75,
+    "cause_categories": ["TC-06", "TC-07"]
+  },
+  {
+    "id": "agent_3_004",
+    "source": "agent_3",
+    "topic": "Explosion sequence",
+    "claim": "The explosion sequence may have involved a methane fire followed by a coal dust explosion, but the evidence does not conclusively establish the order or dominance of the two events.",
+    "evidence": "D-A7, K-A8, agent_1_005. The sequence proposed by agent_1_005 is plausible, but the evidence for the initial methane deflagration is weaker than the evidence for the coal dust explosion. The propagation pattern and damage scale are more consistent with a dust explosion.",
+    "warrant": "The initial methane fire is inferred from the CO spike (D-A6), but the subsequent explosion's characteristics (propagation, damage) are more consistent with a coal dust explosion. The sequence is uncertain, and the dominance of methane or dust in the explosion is not definitively established.",
+    "confidence": 0.6,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_3_005",
+    "source": "agent_3",
+    "topic": "Organizational and Human Factors",
+    "claim": "The organizational failures identified (e.g., labor discipline, supervision) are plausible but not the sole or primary cause, as the technical failures (e.g., degasification, ventilation) were more directly responsible for the accident.",
+    "evidence": "agent_2_001, agent_2_002, agent_2_004. While these failures contributed to the accident, the technical failures (e.g., lack of K2 pre-drainage, stagnant ventilation zone) were more directly responsible for the methane accumulation and ignition.",
+    "warrant": "Organizational failures may have enabled the presence of ignition sources, but the primary cause was the technical failure to control methane accumulation. The technical failures were more directly linked to the accident's root causes.",
+    "confidence": 0.7,
+    "cause_categories": ["OC-01", "OC-06", "TC-01", "TC-07"]
+  }
+]
+```

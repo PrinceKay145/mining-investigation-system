@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_1_001",
+    "source": "agent_1",
+    "topic": "Methane source",
+    "claim": "The explosive methane originated from the K2 companion seam, which released gas into the sub‑conveyor zone of the upper longwall 48K3‑Z because the abutment pressure zone created a local ventilation dead‑space where methane could accumulate to >5%.",
+    "evidence": "K-A2 reports floor‑level methane up to 17.9% at section 140 and stagnant air velocity (0.25 m/s) in the sub‑conveyor zone; D-A1 describes continuous K2 emission (~15 m³/t) and lack of pre‑drainage boreholes; U-A4 shows overall ventilation flow was stable, so the accumulation must be local.",
+    "warrant": "High measured concentrations together with very low local air speed indicate that methane from the K2 seam was not being swept away. The abutment pressure zone is known to fracture the K2 seam and inject gas into the goaf; without dedicated drainage, the gas pools in the dead‑space, creating an explosive atmosphere while bulk ventilation readings remain normal.",
+    "confidence": 0.88,
+    "cause_categories": ["TC-01", "TC-07"]
+  },
+  {
+    "id": "agent_1_002",
+    "source": "agent_1",
+    "topic": "Ignition source",
+    "claim": "The ignition energy was supplied by mechanical sparking of the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor zone.",
+    "evidence": "K-A4 documents witness reports of visible sparks from the AFC chain, manufacturer instructions requiring compressed‑air ventilation when methane is present, and a statistical link (16% of Russian explosions) between conveyor sparking and methane ignition; U-A1 and U-A3 note presence of combustible items but CO sensor data (sharp rise at 02:24) is consistent with solid‑fuel combustion rather than pure methane, supporting a localized hot‑spot created by a spark.",
+    "warrant": "A mechanical spark provides sufficient energy (>0.2 mJ) to ignite a methane‑air mixture at concentrations >5%. The AFC chain operates continuously in the identified zone, and the observed sparks coincide temporally with the CO spike, making the chain the most plausible ignition source despite the presence of other combustible objects.",
+    "confidence": 0.79,
+    "cause_categories": ["TC-02"]
+  },
+  {
+    "id": "agent_1_003",
+    "source": "agent_1",
+    "topic": "Explosion type",
+    "claim": "The primary explosion was a methane deflagration; a secondary coal‑dust explosion was triggered by the pressure wave and contributed to the extensive propagation of the blast.",
+    "evidence": "K-A6 locates the epicenter in the upper longwall at 02:43, matching the time of the methane‑rich environment; K-A8 shows workers remained conscious after the shock, inconsistent with a pure dust explosion; D-A9 provides evidence of abundant settled coal dust on conveyor routes and a 4 km blast travel distance, which requires dust as a propagating fuel.",
+    "warrant": "A methane deflagration can generate a pressure wave sufficient to lift and disperse settled coal dust, creating a combustible dust cloud that then detonates, extending the blast along the conveyor network. The initial high‑temperature fire (CO spike) ignites methane; the subsequent dust explosion explains the long‑range damage while the survival of miners indicates methane was the dominant initial energy source.",
+    "confidence": 0.81,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_1_004",
+    "source": "agent_1",
+    "topic": "Explosion sequence",
+    "claim": "The accident progressed as follows: (1) gas fire began at 02:24 in sections 142‑145 (CO spike); (2) mechanical spark ignited the methane‑rich atmosphere at ~02:43, producing the first methane explosion; (3) the resulting pressure wave entrained coal dust from the conveyor and support surfaces; (4) a secondary dust explosion propagated along the ventilation and transport routes, reaching distant workings.",
+    "evidence": "D-A6 records CO rise at 02:24:20 confirming fire start; K-A6 timestamps seismic events at 02:43:32‑34 indicating the first explosion; K-A7 and D-A1 describe methane displacement to 99.99% after the first blast; D-A9 documents dust accumulation and long‑range blast path.",
+    "warrant": "The temporal ordering of sensor data (CO → seismic → methane surge) matches the described steps. A methane explosion alone cannot travel several kilometres; dust entrainment provides the necessary fuel for the observed propagation, fitting the physical model of a primary gas explosion followed by a secondary dust explosion.",
+    "confidence": 0.78,
+    "cause_categories": ["TC-01", "TC-10"]
+  },
+  {
+    "id": "agent_1_005",
+    "source": "agent_1",
+    "topic": "Ventilation",
+    "claim": "Overall ventilation flow met design specifications, but the combined 1K‑N‑N‑vt scheme created a stagnant sub‑conveyor zone where methane accumulated, representing a functional ventilation failure in that micro‑environment.",
+    "evidence": "U-A4 shows global airflow was stable (1943 m³/min inlet, 1507 m³/min outlet); D-A3 notes the scheme’s structural vulnerability to methane build‑up in the lower longwall sub‑conveyor area; K-A2 and K-A4 identify the same zone as the location of high methane and ignition.",
+    "warrant": "Even with adequate total airflow, poor airflow distribution can produce local dead‑spaces. The measured air speed of 0.25 m/s (K-A2) is far below the design minimum needed to dilute methane, confirming a localized ventilation inadequacy that allowed explosive concentrations to develop.",
+    "confidence": 0.84,
+    "cause_categories": ["TC-06"]
+  }
+]

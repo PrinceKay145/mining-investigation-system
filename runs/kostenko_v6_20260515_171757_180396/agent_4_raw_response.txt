@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "The mine failed to comply with REG-01, as the methane monitoring system did not automatically cutoff power to electrical equipment when the 1.0% CH4 threshold was reached, contributing to the accident",
+    "evidence": "U-A1, U-A4, REG-01",
+    "warrant": "The evidence shows that the methane concentration exceeded the permissible limit, and the automatic cutoff system was not functioning correctly, allowing the ignition source to remain active and cause the explosion",
+    "confidence": 0.85,
+    "cause_categories": ["TC-01", "OC-01"]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "The mine's ventilation scheme did not meet the requirements of REG-02, as it failed to prevent methane accumulation in sub-conveyor zones, contributing to the accident",
+    "evidence": "K-A2, D-A3, REG-02",
+    "warrant": "The evidence shows that the ventilation design was inadequate, allowing methane to accumulate in the sub-conveyor zone and creating an explosive atmosphere",
+    "confidence": 0.80,
+    "cause_categories": ["TC-06", "OC-05"]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "The mine failed to comply with REG-03, as it did not conduct pre-drainage boreholes for the companion seam, contributing to the accident",
+    "evidence": "K-A2, D-A1, REG-03",
+    "warrant": "The evidence shows that the mine did not follow the required degasification procedures, allowing methane to accumulate in the goaf and contributing to the explosion",
+    "confidence": 0.75,
+    "cause_categories": ["TC-07", "OC-01"]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "The mine used non-explosion-proof equipment, violating REG-05, and contributing to the accident",
+    "evidence": "U-A1, K-A4, REG-05",
+    "warrant": "The evidence shows that the mine used equipment that was not certified as explosion-proof, increasing the risk of ignition and contributing to the accident",
+    "confidence": 0.70,
+    "cause_categories": ["TC-02", "OC-06"]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "The mine failed to comply with REG-06, as it did not maintain adequate dust control measures, contributing to the secondary explosion",
+    "evidence": "D-A7, D-A9, REG-06",
+    "warrant": "The evidence shows that the mine did not follow the required dust control procedures, allowing coal dust to accumulate and contribute to the secondary explosion",
+    "confidence": 0.65,
+    "cause_categories": ["TC-10", "OC-05"]
+  }
+]

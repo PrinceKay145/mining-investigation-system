@@ -1,0 +1,25 @@
+{
+  "primary_type": "methane_explosion",
+  "secondary_types": [
+    "underground_gas_fire"
+  ],
+  "cause_profile": {
+    "TC-02": 5,
+    "TC-04": 3,
+    "TC-05": 3,
+    "TC-06": 2,
+    "TC-08": 2,
+    "TC-01": 7,
+    "TC-07": 2,
+    "TC-03": 1,
+    "TC-10": 2
+  },
+  "type_votes": {
+    "underground_gas_fire": 20,
+    "methane_explosion": 25,
+    "surface_fire": 3,
+    "endogenous_fire": 3,
+    "gas_outburst": 2,
+    "coal_dust_explosion": 2
+  }
+}

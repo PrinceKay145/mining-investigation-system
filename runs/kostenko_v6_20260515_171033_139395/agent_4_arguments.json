@@ -1,0 +1,67 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "The mine did not comply with REG-01, as the methane monitoring system did not automatically cut off power when the 1.0% CH4 threshold was reached, contributing to the accident.",
+    "evidence": "U-A1, K-A2, REG-01",
+    "warrant": "The evidence shows that methane levels exceeded 1.0% in the outgoing air stream, and there is no indication that power was automatically cut off, which would have prevented the ignition of the methane-air mixture.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "The mine's ventilation scheme did not meet the requirements of REG-02, as it failed to prevent methane accumulation in sub-conveyor zones, contributing to the accident.",
+    "evidence": "K-A2, D-A3, REG-02",
+    "warrant": "The evidence indicates that the ventilation scheme created stagnant zones where methane could accumulate, and the mine's design did not account for this, leading to a hazardous atmosphere.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "The mine did not comply with REG-03, as it failed to properly degasify the companion seam, leading to uncontrolled methane release and contributing to the accident.",
+    "evidence": "K-A2, D-A1, REG-03",
+    "warrant": "The evidence shows that the mine did not drill pre-drainage boreholes for the companion seam, and the gas balance calculations were not performed, which would have helped to prevent the methane accumulation.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-07",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "The mine did not ensure that all electrical equipment was explosion-proof, as required by REG-05, which may have contributed to the ignition of the methane-air mixture.",
+    "evidence": "U-A1, K-A5, REG-05",
+    "warrant": "The evidence indicates that non-explosion-proof equipment was present in the mine, and while it is not directly linked to the ignition, it increases the risk of an explosion.",
+    "confidence": 0.65,
+    "cause_categories": [
+      "TC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "The mine did not comply with REG-06, as it failed to maintain adequate dust control measures, which contributed to the secondary explosion and propagation of the fire.",
+    "evidence": "D-A7, D-A9, REG-06",
+    "warrant": "The evidence shows that coal dust accumulations were present on conveyor lines, and the mine did not maintain the required stone dusting program, which would have helped to prevent the secondary explosion.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-10",
+      "OC-05"
+    ]
+  }
+]

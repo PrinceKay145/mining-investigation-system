@@ -1,0 +1,2490 @@
+{
+  "attack_relations": [
+    {
+      "id": "ATK-V5-001",
+      "attacker": "U-A3",
+      "target": "D-A5",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific external ignition source, while Argument B concludes the ignition source is unknown, directly contradicting each other’s conclusions."
+    },
+    {
+      "id": "ATK-V5-002",
+      "attacker": "D-A5",
+      "target": "U-A3",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific external ignition source, while Argument B concludes the ignition source is unknown, directly contradicting each other’s conclusions."
+    },
+    {
+      "id": "ATK-V5-003",
+      "attacker": "U-A3",
+      "target": "agent_3_001",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source, while Argument B explicitly states the ignition source is undetermined, making their conclusions directly incompatible."
+    },
+    {
+      "id": "ATK-V5-004",
+      "attacker": "agent_3_001",
+      "target": "U-A3",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source, while Argument B explicitly states the ignition source is undetermined, making their conclusions directly incompatible."
+    },
+    {
+      "id": "ATK-V5-005",
+      "attacker": "K-A6",
+      "target": "D-A8",
+      "type": "rebutting",
+      "description": "Both arguments assert the same event (the initial explosion) but place its epicenter at mutually exclusive locations; thus their conclusions are directly incompatible."
+    },
+    {
+      "id": "ATK-V5-006",
+      "attacker": "D-A8",
+      "target": "K-A6",
+      "type": "rebutting",
+      "description": "Both arguments assert the same event (the initial explosion) but place its epicenter at mutually exclusive locations; thus their conclusions are directly incompatible."
+    },
+    {
+      "id": "ATK-V5-007",
+      "attacker": "K-A7",
+      "target": "D-A7",
+      "type": "rebutting",
+      "description": "Argument A concludes the first explosion was a methane event within 120m of the face, while Argument B asserts an initial dust explosion followed by a coal dust blast; the two conclusions cannot both be true for the same event sequence."
+    },
+    {
+      "id": "ATK-V5-008",
+      "attacker": "D-A7",
+      "target": "K-A7",
+      "type": "rebutting",
+      "description": "Argument A concludes the first explosion was a methane event within 120m of the face, while Argument B asserts an initial dust explosion followed by a coal dust blast; the two conclusions cannot both be true for the same event sequence."
+    },
+    {
+      "id": "ATK-V5-009",
+      "attacker": "K-A4",
+      "target": "agent_3_001",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source (AFC chain sparking), while Argument B explicitly states the ignition source remains undetermined, directly contradicting A’s conclusion."
+    },
+    {
+      "id": "ATK-V5-010",
+      "attacker": "agent_3_001",
+      "target": "K-A4",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source (AFC chain sparking), while Argument B explicitly states the ignition source remains undetermined, directly contradicting A’s conclusion."
+    },
+    {
+      "id": "ATK-V5-011",
+      "attacker": "K-A8",
+      "target": "D-A9",
+      "type": "rebutting",
+      "description": "Argument A concludes methane was the primary fuel, while Argument B concludes coal dust was the primary fuel; the two conclusions are directly incompatible and cannot both be true."
+    },
+    {
+      "id": "ATK-V5-012",
+      "attacker": "D-A9",
+      "target": "K-A8",
+      "type": "rebutting",
+      "description": "Argument A concludes methane was the primary fuel, while Argument B concludes coal dust was the primary fuel; the two conclusions are directly incompatible and cannot both be true."
+    },
+    {
+      "id": "ATK-V5-013",
+      "attacker": "U-A3",
+      "target": "agent_1_002",
+      "type": "rebutting",
+      "description": "Both arguments assert different ignition mechanisms for the same event; they cannot both be true, making the claims directly incompatible."
+    },
+    {
+      "id": "ATK-V5-014",
+      "attacker": "agent_1_002",
+      "target": "U-A3",
+      "type": "rebutting",
+      "description": "Both arguments assert different ignition mechanisms for the same event; they cannot both be true, making the claims directly incompatible."
+    },
+    {
+      "id": "ATK-V5-015",
+      "attacker": "D-A5",
+      "target": "agent_1_002",
+      "type": "rebutting",
+      "description": "Argument A concludes the ignition source is unknown, while Argument B asserts a specific mechanical spark source, directly contradicting each other."
+    },
+    {
+      "id": "ATK-V5-016",
+      "attacker": "agent_1_002",
+      "target": "D-A5",
+      "type": "rebutting",
+      "description": "Argument A concludes the ignition source is unknown, while Argument B asserts a specific mechanical spark source, directly contradicting each other."
+    },
+    {
+      "id": "ATK-V5-017",
+      "attacker": "D-A9",
+      "target": "agent_1_004",
+      "type": "rebutting",
+      "description": "Each argument asserts a different primary cause for the explosion (coal dust vs methane), and the evidence and warrants directly conflict, making the conclusions mutually exclusive."
+    },
+    {
+      "id": "ATK-V5-018",
+      "attacker": "agent_1_004",
+      "target": "D-A9",
+      "type": "rebutting",
+      "description": "Each argument asserts a different primary cause for the explosion (coal dust vs methane), and the evidence and warrants directly conflict, making the conclusions mutually exclusive."
+    },
+    {
+      "id": "ATK-V5-019",
+      "attacker": "agent_1_002",
+      "target": "agent_2_001",
+      "type": "undercutting",
+      "description": "Argument B shows that other ignition-capable items were present, weakening Argument A’s claim that the AFC chain was the most likely source by revealing additional plausible ignition mechanisms."
+    },
+    {
+      "id": "ATK-V5-020",
+      "attacker": "agent_1_002",
+      "target": "agent_3_001",
+      "type": "undercutting",
+      "description": "Argument B casts doubt on the reliability of the evidence and warrant used by Argument A, weakening A’s claim that the AFC chain spark is the most probable ignition source."
+    },
+    {
+      "id": "ATK-V5-021",
+      "attacker": "agent_2_001",
+      "target": "agent_3_001",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source (angle grinder and related materials), while Argument B explicitly states the ignition source remains undetermined, directly contradicting A’s conclusion."
+    },
+    {
+      "id": "ATK-V5-022",
+      "attacker": "agent_3_001",
+      "target": "agent_2_001",
+      "type": "rebutting",
+      "description": "Argument A asserts a specific ignition source (angle grinder and related materials), while Argument B explicitly states the ignition source remains undetermined, directly contradicting A’s conclusion."
+    },
+    {
+      "id": "ATK-V5-023",
+      "attacker": "agent_3_003",
+      "target": "agent_1_005",
+      "type": "undercutting",
+      "description": "Argument B weakens Argument A’s claim that ventilation was the primary cause by stating the evidence is inconclusive, thereby undermining A’s basis without directly contradicting its conclusion."
+    },
+    {
+      "id": "ATK-V5-024",
+      "attacker": "agent_3_003",
+      "target": "agent_2_003",
+      "type": "undercutting",
+      "description": "Argument B weakens Argument A’s claim that the ventilation scheme was the primary cause of methane accumulation by stating the evidence does not conclusively prove it was the main factor."
+    }
+  ],
+  "support_relations": [
+    {
+      "id": "SUP-V5-001",
+      "supporters": [
+        "U-A1",
+        "D-A6"
+      ],
+      "topic": "Ignition location",
+      "description": "Both arguments conclude the initial ignition occurred in the upper part of longwall 48K3-Z near sections 142‑145, each providing independent evidence (physical inspection vs. CO sensor data) that reinforces the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-002",
+      "supporters": [
+        "U-A2",
+        "D-A4"
+      ],
+      "topic": "Spontaneous combustion",
+      "description": "Both arguments independently conclude that spontaneous combustion was excluded as an ignition source, using different but consistent evidence and warrants, thereby reinforcing each other.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-003",
+      "supporters": [
+        "U-A2",
+        "K-A3"
+      ],
+      "topic": "Spontaneous combustion",
+      "description": "Both arguments independently conclude that spontaneous combustion is excluded, each providing separate evidence and warrants that reinforce the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-004",
+      "supporters": [
+        "U-A3",
+        "agent_2_001"
+      ],
+      "topic": "Ignition source",
+      "description": "Both arguments identify the same ignition-capable items (angle grinder, aerosol can, synthetic oil) as the source of ignition; B adds a contextual explanation of organizational failure, reinforcing A’s conclusion rather than contradicting it.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-005",
+      "supporters": [
+        "U-A4",
+        "D-A3"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments agree that the ventilation system was operating within acceptable limits; A rules out a sudden failure, while B explains how the design scheme could still allow methane buildup, reinforcing the overall assessment that ventilation failure was not the cause.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-006",
+      "supporters": [
+        "U-A4",
+        "agent_1_005"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments agree that overall ventilation met design specs; A rules out a total system failure while B identifies a localized ventilation inadequacy, reinforcing each other’s conclusions.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-007",
+      "supporters": [
+        "U-A1",
+        "agent_1_003"
+      ],
+      "topic": "Ignition location",
+      "description": "Both arguments conclude the ignition occurred in the upper part of longwall 48K3‑Z near sections 142‑145, and each cites similar physical evidence and CO data, reinforcing the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-008",
+      "supporters": [
+        "K-A1",
+        "D-A2"
+      ],
+      "topic": "Gas-dynamic event",
+      "description": "Both arguments conclude that no significant gas outburst occurred; A rules out pressure as a cause, while B observes no outburst in the data, reinforcing the same overall conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-009",
+      "supporters": [
+        "K-A2",
+        "D-A1"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments attribute the methane at the ignition location to the K2 seam, providing complementary evidence that reinforces the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-010",
+      "supporters": [
+        "K-A2",
+        "agent_1_001"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments identify the K2 companion seam as the source of methane and cite the same floor‑level concentrations and stagnant airflow; they reinforce each other rather than contradict or undermine.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-011",
+      "supporters": [
+        "U-A4",
+        "agent_3_003"
+      ],
+      "topic": "Ventilation",
+      "description": "Argument B acknowledges Argument A’s evidence that ventilation rates were stable and uses it to conclude that ventilation failure was not the primary cause, thereby reinforcing A’s claim rather than contradicting it.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-012",
+      "supporters": [
+        "K-A3",
+        "D-A4"
+      ],
+      "topic": "Spontaneous combustion",
+      "description": "Both arguments independently conclude that spontaneous combustion is excluded, each providing separate evidence (lab classification and CO/H2 monitoring for A; goaf CO monitoring for B) that reinforces the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-013",
+      "supporters": [
+        "K-A2",
+        "agent_3_004"
+      ],
+      "topic": "Methane source",
+      "description": "Argument B acknowledges K2 as a primary source (as Argument A states) while adding that other factors may also contribute, which is compatible with and reinforces Argument A’s claim.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-014",
+      "supporters": [
+        "D-A1",
+        "agent_1_001"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments independently conclude that the K2 seam was the source of the explosive methane, each citing continuous CH4 release and lack of pre‑drainage, thereby reinforcing the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-015",
+      "supporters": [
+        "K-A4",
+        "agent_1_002"
+      ],
+      "topic": "Ignition source",
+      "description": "Both arguments assert that the most probable ignition source was a mechanical spark from the AFC chain in the methane‑rich zone, using identical witness testimony and manufacturer instructions, thus they reinforce each other.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-016",
+      "supporters": [
+        "D-A1",
+        "agent_2_002"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments assert that the K2 seam was releasing methane into the goaf, with B attributing this to a planning failure and A describing the physical release; they reinforce the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-017",
+      "supporters": [
+        "D-A1",
+        "agent_3_004"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments conclude that the K2 seam was a significant methane source; Argument B merely adds that other factors may also have contributed, which does not contradict but complements Argument A.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-018",
+      "supporters": [
+        "D-A3",
+        "agent_1_005"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments conclude that overall ventilation met design specs but the 1K‑N‑N‑vt scheme created a stagnant sub‑conveyor zone where methane could accumulate; they reinforce the same conclusion with complementary evidence.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-019",
+      "supporters": [
+        "K-A8",
+        "agent_3_002"
+      ],
+      "topic": "Explosion type",
+      "description": "Argument B incorporates Argument A’s claim that methane was the initial driver while adding evidence of a secondary coal dust explosion, thereby reinforcing rather than contradicting A’s conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-020",
+      "supporters": [
+        "D-A3",
+        "agent_2_003"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments assert that the ventilation scheme was operating within design parameters yet created structural vulnerability to methane accumulation in sub-conveyor zones, reinforcing each other’s conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-021",
+      "supporters": [
+        "K-A8",
+        "agent_1_004"
+      ],
+      "topic": "Explosion type",
+      "description": "Both arguments conclude that methane was the primary driver of the explosion and that coal dust played only a secondary, limited role; they use different evidence but reinforce the same overall claim.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-022",
+      "supporters": [
+        "D-A5",
+        "agent_2_001"
+      ],
+      "topic": "Ignition source",
+      "description": "Both arguments converge on the likelihood of a mechanical ignition source: A identifies mechanical sparks as the most probable category, while B highlights the presence of ignition-capable tools that could have caused such a spark, reinforcing the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-023",
+      "supporters": [
+        "D-A3",
+        "agent_3_003"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments agree that the ventilation system was operating within design parameters and that its design created structural vulnerabilities leading to methane accumulation; B merely adds uncertainty about it being the primary cause, which does not contradict A.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-024",
+      "supporters": [
+        "D-A7",
+        "agent_2_005"
+      ],
+      "topic": "Explosion sequence",
+      "description": "Argument B uses the same evidence and sequence described in Argument A to argue that the failure to control coal dust was a systemic safety lapse, reinforcing A’s conclusion rather than contradicting or undermining it.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-025",
+      "supporters": [
+        "agent_1_001",
+        "agent_3_004"
+      ],
+      "topic": "Methane source",
+      "description": "Argument B acknowledges K2 as a primary source while also allowing additional sources, which does not contradict Argument A’s claim that K2 was the main source; the two arguments reinforce each other rather than oppose.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-026",
+      "supporters": [
+        "D-A9",
+        "agent_3_002"
+      ],
+      "topic": "Explosion type",
+      "description": "Argument B acknowledges coal dust as a primary fuel in the secondary explosion, which is consistent with Argument A’s claim that coal dust was the primary fuel for the full-scale explosion, thereby reinforcing the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-027",
+      "supporters": [
+        "agent_1_001",
+        "agent_2_002"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments identify the K2 seam as the methane source; Argument A explains the physical mechanism, while Argument B attributes the release to planning failures, reinforcing the same conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-028",
+      "supporters": [
+        "agent_1_004",
+        "agent_3_002"
+      ],
+      "topic": "Explosion type",
+      "description": "Both arguments agree that methane initiated the explosion and that coal dust played a secondary role; they reinforce each other rather than contradict or undermine one another.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-029",
+      "supporters": [
+        "agent_1_005",
+        "agent_2_003"
+      ],
+      "topic": "Ventilation",
+      "description": "Both arguments conclude that overall ventilation met design specs but local sub‑conveyor zones caused methane accumulation; they use complementary evidence and reinforce the same point.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-030",
+      "supporters": [
+        "D-A6",
+        "agent_1_003"
+      ],
+      "topic": "Ignition location",
+      "description": "Both arguments identify the same ignition location (upper part of longwall near sections 142‑145) using identical CO sensor data and phone call confirmation, and they reinforce each other’s conclusion.",
+      "strength": "bilateral"
+    },
+    {
+      "id": "SUP-V5-031",
+      "supporters": [
+        "agent_2_002",
+        "agent_3_004"
+      ],
+      "topic": "Methane source",
+      "description": "Both arguments identify the K2 seam as a significant methane source; B merely adds that other factors may also contribute, which does not contradict A and reinforces the overall conclusion.",
+      "strength": "bilateral"
+    }
+  ],
+  "grounded_extension": [
+    "D-A1",
+    "D-A2",
+    "D-A3",
+    "D-A4",
+    "D-A6",
+    "K-A1",
+    "K-A2",
+    "K-A3",
+    "K-A5",
+    "U-A1",
+    "U-A2",
+    "U-A4",
+    "agent_1_001",
+    "agent_1_003",
+    "agent_2_002",
+    "agent_2_004",
+    "agent_2_005",
+    "agent_2_006",
+    "agent_3_002",
+    "agent_3_003",
+    "agent_3_004",
+    "agent_3_005",
+    "agent_4_001",
+    "agent_4_002",
+    "agent_4_003",
+    "agent_4_004",
+    "agent_4_005"
+  ],
+  "preferred_extensions": [
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_002",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A6",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A6",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A5",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_001",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A6",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A3",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A6",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A7",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A8",
+      "D-A9",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ],
+    [
+      "D-A1",
+      "D-A2",
+      "D-A3",
+      "D-A4",
+      "D-A5",
+      "D-A6",
+      "D-A8",
+      "K-A1",
+      "K-A2",
+      "K-A3",
+      "K-A4",
+      "K-A5",
+      "K-A7",
+      "K-A8",
+      "U-A1",
+      "U-A2",
+      "U-A4",
+      "agent_1_001",
+      "agent_1_003",
+      "agent_1_004",
+      "agent_2_001",
+      "agent_2_002",
+      "agent_2_004",
+      "agent_2_005",
+      "agent_2_006",
+      "agent_3_002",
+      "agent_3_003",
+      "agent_3_004",
+      "agent_3_005",
+      "agent_4_001",
+      "agent_4_002",
+      "agent_4_003",
+      "agent_4_004",
+      "agent_4_005"
+    ]
+  ],
+  "accepted": [
+    "D-A1",
+    "D-A2",
+    "D-A3",
+    "D-A4",
+    "D-A6",
+    "K-A1",
+    "K-A2",
+    "K-A3",
+    "K-A5",
+    "U-A1",
+    "U-A2",
+    "U-A4",
+    "agent_1_001",
+    "agent_1_003",
+    "agent_2_002",
+    "agent_2_004",
+    "agent_2_005",
+    "agent_2_006",
+    "agent_3_002",
+    "agent_3_003",
+    "agent_3_004",
+    "agent_3_005",
+    "agent_4_001",
+    "agent_4_002",
+    "agent_4_003",
+    "agent_4_004",
+    "agent_4_005"
+  ],
+  "rejected": [
+    "agent_1_005",
+    "agent_2_003"
+  ],
+  "ambiguous": [
+    "D-A5",
+    "D-A7",
+    "D-A8",
+    "D-A9",
+    "K-A4",
+    "K-A6",
+    "K-A7",
+    "K-A8",
+    "U-A3",
+    "agent_1_002",
+    "agent_1_004",
+    "agent_2_001",
+    "agent_3_001"
+  ],
+  "af_graph": {
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "data": {
+          "id": "U-A1",
+          "source": "U",
+          "topic": "Ignition location",
+          "claim": "Initial ignition occurred in the upper part of longwall 48K3-Z, in the area of sections 142-145.",
+          "evidence": "Physical inspection findings: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' found on shearer SL-300; plastic bottle with synthetic oil in section 144 pocket; chemical ampoules behind sections 143-144.",
+          "warrant": "Physical items capable of producing ignition are concentrated at that location, and CO trend data shows sharp rise from 02:24 consistent with combustion of solid materials (CH4 combustion does not produce CO: CH4 + 2O2 = CO2 + 2H2O).",
+          "confidence": 0.75,
+          "cause_categories": [
+            "TC-02",
+            "TC-04"
+          ]
+        },
+        "id": "U-A1"
+      },
+      {
+        "data": {
+          "id": "U-A2",
+          "source": "U",
+          "topic": "Spontaneous combustion",
+          "claim": "Spontaneous combustion of coal in the goaf is excluded as a cause.",
+          "evidence": "Indicator gas analysis from PASS 'Komir' (4 sampling dates Jul-Oct 2023): R1 max=0.94 across all isolation walls (critical threshold is R1>2.5); R2=R3=0 in all samples (no CO or H2 detected). CO concentration trends on sensors stable at 0.0004-0.0009% until the accident.",
+          "warrant": "All three fire indicator ratios (R1, R2, R3) are in the green zone well below spontaneous combustion thresholds. R1=CO2_increase/O2_decrease; R2=CO_increase/O2_decrease; R3=CO_increase/CO2_increase. This is the standard VGCH method for detecting oxidation processes.",
+          "confidence": 0.95,
+          "cause_categories": [
+            "TC-05"
+          ]
+        },
+        "id": "U-A2"
+      },
+      {
+        "data": {
+          "id": "U-A3",
+          "source": "U",
+          "topic": "Ignition source",
+          "claim": "Ignition was caused by an external source, most likely the angle grinder, aerosol can, synthetic oil, or AFC chain friction.",
+          "evidence": "Angle grinder with 6 used disks found in conveyor drift 47K3-Z. Aerosol can marked 'flammable' on shearer. Synthetic oil bottle in section 144. Equipment operation data shows shearer and conveyor were running at 02:29 when power was cut.",
+          "warrant": "Multiple identifiable ignition-capable items were present at the ignition location. CO sensor data confirms combustion of solid materials rather than pure methane ignition.",
+          "confidence": 0.65,
+          "cause_categories": [
+            "TC-02",
+            "TC-04"
+          ]
+        },
+        "id": "U-A3"
+      },
+      {
+        "data": {
+          "id": "U-A4",
+          "source": "U",
+          "topic": "Ventilation",
+          "claim": "Technical ventilation failure is excluded as a cause of elevated methane concentration.",
+          "evidence": "Air velocity sensor data from 12:00 27.10 to accident time was stable and matched ventilation journal entries dated 20.10.23 No.29. Incoming airflow: 1943 m3/min; outgoing: 1507 m3/min.",
+          "warrant": "Consistent pre-accident readings across multiple sensors exclude sudden ventilation failure as a contributing factor.",
+          "confidence": 0.92,
+          "cause_categories": [
+            "TC-06"
+          ]
+        },
+        "id": "U-A4"
+      },
+      {
+        "data": {
+          "id": "K-A1",
+          "source": "K",
+          "topic": "Gas-dynamic event",
+          "claim": "Atmospheric pressure change did not contribute to elevated methane release.",
+          "evidence": "Atmospheric pressure data for 27-28.10.2023: total change in 24h before accident was 0.39% (external data) or +1.1% (mine data). Literature threshold for significant effect is typically rapid drops of >1% within hours.",
+          "warrant": "Per Le Chatelier principle, pressure drop accelerates gas release. The observed pressure change is below documented thresholds for significant effect on methane outburst (Skochinsky, Komarov; Lidin, Ayruny et al.).",
+          "confidence": 0.88,
+          "cause_categories": [
+            "TC-08"
+          ]
+        },
+        "id": "K-A1"
+      },
+      {
+        "data": {
+          "id": "K-A2",
+          "source": "K",
+          "topic": "Methane source",
+          "claim": "The primary source of elevated methane in the upper longwall was the K2 companion seam, released due to abutment pressure decompression zones.",
+          "evidence": "Post-accident methane survey at floor level across all sections: sections 128-142 showed concentrations 1.2-17.9%, maximum 17.9% at section 140 (near lower auger). Average cross-section concentration in central longwall was only 0.16-0.39%. Air velocity at floor: 0.25 m/s (stagnant sub-conveyor zone).",
+          "warrant": "K2 seam is 3.35m below K3. Abutment pressure creates decompression zone at the face, causing K2 fracturing and methane release into sub-conveyor space where ventilation is insufficient to dilute it. Abutment pressure maximum is shifted toward the ventilation drift.",
+          "confidence": 0.85,
+          "cause_categories": [
+            "TC-01",
+            "TC-07"
+          ]
+        },
+        "id": "K-A2"
+      },
+      {
+        "data": {
+          "id": "K-A3",
+          "source": "K",
+          "topic": "Spontaneous combustion",
+          "claim": "Spontaneous combustion is excluded: K3 seam is classified as non-prone, and no CO/H2 indicators were detected.",
+          "evidence": "Expert conclusion No.3 from 'NIC UGOL' laboratory: coal from section 139, lava 48K3-West rated as stable to self-ignition (Group III by KNIUI classification). No CO or H2 in any VGCH samples July-October 2023 (Notices No.43, 8, 33, 26).",
+          "warrant": "Independent laboratory classification plus longitudinal monitoring data provide two independent lines of evidence excluding spontaneous combustion.",
+          "confidence": 0.95,
+          "cause_categories": [
+            "TC-05"
+          ]
+        },
+        "id": "K-A3"
+      },
+      {
+        "data": {
+          "id": "K-A4",
+          "source": "K",
+          "topic": "Ignition source",
+          "claim": "The most probable ignition source was sparking from the armored face conveyor (AFC) chain operating in the methane-rich zone.",
+          "evidence": "Witness testimony (Protocols No.35, 37, 42, 43): sparking and ignition events observed during conveyor operation in upper longwall. Physical tests confirmed conveyor sparking is possible. Sparking zone coincides with elevated methane zone (floor-level measurements, sections 128-142). Manufacturer instruction section 9.2.1 requires compressed air ventilation of scraper chain when methane is present.",
+          "warrant": "Conveyor sparking zone overlaps with sub-conveyor methane accumulation zone. Documented as major ignition cause: 16% of Russian coal mine explosions 2004-2019 (N=50 events, 645 casualties). Conveyor sparking was the leading mechanical ignition category.",
+          "confidence": 0.72,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "K-A4"
+      },
+      {
+        "data": {
+          "id": "K-A5",
+          "source": "K",
+          "topic": "Electrical equipment",
+          "claim": "Electrical equipment malfunction is excluded as an ignition source.",
+          "evidence": "Post-accident inspection of all electrical equipment in lava 48K3-Z and development headings: equipment operated normally without violations.",
+          "warrant": "Standard post-accident electrical inspection found no evidence of abnormal operation or insulation failures.",
+          "confidence": 0.82,
+          "cause_categories": [
+            "TC-03"
+          ]
+        },
+        "id": "K-A5"
+      },
+      {
+        "data": {
+          "id": "K-A6",
+          "source": "K",
+          "topic": "Explosion location",
+          "claim": "The explosion epicenter was in the upper part of longwall 48K3-Z; two seismic events recorded at 02:43:32 and 02:43:34.",
+          "evidence": "Institute of Mine Seismology (Australia) seismic analysis: two events at 02:43:32 and 02:43:34, presumed epicenter includes lava 48K3-Z. Main ventilation fan VC-5 data: at 02:43:49 airflow surged from 191 to 333 m3/s and depression halved (480 to 260 mmH2O). Phone records confirm fire at sections 142-145.",
+          "warrant": "Multiple independent data streams converge on same location and time: seismic events, ventilation fan readings, and eyewitness phone records.",
+          "confidence": 0.88,
+          "cause_categories": [
+            "TC-01"
+          ]
+        },
+        "id": "K-A6"
+      },
+      {
+        "data": {
+          "id": "K-A7",
+          "source": "K",
+          "topic": "Explosion sequence",
+          "claim": "The first explosion occurred in the goaf of longwall 48K3-Z approximately 120m from the face, followed by 99.99% methane displacement into workings, then a second large explosion.",
+          "evidence": "Individual gas detector of miner Bobryashov S.V. in conveyor drift: at 02:47 methane reached 99.99% and held for ~4 minutes; temperature rose from 21 to 45 degrees C; pressure 103->109 units. Degasification pipeline (10% CH4) was not damaged — explosion did not reach it, implying it occurred within 120m of face.",
+          "warrant": "The 120m limit is inferred from the intact degasification pipeline. The 99.99% methane reading means gas was displaced from the goaf into the workings after initial explosion. Worker survival time post-shock-wave eliminates coal dust as primary agent (CO poisoning would have been near-immediate with coal dust).",
+          "confidence": 0.78,
+          "cause_categories": [
+            "TC-01"
+          ]
+        },
+        "id": "K-A7"
+      },
+      {
+        "data": {
+          "id": "K-A8",
+          "source": "K",
+          "topic": "Explosion type",
+          "claim": "The large-scale explosion was driven primarily by high-concentration methane, not coal dust.",
+          "evidence": "Video from miner's lamp captured after shock wave arrived at gallery K1-K2: workers remained active and breathing without respirators for extended period post-shock-wave. With coal dust explosion CO poisoning would have incapacitated them rapidly.",
+          "warrant": "Coal dust explosions produce high CO concentrations in post-explosion atmosphere; workers would not survive unprotected. The video evidence is direct observational testimony contradicting a coal dust primary explosion.",
+          "confidence": 0.68,
+          "cause_categories": [
+            "TC-01"
+          ]
+        },
+        "id": "K-A8"
+      },
+      {
+        "data": {
+          "id": "D-A1",
+          "source": "D",
+          "topic": "Methane source",
+          "claim": "K2 seam was continuously releasing CH4 into goaf near the longwall face; this was the methane present at the ignition location.",
+          "evidence": "K2 seam: ~5m thickness, ~15 m3/t CH4 content in vicinity of 48K3-Z. Geological conditions (3.35m separation, weak rock layer) make continuous CH4 release probable. Gas drainage system captured 34.1% CH4 at perimeter wall 1640. No borehole pre-drainage of K2 seam.",
+          "warrant": "K2 proximity and characteristics, combined with absence of pre-drainage boreholes, means CH4 accumulates in goaf. Mine Scada shows small CH4 increase (~1.8 m3/min) at 02:04-02:12, consistent with roof movement releasing gas — possibly triggered by support movement.",
+          "confidence": 0.82,
+          "cause_categories": [
+            "TC-01",
+            "TC-07"
+          ]
+        },
+        "id": "D-A1"
+      },
+      {
+        "data": {
+          "id": "D-A2",
+          "source": "D",
+          "topic": "Gas-dynamic event",
+          "claim": "No sudden gas outburst or gas-dynamic phenomenon occurred before ignition.",
+          "evidence": "Mine Scada data 25-28 October: CH4 levels in outgoing air fluctuated normally, reaching max 1.2%. No sudden spike before 02:24. Small increase of 0.05% at 02:04-02:12 is within operational range. Airflow (air speed sensor) remained unchanged throughout.",
+          "warrant": "A gas outburst would appear as a rapid, large-amplitude CH4 spike in Mine Scada data. No such pattern observed. Sudden outburst from K3 or K2 is assessed as unlikely given geological conditions.",
+          "confidence": 0.9,
+          "cause_categories": [
+            "TC-08"
+          ]
+        },
+        "id": "D-A2"
+      },
+      {
+        "data": {
+          "id": "D-A3",
+          "source": "D",
+          "topic": "Ventilation",
+          "claim": "Ventilation was operating within design parameters but the combined scheme created structural vulnerability to methane accumulation in sub-conveyor zones.",
+          "evidence": "Airflow of 2572 m3/min per ventilation journal (design: 2705 m3/min). CH4 in outgoing stream consistently below lower explosive limit. Isolation methane removal system: 34.5 m3/min. However, no borehole drainage of K2. Leakage coefficient 1.3.",
+          "warrant": "Ventilation quantity was adequate for design load. However the 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone in lower longwall where methane can accumulate to explosive concentrations while average cross-section readings remain below threshold.",
+          "confidence": 0.8,
+          "cause_categories": [
+            "TC-06"
+          ]
+        },
+        "id": "D-A3"
+      },
+      {
+        "data": {
+          "id": "D-A4",
+          "source": "D",
+          "topic": "Spontaneous combustion",
+          "claim": "Spontaneous combustion and resin chemical reactions are excluded as ignition sources.",
+          "evidence": "No CO increase in goaf monitoring (perimeter walls, crosscuts) in August, September, and last sampling 16 October 2023. No evidence of resin use at time of ignition found during physical inspection.",
+          "warrant": "Spontaneous combustion produces progressive CO accumulation in goaf samples prior to ignition event. No such trend was observed across multiple monitoring points over 3 months.",
+          "confidence": 0.9,
+          "cause_categories": [
+            "TC-04",
+            "TC-05"
+          ]
+        },
+        "id": "D-A4"
+      },
+      {
+        "data": {
+          "id": "D-A5",
+          "source": "D",
+          "topic": "Ignition source",
+          "claim": "Ignition source is unknown and may never be identified. Most probable category: mechanical sparks (shearer, falling material, or metal cutting).",
+          "evidence": "Physical inspection: damaged shearer (external teeth missing, mount sheared — timing unclear); no evidence of angle grinder use at ignition location; no resin use evidence; explosion-proof electrical equipment. Electrical equipment inspection still ongoing at report date. Fire appears to have started in goaf or at goaf-longwall interface.",
+          "warrant": "Analysis per EN 1127-1 (13 ignition source categories): electrical excluded (explosion-proof, ongoing inspection), self-ignition excluded, sources 7-13 highly unlikely. Remaining probable category is mechanical sparks. Post-explosion wave damage may have permanently destroyed ignition evidence.",
+          "confidence": 0.45,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "D-A5"
+      },
+      {
+        "data": {
+          "id": "D-A6",
+          "source": "D",
+          "topic": "Ignition location",
+          "claim": "Initial fire started at upper part of longwall near sections 142-145, confirmed by CO sensor data at 02:24:20.",
+          "evidence": "Mine Scada: CO increased at sensor OY32(2) in conveyor drift at 02:24:20; followed ~80 seconds later at mixing chamber OY42(2). CH4 simultaneously decreased slightly, consistent with combustion consuming methane. Phone call at 02:29:19 confirmed fire at sections 142-145 growing from goaf toward AFC.",
+          "warrant": "CO spike at 02:24 precedes first phone report by 5 minutes, indicating sensor-level detection. 80-second lag between OY32 and OY42 matches expected airflow travel time between sensors, confirming fire location by triangulation.",
+          "confidence": 0.9,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "D-A6"
+      },
+      {
+        "data": {
+          "id": "D-A7",
+          "source": "D",
+          "topic": "Explosion sequence",
+          "claim": "Full accident sequence: gas fire (02:24) -> methane deflagration -> initial dust explosion -> full-scale coal dust explosion propagating across the mine.",
+          "evidence": "Physical inspection: fire marks from section 143 downward; small pressure wave evidence at sections 20-8 from goaf direction. Coal dust accumulations on conveyor lines. Slate barrier activated. Explosion reached eastern mine (42K2E), 4+ km from origin. Explosion traveled along conveyor transport routes.",
+          "warrant": "Five-stage sequence modeled on established coal mine explosion physics. Scale and propagation pattern (traveling on fresh-air side, following conveyor lines) is characteristic of dust explosion, not methane.",
+          "confidence": 0.7,
+          "cause_categories": [
+            "TC-01",
+            "TC-10"
+          ]
+        },
+        "id": "D-A7"
+      },
+      {
+        "data": {
+          "id": "D-A8",
+          "source": "D",
+          "topic": "Explosion location",
+          "claim": "Initial methane explosion most likely occurred near section 20 of the longwall (lower area), distinct from the initial fire location.",
+          "evidence": "Physical inspection: synthetic coatings on support legs sections 20-8 strongly scorched and displaced toward coal face, indicating small pressure wave from goaf direction. Some covers completely absent. Open space found between section 1, drift supports, and goaf debris — potential CH4 accumulation zone.",
+          "warrant": "Direction of force on support coatings (from goaf side) is a physical indicator of explosion origin on the goaf side at sections 20-8. This location is geometrically distinct from the initial fire at sections 142-145 — the explosion is a downstream event from the fire.",
+          "confidence": 0.62,
+          "cause_categories": [
+            "TC-01"
+          ]
+        },
+        "id": "D-A8"
+      },
+      {
+        "data": {
+          "id": "D-A9",
+          "source": "D",
+          "topic": "Explosion type",
+          "claim": "Coal dust was the primary fuel for the full-scale explosion — this is one of the most important conclusions.",
+          "evidence": "Explosion propagated along conveyor transport routes across mine including fresh-air side where methane was below explosive limit. Explosion covered 4+ km. Degree of destruction and body fragmentation consistent with powerful dust explosion. Coal dust accumulations observed post-accident on conveyor lines. Slate barrier activated.",
+          "warrant": "Methane explosion cannot propagate on fresh-air side or follow conveyor routes over long distances. Only coal dust distributed along conveyor lines explains the propagation pattern. Lower explosive limit for settled coal dust: ~100 g/m2 (0.1mm layer). Combined methane-dust mixtures lower this threshold by ~25% at 0.75% CH4.",
+          "confidence": 0.75,
+          "cause_categories": [
+            "TC-10"
+          ]
+        },
+        "id": "D-A9"
+      },
+      {
+        "data": {
+          "id": "agent_1_001",
+          "source": "agent_1",
+          "topic": "Methane source",
+          "claim": "The explosive methane originated from the K2 companion seam, which released gas into the sub‑conveyor zone of the upper longwall 48K3‑Z because the abutment pressure zone created a stagnant pocket where ventilation was insufficient to dilute the gas.",
+          "evidence": "K-A2 reports floor‑level methane concentrations up to 17.9 % at section 140 and a stagnant air velocity of 0.25 m/s in the sub‑conveyor zone; D-A1 describes continuous CH4 emission from K2 (≈15 m³/t) and lack of pre‑drainage boreholes; U-A4 shows overall ventilation rates were stable, indicating the problem was local rather than a system‑wide failure.",
+          "warrant": "High localized CH4 readings together with very low airflow create conditions where methane can accumulate to explosive levels despite normal overall ventilation. The geological relationship (K2 3.35 m below K3) and abutment‑pressure‑induced fracturing are well‑known mechanisms for gas migration into the goaf. Absence of active degasification for K2 (D-A1) confirms the source.",
+          "confidence": 0.88,
+          "cause_categories": [
+            "TC-01",
+            "TC-07"
+          ]
+        },
+        "id": "agent_1_001"
+      },
+      {
+        "data": {
+          "id": "agent_1_002",
+          "source": "agent_1",
+          "topic": "Ignition source",
+          "claim": "The most probable ignition energy was a mechanical spark generated by the armored face conveyor (AFC) chain operating within the methane‑rich sub‑conveyor pocket.",
+          "evidence": "K-A5 documents multiple eyewitness reports of sparking from the AFC chain (Protocols 35, 37, 42, 43) and manufacturer instructions requiring compressed‑air ventilation of the chain when methane is present; U-A3 notes presence of other potential ignition items but assigns lower confidence; electrical sources are excluded by K-A5 and D-A5; chemical sources lack direct evidence of release at the time.",
+          "warrant": "Mechanical chain sparking can produce ignition energies of several millijoules, sufficient to ignite a methane‑air mixture above the LEL. The coincidence of the spark zone with the measured methane pocket, and the absence of other viable sources, makes the AFC chain the most likely ignition mechanism.",
+          "confidence": 0.81,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "agent_1_002"
+      },
+      {
+        "data": {
+          "id": "agent_1_003",
+          "source": "agent_1",
+          "topic": "Ignition location",
+          "claim": "The fire ignited in the upper part of longwall 48K3‑Z, specifically in the conveyor drift near sections 142‑145, and then propagated downward into the methane‑filled goaf.",
+          "evidence": "D-A6 records a CO spike at sensor OY32(2) at 02:24:20 in the conveyor drift, followed 80 s later by a second CO rise at OY42(2); U-A1 and U-A3 locate combustible items (angle grinder, aerosol can, oil bottle) in the same area; phone call at 02:29:19 confirms fire observed at sections 142‑145 (D-A6).",
+          "warrant": "A rapid CO increase is characteristic of solid‑fuel combustion; the sequential sensor response matches airflow direction, pinpointing the ignition point. Physical evidence of ignition‑capable materials at that location supports the conclusion.",
+          "confidence": 0.86,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "agent_1_003"
+      },
+      {
+        "data": {
+          "id": "agent_1_004",
+          "source": "agent_1",
+          "topic": "Explosion type",
+          "claim": "The primary explosion was a methane deflagration; coal dust contributed only as a secondary, limited‑range enhancer and did not drive the main blast propagation.",
+          "evidence": "K-A8 shows miners remained conscious and active after the shock wave, inconsistent with the high CO levels typical of a coal‑dust explosion; K-A6 records two seismic events at 02:43:32‑34 with a localized epicenter in the upper longwall, matching a rapid methane combustion front; D-A2 reports no sudden CH4 spike before ignition, indicating the gas was already present rather than released by a dust‑driven pressure wave; D-A9’s claim of a dust‑driven propagation is contradicted by the observed limited damage radius (explosion did not reach the degasification pipeline) and by the lack of widespread dust cloud evidence.",
+          "warrant": "Methane explosions generate a fast pressure wave but leave relatively low post‑explosion CO, allowing workers to survive briefly; coal‑dust explosions produce high CO and extensive secondary damage. The evidence points to a methane‑dominated event with only localized dust involvement.",
+          "confidence": 0.78,
+          "cause_categories": [
+            "TC-01"
+          ]
+        },
+        "id": "agent_1_004"
+      },
+      {
+        "data": {
+          "id": "agent_1_005",
+          "source": "agent_1",
+          "topic": "Ventilation",
+          "claim": "Overall ventilation performance met design specifications, but the combined 1K‑N‑N‑vt scheme created a stagnant sub‑conveyor zone where methane accumulated, representing a localized ventilation inadequacy rather than a total system failure.",
+          "evidence": "U-A4 shows stable airflow readings (incoming 1943 m³/min, outgoing 1507 m³/min) and no sudden failure; D-A3 notes design airflow of 2705 m³/min versus actual 2572 m³/min and identifies the sub‑conveyor zone as a structural weak point; K-A2 and K-A6 locate the methane pocket and explosion epicenter within that zone.",
+          "warrant": "When a ventilation network includes dead‑ends or low‑velocity pockets, local gas concentrations can exceed the LEL even though global flow rates appear adequate. The measured low air velocity (0.25 m/s) in the pocket confirms insufficient dilution, fulfilling the definition of a localized ventilation failure (TC‑06).",
+          "confidence": 0.84,
+          "cause_categories": [
+            "TC-06"
+          ]
+        },
+        "id": "agent_1_005"
+      },
+      {
+        "data": {
+          "id": "agent_2_001",
+          "source": "agent_2",
+          "topic": "Ignition source",
+          "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+          "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144. U-A3 confirms these items are ignition-capable and were located at the ignition site.",
+          "warrant": "The presence of non-approved tools and flammable substances in an active mining section with known methane emissions indicates a breakdown in underground supervision and enforcement of safety rules. Such items should be strictly controlled under the naryad system and pre-shift inspections. Their presence reflects a systemic failure in labor discipline and daily production control.",
+          "confidence": 0.9,
+          "cause_categories": [
+            "OC-06",
+            "OC-01"
+          ]
+        },
+        "id": "agent_2_001"
+      },
+      {
+        "data": {
+          "id": "agent_2_002",
+          "source": "agent_2",
+          "topic": "Methane source",
+          "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the goaf and longwall zone.",
+          "evidence": "K-A2 and D-A1: K2 seam is 3.35m below K3, with high gas content (~15 m3/t), releasing methane due to abutment pressure; no borehole pre-drainage of K2 was implemented. D-A1 notes gas drainage system captured only 34.1% CH4 at perimeter wall, indicating incomplete capture.",
+          "warrant": "The K2 seam’s proximity and high gas content represent a foreseeable hazard. The lack of pre-drainage boreholes indicates either a failure in geotechnical hazard forecasting (OC-09) or a decision to proceed without adequate degasification — a known risk factor in methane explosions. This reflects a systemic failure in hazard identification and degasification planning.",
+          "confidence": 0.8,
+          "cause_categories": [
+            "OC-10",
+            "OC-09",
+            "TC-07"
+          ]
+        },
+        "id": "agent_2_002"
+      },
+      {
+        "data": {
+          "id": "agent_2_003",
+          "source": "agent_2",
+          "topic": "Ventilation",
+          "claim": "The mine’s ventilation scheme, while operating within design parameters, was structurally vulnerable to methane accumulation in sub-conveyor zones due to inadequate risk assessment in technical documentation.",
+          "evidence": "D-A3: the 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zones where methane accumulates despite adequate overall airflow. K-A2 confirms floor-level methane concentrations up to 17.9% in sections 128-142, while cross-section averages remain low.",
+          "warrant": "The ventilation system’s design allowed for undetected methane accumulation in low-velocity zones, which sensors failed to capture. This indicates a failure in technical documentation to account for real-world airflow distribution and localized hazards — a violation of industrial safety standards in project design (OC-08) and a failure in hazard identification (OC-10).",
+          "confidence": 0.75,
+          "cause_categories": [
+            "OC-08",
+            "OC-10",
+            "TC-06"
+          ]
+        },
+        "id": "agent_2_003"
+      },
+      {
+        "data": {
+          "id": "agent_2_004",
+          "source": "agent_2",
+          "topic": "Supervision failure",
+          "claim": "Production control and supervision systems failed to detect and prevent unauthorized work activities and the presence of ignition sources, indicating a collapse in internal safety oversight.",
+          "evidence": "U-A1: multiple prohibited items (angle grinder, flammable can, oil bottle) found at ignition location. D-A5 notes no evidence of angle grinder use recorded, yet physical items remain. U-A3 links these to potential ignition.",
+          "warrant": "The presence of unapproved tools and flammable materials underground — especially an angle grinder with used disks — strongly suggests hot work or maintenance occurred without authorization or documentation. This points to a failure in the naryad-dopusk system and absence of effective production control (OC-01), allowing high-risk activities to proceed unchecked.",
+          "confidence": 0.85,
+          "cause_categories": [
+            "OC-01",
+            "OC-02",
+            "OC-06"
+          ]
+        },
+        "id": "agent_2_004"
+      },
+      {
+        "data": {
+          "id": "agent_2_005",
+          "source": "agent_2",
+          "topic": "Explosion sequence",
+          "claim": "Failure to control coal dust accumulations on conveyor lines enabled the propagation of a full-scale explosion, indicating a systemic breakdown in housekeeping and hazard monitoring.",
+          "evidence": "D-A7 and D-A9: coal dust accumulations observed on conveyor lines; explosion propagated over 4+ km along conveyor routes, including fresh-air side, consistent with coal dust explosion. Slate barrier activated, confirming explosive dust presence.",
+          "warrant": "Coal dust buildup on conveyors is a preventable hazard requiring regular cleaning and monitoring. The fact that it reached explosive levels indicates a failure in routine safety inspections and maintenance discipline. This reflects a chronic deficiency in production control and emergency preparedness, allowing a secondary hazard to amplify a localized fire into a mine-wide disaster.",
+          "confidence": 0.8,
+          "cause_categories": [
+            "OC-01",
+            "TC-10"
+          ]
+        },
+        "id": "agent_2_005"
+      },
+      {
+        "data": {
+          "id": "agent_2_006",
+          "source": "agent_2",
+          "topic": "Hazard recognition",
+          "claim": "Despite precedent cases involving companion seam methane and conveyor sparking, the mine failed to implement targeted controls, indicating a failure in organizational learning and hazard communication.",
+          "evidence": "PREC-2021-04 (Shakhta Listvyazhnaya) involved methane explosion from undrained seams; K-A4 identifies conveyor sparking as a leading cause in Russian mines (16% of explosions 2004–2019). Yet no borehole drainage of K2 seam and no compressed air ventilation of AFC chain per manufacturer instructions (K-A4).",
+          "warrant": "The recurrence of similar technical conditions — undrained gassy seams and unmitigated mechanical ignition sources — in the context of known industry patterns indicates a failure to apply lessons from past accidents. Management did not update hazard assessments or enforce manufacturer safety requirements, reflecting a systemic failure in hazard recognition and organizational learning.",
+          "confidence": 0.75,
+          "cause_categories": [
+            "OC-10",
+            "OC-05"
+          ]
+        },
+        "id": "agent_2_006"
+      },
+      {
+        "data": {
+          "id": "agent_3_001",
+          "source": "agent_3",
+          "topic": "Ignition source",
+          "claim": "The ignition source remains undetermined — the evidence for the angle grinder is circumstantial and no expert confirmed its use at the ignition location.",
+          "evidence": "U-A1, U-A3, D-A5. U-A1 and U-A3 mention the angle grinder but do not confirm it was used at the ignition location. D-A5 explicitly states the ignition source is unknown and may never be identified.",
+          "warrant": "The presence of the angle grinder does not confirm it was used or caused ignition. The confidence in U-A3 (0.65) and D-A5 (0.45) is lower than agent_1_002's confidence (0.81), indicating uncertainty. The evidence does not conclusively support the AFC chain as the ignition source either, as D-A5 notes post-explosion wave damage may have destroyed evidence.",
+          "confidence": 0.7,
+          "cause_categories": [
+            "TC-02"
+          ]
+        },
+        "id": "agent_3_001"
+      },
+      {
+        "data": {
+          "id": "agent_3_002",
+          "source": "agent_3",
+          "topic": "Explosion type",
+          "claim": "The explosion sequence may have involved both methane and coal dust, with the initial explosion being methane-driven and the secondary explosion involving coal dust.",
+          "evidence": "K-A8, D-A7, D-A9. K-A8 suggests the initial explosion was methane-driven, while D-A7 and D-A9 describe a secondary dust explosion. The evidence supports both methane and coal dust involvement, not just one or the other.",
+          "warrant": "Agent_1_004 dismisses coal dust as a primary fuel, but D-A7 and D-A9 provide strong evidence for a coal dust explosion. The explosion propagated along conveyor lines, which is characteristic of dust explosions. The initial explosion may have been methane-driven, but the secondary explosion likely involved coal dust.",
+          "confidence": 0.75,
+          "cause_categories": [
+            "TC-01",
+            "TC-10"
+          ]
+        },
+        "id": "agent_3_002"
+      },
+      {
+        "data": {
+          "id": "agent_3_003",
+          "source": "agent_3",
+          "topic": "Ventilation",
+          "claim": "The ventilation system's design may have contributed to the accident, but the evidence does not conclusively prove it was the primary cause of methane accumulation.",
+          "evidence": "U-A4, D-A3, agent_1_005, agent_2_003. U-A4 shows stable ventilation rates, while D-A3 and agent_1_005 note localized stagnant zones. Agent_2_003 suggests the ventilation scheme was structurally vulnerable but does not prove it was the primary cause.",
+          "warrant": "The evidence shows both that the ventilation system was operating within design parameters and that it had structural weaknesses. However, the methane accumulation may have been caused by other factors, such as the lack of pre-drainage boreholes (K-A2, D-A1). The ventilation system's role is not conclusively established as the primary cause.",
+          "confidence": 0.65,
+          "cause_categories": [
+            "TC-06"
+          ]
+        },
+        "id": "agent_3_003"
+      },
+      {
+        "data": {
+          "id": "agent_3_004",
+          "source": "agent_3",
+          "topic": "Methane source",
+          "claim": "The methane source may have been a combination of the K2 seam and other factors, such as roof movement or support displacement.",
+          "evidence": "K-A2, D-A1, D-A7. K-A2 and D-A1 identify the K2 seam as a primary source, but D-A7 notes a small CH4 increase at 02:04-02:12, possibly due to roof movement or support displacement. The evidence supports multiple sources of methane, not just the K2 seam.",
+          "warrant": "Agent_1_001 focuses on the K2 seam as the primary source, but D-A7 suggests other factors may have contributed. The evidence does not rule out additional methane sources, such as roof movement or support displacement, which could have released methane from other seams or the goaf.",
+          "confidence": 0.6,
+          "cause_categories": [
+            "TC-01",
+            "TC-07"
+          ]
+        },
+        "id": "agent_3_004"
+      },
+      {
+        "data": {
+          "id": "agent_3_005",
+          "source": "agent_3",
+          "topic": "Organizational causes",
+          "claim": "The organizational failures identified by agent_2 may have contributed to the accident, but their role as primary causes is not conclusively established.",
+          "evidence": "agent_2_001, agent_2_002, agent_2_004. These arguments highlight organizational failures, but they do not prove these were the primary causes of the accident. The technical evidence (e.g., methane accumulation, ignition sources) is more directly linked to the accident.",
+          "warrant": "While organizational failures are important, the evidence does not conclusively establish them as primary causes. The technical causes (e.g., methane accumulation, ignition sources) are more directly linked to the accident. The organizational failures may have contributed, but they are not the sole or primary causes.",
+          "confidence": 0.6,
+          "cause_categories": [
+            "OC-01",
+            "OC-06"
+          ]
+        },
+        "id": "agent_3_005"
+      },
+      {
+        "data": {
+          "id": "agent_4_001",
+          "source": "agent_4",
+          "topic": "Methane monitoring compliance",
+          "claim": "The mine failed to comply with REG-01 by not ensuring continuous monitoring of CH4 concentration in the longwall face, outgoing air stream, and goaf, which contributed to the methane explosion.",
+          "evidence": "U-A1, K-A2, D-A1; REG-01",
+          "warrant": "The evidence shows that methane accumulation was a primary cause of the accident, and REG-01 requires continuous monitoring to prevent such accumulation. Compliance with REG-01 would have likely prevented the accident by detecting and addressing the methane buildup before it reached explosive levels.",
+          "confidence": 0.85,
+          "cause_categories": [
+            "TC-01",
+            "OC-01"
+          ]
+        },
+        "id": "agent_4_001"
+      },
+      {
+        "data": {
+          "id": "agent_4_002",
+          "source": "agent_4",
+          "topic": "Ventilation design compliance",
+          "claim": "The mine's ventilation scheme did not meet the requirements of REG-02, leading to methane accumulation in sub-conveyor zones and contributing to the explosion.",
+          "evidence": "K-A2, D-A3; REG-02",
+          "warrant": "The evidence indicates that the ventilation design was inadequate, allowing methane to accumulate in stagnant zones. REG-02 requires ventilation schemes to prevent such accumulation, and compliance would have mitigated the accident by reducing the methane concentration.",
+          "confidence": 0.8,
+          "cause_categories": [
+            "TC-06",
+            "OC-05"
+          ]
+        },
+        "id": "agent_4_002"
+      },
+      {
+        "data": {
+          "id": "agent_4_003",
+          "source": "agent_4",
+          "topic": "Degasification compliance",
+          "claim": "The mine failed to comply with REG-03 by not conducting pre-drainage boreholes for the companion seam, which contributed to the methane release and subsequent explosion.",
+          "evidence": "K-A2, D-A1; REG-03",
+          "warrant": "The evidence shows that the companion seam was a significant source of methane, and REG-03 requires pre-drainage boreholes to mitigate this risk. Compliance with REG-03 would have reduced the methane release and potentially prevented the accident.",
+          "confidence": 0.8,
+          "cause_categories": [
+            "TC-07",
+            "OC-01"
+          ]
+        },
+        "id": "agent_4_003"
+      },
+      {
+        "data": {
+          "id": "agent_4_004",
+          "source": "agent_4",
+          "topic": "Equipment certification",
+          "claim": "The presence of non-explosion-proof equipment, such as the angle grinder, and flammable materials, like the aerosol can and synthetic oil, indicates non-compliance with REG-05, which increased the risk of ignition.",
+          "evidence": "U-A1, U-A3; REG-05",
+          "warrant": "The evidence shows that non-explosion-proof equipment and flammable materials were present in the mine, which REG-05 prohibits. Compliance with REG-05 would have reduced the risk of ignition and potentially prevented the accident.",
+          "confidence": 0.75,
+          "cause_categories": [
+            "TC-02",
+            "OC-06"
+          ]
+        },
+        "id": "agent_4_004"
+      },
+      {
+        "data": {
+          "id": "agent_4_005",
+          "source": "agent_4",
+          "topic": "Dust control compliance",
+          "claim": "The mine's dust control measures, as required by REG-06, were inadequate, allowing coal dust to accumulate and contribute to the secondary explosion.",
+          "evidence": "D-A7, D-A9; REG-06",
+          "warrant": "The evidence indicates that coal dust played a significant role in the accident, and REG-06 requires measures to prevent dust accumulation. Compliance with REG-06 would have mitigated the accident by reducing the fuel available for the secondary explosion.",
+          "confidence": 0.7,
+          "cause_categories": [
+            "TC-10",
+            "OC-05"
+          ]
+        },
+        "id": "agent_4_005"
+      }
+    ],
+    "edges": [
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-001",
+        "source": "U-A3",
+        "target": "D-A5"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-003",
+        "source": "U-A3",
+        "target": "agent_3_001"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-013",
+        "source": "U-A3",
+        "target": "agent_1_002"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-009",
+        "source": "K-A4",
+        "target": "agent_3_001"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-005",
+        "source": "K-A6",
+        "target": "D-A8"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-007",
+        "source": "K-A7",
+        "target": "D-A7"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-011",
+        "source": "K-A8",
+        "target": "D-A9"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-002",
+        "source": "D-A5",
+        "target": "U-A3"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-015",
+        "source": "D-A5",
+        "target": "agent_1_002"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-008",
+        "source": "D-A7",
+        "target": "K-A7"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-006",
+        "source": "D-A8",
+        "target": "K-A6"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-012",
+        "source": "D-A9",
+        "target": "K-A8"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-017",
+        "source": "D-A9",
+        "target": "agent_1_004"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-014",
+        "source": "agent_1_002",
+        "target": "U-A3"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-016",
+        "source": "agent_1_002",
+        "target": "D-A5"
+      },
+      {
+        "type": "undercutting",
+        "attack_id": "ATK-V5-019",
+        "source": "agent_1_002",
+        "target": "agent_2_001"
+      },
+      {
+        "type": "undercutting",
+        "attack_id": "ATK-V5-020",
+        "source": "agent_1_002",
+        "target": "agent_3_001"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-018",
+        "source": "agent_1_004",
+        "target": "D-A9"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-021",
+        "source": "agent_2_001",
+        "target": "agent_3_001"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-004",
+        "source": "agent_3_001",
+        "target": "U-A3"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-010",
+        "source": "agent_3_001",
+        "target": "K-A4"
+      },
+      {
+        "type": "rebutting",
+        "attack_id": "ATK-V5-022",
+        "source": "agent_3_001",
+        "target": "agent_2_001"
+      },
+      {
+        "type": "undercutting",
+        "attack_id": "ATK-V5-023",
+        "source": "agent_3_003",
+        "target": "agent_1_005"
+      },
+      {
+        "type": "undercutting",
+        "attack_id": "ATK-V5-024",
+        "source": "agent_3_003",
+        "target": "agent_2_003"
+      }
+    ]
+  }
+}

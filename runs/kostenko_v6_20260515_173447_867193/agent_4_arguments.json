@@ -1,0 +1,67 @@
+[
+  {
+    "id": "agent_4_001",
+    "source": "agent_4",
+    "topic": "Methane monitoring compliance",
+    "claim": "The mine failed to comply with REG-01 by not ensuring continuous monitoring of CH4 concentration in the longwall face, outgoing air stream, and goaf, which contributed to the methane explosion.",
+    "evidence": "U-A1, K-A2, D-A1; REG-01",
+    "warrant": "The evidence shows that methane accumulation was a primary cause of the accident, and REG-01 requires continuous monitoring to prevent such accumulation. Compliance with REG-01 would have likely prevented the accident by detecting and addressing the methane buildup before it reached explosive levels.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "TC-01",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_002",
+    "source": "agent_4",
+    "topic": "Ventilation design compliance",
+    "claim": "The mine's ventilation scheme did not meet the requirements of REG-02, leading to methane accumulation in sub-conveyor zones and contributing to the explosion.",
+    "evidence": "K-A2, D-A3; REG-02",
+    "warrant": "The evidence indicates that the ventilation design was inadequate, allowing methane to accumulate in stagnant zones. REG-02 requires ventilation schemes to prevent such accumulation, and compliance would have mitigated the accident by reducing the methane concentration.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-06",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_4_003",
+    "source": "agent_4",
+    "topic": "Degasification compliance",
+    "claim": "The mine failed to comply with REG-03 by not conducting pre-drainage boreholes for the companion seam, which contributed to the methane release and subsequent explosion.",
+    "evidence": "K-A2, D-A1; REG-03",
+    "warrant": "The evidence shows that the companion seam was a significant source of methane, and REG-03 requires pre-drainage boreholes to mitigate this risk. Compliance with REG-03 would have reduced the methane release and potentially prevented the accident.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "TC-07",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_4_004",
+    "source": "agent_4",
+    "topic": "Equipment certification",
+    "claim": "The presence of non-explosion-proof equipment, such as the angle grinder, and flammable materials, like the aerosol can and synthetic oil, indicates non-compliance with REG-05, which increased the risk of ignition.",
+    "evidence": "U-A1, U-A3; REG-05",
+    "warrant": "The evidence shows that non-explosion-proof equipment and flammable materials were present in the mine, which REG-05 prohibits. Compliance with REG-05 would have reduced the risk of ignition and potentially prevented the accident.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "TC-02",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_4_005",
+    "source": "agent_4",
+    "topic": "Dust control compliance",
+    "claim": "The mine's dust control measures, as required by REG-06, were inadequate, allowing coal dust to accumulate and contribute to the secondary explosion.",
+    "evidence": "D-A7, D-A9; REG-06",
+    "warrant": "The evidence indicates that coal dust played a significant role in the accident, and REG-06 requires measures to prevent dust accumulation. Compliance with REG-06 would have mitigated the accident by reducing the fuel available for the secondary explosion.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "TC-10",
+      "OC-05"
+    ]
+  }
+]

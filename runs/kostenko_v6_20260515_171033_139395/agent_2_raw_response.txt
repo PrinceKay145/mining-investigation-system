@@ -1,0 +1,79 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, aerosol can, synthetic oil) to be present and used in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. D-A5: no evidence of angle grinder use documented, yet physical items present.",
+    "warrant": "The presence of multiple unauthorized, ignition-capable items in the longwall section indicates a systemic failure in enforcing safety rules underground. These items should have been prohibited or controlled under naryad-dopusk and explosion safety protocols. Their presence reflects a breakdown in supervision and labor discipline (OC-06), likely enabled by weak production control (OC-01).",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-06",
+      "OC-01"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Degasification planning failed to address the known hazard of methane release from the K2 companion seam, resulting in uncontrolled accumulation in the goaf and sub-conveyor zone.",
+    "evidence": "K-A2: K2 seam methane release due to abutment pressure; D-A1: no borehole pre-drainage of K2 seam despite 15 m3/t gas content; 3.35m separation and weak rock layer; gas drainage system captured only 34.1% CH4 at perimeter wall.",
+    "warrant": "The absence of pre-drainage boreholes for a high-gas companion seam directly violates standard degasification planning requirements. This represents a failure in hazard identification (OC-10) and technical documentation compliance (OC-05), as the geological risk was foreseeable. The organizational system failed to mandate or implement adequate degasification measures despite known conditions.",
+    "confidence": 0.78,
+    "cause_categories": [
+      "OC-10",
+      "OC-05"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine's ventilation scheme was structurally inadequate for the geological conditions, creating stagnant zones where methane could accumulate undetected, due to deficiencies in project documentation and hazard assessment.",
+    "evidence": "D-A3: 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone; air velocity at floor: 0.25 m/s; methane concentrations up to 17.9% at floor level in sections 128-142; average cross-section readings remained below threshold, masking danger.",
+    "warrant": "The ventilation design failed to account for methane accumulation in low-velocity zones beneath the conveyor, a known risk in longwall mining. This indicates a failure in project documentation (OC-08) and hazard identification (OC-10). The organizational system allowed a design that met nominal airflow requirements but created localized explosive atmospheres, violating industrial safety standards.",
+    "confidence": 0.82,
+    "cause_categories": [
+      "OC-08",
+      "OC-10"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Supervision systems failed to detect or prevent unauthorized work activities and the presence of prohibited materials, indicating a collapse in production control and labor discipline.",
+    "evidence": "U-A1: multiple ignition-capable items found at ignition location; D-A5: no documentation of angle grinder use; U-A3: equipment (shearer, conveyor) running at 02:29 despite high-risk conditions.",
+    "warrant": "The presence of unapproved tools and chemicals, combined with continued operation of equipment in a known methane-prone area, indicates that frontline supervision (proizvodstvennyy kontrol) was ineffective. This is a direct failure of OC-01 (insufficient production control) and OC-06 (labor discipline), suggesting systemic tolerance of procedural violations.",
+    "confidence": 0.88,
+    "cause_categories": [
+      "OC-01",
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Hazard recognition",
+    "claim": "The mine management failed to recognize and act on the combined hazard of K2 seam methane release and mechanical ignition sources in the conveyor zone, despite available monitoring and precedent cases.",
+    "evidence": "K-A2, D-A1: K2 methane release into goaf; K-A4: conveyor sparking observed in methane-rich zone; PREC-2021-04: similar methane explosion with gross violations; PREC-2024-01: goaf methane ignition with evacuation.",
+    "warrant": "The combination of methane accumulation and mechanical ignition sources in the same zone was a known risk pattern, reinforced by precedent cases. The failure to implement additional controls (e.g., conveyor ventilation, stricter access) indicates a systemic failure in hazard recognition (OC-10) and learning from past incidents. Management did not escalate risk mitigation despite clear indicators.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-10"
+    ]
+  },
+  {
+    "id": "agent_2_006",
+    "source": "agent_2",
+    "topic": "Degasification planning",
+    "claim": "The absence of a pre-drainage program for the K2 seam constitutes a deliberate or negligent omission in degasification planning, reflecting a failure in geotechnical forecasting and technical documentation.",
+    "evidence": "D-A1: no borehole pre-drainage of K2 seam; K-A2: abutment pressure creates decompression zone fracturing K2; D-A3: leakage coefficient 1.3, indicating poor sealing and gas migration pathways.",
+    "warrant": "Given the known gas content and geological proximity of K2, pre-drainage should have been a mandatory component of the degasification plan. Its absence indicates either a failure in geotechnical forecasting (OC-09) or a decision to bypass safety requirements, possibly due to production pressures. This represents a systemic deficiency in technical planning and risk management.",
+    "confidence": 0.7,
+    "cause_categories": [
+      "OC-09",
+      "OC-05"
+    ]
+  }
+]

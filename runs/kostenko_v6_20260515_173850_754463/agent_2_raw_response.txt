@@ -1,0 +1,67 @@
+[
+  {
+    "id": "agent_2_001",
+    "source": "agent_2",
+    "topic": "Ignition source",
+    "claim": "Organizational failure in labor discipline allowed prohibited ignition-capable materials (angle grinder, flammable aerosol, synthetic oil) to be present in a high-methane zone, directly enabling a mechanical or chemical ignition.",
+    "evidence": "U-A1: angle grinder with 6 used disks found in conveyor drift; aerosol can marked 'toxic and flammable' on shearer; plastic bottle with synthetic oil in section 144; chemical ampoules behind sections 143-144. U-A3 confirms multiple ignition-capable items were present at ignition location.",
+    "warrant": "The presence of non-approved tools and flammable substances in an active longwall with known methane accumulation constitutes a clear violation of underground safety protocols. This indicates a systemic failure in supervision and enforcement of labor discipline, as such items should have been detected and removed during entry checks or routine inspections.",
+    "confidence": 0.9,
+    "cause_categories": [
+      "OC-06"
+    ]
+  },
+  {
+    "id": "agent_2_002",
+    "source": "agent_2",
+    "topic": "Methane source",
+    "claim": "Failure in degasification planning and hazard recognition led to the absence of pre-drainage boreholes for the K2 companion seam, allowing uncontrolled methane release into the goaf and longwall area.",
+    "evidence": "K-A2: primary methane source is K2 seam via abutment pressure decompression; D-A1: no borehole pre-drainage of K2 despite 15 m3/t gas content; D-A3: ventilation adequate but structurally unable to dilute sub-conveyor methane accumulation due to lack of degasification.",
+    "warrant": "The K2 seam’s high gas content and proximity to K3 were known geological conditions. The absence of pre-drainage boreholes indicates a failure to design a degasification system that accounts for companion seam hazards, which is a core responsibility of mine planning and geotechnical risk management. This reflects a deficiency in both hazard identification and project documentation.",
+    "confidence": 0.8,
+    "cause_categories": [
+      "OC-09",
+      "OC-10",
+      "OC-08"
+    ]
+  },
+  {
+    "id": "agent_2_003",
+    "source": "agent_2",
+    "topic": "Ventilation",
+    "claim": "The mine’s ventilation scheme, while operating within design parameters, was inherently vulnerable to methane accumulation in sub-conveyor zones due to inadequate design review and risk assessment, indicating a failure in technical documentation compliance.",
+    "evidence": "D-A3: 1K-N-N-vt combined ventilation scheme creates stagnant sub-conveyor zone; air velocity at floor 0.25 m/s; methane concentrations up to 17.9% at floor level in sections 128-142; average cross-section readings remained below threshold, masking localized hazard.",
+    "warrant": "The ventilation system was technically functional but structurally incapable of preventing accumulation in low-flow zones. The persistence of this design despite known risks (e.g., K2 methane release into goaf) suggests that the technical documentation did not require or incorporate mitigation for localized stagnation, a failure in hazard-informed engineering design.",
+    "confidence": 0.75,
+    "cause_categories": [
+      "OC-05",
+      "OC-08"
+    ]
+  },
+  {
+    "id": "agent_2_004",
+    "source": "agent_2",
+    "topic": "Supervision failure",
+    "claim": "Production control and supervision systems failed to detect and prevent unauthorized work activities involving ignition sources, including potential hot work or equipment misuse in a gassy environment.",
+    "evidence": "U-A1: angle grinder with 6 used disks found; U-A3: shearer and conveyor running at time of ignition; OC-06 violation implied by presence of prohibited tools. No evidence of naryad-dopusk for hot work or maintenance in the area.",
+    "warrant": "The use of an angle grinder — a hot work tool — in a methane-prone zone would require formal authorization, gas monitoring, and safety precautions under the naryad-dopusk system. Its presence with used disks indicates work was performed without such controls, revealing a breakdown in production supervision and procedural compliance.",
+    "confidence": 0.82,
+    "cause_categories": [
+      "OC-01",
+      "OC-02"
+    ]
+  },
+  {
+    "id": "agent_2_005",
+    "source": "agent_2",
+    "topic": "Explosion sequence",
+    "claim": "Failure to control coal dust accumulations along conveyor routes enabled the transition from a localized methane fire to a full-scale propagating coal dust explosion, indicating a systemic deficiency in housekeeping and hazard monitoring.",
+    "evidence": "D-A7: coal dust accumulations observed on conveyor lines; D-A9: explosion propagated over 4+ km on fresh-air side, characteristic of coal dust; slate barrier activated; destruction pattern consistent with dust explosion.",
+    "warrant": "Coal dust accumulation to explosive levels is a preventable condition requiring regular cleaning and inerting. The fact that dust was present in sufficient quantity to propagate an explosion across the mine indicates a failure in routine hazard control, likely due to inadequate supervision, production pressure, or lack of enforcement of dust control protocols.",
+    "confidence": 0.85,
+    "cause_categories": [
+      "OC-01",
+      "OC-10"
+    ]
+  }
+]

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Investigation Report — Kostenko Mine Explosion</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        max-width: 900px; margin: 2em auto; padding: 0 1em; line-height: 1.55;
+        color: #222; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 0.3em; }
+h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; margin-top: 2em; }
+h3 { color: #444; }
+code { background: #f4f4f4; padding: 1px 4px; border-radius: 3px;
+        font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+table { border-collapse: collapse; margin: 1em 0; }
+th { background: #f4f4f4; text-align: left; }
+hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+img { display: block; margin: 1em auto; }
+</style>
+</head>
+<body>
+<h1>Investigation Report — Kostenko Mine Explosion</h1>
+
+<p><strong>Date of incident:</strong> 2023-10-28</p>
+<p><strong>Run ID:</strong> <code>kostenko_v6_20260515_170601_166521</code></p>
+
+<hr>
+
+<h2>1. Incident summary</h2>
+
+<p>On October 28, 2023, a catastrophic methane explosion occurred at the Kostenko Mine, operated by ArcelorMittal Temirtau in Kazakhstan. The incident began with a fire, rapidly escalating into a methane deflagration and subsequently a widespread coal dust explosion. This event resulted in significant casualties and extensive damage to the mine infrastructure.</p>
+
+<p>The investigation into this accident was conducted by multiple expert teams, including specialists from KarTU im. Abylkas Saginov (Usembekov Meirambek Sabdenovich), a joint commission from NUST MISIS (Kolikov-Meshcheryakov), and DMT GmbH & Co. KG from Germany. These expert analyses, alongside outputs from a multi-agent analytical system, formed the basis of this formal report.</p>
+
+<p>The immediate sequence of events involved an initial fire detected around 02:24, followed by a methane deflagration. This initial explosion then ignited accumulated coal dust, leading to a massive explosion that propagated throughout a significant portion of the mine. The full extent of casualties and the precise timeline of the propagation are still under detailed review, but the event necessitated immediate emergency response and evacuation efforts.</p>
+
+<p>This report synthesizes the findings from these diverse expert sources and analytical agents to provide a comprehensive understanding of the accident's causes, sequence, and contributing factors. It aims to establish a clear, evidence-based narrative to inform future safety protocols and prevent recurrence.</p>
+
+<h2>2. Classification and precedents</h2>
+
+<p>The Kostenko Mine explosion has been classified primarily as a <strong>methane_explosion</strong> (<code>[v2 classification]</code>). A secondary classification of <strong>underground_gas_fire</strong> has also been assigned. The dominant causal factors identified across the analyzed arguments include <strong>methane_accumulation</strong> (TC-01) and an <strong>ignition_source_mechanical</strong> (TC-02), with significant contributions from <strong>spontaneous_combustion</strong> (TC-05) and <strong>coal_dust_hazard</strong> (TC-10) in the propagation phase.</p>
+
+<p>Precedent analysis identified 11 potential matches, with two passing the initial filtering and thresholding. The top-ranked match is <strong>PREC-2021-04 — Shaktha Listvyazhnaya</strong>, an accident of the same primary type (methane_explosion) that resulted in 51 fatalities. This precedent shares the cause category 'TC-01' (methane_accumulation) and involved gross violations of safety regulations, similar to findings in the Kostenko case. The second match, <strong>PREC-2024-01 — Shaktha Alardinskaya</strong>, is an underground_gas_fire (secondary type) also linked to 'TC-01' (methane_accumulation) due to a roof fall displacing ignited methane.</p>
+
+<p>These precedents underscore the recurring nature of methane-related hazards in underground mining and highlight the critical importance of addressing methane accumulation and ignition sources, as well as adherence to safety regulations, to prevent catastrophic events.</p>
+
+<h2>3. Accepted conclusions</h2>
+
+<h3>Gas-Dynamic Events and Atmospheric Pressure</h3>
+
+<p>Analysis confirms that atmospheric pressure changes did not contribute to elevated methane release prior to the incident <code>[K-A1, analyst_1_006]</code>. Furthermore, no sudden gas outburst or significant gas-dynamic phenomenon preceded the ignition <code>[D-A2, analyst_1_006]</code>. The methane accumulation was a consequence of continuous release and inadequate ventilation measures <code>[analyst_1_006]</code>.</p>
+
+<h3>Spontaneous Combustion and Other Ignition Sources</h3>
+
+<p>Multiple independent analyses have excluded spontaneous combustion of coal in the goaf as a cause for the ignition <code>[U-A2, D-A4, K-A3]</code>. This conclusion is supported by consistent findings of low indicator gas ratios (R1, R2, R3) and the absence of CO and H2 in monitoring samples, as well as the classification of the coal seam as non-prone to self-ignition <code>[U-A2, D-A4, K-A3]</code>. Similarly, electrical equipment malfunction has been ruled out as an ignition source following post-accident inspections <code>[K-A5]</code>.</p>
+
+<h3>Accident Sequence and Explosion Dynamics</h3>
+
+<p>The accident sequence is accepted as a multi-stage event: an initial gas fire occurred around 02:24, followed by a methane deflagration, which then transitioned into an initial coal dust explosion, culminating in a full-scale coal dust explosion propagating across the mine <code>[D-A7, analyst_1_003, agent_2_005]</code>. While an initial methane deflagration likely occurred, the catastrophic and widespread destruction over long distances indicates that coal dust served as the primary fuel for the main explosion <code>[analyst_1_004]</code>. However, there is a challenge to the assertion that coal dust was the <em>sole</em> primary fuel, with evidence suggesting a significant methane component in the initial and subsequent explosions, particularly a reported 99.99% methane reading <code>[agent_3_002]</code>.</p>
+
+<h3>Ventilation and Methane Accumulation</h3>
+
+<p>While overall ventilation quantities met design parameters, the mine's ventilation scheme, specifically the '1K-N-N-vt' combined system, created stagnant sub-conveyor zones where methane could accumulate to explosive concentrations <code>[D-A3, analyst_1_005, agent_2_003]</code>. This structural vulnerability, combined with continuous methane release from the K2 companion seam, contributed significantly to the hazardous atmospheric conditions <code>[analyst_1_005, agent_2_003]</code>.</p>
+
+<h3>Supervision and Regulatory Compliance</h3>
+
+<p>Accepted conclusions point to a systemic failure in production control and supervision <code>[agent_2_006]</code>. This is evidenced by the presence of prohibited items and hazardous materials in the working area, coupled with likely violations of procedures for operating equipment in gassy conditions. Furthermore, non-compliance with regulations concerning methane monitoring, ventilation design, degasification of companion seams, equipment certification, and coal dust explosion prevention has been identified as a significant factor <code>[agent_4_001, agent_4_002, agent_4_003, agent_4_004, agent_4_005, agent_4_006]</code>.</p>
+
+<h2>4. Rejected hypotheses</h2>
+
+<p>Several hypotheses regarding the ignition source and explosion dynamics were considered and subsequently rejected based on the available evidence and argumentation.</p>
+
+<p>The hypothesis that the ignition source was unknown and may never be identified, as proposed by DMT <code>[D-A5]</code>, was rejected. While the exact ignition source remains contested, the presence of multiple potential ignition sources and specific operational contexts provides a stronger basis for concluding a probable cause rather than complete uncertainty <code>[ATK-V5-004: D-A5 rebuts U-A3, ATK-V5-005: U-A3 rebuts D-A5]</code>. Similarly, the claim that technical ventilation failure was excluded as a cause of elevated methane concentration <code>[U-A4]</code> was rejected. Although overall airflow met design parameters, the ventilation scheme's inherent structural vulnerability in sub-conveyor zones, which allowed methane accumulation, directly contradicts this assertion <code>[ATK-V5-010: D-A3 undercuts U-A4, ATK-V5-011: agent_2_003 undercuts U-A4, ATK-V5-012: agent_3_004 undercuts U-A4, ATK-V5-044: analyst_1_005 undercuts U-A4]</code>.</p>
+
+<p>The assertion that the K2 seam was the <em>primary</em> source of elevated methane <code>[D-A1, K-A2, agent_2_001, analyst_1_002]</code> has been rejected in its most definitive form. While the K2 seam was a significant contributor, arguments were raised that the working seam (K3) could have also contributed substantially, particularly given the potential for geological dynamic hazards <code>[agent_3_003]</code> and that the evidence did not fully exclude the K3 seam's contribution <code>[ATK-V5-013: agent_3_003 undercuts K-A2, ATK-V5-028: agent_3_003 undercuts D-A1, ATK-V5-037: agent_3_003 undercuts analyst_1_002, ATK-V5-039: agent_3_003 undercuts agent_2_001]</code>.</p>
+
+<p>Furthermore, the conclusion that coal dust was the primary fuel for the full-scale explosion <code>[D-A9, analyst_1_004]</code> has been rejected as the sole driver. While coal dust was a critical fuel, evidence suggesting a significant methane component in the initial and subsequent explosions, including a 99.99% methane reading, challenges the exclusivity of coal dust as the primary fuel <code>[agent_3_002]</code>.</p>
+
+<p>Finally, the specific claim that the initial methane explosion occurred near section 20 of the longwall, distinct from the initial fire location <code>[D-A8]</code>, is rejected due to conflicting evidence regarding the epicenter and the sequence of events, leading to ambiguity rather than a definitive conclusion <code>[ATK-V5-019: K-A6 rebuts D-A8, ATK-V5-027: agent_2_005 undercuts K-A7]</code>.</p>
+
+<h2>5. Unresolved questions</h2>
+
+<h3>Contested Conclusions on Ignition Source and Location</h3>
+
+<p>The precise ignition source remains a subject of contention. While mechanical sparking from the armored face conveyor (AFC) chain operating in a methane-rich zone is considered the most probable source by some analyses <code>[K-A4, analyst_1_001, agent_2_004]</code>, this is directly challenged. Arguments posit that the evidence for AFC chain sparking is circumstantial and that the presence of other ignition-capable items, such as an angle grinder, aerosol can, and synthetic oil, presents a strong alternative <code>[U-A3, agent_3_001]</code>.</p>
+
+<p>This conflict is reflected in the rejection of arguments claiming the AFC chain was the most probable source <code>[ATK-V5-016: agent_3_001 rebuts K-A4, ATK-V5-017: K-A4 rebuts agent_3_001, ATK-V5-034: analyst_1_001 rebuts agent_3_001, ATK-V5-035: agent_3_001 rebuts analyst_1_001, ATK-V5-042: agent_2_004 rebuts agent_3_001, ATK-V5-043: agent_3_001 rebuts agent_2_004]</code>. The claim that the ignition source is unknown and may never be identified <code>[D-A5]</code> is also contested by arguments identifying specific potential sources <code>[ATK-V5-004: U-A3 rebuts D-A5, ATK-V5-005: D-A5 rebuts U-A3]</code>.</p>
+
+<p>Consequently, the precise ignition location remains ambiguous <code>[agent_3_005]</code>. While some evidence points to the upper part of longwall 48K3-Z, sections 142-145, as the initial fire location <code>[U-A1, D-A6]</code>, other analyses suggest the initial methane explosion occurred in the lower area near section 20, distinct from the fire <code>[D-A8]</code>, while seismic data points to the upper part of the longwall as the epicenter <code>[K-A6]</code>.</p>
+
+<h3>Explosion Fuel Dynamics</h3>
+
+<p>The primary fuel for the large-scale explosion is also debated. One perspective holds that coal dust was the primary fuel due to the extensive propagation and destruction <code>[D-A9, analyst_1_004]</code>. However, this is challenged by arguments emphasizing the significant role of methane, citing a 99.99% methane concentration reading and evidence of worker survivability without respirators immediately post-shockwave, suggesting methane was a substantial contributor, if not primary, to the initial and subsequent explosions <code>[K-A8, agent_3_002]</code>.</p>
+
+<h3>Open Questions from Original Investigators</h3>
+
+<p>Several open questions identified by the original investigators remain unresolved or directly correspond to the contested areas:</p>
+
+<p>*   <strong>OQ-1</strong>: Was the shearer operating at the time of ignition? This remains relevant for assessing the probability of mechanical sparking from the shearer versus the AFC <code>[D]</code>.</p>
+<p>*   <strong>OQ-2</strong>: Was the angle grinder used at or near the ignition location (sections 142-145)? Resolving this would strengthen or defeat arguments regarding external ignition sources <code>[D, U]</code>.</p>
+<p>*   <strong>OQ-3</strong>: What was the actual CH4 concentration distribution in the goaf and crosscut 13 immediately before the explosion? This is critical for resolving conflicting claims about the initial explosion location <code>[D, K]</code>.</p>
+<p>*   <strong>OQ-4</strong>: Were post-accident coal dust samples from conveyor lines explosive? Confirmation would support or refute the conclusion that coal dust was the primary fuel <code>[D]</code>.</p>
+<p>*   <strong>OQ-5</strong>: What was the exact sequence of explosion propagation through the mine? This is required to definitively determine whether the full-scale explosion was methane or dust-driven <code>[D, K]</code>.</p>
+
+<p>The role of seismic activity as a potential trigger for methane release or ignition was also noted as not sufficiently explored <code>[agent_3_006]</code>.</p>
+
+<h2>6. Argumentation graph</h2>
+
+<p><img src="argumentation_graph.png" alt="Argumentation framework" style="max-width:100%;"></p>
+
+<p>Node colors: <strong>green</strong> = accepted (grounded extension), <strong>orange</strong> = ambiguous (in some preferred extension but not all), <strong>red</strong> = rejected (in no preferred extension). Edges: <strong>solid red</strong> = rebutting attack, <strong>dashed</strong> = undercutting attack.</p>
+
+<h2>7. Regulatory violations</h2>
+
+<p>The investigation identified several significant violations of mining safety regulations, which contributed to the hazardous conditions leading to the Kostenko Mine explosion.</p>
+
+<p><strong>Non-compliance with Methane Monitoring Limits and Automatic Cutoff (REG-01)</strong>: Evidence suggests methane accumulation in sub-conveyor zones that was not adequately detected or controlled. This indicates a failure to adhere to methane monitoring limits and potentially automatic cutoff requirements, directly contributing to the creation of an explosive atmosphere <code>[agent_4_001]</code>.</p>
+
+<p><strong>Non-compliance with Ventilation Scheme Design (REG-02)</strong>: The '1K-N-N-vt' combined ventilation scheme created structural vulnerabilities leading to methane accumulation in sub-conveyor zones. This represents a violation of requirements for ventilation scheme design, which must prevent such stagnant zones <code>[agent_4_002]</code>.</p>
+
+<p><strong>Non-compliance with Degasification of Companion Seams (REG-03)</strong>: The K2 seam, identified as a significant methane source, was not adequately pre-drained. This failure to implement required degasification measures for companion seams contributed to methane accumulation in the goaf and the subsequent explosion <code>[agent_4_003]</code>.</p>
+
+<p><strong>Violation of Equipment Certification Requirements (REG-05)</strong>: The presence of non-explosion-proof tools, such as an angle grinder, and flammable materials (aerosol can, synthetic oil) at or near the ignition location likely served as the ignition source. This constitutes a violation of regulations mandating the use of explosion-proof equipment in underground workings <code>[agent_4_004]</code>.</p>
+
+<p><strong>Non-compliance with Coal Dust Explosion Prevention (REG-06)</strong>: Evidence suggests inadequate dust control measures, allowing for the propagation of a large-scale explosion. This indicates a failure to implement mandatory dust control measures, such as stone dusting and the maintenance of dust barriers, as required by regulation <code>[agent_4_005]</code>.</p>
+
+<p><strong>Failure of Internal Production Control System (REG-09)</strong>: The internal production control system failed to identify and rectify hazardous conditions, specifically the methane accumulation in sub-conveyor zones and the presence of prohibited ignition sources. This points to a systemic failure in the mine's safety management and oversight <code>[agent_4_006]</code>.</p>
+
+<p><strong>Concerns Regarding Atmospheric Data Integrity (REG-10)</strong>: While not directly proven, the evidence of methane accumulation in sub-conveyor zones raises concerns about the integrity and comprehensiveness of atmospheric monitoring data. This potentially indicates a violation of regulations ensuring the accuracy and anti-falsification of atmospheric monitoring data <code>[agent_4_007]</code>.</p>
+
+<p>These regulatory violations collectively created and exacerbated the hazardous conditions, significantly increasing the likelihood and severity of the accident. Compliance with these regulations would have likely prevented or substantially mitigated the methane accumulation and ignition events.</p>
+
+<hr>
+
+<h2>Summary counts</h2>
+
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>combined_arguments</td>
+<td>46</td>
+</tr>
+<tr>
+<td>expert_arguments</td>
+<td>21</td>
+</tr>
+<tr>
+<td>agent_arguments</td>
+<td>25</td>
+</tr>
+<tr>
+<td>attacks_detected</td>
+<td>44</td>
+</tr>
+<tr>
+<td>supports_detected</td>
+<td>25</td>
+</tr>
+<tr>
+<td>accepted</td>
+<td>24</td>
+</tr>
+<tr>
+<td>ambiguous</td>
+<td>7</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>15</td>
+</tr>
+<tr>
+<td>preferred_extensions</td>
+<td>4</td>
+</tr>
+</tbody></table>
+
+<p>_Reproducible from run artifacts in <code>runs/kostenko_v6_20260515_170601_166521/</code>._</p>
+</body>
+</html>
